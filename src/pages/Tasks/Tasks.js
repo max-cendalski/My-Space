@@ -1,8 +1,6 @@
 
 
-export default Tasks () => {
-
-
+export const Tasks = () => {
 
   return (
     <article>
@@ -10,3 +8,5 @@ export default Tasks () => {
     </article>
   )
 }
+
+export default Tasks
