@@ -1,4 +1,4 @@
-/* Using My Space 2 color palette */
+/* For now using My Space 2 color palette */
 
 body {
   margin: 0;
@@ -14,6 +14,13 @@ code {
     monospace;
 }
 
+:root {
+  --darkGreen: #18946F;
+  --green: #4FE0B5;
+  --lightGreen: #BAFDE9;
+  --red: #942607;
+  --lightPink: #DEA697;
+}
 
 
 * {
@@ -30,7 +37,7 @@ code {
 .feature-button {
   width: 90%;
   height: 4rem;
-  background-color: #18946F;
+  background-color: var(--darkGreen);
   text-align: center;
   font-size: 2rem;
   font-weight: 500;
