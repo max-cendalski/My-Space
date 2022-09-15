@@ -11,3 +11,25 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+* {
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  gap:calc(2rem)
+}
+
+.feature-button {
+  width: 90%;
+  height: 4rem;
+  background-color: aqua;
+  text-align: center;
+  font-size: 2rem;
+  text-decoration: none;
+
+}
