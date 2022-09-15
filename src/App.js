@@ -1,11 +1,11 @@
 
 import './App.css';
-import {Routes,Route} from 'react-router-dom'
-import Home from '../src/pages/Home/Home'
+import {Routes,Route} from 'react-router-dom';
+import Home from '../src/pages/Home/Home';
 import Layout from './components/Layout/Layout';
 import Notes from './pages/Notes/Notes';
 import Tasks from './pages/Tasks/Tasks';
-import Weather from './pages/Weather/Weather';
+import Weather from './pages/Weather/Weather'
 
 function App() {
   return (
