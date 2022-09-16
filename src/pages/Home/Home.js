@@ -7,7 +7,12 @@ const Home = () => {
   console.log('user',user)
   return (
     <article className="home-container">
-    <SignIn />
+      {
+        (user)?
+        <h3>{user.displayName}</h3>
+        :
+        <SignIn />
+      }
       <NavLink className="feature-button" to ="/notes" >Notes</NavLink>
       <NavLink className="feature-button" to ="/tasks" >Tasks</NavLink>
       <NavLink className="feature-button" to ="/weather" >Weather</NavLink>

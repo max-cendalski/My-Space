@@ -4,17 +4,7 @@ import { UserAuth } from '../../context/AuthContext'
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const SignIn = () => {
-  const {googleSignIn, user} = UserAuth()
-
-  const navigate = useNavigate()
-  const location = useLocation()
-  const from = location.state?.from?.pathname || "/";
-
-/*   useEffect(() => {
-    if (user != null) {
-      navigate(from)
-    }
-  },[user]) */
+  const {googleSignIn} = UserAuth()
 
   const handleGoogleSignIn = async () => {
     try {
