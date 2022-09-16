@@ -29,7 +29,6 @@ export const AuthContextProvider = ({children}) => {
      <AuthContext.Provider value={
           {
             googleSignIn,
-            signOut,
             user,
             logOut
           }

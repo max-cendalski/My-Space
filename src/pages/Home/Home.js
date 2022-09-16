@@ -1,7 +1,10 @@
 import { NavLink } from 'react-router-dom';
 import SignIn from '../../components/SignIn/SignIn';
+import { UserAuth } from '../../context/AuthContext';
 
 const Home = () => {
+  const {user} = UserAuth()
+  console.log('user',user)
   return (
     <article className="home-container">
     <SignIn />
