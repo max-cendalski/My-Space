@@ -1,7 +1,6 @@
 import React from 'react';
-import { useEffect } from 'react';
 import { UserAuth } from '../../context/AuthContext'
-import { useNavigate, useLocation } from 'react-router-dom';
+
 
 const SignIn = () => {
   const {googleSignIn} = UserAuth()
