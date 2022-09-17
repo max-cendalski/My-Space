@@ -31,9 +31,12 @@ code {
 .home-container {
   display: flex;
   flex-direction: column;
-  gap:calc(2rem)
+  gap:calc(2rem);
 }
 
+#signin-page-container {
+  display: flex;
+}
 .feature-button {
   width: 90%;
   height: 4rem;
@@ -47,4 +50,5 @@ code {
 
 .navbar-container {
   border-bottom: 2px solid var(--red);
+  width: 90%;
 }

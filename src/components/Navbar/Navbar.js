@@ -16,7 +16,6 @@ const Navbar = () => {
   return (
 
     <article className="navbar-container">
-      <h1>Navbar</h1>
       {
         (user) ?
         <button onClick={handleSignOut}>Logout</button>

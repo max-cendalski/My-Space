@@ -13,7 +13,10 @@ const Home = () => {
         (user)?
         <h3>{user.displayName}</h3>
         :
-        <SignIn />
+        <article>
+          <h3>You need to be signed in to use all features! </h3>
+          <SignIn />
+        </article>
       }
       <NavLink className="feature-button" to ="/notes" >Notes</NavLink>
       <NavLink className="feature-button" to ="/tasks" >Tasks</NavLink>
