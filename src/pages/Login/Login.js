@@ -3,8 +3,7 @@ import SignIn from "../../components/SignIn/SignIn";
 
 const Login = () => {
   return (
-    <article>
-      <Navbar />
+    <article className="login-page-container">
       <SignIn />
     </article>
   )

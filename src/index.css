@@ -36,6 +36,7 @@ code {
 
 #signin-page-container {
   display: flex;
+  margin-top: 1rem;
 }
 .feature-button {
   width: 90%;
@@ -51,4 +52,9 @@ code {
 .navbar-container {
   border-bottom: 2px solid var(--red);
   width: 90%;
+}
+
+.signin-link {
+  float: right;
+  margin: 0.5rem;
 }

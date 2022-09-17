@@ -1,4 +1,6 @@
 import { UserAuth } from "../../context/AuthContext"
+import SignIn from "../SignIn/SignIn"
+import { Link } from "react-router-dom"
 
 
 
@@ -20,7 +22,7 @@ const Navbar = () => {
         (user) ?
         <button onClick={handleSignOut}>Logout</button>
         :
-        <h2>No user</h2>
+        <Link className="signin-link" to ="/login">SignIn</Link>
       }
     </article>
   )
