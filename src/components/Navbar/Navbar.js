@@ -14,7 +14,8 @@ const Navbar = () => {
   }
 
   return (
-    <>
+
+    <article className="navbar-container">
       <h1>Navbar</h1>
       {
         (user) ?
@@ -22,7 +23,7 @@ const Navbar = () => {
         :
         <h2>No user</h2>
       }
-    </>
+    </article>
   )
 }
 

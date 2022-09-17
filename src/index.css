@@ -44,3 +44,7 @@ code {
   text-decoration: none;
   color: white;
 }
+
+.navbar-container {
+  border-bottom: 2px solid var(--red);
+}
