@@ -1,5 +1,4 @@
 import { NavLink } from 'react-router-dom';
-import SignIn from '../../components/SignIn/SignIn';
 import { UserAuth } from '../../context/AuthContext';
 import Navbar from '../../components/Navbar/Navbar';
 

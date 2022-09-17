@@ -1,4 +1,4 @@
-import Navbar from "../../components/Navbar/Navbar"
+
 import SignIn from "../../components/SignIn/SignIn";
 
 const Login = () => {
