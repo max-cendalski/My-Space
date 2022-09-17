@@ -1,4 +1,4 @@
-/* import { useLocation, Navigate, Outlet } from 'react-router-dom';
+import { useLocation, Navigate, Outlet } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext'
 
 const RequireAuth = () => {
@@ -7,9 +7,8 @@ const RequireAuth = () => {
   return (
     (user)
       ? <Outlet />
-      : <Navigate to="/signIn" state={{from: location}} replace />
+      : <Navigate to="/login" state={{from: location}} replace />
   );
 }
 
 export default RequireAuth;
- */

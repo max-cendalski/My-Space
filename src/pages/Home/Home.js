@@ -1,12 +1,14 @@
 import { NavLink } from 'react-router-dom';
 import SignIn from '../../components/SignIn/SignIn';
 import { UserAuth } from '../../context/AuthContext';
+import Navbar from '../../components/Navbar/Navbar';
 
 const Home = () => {
   const {user} = UserAuth()
   console.log('user',user)
   return (
     <article className="home-container">
+    <Navbar />
       {
         (user)?
         <h3>{user.displayName}</h3>
