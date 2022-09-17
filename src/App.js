@@ -7,6 +7,7 @@ import Notes from './pages/Notes/Notes';
 import Tasks from './pages/Tasks/Tasks';
 import Weather from './pages/Weather/Weather'
 import RequireAuth from './RequireAuth/RequireAuth';
+import Login from './pages/Login/Login';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
 
       {/*public routes*/}
       <Route index element = {<Home />} />
+      <Route path="/login" element = {<Login />} />
 
       {/*protected routes*/}
       <Route element={<RequireAuth />}>

@@ -1,9 +1,12 @@
-import React from 'react';
+
+import { useEffect } from 'react';
 import { UserAuth } from '../../context/AuthContext'
+import { useNavigate } from 'react-router-dom';
 
 
 const SignIn = () => {
-  const {googleSignIn} = UserAuth()
+  const {googleSignIn, user} = UserAuth()
+  const navigate = useNavigate()
 
   const handleGoogleSignIn = async () => {
     try {
@@ -12,6 +15,12 @@ const SignIn = () => {
       console.log('ERROR:',error)
     }
   };
+
+  useEffect(()=> {
+    if (user !=null) {
+      navigate('/')
+    }
+  },[user])
 
   return (
     <article id="signin-page-container">
