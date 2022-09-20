@@ -1,8 +1,9 @@
-import { useState} from "react"
-import { collection, addDoc } from "firebase/firestore"
+import { useState, useEffect} from "react"
+import { collection, addDoc, getDocs } from "firebase/firestore"
 import {db} from "../../firebase/Firebase"
 import { UserAuth } from "../../context/AuthContext"
 import Navbar from "../../components/Navbar/Navbar"
+import NotesList from "../../components/Notes/Notes"
 
 const Notes = () => {
   const {user}  = UserAuth()
@@ -11,6 +12,21 @@ const Notes = () => {
     text: '',
     date: ''
   })
+  const [notes, setNotes] = useState([])
+  const canSave = [...Object.values(formData)].every(Boolean)
+
+
+
+
+ const getNotes = async() => {
+  const notesCollectionRef = collection(db, `users/${user.uid}`,'notes')
+  const notesData = await getDocs(notesCollectionRef)
+  setNotes(notesData.docs.map((doc) =>({...doc.data(), id: doc.id})))
+ }
+
+  useEffect(()=> {
+    getNotes()
+  },[])
 
   const handleAddNote = e => {
     e.preventDefault()
@@ -29,7 +45,6 @@ const Notes = () => {
     })
   }
 
-
   const handleChange = e => {
     const name = e.target.name
     const value = e.target.value
@@ -39,7 +54,6 @@ const Notes = () => {
         [name]: value
     }))
   }
-  const canSave = [...Object.values(formData)].every(Boolean)
 
   return (
     <article className="notes-page-container">
@@ -75,6 +89,7 @@ const Notes = () => {
         </p>
         <button onClick={handleAddNote} disabled={!canSave}>Submit</button>
       </form>
+      <NotesList data={notes}/>
     </article>
   )
 }
