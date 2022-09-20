@@ -58,3 +58,9 @@ code {
   float: right;
   margin: 0.5rem;
 }
+
+.note-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

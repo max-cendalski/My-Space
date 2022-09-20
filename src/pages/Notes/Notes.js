@@ -1,10 +1,14 @@
 import Navbar from "../../components/Navbar/Navbar"
 
 const Notes = () => {
+
+  const handleAddNote = () => {
+    console.log('whee')
+  }
   return (
-    <article>
+    <article className="notes-page-container">
       <Navbar />
-      <h1>Notes</h1>
+      <button onClick={handleAddNote}>Add Note</button>
     </article>
   )
 }
