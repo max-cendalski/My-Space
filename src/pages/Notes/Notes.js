@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState} from "react"
 import { collection, addDoc } from "firebase/firestore"
 import {db} from "../../firebase/Firebase"
 import { UserAuth } from "../../context/AuthContext"
@@ -16,27 +16,30 @@ const Notes = () => {
     e.preventDefault()
     const addNote = async() => {
       try {
-        const docRef = await addDoc(collection(db, "users", `${user.uid}`,"notes"),
-        {formData})
+        await addDoc(collection(db, "users", `${user.uid}`,"notes"),{formData})
       } catch(e) {
         console.error("Error adding document:" ,e)
       }
     }
     addNote()
-    console.log('formData',formData)
+    setFormData({
+      title: '',
+      text: '',
+      date: ''
+    })
   }
 
 
-    const handleChange = e => {
-        const name = e.target.name
-        const value = e.target.value
+  const handleChange = e => {
+    const name = e.target.name
+    const value = e.target.value
 
-        setFormData(prevData => ({
-            ...prevData,
-            [name]: value
-        }))
-    }
-    const canSave = [...Object.values(formData)].every(Boolean)
+    setFormData(prevData => ({
+        ...prevData,
+        [name]: value
+    }))
+  }
+  const canSave = [...Object.values(formData)].every(Boolean)
 
   return (
     <article className="notes-page-container">
