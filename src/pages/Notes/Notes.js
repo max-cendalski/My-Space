@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react"
+import { collection, addDoc } from "firebase/firestore"
+import {db} from "../../firebase/Firebase"
+import { UserAuth } from "../../context/AuthContext"
 import Navbar from "../../components/Navbar/Navbar"
 
 const Notes = () => {
+  const {user}  = UserAuth()
   const [formData, setFormData] = useState({
     title: '',
     text: '',
@@ -10,12 +14,20 @@ const Notes = () => {
 
   const handleAddNote = e => {
     e.preventDefault()
+    const addNote = async() => {
+      try {
+        const docRef = await addDoc(collection(db, "users", `${user.uid}`,"notes"),
+        {formData})
+      } catch(e) {
+        console.error("Error adding document:" ,e)
+      }
+    }
+    addNote()
     console.log('formData',formData)
   }
 
 
     const handleChange = e => {
-        const type = e.target.type
         const name = e.target.name
         const value = e.target.value
 
