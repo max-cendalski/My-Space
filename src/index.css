@@ -58,3 +58,17 @@ code {
   float: right;
   margin: 0.5rem;
 }
+
+.notes-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.add-note-button {
+  margin-top: 2rem;
+}
+
+.invisible {
+  display: none;
+}
