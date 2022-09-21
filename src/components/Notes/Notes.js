@@ -10,7 +10,7 @@ const NotesList = ({notes,deleteNote}) => {
           <h3>{note.title}</h3>
           <p>{note.text}</p>
           <p>{note.date}</p>
-          <button onClick={deleteNote}>Delete</button>
+          <button onClick={()=> deleteNote(note.id)}>Delete</button>
         </section>
        ))
     }

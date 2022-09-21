@@ -1,5 +1,5 @@
 import { useState, useEffect} from "react"
-import { collection, addDoc, getDocs } from "firebase/firestore"
+import { collection, addDoc, getDocs,deleteDoc, doc } from "firebase/firestore"
 import {db} from "../../firebase/Firebase"
 import { UserAuth } from "../../context/AuthContext"
 import Navbar from "../../components/Navbar/Navbar"
@@ -21,11 +21,10 @@ const Notes = () => {
   setNotes(notesData.docs.map((doc) =>({...doc.data(), id: doc.id})))
  }
 
-
-   useEffect(() => {
-    getNotes()
-    // eslint-disable-next-line
-   },[])
+  useEffect(() => {
+  getNotes()
+  // eslint-disable-next-line
+  },[])
 
 
   const handleAddNote = e => {
@@ -56,8 +55,13 @@ const Notes = () => {
     }))
   }
 
-  const handleDeleteNote = e => {
-    console.log('delete')
+  const handleDeleteNote = (id) => {
+    const deleteNote = async() => {
+      const noteRef = doc(db, "users", `${user.uid}`,"notes",id)
+      await deleteDoc(noteRef)
+    }
+    deleteNote()
+    getNotes()
   }
 
   return (
@@ -94,7 +98,7 @@ const Notes = () => {
         <button onClick={handleAddNote} disabled={!canSave}>Add Note</button>
       </form>
       <NotesList notes={notes}
-                 deletNote={handleDeleteNote}
+                 deleteNote={handleDeleteNote}
       />
     </article>
   )
