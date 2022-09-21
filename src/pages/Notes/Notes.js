@@ -1,8 +1,9 @@
-import { useState} from "react"
-import { collection, addDoc } from "firebase/firestore"
+import { useState, useEffect} from "react"
+import { collection, addDoc, getDocs } from "firebase/firestore"
 import {db} from "../../firebase/Firebase"
 import { UserAuth } from "../../context/AuthContext"
 import Navbar from "../../components/Navbar/Navbar"
+import NotesList from "../../components/Notes/Notes"
 
 const Notes = () => {
   const {user}  = UserAuth()
@@ -11,12 +12,27 @@ const Notes = () => {
     text: '',
     date: ''
   })
+  const [notes, setNotes] = useState([])
+  const canSave = [...Object.values(formData)].every(Boolean)
+
+
+ const getNotes = async() => {
+  const notesData = await getDocs(collection(db, `users/${user.uid}`,'notes'))
+  setNotes(notesData.docs.map((doc) =>({...doc.data(), id: doc.id})))
+ }
+
+
+   useEffect(() => {
+    getNotes()
+    // eslint-disable-next-line
+   },[])
+
 
   const handleAddNote = e => {
     e.preventDefault()
     const addNote = async() => {
       try {
-        await addDoc(collection(db, "users", `${user.uid}`,"notes"),{formData})
+        await addDoc(collection(db, "users", `${user.uid}`,"notes"),formData)
       } catch(e) {
         console.error("Error adding document:" ,e)
       }
@@ -27,8 +43,8 @@ const Notes = () => {
       text: '',
       date: ''
     })
+    getNotes()
   }
-
 
   const handleChange = e => {
     const name = e.target.name
@@ -39,13 +55,15 @@ const Notes = () => {
         [name]: value
     }))
   }
-  const canSave = [...Object.values(formData)].every(Boolean)
+
+  const handleDeleteNote = e => {
+    console.log('delete')
+  }
 
   return (
     <article className="notes-page-container">
       <Navbar />
-      <button className="add-note-button" onClick={handleAddNote}>Add Note</button>
-      <form>
+      <form className="add-note-form">
         <p>
           <label htmlFor="title">Title</label>
           <input
@@ -73,8 +91,11 @@ const Notes = () => {
             onChange={handleChange}
           />
         </p>
-        <button onClick={handleAddNote} disabled={!canSave}>Submit</button>
+        <button onClick={handleAddNote} disabled={!canSave}>Add Note</button>
       </form>
+      <NotesList notes={notes}
+                 deletNote={handleDeleteNote}
+      />
     </article>
   )
 }

@@ -4,7 +4,7 @@ import Navbar from '../../components/Navbar/Navbar';
 
 const Home = () => {
   const {user} = UserAuth()
-  console.log('user',user)
+
   return (
     <article className="home-container">
     <Navbar />
