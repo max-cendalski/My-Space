@@ -1,9 +1,19 @@
 
+const NotesList = ({notes,deleteNote}) => {
 
-const NotesList = () => {
+
   return (
     <article>
-      <h1>NotesList</h1>
+    {
+       notes.map(note => (
+        <section className="single-note-container" key={note.id}>
+          <h3>{note.title}</h3>
+          <p>{note.text}</p>
+          <p>{note.date}</p>
+          <button onClick={deleteNote}>Delete</button>
+        </section>
+       ))
+    }
     </article>
   )
 }

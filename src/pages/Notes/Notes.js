@@ -16,23 +16,23 @@ const Notes = () => {
   const canSave = [...Object.values(formData)].every(Boolean)
 
 
-
-
  const getNotes = async() => {
-  const notesCollectionRef = collection(db, `users/${user.uid}`,'notes')
-  const notesData = await getDocs(notesCollectionRef)
+  const notesData = await getDocs(collection(db, `users/${user.uid}`,'notes'))
   setNotes(notesData.docs.map((doc) =>({...doc.data(), id: doc.id})))
  }
 
-  useEffect(()=> {
+
+   useEffect(() => {
     getNotes()
-  },[])
+    // eslint-disable-next-line
+   },[])
+
 
   const handleAddNote = e => {
     e.preventDefault()
     const addNote = async() => {
       try {
-        await addDoc(collection(db, "users", `${user.uid}`,"notes"),{formData})
+        await addDoc(collection(db, "users", `${user.uid}`,"notes"),formData)
       } catch(e) {
         console.error("Error adding document:" ,e)
       }
@@ -43,6 +43,7 @@ const Notes = () => {
       text: '',
       date: ''
     })
+    getNotes()
   }
 
   const handleChange = e => {
@@ -55,11 +56,14 @@ const Notes = () => {
     }))
   }
 
+  const handleDeleteNote = e => {
+    console.log('delete')
+  }
+
   return (
     <article className="notes-page-container">
       <Navbar />
-      <button className="add-note-button" onClick={handleAddNote}>Add Note</button>
-      <form>
+      <form className="add-note-form">
         <p>
           <label htmlFor="title">Title</label>
           <input
@@ -87,9 +91,11 @@ const Notes = () => {
             onChange={handleChange}
           />
         </p>
-        <button onClick={handleAddNote} disabled={!canSave}>Submit</button>
+        <button onClick={handleAddNote} disabled={!canSave}>Add Note</button>
       </form>
-      <NotesList data={notes}/>
+      <NotesList notes={notes}
+                 deletNote={handleDeleteNote}
+      />
     </article>
   )
 }
