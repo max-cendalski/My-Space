@@ -60,7 +60,7 @@ code {
 }
 
 .notes-page-container {
-  width: 90%;
+  width: 95%;
 }
 
 .add-note-form {
@@ -72,6 +72,20 @@ code {
   margin: 1rem auto;
 }
 
+.delete-button {
+  background-color: var(--red);
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 0.175rem 0.375rem;
+}
+.edit-button {
+  background-color: var(--darkGreen);
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 0.175rem 0.375rem;
+}
 .single-note-container {
   width: 100%;
   margin: 0.375rem auto;
@@ -87,7 +101,7 @@ code {
 }
 
 .single-note-container h3 {
-  color: var(--darkGreen)
+
 }
 .invisible {
   display: none;
