@@ -3,7 +3,6 @@ import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 
 
-
 const Navbar = () => {
   const {user, logOut} = UserAuth()
   const navigate = useNavigate()
@@ -21,7 +20,6 @@ const Navbar = () => {
   }
 
   return (
-
     <article className="navbar-container">
       {
         (user) ?
