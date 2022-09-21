@@ -9,7 +9,7 @@ import {
 import { db } from "../../firebase/Firebase";
 import { UserAuth } from "../../context/AuthContext";
 import Navbar from "../../components/Navbar/Navbar";
-import NotesList from "../../components/Notes/Notes";
+import NotesList from "../../components/Notes/NotesList";
 
 const Notes = () => {
   const { user } = UserAuth();

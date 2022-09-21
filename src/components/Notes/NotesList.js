@@ -1,7 +1,4 @@
-
-const NotesList = ({notes,deleteNote}) => {
-
-
+const NotesList = ({ notes, deleteNote }) => {
   return (
     <article>
       {notes.map((note) => (
@@ -20,6 +17,6 @@ const NotesList = ({notes,deleteNote}) => {
       ))}
     </article>
   );
-}
+};
 
 export default NotesList;
