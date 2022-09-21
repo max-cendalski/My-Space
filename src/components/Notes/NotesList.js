@@ -1,7 +1,7 @@
 const NotesList = ({ notes, editNote, deleteNote }) => {
   return (
     <article>
-      {notes.map((note) => (
+      {notes && notes.map((note) => (
         <section className="single-note-container" key={note.id}>
           <h3>{note.title}</h3>
           <p>{note.text}</p>
