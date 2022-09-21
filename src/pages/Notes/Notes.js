@@ -22,12 +22,14 @@ const Notes = () => {
   const canSave = [...Object.values(formData)].every(Boolean);
 
   const getNotes = async () => {
-    const notesData = await getDocs(collection(db, `users/${user.uid}`, "notes")
+    const notesData = await getDocs(
+      collection(db, `users/${user.uid}`, "notes")
     );
     setNotes(notesData.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
 
   useEffect(() => {
+    console.log("whe");
     getNotes();
     // eslint-disable-next-line
   }, []);
@@ -69,6 +71,12 @@ const Notes = () => {
     getNotes();
   };
 
+  const handleEditNote = (id) => {
+    console.log("whe");
+  };
+
+  getNotes();
+
   return (
     <article className="notes-page-container">
       <Navbar />
@@ -104,7 +112,11 @@ const Notes = () => {
           Add Note
         </button>
       </form>
-      <NotesList notes={notes} deleteNote={handleDeleteNote} />
+      <NotesList
+        notes={notes}
+        deleteNote={handleDeleteNote}
+        editNote={handleEditNote}
+      />
     </article>
   );
 };

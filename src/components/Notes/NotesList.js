@@ -1,4 +1,4 @@
-const NotesList = ({ notes, deleteNote }) => {
+const NotesList = ({ notes, editNote, deleteNote }) => {
   return (
     <article>
       {notes.map((note) => (
@@ -6,7 +6,7 @@ const NotesList = ({ notes, deleteNote }) => {
           <h3>{note.title}</h3>
           <p>{note.text}</p>
           <p>{note.date}</p>
-          <button className="edit-button" onClick={() => deleteNote(note.id)}>
+          <button className="edit-button" onClick={() => editNote(note.id)}>
             Edit
           </button>
 
