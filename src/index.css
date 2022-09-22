@@ -63,7 +63,7 @@ code {
   width: 95%;
 }
 
-.add-note-form {
+.add-note-form, .edit-note-form {
   position: absolute;
   background-color: white;;
   top: 10%;
