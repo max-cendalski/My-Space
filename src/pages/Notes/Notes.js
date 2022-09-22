@@ -27,33 +27,7 @@ const Notes = () => {
     }
   };
 
-  /*   const handleAddNote = (e) => {
-    e.preventDefault();
-    const addNote = async () => {
-      try {
-        await addDoc(collection(db, "users", `${user.uid}`, "notes"), formData);
-      } catch (e) {
-        console.error("Error adding document:", e);
-      }
-    };
-    addNote();
-    setFormData({
-      title: "",
-      text: "",
-      date: "",
-    });
-    getNotes();
-  };
- */
-  /*   const handleChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
 
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  }; */
 
   const handleDeleteNote = (id) => {
     const deleteNote = async () => {
@@ -70,7 +44,6 @@ const Notes = () => {
 
   const handleFormState = () => {
     setIsVisible(current => !current)
-    console.log('visible',isVisible)
   };
 
   useEffect(() => {
@@ -87,7 +60,7 @@ const Notes = () => {
         deleteNote={handleDeleteNote}
         editNote={handleEditNote}
       />
-      <AddNoteForm isVisible={isVisible} handleFormState={handleFormState} />
+      <AddNoteForm isVisible={isVisible} handleFormState={handleFormState} getNotes={getNotes} />
     </article>
   );
 };

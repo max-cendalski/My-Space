@@ -1,11 +1,9 @@
 const NotesList = ({ notes, editNote, deleteNote }) => {
-  console.log('notes.length',notes.length)
 
   return (
     <article>
-      {
-        notes.map((note) => (
-         <section className="single-note-container" key={note.id}>
+      {notes.map((note) => (
+        <section className="single-note-container" key={note.id}>
           <h3>{note.title}</h3>
           <p>{note.text}</p>
           <p>{note.date}</p>
@@ -16,8 +14,7 @@ const NotesList = ({ notes, editNote, deleteNote }) => {
             Delete
           </button>
         </section>
-      )
-  )}
+      ))}
     </article>
   );
 };

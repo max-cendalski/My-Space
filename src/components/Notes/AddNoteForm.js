@@ -3,15 +3,14 @@ import { addDoc, collection } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { UserAuth } from "../../context/AuthContext";
 
-const AddNoteForm = ({isVisible}) => {
-  console.log('isVisible',isVisible)
+const AddNoteForm = ({isVisible, getNotes,  handleFormState}) => {
   const { user } = UserAuth();
   const [formData, setFormData] = useState({
     title: "",
     text: "",
     date: "",
   });
-  const [notes, setNotes] = useState([]);
+
   const canSave = [...Object.values(formData)].every(Boolean);
 
   const handleAddNote = (e) => {
@@ -29,6 +28,8 @@ const AddNoteForm = ({isVisible}) => {
       text: "",
       date: "",
     });
+    getNotes()
+    handleFormState()
   };
 
   const handleChange = (e) => {
