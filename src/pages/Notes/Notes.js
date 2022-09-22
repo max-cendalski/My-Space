@@ -5,6 +5,7 @@ import { UserAuth } from "../../context/AuthContext";
 import Navbar from "../../components/Navbar/Navbar";
 import NotesList from "../../components/Notes/NotesList";
 import AddNoteForm from "../../components/Notes/AddNoteForm";
+import { Link } from "react-router-dom";
 
 const Notes = () => {
   const { user } = UserAuth();
@@ -27,8 +28,6 @@ const Notes = () => {
     }
   };
 
-
-
   const handleDeleteNote = (id) => {
     const deleteNote = async () => {
       const noteRef = doc(db, "users", `${user.uid}`, "notes", id);
@@ -43,7 +42,7 @@ const Notes = () => {
   };
 
   const handleFormState = () => {
-    setIsVisible(current => !current)
+    setIsVisible((current) => !current);
   };
 
   useEffect(() => {
@@ -60,7 +59,11 @@ const Notes = () => {
         deleteNote={handleDeleteNote}
         editNote={handleEditNote}
       />
-      <AddNoteForm isVisible={isVisible} handleFormState={handleFormState} getNotes={getNotes} />
+      <AddNoteForm
+        isVisible={isVisible}
+        handleFormState={handleFormState}
+        getNotes={getNotes}
+      />
     </article>
   );
 };

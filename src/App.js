@@ -8,6 +8,7 @@ import Tasks from './pages/Tasks/Tasks';
 import Weather from './pages/Weather/Weather'
 import RequireAuth from './RequireAuth/RequireAuth';
 import Login from './pages/Login/Login';
+import EditNote from './pages/Notes/EditNote';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
       <Route element={<RequireAuth />}>
         <Route path="/notes">
           <Route index element={<Notes />} />
+          <Route path="edit/:noteId" element={<EditNote />} />
         </Route>
 
 
