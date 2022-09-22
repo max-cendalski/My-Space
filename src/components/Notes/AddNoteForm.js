@@ -1,54 +1,49 @@
 import { useState } from "react";
 import { addDoc, collection } from "firebase/firestore";
-import {db} from "../../firebase/Firebase"
+import { db } from "../../firebase/Firebase";
 import { UserAuth } from "../../context/AuthContext";
 
+const AddNoteForm = ({isVisible}) => {
+  console.log('isVisible',isVisible)
+  const { user } = UserAuth();
+  const [formData, setFormData] = useState({
+    title: "",
+    text: "",
+    date: "",
+  });
+  const [notes, setNotes] = useState([]);
+  const canSave = [...Object.values(formData)].every(Boolean);
 
-const AddNoteForm = () => {
-  const {user} = UserAuth()
-   const [formData, setFormData] = useState({
-     title: "",
-     text: "",
-     date: "",
-   });
-   const [notes, setNotes] = useState([]);
-   const canSave = [...Object.values(formData)].every(Boolean);
+  const handleAddNote = (e) => {
+    e.preventDefault();
+    const addNote = async () => {
+      try {
+        await addDoc(collection(db, "users", `${user.uid}`, "notes"), formData);
+      } catch (e) {
+        console.error("Error adding document:", e);
+      }
+    };
+    addNote();
+    setFormData({
+      title: "",
+      text: "",
+      date: "",
+    });
+  };
 
-     const handleAddNote = (e) => {
-       e.preventDefault();
-       const addNote = async () => {
-         try {
-           await addDoc(
-             collection(db, "users", `${user.uid}`, "notes"),
-             formData
-           );
-         } catch (e) {
-           console.error("Error adding document:", e);
-         }
-       };
-       addNote();
-       setFormData({
-         title: "",
-         text: "",
-         date: "",
-       });
-     };
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
 
-     const handleChange = (e) => {
-       const name = e.target.name;
-       const value = e.target.value;
-
-       setFormData((prevData) => ({
-         ...prevData,
-         [name]: value,
-       }));
-     };
-
-
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
   return (
     <article>
-       <form className="add-note-form">
+      <form className={isVisible ? "invisible" : "add-note-form"}>
         <p>
           <label htmlFor="title">Title</label>
           <input
@@ -81,7 +76,7 @@ const AddNoteForm = () => {
         </button>
       </form>
     </article>
-  )
-}
+  );
+};
 
 export default AddNoteForm;

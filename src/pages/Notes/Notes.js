@@ -1,11 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  collection,
-  addDoc,
-  getDocs,
-  deleteDoc,
-  doc,
-} from "firebase/firestore";
+import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { UserAuth } from "../../context/AuthContext";
 import Navbar from "../../components/Navbar/Navbar";
@@ -14,28 +8,26 @@ import AddNoteForm from "../../components/Notes/AddNoteForm";
 
 const Notes = () => {
   const { user } = UserAuth();
-  const [formData, setFormData] = useState({
+  /*   const [formData, setFormData] = useState({
     title: "",
     text: "",
     date: "",
-  });
-  const [notes, setNotes] = useState([]);
-  const canSave = [...Object.values(formData)].every(Boolean);
+  }) */ const [notes, setNotes] = useState([]);
+  const [isVisible, setIsVisible] = useState(true);
+  //const canSave = [...Object.values(formData)].every(Boolean);
 
   const getNotes = async () => {
-    const notesData = await getDocs(
-      collection(db, `users/${user.uid}`, "notes")
-    );
-    setNotes(notesData.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    try {
+      const notesData = await getDocs(
+        collection(db, `users/${user.uid}`, "notes")
+      );
+      setNotes(notesData.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    } catch (e) {
+      console.error("ERROR", e);
+    }
   };
 
-  useEffect(() => {
-    console.log("whe");
-    getNotes();
-    // eslint-disable-next-line
-  }, []);
-
-/*   const handleAddNote = (e) => {
+  /*   const handleAddNote = (e) => {
     e.preventDefault();
     const addNote = async () => {
       try {
@@ -53,7 +45,7 @@ const Notes = () => {
     getNotes();
   };
  */
-/*   const handleChange = (e) => {
+  /*   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
 
@@ -63,7 +55,7 @@ const Notes = () => {
     }));
   }; */
 
- const handleDeleteNote = (id) => {
+  const handleDeleteNote = (id) => {
     const deleteNote = async () => {
       const noteRef = doc(db, "users", `${user.uid}`, "notes", id);
       await deleteDoc(noteRef);
@@ -76,22 +68,26 @@ const Notes = () => {
     console.log("whe");
   };
 
-   const handleFormVisible = () => {
-     console.log("change to visible");
-   };
+  const handleFormState = () => {
+    setIsVisible(current => !current)
+    console.log('visible',isVisible)
+  };
 
+  useEffect(() => {
+    getNotes();
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <article className="notes-page-container">
       <Navbar />
-      <button onClick={handleFormVisible}>Add Note</button>
-
+      <button onClick={handleFormState}>Add Note</button>
       <NotesList
         notes={notes}
         deleteNote={handleDeleteNote}
         editNote={handleEditNote}
       />
-      <AddNoteForm />
+      <AddNoteForm isVisible={isVisible} handleFormState={handleFormState} />
     </article>
   );
 };
