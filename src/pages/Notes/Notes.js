@@ -80,38 +80,6 @@ const Notes = () => {
   return (
     <article className="notes-page-container">
       <Navbar />
-      <form className="add-note-form">
-        <p>
-          <label htmlFor="title">Title</label>
-          <input
-            type="text"
-            name="title"
-            value={formData.title}
-            onChange={handleChange}
-          />
-        </p>
-        <p>
-          <label htmlFor="text">Text</label>
-          <textarea
-            type="textarea"
-            name="text"
-            value={formData.text}
-            onChange={handleChange}
-          />
-        </p>
-        <p>
-          <label htmlFor="date">Date</label>
-          <input
-            type="text"
-            name="date"
-            value={formData.date}
-            onChange={handleChange}
-          />
-        </p>
-        <button onClick={handleAddNote} disabled={!canSave}>
-          Add Note
-        </button>
-      </form>
       <NotesList
         notes={notes}
         deleteNote={handleDeleteNote}
