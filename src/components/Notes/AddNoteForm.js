@@ -2,7 +2,7 @@ import { useState } from "react";
 import { addDoc, collection } from "firebase/firestore";
 import {db} from "../../firebase/Firebase"
 import { UserAuth } from "../../context/AuthContext";
-import Navbar from "../Navbar/Navbar";
+
 
 const AddNoteForm = () => {
   const {user} = UserAuth()
@@ -44,9 +44,10 @@ const AddNoteForm = () => {
        }));
      };
 
+
+
   return (
     <article>
-      <Navbar />
        <form className="add-note-form">
         <p>
           <label htmlFor="title">Title</label>
@@ -79,7 +80,6 @@ const AddNoteForm = () => {
           Add Note
         </button>
       </form>
-
     </article>
   )
 }

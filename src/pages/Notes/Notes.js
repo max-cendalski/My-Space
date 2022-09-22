@@ -10,6 +10,7 @@ import { db } from "../../firebase/Firebase";
 import { UserAuth } from "../../context/AuthContext";
 import Navbar from "../../components/Navbar/Navbar";
 import NotesList from "../../components/Notes/NotesList";
+import AddNoteForm from "../../components/Notes/AddNoteForm";
 
 const Notes = () => {
   const { user } = UserAuth();
@@ -34,7 +35,7 @@ const Notes = () => {
     // eslint-disable-next-line
   }, []);
 
-  const handleAddNote = (e) => {
+/*   const handleAddNote = (e) => {
     e.preventDefault();
     const addNote = async () => {
       try {
@@ -51,8 +52,8 @@ const Notes = () => {
     });
     getNotes();
   };
-
-  const handleChange = (e) => {
+ */
+/*   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
 
@@ -60,9 +61,9 @@ const Notes = () => {
       ...prevData,
       [name]: value,
     }));
-  };
+  }; */
 
-  const handleDeleteNote = (id) => {
+ const handleDeleteNote = (id) => {
     const deleteNote = async () => {
       const noteRef = doc(db, "users", `${user.uid}`, "notes", id);
       await deleteDoc(noteRef);
@@ -75,16 +76,22 @@ const Notes = () => {
     console.log("whe");
   };
 
-  getNotes();
+   const handleFormVisible = () => {
+     console.log("change to visible");
+   };
+
 
   return (
     <article className="notes-page-container">
       <Navbar />
+      <button onClick={handleFormVisible}>Add Note</button>
+
       <NotesList
         notes={notes}
         deleteNote={handleDeleteNote}
         editNote={handleEditNote}
       />
+      <AddNoteForm />
     </article>
   );
 };
