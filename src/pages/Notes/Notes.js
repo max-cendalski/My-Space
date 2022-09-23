@@ -13,39 +13,41 @@ const Notes = () => {
 
   const getNotes = async () => {
     try {
-      const notesData = await getDocs(
-        collection(db, `users/${user.uid}`, 'notes')
-      );
+      const notesData = await getDocs(collection(db, `users/${user.uid}`, 'notes'));
       setNotes(notesData.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     } catch (e) {
       console.error("ERROR", e);
     }
   };
 
-    useEffect(() => {
-      getNotes();
-      // eslint-disable-next-line
-    }, []);
+  useEffect(() => {
+    getNotes();
+    // eslint-disable-next-line
+  }, []);
 
-  const handleDeleteNote = (id) => {
-    const deleteNote = async () => {
+  const handleDeleteNote = async (id) => {
+    try {
       const noteRef = doc(db, 'users', user.uid, 'notes', id);
       await deleteDoc(noteRef);
-    };
-    deleteNote();
-    getNotes();
+      setNotes(notes.filter((item) => item.id !== id));
+    } catch (err) {
+      console.error("ERROR:", err);
+    }
   };
 
   const handleFormState = () => {
     setIsVisible((current) => !current);
   };
 
-
   return (
     <article className="notes-page-container">
       <Navbar />
       <button onClick={handleFormState}>Add Note</button>
-      <NotesList notes={notes} deleteNote={handleDeleteNote} getNotes={getNotes}/>
+      <NotesList
+        notes={notes}
+        deleteNote={handleDeleteNote}
+        getNotes={getNotes}
+      />
       <AddNoteForm
         isVisible={isVisible}
         handleFormState={handleFormState}
