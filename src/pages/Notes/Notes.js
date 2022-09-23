@@ -8,21 +8,24 @@ import AddNoteForm from '../../components/Notes/AddNoteForm';
 
 const Notes = () => {
   const { user } = UserAuth();
-
   const [notes, setNotes] = useState([]);
   const [isVisible, setIsVisible] = useState(true);
-  //const canSave = [...Object.values(formData)].every(Boolean);
 
   const getNotes = async () => {
     try {
       const notesData = await getDocs(
-        collection(db, 'users',user.uid, 'notes')
+        collection(db, `users/${user.uid}`, 'notes')
       );
       setNotes(notesData.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     } catch (e) {
       console.error("ERROR", e);
     }
   };
+
+    useEffect(() => {
+      getNotes();
+      // eslint-disable-next-line
+    }, []);
 
   const handleDeleteNote = (id) => {
     const deleteNote = async () => {
@@ -33,24 +36,16 @@ const Notes = () => {
     getNotes();
   };
 
-
   const handleFormState = () => {
     setIsVisible((current) => !current);
   };
 
-  useEffect(() => {
-    getNotes();
-    // eslint-disable-next-line
-  }, []);
 
   return (
     <article className="notes-page-container">
       <Navbar />
       <button onClick={handleFormState}>Add Note</button>
-      <NotesList
-        notes={notes}
-        deleteNote={handleDeleteNote}
-      />
+      <NotesList notes={notes} deleteNote={handleDeleteNote} getNotes={getNotes}/>
       <AddNoteForm
         isVisible={isVisible}
         handleFormState={handleFormState}
