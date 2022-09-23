@@ -9,7 +9,7 @@ const NoteEdit = () => {
   const { noteId } = useParams();
   const navigate = useNavigate();
   const { user } = UserAuth();
-  const [isLoading, setisLoading] = useState(true)
+  const [isLoading, setisLoading] = useState(true);
   const [formData, setFormData] = useState({
     title: "",
     text: "",
@@ -24,13 +24,13 @@ const NoteEdit = () => {
     } catch (e) {
       console.error("ERROR:", e);
     }
-    setisLoading(false)
+    setisLoading(false);
   };
 
   useEffect(() => {
     getNoteToUpdate();
     //eslint-disable-next-line
-  },[]);
+  }, []);
 
   const handleUpdateNote = (e) => {
     e.preventDefault();
@@ -49,9 +49,8 @@ const NoteEdit = () => {
       text: "",
       date: "",
     });
-    navigate('/notes')
+    navigate("/notes");
   };
-
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -63,11 +62,15 @@ const NoteEdit = () => {
     }));
   };
 
-  if (isLoading && !formData) {return <p>Loading</p>}
 
+  const handleGoBack = () => {
+    navigate(-1)
+  }
+  if (isLoading && !formData) return <p>Loading</p>
   return (
     <article>
       <Navbar />
+      <button onClick={handleGoBack}>Go Back</button>
       <form className="edit-note-form">
         <p>
           <label htmlFor="title">Title</label>
