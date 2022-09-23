@@ -5,17 +5,11 @@ import { UserAuth } from "../../context/AuthContext";
 import Navbar from "../../components/Navbar/Navbar";
 import NotesList from "../../components/Notes/NotesList";
 import AddNoteForm from "../../components/Notes/AddNoteForm";
-import { Link } from "react-router-dom";
 
 const Notes = () => {
   const { user } = UserAuth();
-  /*   const [formData, setFormData] = useState({
-    title: "",
-    text: "",
-    date: "",
-  }) */ const [notes, setNotes] = useState([]);
+  const [notes, setNotes] = useState([]);
   const [isVisible, setIsVisible] = useState(true);
-  //const canSave = [...Object.values(formData)].every(Boolean);
 
   const getNotes = async () => {
     try {

@@ -16,7 +16,7 @@ const NoteEdit = () => {
     date: "",
   });
 
-  const getNote = async () => {
+  const getNoteToUpdate = async () => {
     const noteToUpdateRef = doc(db, "users", `${user.uid}`, "notes", noteId);
     try {
       const docSnap = await getDoc(noteToUpdateRef);
@@ -28,7 +28,7 @@ const NoteEdit = () => {
   };
 
   useEffect(() => {
-    getNote();
+    getNoteToUpdate();
     //eslint-disable-next-line
   },[]);
 
