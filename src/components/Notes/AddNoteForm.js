@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { addDoc, collection } from "firebase/firestore";
-import { db } from "../../firebase/Firebase";
-import { UserAuth } from "../../context/AuthContext";
+import { useState } from 'react';
+import { addDoc, collection } from 'firebase/firestore';
+import { db } from '../../firebase/Firebase';
+import { UserAuth } from '../../context/AuthContext';
 
 const AddNoteForm = ({isVisible, getNotes,  handleFormState}) => {
   const { user } = UserAuth();
@@ -17,7 +17,7 @@ const AddNoteForm = ({isVisible, getNotes,  handleFormState}) => {
     e.preventDefault();
     const addNote = async () => {
       try {
-        await addDoc(collection(db, "users", `${user.uid}`, "notes"), formData);
+        await addDoc(collection(db, 'users', user.uid, 'notes'), formData);
       } catch (e) {
         console.error("Error adding document:", e);
       }

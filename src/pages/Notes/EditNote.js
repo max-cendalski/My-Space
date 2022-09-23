@@ -1,9 +1,9 @@
-import { useParams, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { UserAuth } from "../../context/AuthContext";
-import Navbar from "../../components/Navbar/Navbar";
-import { db } from "../../firebase/Firebase";
-import { updateDoc, doc, getDoc } from "firebase/firestore";
+import { useParams, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { UserAuth } from '../../context/AuthContext';
+import Navbar from '../../components/Navbar/Navbar';
+import { db } from '../../firebase/Firebase';
+import { updateDoc, doc, getDoc } from 'firebase/firestore';
 
 const NoteEdit = () => {
   const { noteId } = useParams();
@@ -17,7 +17,7 @@ const NoteEdit = () => {
   });
 
   const getNoteToUpdate = async () => {
-    const noteToUpdateRef = doc(db, "users", `${user.uid}`, "notes", noteId);
+    const noteToUpdateRef = doc(db, 'users', user.uid, 'notes', noteId);
     try {
       const docSnap = await getDoc(noteToUpdateRef);
       setFormData(docSnap.data());
@@ -34,7 +34,7 @@ const NoteEdit = () => {
 
   const handleUpdateNote = (e) => {
     e.preventDefault();
-    const noteToUpdateRef = doc(db, "users", `${user.uid}`, "notes", noteId);
+    const noteToUpdateRef = doc(db, 'users', user.uid, 'notes', noteId);
 
     const addNote = async () => {
       try {
@@ -61,7 +61,6 @@ const NoteEdit = () => {
       [name]: value,
     }));
   };
-
 
   const handleGoBack = () => {
     navigate(-1)
@@ -99,7 +98,7 @@ const NoteEdit = () => {
             onChange={handleChange}
           />
         </p>
-        <button onClick={handleUpdateNote}>Add Note</button>
+        <button onClick={handleUpdateNote}>Submit</button>
       </form>
     </article>
   );

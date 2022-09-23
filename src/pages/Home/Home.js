@@ -1,6 +1,6 @@
-import { NavLink } from "react-router-dom";
-import { UserAuth } from "../../context/AuthContext";
-import Navbar from "../../components/Navbar/Navbar";
+import { NavLink } from 'react-router-dom';
+import { UserAuth } from '../../context/AuthContext';
+import Navbar from '../../components/Navbar/Navbar';
 
 const Home = () => {
   const { user } = UserAuth();
