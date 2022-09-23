@@ -65,6 +65,7 @@ const NoteEdit = () => {
   const handleGoBack = () => {
     navigate(-1)
   }
+
   if (isLoading && !formData) return <p>Loading</p>
   return (
     <article>

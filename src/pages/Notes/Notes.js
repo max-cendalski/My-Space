@@ -1,33 +1,48 @@
-import { useState, useEffect } from 'react';
-import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
-import { db } from '../../firebase/Firebase';
-import { UserAuth } from '../../context/AuthContext';
-import Navbar from '../../components/Navbar/Navbar';
-import NotesList from '../../components/Notes/NotesList';
-import AddNoteForm from '../../components/Notes/AddNoteForm';
+import { useState, useEffect } from "react";
+import { collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
+import { db } from "../../firebase/Firebase";
+import { UserAuth } from "../../context/AuthContext";
+import Navbar from "../../components/Navbar/Navbar";
+import NotesList from "../../components/Notes/NotesList";
+import AddNoteForm from "../../components/Notes/AddNoteForm";
 
 const Notes = () => {
   const { user } = UserAuth();
   const [notes, setNotes] = useState([]);
   const [isVisible, setIsVisible] = useState(true);
 
-  const getNotes = async () => {
+  /*   const getNotes = async () => {
     try {
       const notesData = await getDocs(collection(db, `users/${user.uid}`, 'notes'));
       setNotes(notesData.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    } catch (e) {
-      console.error("ERROR", e);
+    } catch (err) {
+      console.error("ERROR", err);
     }
-  };
+  }; */
 
   useEffect(() => {
-    getNotes();
+    const unsub = onSnapshot(collection(db, `users/${user.uid}`, "notes"),
+      (snapShot) => {
+        let notesList = [];
+        snapShot.docs.forEach((doc) => {
+          notesList.push({ id: doc.id, ...doc.data() });
+        });
+        setNotes(notesList);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+
+    return () => {
+      unsub();
+    };
     // eslint-disable-next-line
   }, []);
 
   const handleDeleteNote = async (id) => {
     try {
-      const noteRef = doc(db, 'users', user.uid, 'notes', id);
+      const noteRef = doc(db, "users", user.uid, "notes", id);
       await deleteDoc(noteRef);
       setNotes(notes.filter((item) => item.id !== id));
     } catch (err) {
@@ -43,16 +58,8 @@ const Notes = () => {
     <article className="notes-page-container">
       <Navbar />
       <button onClick={handleFormState}>Add Note</button>
-      <NotesList
-        notes={notes}
-        deleteNote={handleDeleteNote}
-        getNotes={getNotes}
-      />
-      <AddNoteForm
-        isVisible={isVisible}
-        handleFormState={handleFormState}
-        getNotes={getNotes}
-      />
+      <NotesList notes={notes} deleteNote={handleDeleteNote} />
+      <AddNoteForm isVisible={isVisible} handleFormState={handleFormState} />
     </article>
   );
 };
