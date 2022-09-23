@@ -1,6 +1,7 @@
+
 import { Link } from 'react-router-dom';
 
-const NotesList = ({ notes, editNote, deleteNote }) => {
+const NotesList = ({ notes, editNote, deleteNote, getNotes }) => {
   return (
     <article>
       {notes.map((note) => (
