@@ -1,3 +1,6 @@
+
+import { Link } from 'react-router-dom';
+
 const NotesList = ({ notes, editNote, deleteNote }) => {
   return (
     <article>
@@ -6,10 +9,9 @@ const NotesList = ({ notes, editNote, deleteNote }) => {
           <h3>{note.title}</h3>
           <p>{note.text}</p>
           <p>{note.date}</p>
-          <button className="edit-button" onClick={() => editNote(note.id)}>
-            Edit
-          </button>
-
+          <Link to={`/notes/edit/${note.id}`}>
+            <button className="edit-button">Edit</button>
+          </Link>
           <button className="delete-button" onClick={() => deleteNote(note.id)}>
             Delete
           </button>

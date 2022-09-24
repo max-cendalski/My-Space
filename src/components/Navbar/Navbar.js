@@ -1,6 +1,6 @@
-import { UserAuth } from "../../context/AuthContext"
-import { Link } from "react-router-dom"
-import { useNavigate } from "react-router-dom"
+import { UserAuth } from '../../context/AuthContext'
+import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 
 const Navbar = () => {
@@ -16,7 +16,7 @@ const Navbar = () => {
   }
 
   const goHome = () => {
-    navigate('/')
+    navigate("/")
   }
 
   return (

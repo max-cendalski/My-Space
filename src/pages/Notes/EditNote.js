@@ -1,23 +1,44 @@
-import { useState } from 'react';
-import { addDoc, collection } from 'firebase/firestore';
-import { db } from '../../firebase/Firebase';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { UserAuth } from '../../context/AuthContext';
+import Navbar from '../../components/Navbar/Navbar';
+import { db } from '../../firebase/Firebase';
+import { updateDoc, doc, getDoc } from 'firebase/firestore';
 
-const AddNoteForm = ({isVisible,  handleFormState}) => {
+const NoteEdit = () => {
+  const { noteId } = useParams();
+  const navigate = useNavigate();
   const { user } = UserAuth();
+  const [isLoading, setisLoading] = useState(true);
   const [formData, setFormData] = useState({
     title: "",
     text: "",
     date: "",
   });
 
-  const canSave = [...Object.values(formData)].every(Boolean);
+  const getNoteToUpdate = async () => {
+    const noteToUpdateRef = doc(db, 'users', user.uid, 'notes', noteId);
+    try {
+      const docSnap = await getDoc(noteToUpdateRef);
+      setFormData(docSnap.data());
+    } catch (e) {
+      console.error("ERROR:", e);
+    }
+    setisLoading(false);
+  };
 
-  const handleAddNote = (e) => {
+  useEffect(() => {
+    getNoteToUpdate();
+    //eslint-disable-next-line
+  }, []);
+
+  const handleUpdateNote = (e) => {
     e.preventDefault();
+    const noteToUpdateRef = doc(db, 'users', user.uid, 'notes', noteId);
+
     const addNote = async () => {
       try {
-        await addDoc(collection(db, 'users', user.uid, 'notes'), formData);
+        await updateDoc(noteToUpdateRef, formData);
       } catch (e) {
         console.error("Error adding document:", e);
       }
@@ -28,7 +49,7 @@ const AddNoteForm = ({isVisible,  handleFormState}) => {
       text: "",
       date: "",
     });
-    handleFormState()
+    navigate("/notes");
   };
 
   const handleChange = (e) => {
@@ -41,9 +62,16 @@ const AddNoteForm = ({isVisible,  handleFormState}) => {
     }));
   };
 
+  const handleGoBack = () => {
+    navigate(-1)
+  }
+
+  if (isLoading && !formData) return <p>Loading</p>
   return (
     <article>
-      <form className={isVisible ? "invisible" : "add-note-form"}>
+      <Navbar />
+      <button onClick={handleGoBack}>Go Back</button>
+      <form className="edit-note-form">
         <p>
           <label htmlFor="title">Title</label>
           <input
@@ -71,12 +99,10 @@ const AddNoteForm = ({isVisible,  handleFormState}) => {
             onChange={handleChange}
           />
         </p>
-        <button onClick={handleAddNote} disabled={!canSave}>
-          Add Note
-        </button>
+        <button onClick={handleUpdateNote}>Submit</button>
       </form>
     </article>
   );
 };
 
-export default AddNoteForm;
+export default NoteEdit;
