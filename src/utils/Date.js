@@ -1,5 +1,5 @@
-const DateToSave = () => {
+const Time = () => {
   return <p>Date</p>;
 };
 
-export default DateToSave;
+export default Time;
