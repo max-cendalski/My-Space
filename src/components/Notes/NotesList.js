@@ -8,7 +8,7 @@ const NotesList = ({ notes, editNote, deleteNote }) => {
         <section className="single-note-container" key={note.id}>
           <h3>{note.title}</h3>
           <p>{note.text}</p>
-          <p>{note.date}</p>
+          <p>Created: {note.date}</p>
           <Link to={`/notes/edit/${note.id}`}>
             <button className="edit-button">Edit</button>
           </Link>

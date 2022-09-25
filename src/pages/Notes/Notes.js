@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { UserAuth } from "../../context/AuthContext";
-import {format} from 'date-fns'
 import Navbar from "../../components/Navbar/Navbar";
 import NotesList from "../../components/Notes/NotesList";
 import AddNoteForm from "../../components/Notes/AddNoteForm";
