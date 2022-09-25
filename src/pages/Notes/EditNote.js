@@ -12,8 +12,7 @@ const NoteEdit = () => {
   const [isLoading, setisLoading] = useState(true);
   const [formData, setFormData] = useState({
     title: "",
-    text: "",
-    date: "",
+    text: ""
   });
 
   const getNoteToUpdate = async () => {
@@ -46,8 +45,7 @@ const NoteEdit = () => {
     addNote();
     setFormData({
       title: "",
-      text: "",
-      date: "",
+      text: ""
     });
     navigate("/notes");
   };
@@ -87,15 +85,6 @@ const NoteEdit = () => {
             type="textarea"
             name="text"
             value={formData.text}
-            onChange={handleChange}
-          />
-        </p>
-        <p>
-          <label htmlFor="date">Date</label>
-          <input
-            type="text"
-            name="date"
-            value={formData.date}
             onChange={handleChange}
           />
         </p>

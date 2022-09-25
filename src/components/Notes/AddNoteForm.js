@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../../firebase/Firebase';
 import { UserAuth } from '../../context/AuthContext';
+import {format} from 'date-fns'
 import Time from '../../utils/Date';
 
 const AddNoteForm = ({isVisible,  handleFormState}) => {
@@ -9,7 +10,7 @@ const AddNoteForm = ({isVisible,  handleFormState}) => {
   const [formData, setFormData] = useState({
     title: "",
     text: "",
-    date: "",
+    date: format(new Date(), "PP")
   });
 
   const canSave = [...Object.values(formData)].every(Boolean);
@@ -26,8 +27,7 @@ const AddNoteForm = ({isVisible,  handleFormState}) => {
     addNote();
     setFormData({
       title: "",
-      text: "",
-      date: "",
+      text: ""
     });
     handleFormState()
   };
@@ -63,15 +63,7 @@ const AddNoteForm = ({isVisible,  handleFormState}) => {
             onChange={handleChange}
           />
         </p>
-        <p>
-          <label htmlFor="date">Date</label>
-          <input
-            type="text"
-            name="date"
-            value={formData.date}
-            onChange={handleChange}
-          />
-        </p>
+
         <button onClick={handleAddNote} disabled={!canSave}>
           Add Note
         </button>
@@ -81,3 +73,12 @@ const AddNoteForm = ({isVisible,  handleFormState}) => {
 };
 
 export default AddNoteForm;
+/*   <p>
+    <label htmlFor="date">Date</label>
+    <input
+      type="text"
+      name="date"
+      value={formData.date}
+      onChange={handleChange}
+    />
+  </p>; */
