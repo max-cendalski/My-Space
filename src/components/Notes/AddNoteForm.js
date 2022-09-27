@@ -73,12 +73,3 @@ const AddNoteForm = ({isVisible,  handleFormState}) => {
 };
 
 export default AddNoteForm;
-/*   <p>
-    <label htmlFor="date">Date</label>
-    <input
-      type="text"
-      name="date"
-      value={formData.date}
-      onChange={handleChange}
-    />
-  </p>; */

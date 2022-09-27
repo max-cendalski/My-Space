@@ -68,28 +68,30 @@ const NoteEdit = () => {
   return (
     <article>
       <Navbar />
-      <button onClick={handleGoBack}>Go Back</button>
-      <form className="edit-note-form">
-        <p>
-          <label htmlFor="title">Title</label>
-          <input
-            type="text"
-            name="title"
-            value={formData.title}
-            onChange={handleChange}
-          />
-        </p>
-        <p>
-          <label htmlFor="text">Text</label>
-          <textarea
-            type="textarea"
-            name="text"
-            value={formData.text}
-            onChange={handleChange}
-          />
-        </p>
-        <button onClick={handleUpdateNote}>Submit</button>
-      </form>
+      <article className="edit-note-container">
+        <i onClick={handleGoBack} className="fa-solid fa-arrow-left fa-xl"></i>
+        <form className="edit-note-form">
+          <p>
+            <label htmlFor="title">Title</label>
+            <input
+              type="text"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+            />
+          </p>
+          <p>
+            <label htmlFor="text">Text</label>
+            <textarea
+              type="textarea"
+              name="text"
+              value={formData.text}
+              onChange={handleChange}
+            />
+          </p>
+          <button onClick={handleUpdateNote}>Submit</button>
+        </form>
+      </article>
     </article>
   );
 };
