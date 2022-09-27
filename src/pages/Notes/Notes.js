@@ -10,7 +10,7 @@ import AddNoteForm from "../../components/Notes/AddNoteForm";
 const Notes = () => {
   const { user } = UserAuth();
   const [notes, setNotes] = useState([]);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const navigate = useNavigate()
 
   /*   const getNotes = async () => {
