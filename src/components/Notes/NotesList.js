@@ -1,20 +1,23 @@
+import { Link } from "react-router-dom";
 
-import { Link } from 'react-router-dom';
-
-const NotesList = ({ notes, editNote, deleteNote }) => {
+const NotesList = ({ notes, deleteNote }) => {
   return (
     <article>
       {notes.map((note) => (
         <section className="single-note-container" key={note.id}>
-          <h3>{note.title}</h3>
-          <p>{note.text}</p>
-          <p>{note.date}</p>
-          <Link to={`/notes/edit/${note.id}`}>
-            <button className="edit-button">Edit</button>
+          <h2 className="note-title">{note.title}</h2>
+          <Link className="edit-link" to={`/notes/edit/${note.id}`}>
+            <p className="text">{note.text}</p>
           </Link>
-          <button className="delete-button" onClick={() => deleteNote(note.id)}>
-            Delete
-          </button>
+          <footer className="single-note-footer">
+            <p className="date-paragraph">Created: {note.date}</p>
+            <button
+              className="delete-button"
+              onClick={() => deleteNote(note.id)}
+            >
+              Delete
+            </button>
+          </footer>
         </section>
       ))}
     </article>

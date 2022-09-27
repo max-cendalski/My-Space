@@ -12,8 +12,7 @@ const NoteEdit = () => {
   const [isLoading, setisLoading] = useState(true);
   const [formData, setFormData] = useState({
     title: "",
-    text: "",
-    date: "",
+    text: ""
   });
 
   const getNoteToUpdate = async () => {
@@ -46,8 +45,7 @@ const NoteEdit = () => {
     addNote();
     setFormData({
       title: "",
-      text: "",
-      date: "",
+      text: ""
     });
     navigate("/notes");
   };
@@ -70,37 +68,30 @@ const NoteEdit = () => {
   return (
     <article>
       <Navbar />
-      <button onClick={handleGoBack}>Go Back</button>
-      <form className="edit-note-form">
-        <p>
-          <label htmlFor="title">Title</label>
-          <input
-            type="text"
-            name="title"
-            value={formData.title}
-            onChange={handleChange}
-          />
-        </p>
-        <p>
-          <label htmlFor="text">Text</label>
-          <textarea
-            type="textarea"
-            name="text"
-            value={formData.text}
-            onChange={handleChange}
-          />
-        </p>
-        <p>
-          <label htmlFor="date">Date</label>
-          <input
-            type="text"
-            name="date"
-            value={formData.date}
-            onChange={handleChange}
-          />
-        </p>
-        <button onClick={handleUpdateNote}>Submit</button>
-      </form>
+      <article className="edit-note-container">
+        <i onClick={handleGoBack} className="back-arrow fa-solid fa-arrow-left fa-xl"></i>
+        <form className="edit-note-form">
+          <p>
+            <label htmlFor="title">Title</label>
+            <input
+              type="text"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+            />
+          </p>
+          <p>
+            <label htmlFor="text">Text</label>
+            <textarea
+              type="textarea"
+              name="text"
+              value={formData.text}
+              onChange={handleChange}
+            />
+          </p>
+          <button onClick={handleUpdateNote}>Submit</button>
+        </form>
+      </article>
     </article>
   );
 };

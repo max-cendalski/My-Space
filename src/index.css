@@ -48,6 +48,20 @@ code {
   text-decoration: none;
   color: white;
 }
+.sticky-section {
+  width: 95%;
+  position: sticky;
+  background-color: white;
+  padding: 0.5rem;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.back-arrow {
+  margin-left: 0;
+  color: var(--red)
+}
 
 .navbar-container {
   border-bottom: 2px solid var(--red);
@@ -60,7 +74,7 @@ code {
 }
 
 .notes-page-container {
-  width: 95%;
+  width: 90%;
 }
 
 .add-note-form, .edit-note-form {
@@ -82,8 +96,15 @@ code {
   color: white;
   border: none;
   cursor: pointer;
-  padding: 0.175rem 0.375rem;
+  padding: 0.375rem 0.625rem;
+  border-radius: 5px;
+  margin-right: 0;
 }
+
+.edit-note-container {
+  width: 95%;
+}
+
 .edit-button {
   background-color: var(--darkGreen);
   color: white;
@@ -91,18 +112,44 @@ code {
   cursor: pointer;
   padding: 0.175rem 0.375rem;
 }
+
 .single-note-container {
   width: 100%;
-  margin: 0.375rem auto;
-  padding: 0.375rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--lightPink);
+}
+.single-note-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.425rem 0;
 }
 
-.single-note-container h3 {
-  border-bottom: 1px solid rgb(165, 164, 164);
+.text {
+  font-size: 1rem;
+  margin-top: 0.375rem;
+  word-spacing: 4px;
 }
-.single-note-container button {
-  margin-left: auto;
-  margin-right: 1rem;
+.edit-link {
+  text-decoration: none;
+  color: black;
+}
+.date-paragraph {
+  font-style: italic;
+  font-size: 0.675rem;
+  padding: 0.375rem 0;
+  margin-left: 0;
+  font-weight: 500;
+}
+
+.plus-button {
+  width:50px;
+  height: 50px;
+  margin-right: 0;
+  background-color: var(--darkGreen);
+  border-radius: 50%;
+  border: none;
+  color: white;
 }
 
 .invisible {
