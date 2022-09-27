@@ -64,7 +64,7 @@ const Notes = () => {
     <>
       <Navbar />
       <section className="sticky-section">
-        <i onClick={handleGoBack} className="fa-solid fa-arrow-left fa-xl"></i>
+        <i onClick={handleGoBack} className="back-arrow fa-solid fa-arrow-left fa-xl"></i>
       </section>
       <article className="notes-page-container">
         <NotesList notes={notes} deleteNote={handleDeleteNote} />

@@ -69,7 +69,7 @@ const NoteEdit = () => {
     <article>
       <Navbar />
       <article className="edit-note-container">
-        <i onClick={handleGoBack} className="fa-solid fa-arrow-left fa-xl"></i>
+        <i onClick={handleGoBack} className="back-arrow fa-solid fa-arrow-left fa-xl"></i>
         <form className="edit-note-form">
           <p>
             <label htmlFor="title">Title</label>
