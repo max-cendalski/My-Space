@@ -1,5 +1,4 @@
-
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const NotesList = ({ notes, deleteNote }) => {
   return (
@@ -7,13 +6,11 @@ const NotesList = ({ notes, deleteNote }) => {
       {notes.map((note) => (
         <section className="single-note-container" key={note.id}>
           <h2 className="note-title">{note.title}</h2>
-
           <Link className="edit-link" to={`/notes/edit/${note.id}`}>
             <p className="text">{note.text}</p>
           </Link>
-          <footer>
+          <footer className="single-note-footer">
             <p className="date-paragraph">Created: {note.date}</p>
-
             <button
               className="delete-button"
               onClick={() => deleteNote(note.id)}
