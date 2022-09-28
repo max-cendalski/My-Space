@@ -69,7 +69,7 @@ const Notes = () => {
           className="back-arrow fa-solid fa-arrow-left fa-xl"
         ></i>
         <button onClick={handleFormState} className="plus-button">
-          <i class="fa-solid fa-plus fa-2xl"></i>
+          <i className="fa-solid fa-plus fa-2xl"></i>
         </button>
       </section>
       <section id="notes-page-container">
