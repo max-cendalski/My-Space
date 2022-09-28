@@ -69,10 +69,10 @@ const Notes = () => {
           <i class="fa-solid fa-plus fa-2xl"></i>
         </button>
       </section>
-      <article className="notes-page-container">
+      <section id="notes-page-container">
         <NotesList notes={notes} deleteNote={handleDeleteNote} />
         <AddNoteForm isVisible={isVisible} handleFormState={handleFormState} />
-      </article>
+      </section>
     </>
   );
 };

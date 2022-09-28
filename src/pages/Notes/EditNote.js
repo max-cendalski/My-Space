@@ -68,11 +68,18 @@ const NoteEdit = () => {
   return (
     <article>
       <Navbar />
+
       <article className="edit-note-container">
-        <i onClick={handleGoBack} className="back-arrow fa-solid fa-arrow-left fa-xl"></i>
-        <form className="edit-note-form">
-          <p>
-            <label htmlFor="title">Title</label>
+        <section className="sticky-section"></section>
+        <i
+          onClick={handleGoBack}
+          className="back-arrow fa-solid fa-arrow-left fa-xl"
+        ></i>
+        <form className="note-form">
+          <p className="field">
+            <label className="label-standard" htmlFor="title">
+              Title
+            </label>
             <input
               type="text"
               name="title"
@@ -80,8 +87,10 @@ const NoteEdit = () => {
               onChange={handleChange}
             />
           </p>
-          <p>
-            <label htmlFor="text">Text</label>
+          <p className="field">
+            <label className="label-standard" htmlFor="text">
+              Text
+            </label>
             <textarea
               type="textarea"
               name="text"

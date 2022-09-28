@@ -6,7 +6,7 @@ const Home = () => {
   const { user } = UserAuth();
 
   return (
-    <article className="home-container">
+    <article id="home-container">
       <Navbar />
       {user ? (
         <h3>{user.displayName}</h3>
