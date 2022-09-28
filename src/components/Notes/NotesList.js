@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
 
-const NotesList = ({ notes, deleteNote }) => {
+const NotesList = ({ isVisible,notes, deleteNote }) => {
   return (
     <article>
       {notes.map((note) => (
-        <section className="single-note-container" key={note.id}>
+        <section
+          className={!isVisible ? "invisible" : "single-note-container"}
+          key={note.id}
+        >
           <h2 className="note-title">{note.title}</h2>
           <Link className="edit-link" to={`/notes/edit/${note.id}`}>
             <p className="text">{note.text}</p>

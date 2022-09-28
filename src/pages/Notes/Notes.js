@@ -64,14 +64,17 @@ const Notes = () => {
     <>
       <Navbar />
       <section className="sticky-section">
-        <i onClick={handleGoBack} className="back-arrow fa-solid fa-arrow-left fa-xl"></i>
+        <i
+          onClick={handleGoBack}
+          className="back-arrow fa-solid fa-arrow-left fa-xl"
+        ></i>
         <button onClick={handleFormState} className="plus-button">
           <i class="fa-solid fa-plus fa-2xl"></i>
         </button>
       </section>
       <section id="notes-page-container">
-        <NotesList notes={notes} deleteNote={handleDeleteNote} />
         <AddNoteForm isVisible={isVisible} handleFormState={handleFormState} />
+        <NotesList isVisible={isVisible} notes={notes} deleteNote={handleDeleteNote} />
       </section>
     </>
   );

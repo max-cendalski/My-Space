@@ -44,9 +44,11 @@ const AddNoteForm = ({isVisible,  handleFormState}) => {
 
   return (
     <article>
-      <form className={isVisible ? "invisible" : "add-note-form"}>
-        <p>
-          <label htmlFor="title">Title</label>
+      <form className={isVisible ? "invisible" : "note-form"}>
+        <p className="field">
+          <label className="label-standard" htmlFor="title">
+            Title
+          </label>
           <input
             type="text"
             name="title"
@@ -54,8 +56,10 @@ const AddNoteForm = ({isVisible,  handleFormState}) => {
             onChange={handleChange}
           />
         </p>
-        <p>
-          <label htmlFor="text">Text</label>
+        <p className="field">
+          <label className="label-standard" htmlFor="text">
+            Text
+          </label>
           <textarea
             type="textarea"
             name="text"

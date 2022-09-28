@@ -77,6 +77,7 @@ code {
   width: 90%;
 }
 
+/*NOTE FORM */
 .note-form {
   position: absolute;
   background-color: white;;
@@ -176,6 +177,7 @@ code {
 
 .label-standard {
   display: block;
+  font-weight: bold;
 }
 .field {
   margin-bottom: 1rem;
