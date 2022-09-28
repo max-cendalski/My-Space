@@ -69,7 +69,7 @@ const NoteEdit = () => {
     <article>
       <Navbar />
 
-      <article className="edit-note-container">
+      <article id="edit-note-container">
         <section className="sticky-section"></section>
         <i
           onClick={handleGoBack}

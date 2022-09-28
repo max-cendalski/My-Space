@@ -11,7 +11,7 @@ const Notes = () => {
   const { user } = UserAuth();
   const [notes, setNotes] = useState([]);
   const [isVisible, setIsVisible] = useState(true);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   /*   const getNotes = async () => {
     try {
@@ -23,7 +23,8 @@ const Notes = () => {
   }; */
 
   useEffect(() => {
-    const unsub = onSnapshot(collection(db, `users/${user.uid}`, "notes"),
+    const unsub = onSnapshot(
+      collection(db, `users/${user.uid}`, "notes"),
       (snapShot) => {
         let notesList = [];
         snapShot.docs.forEach((doc) => {
@@ -57,8 +58,8 @@ const Notes = () => {
   };
 
   const handleGoBack = () => {
-    navigate(-1)
-  }
+    navigate(-1);
+  };
 
   return (
     <>
@@ -72,10 +73,14 @@ const Notes = () => {
           <i className="fa-solid fa-plus fa-2xl"></i>
         </button>
       </section>
-      <section id="notes-page-container">
+      <article id="notes-page-container">
         <AddNoteForm isVisible={isVisible} handleFormState={handleFormState} />
-        <NotesList isVisible={isVisible} notes={notes} deleteNote={handleDeleteNote} />
-      </section>
+        <NotesList
+          isVisible={isVisible}
+          notes={notes}
+          deleteNote={handleDeleteNote}
+        />
+      </article>
     </>
   );
 };
