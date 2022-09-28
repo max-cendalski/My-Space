@@ -11,7 +11,7 @@ const Notes = () => {
   const { user } = UserAuth();
   const [notes, setNotes] = useState([]);
   const [isVisible, setIsVisible] = useState(true);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   /*   const getNotes = async () => {
     try {
@@ -23,7 +23,8 @@ const Notes = () => {
   }; */
 
   useEffect(() => {
-    const unsub = onSnapshot(collection(db, `users/${user.uid}`, "notes"),
+    const unsub = onSnapshot(
+      collection(db, `users/${user.uid}`, "notes"),
       (snapShot) => {
         let notesList = [];
         snapShot.docs.forEach((doc) => {
@@ -57,21 +58,28 @@ const Notes = () => {
   };
 
   const handleGoBack = () => {
-    navigate(-1)
-  }
+    navigate(-1);
+  };
 
   return (
     <>
       <Navbar />
       <section className="sticky-section">
-        <i onClick={handleGoBack} className="back-arrow fa-solid fa-arrow-left fa-xl"></i>
+        <i
+          onClick={handleGoBack}
+          className="back-arrow fa-solid fa-arrow-left fa-xl"
+        ></i>
         <button onClick={handleFormState} className="plus-button">
-          <i class="fa-solid fa-plus fa-2xl"></i>
+          <i className="fa-solid fa-plus fa-2xl"></i>
         </button>
       </section>
-      <article className="notes-page-container">
-        <NotesList notes={notes} deleteNote={handleDeleteNote} />
+      <article id="notes-page-container">
         <AddNoteForm isVisible={isVisible} handleFormState={handleFormState} />
+        <NotesList
+          isVisible={isVisible}
+          notes={notes}
+          deleteNote={handleDeleteNote}
+        />
       </article>
     </>
   );

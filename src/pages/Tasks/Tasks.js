@@ -3,7 +3,7 @@ import Navbar from '../../components/Navbar/Navbar';
 export const Tasks = () => {
 
   return (
-    <article>
+    <article id="tasks-container">
       <Navbar />
       <h1>Tasks</h1>
     </article>

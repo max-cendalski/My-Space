@@ -1,16 +1,15 @@
-import { useState } from 'react';
-import { addDoc, collection } from 'firebase/firestore';
-import { db } from '../../firebase/Firebase';
-import { UserAuth } from '../../context/AuthContext';
-import {format} from 'date-fns'
+import { useState } from "react";
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "../../firebase/Firebase";
+import { UserAuth } from "../../context/AuthContext";
+import { format } from "date-fns";
 
-
-const AddNoteForm = ({isVisible,  handleFormState}) => {
+const AddNoteForm = ({ isVisible, handleFormState }) => {
   const { user } = UserAuth();
   const [formData, setFormData] = useState({
     title: "",
     text: "",
-    date: format(new Date(), "PP")
+    date: format(new Date(), "PP"),
   });
 
   const canSave = [...Object.values(formData)].every(Boolean);
@@ -19,7 +18,7 @@ const AddNoteForm = ({isVisible,  handleFormState}) => {
     e.preventDefault();
     const addNote = async () => {
       try {
-        await addDoc(collection(db, 'users', user.uid, 'notes'), formData);
+        await addDoc(collection(db, "users", user.uid, "notes"), formData);
       } catch (e) {
         console.error("Error adding document:", e);
       }
@@ -27,9 +26,9 @@ const AddNoteForm = ({isVisible,  handleFormState}) => {
     addNote();
     setFormData({
       title: "",
-      text: ""
+      text: "",
     });
-    handleFormState()
+    handleFormState();
   };
 
   const handleChange = (e) => {
@@ -44,9 +43,11 @@ const AddNoteForm = ({isVisible,  handleFormState}) => {
 
   return (
     <article>
-      <form className={isVisible ? "invisible" : "add-note-form"}>
-        <p>
-          <label htmlFor="title">Title</label>
+      <form className={isVisible ? "invisible" : "note-form"}>
+        <p className="field">
+          <label className="label-standard" htmlFor="title">
+            Title
+          </label>
           <input
             type="text"
             name="title"
@@ -54,8 +55,10 @@ const AddNoteForm = ({isVisible,  handleFormState}) => {
             onChange={handleChange}
           />
         </p>
-        <p>
-          <label htmlFor="text">Text</label>
+        <p className="field">
+          <label className="label-standard" htmlFor="text">
+            Text
+          </label>
           <textarea
             type="textarea"
             name="text"
@@ -63,7 +66,6 @@ const AddNoteForm = ({isVisible,  handleFormState}) => {
             onChange={handleChange}
           />
         </p>
-
         <button onClick={handleAddNote} disabled={!canSave}>
           Add Note
         </button>
