@@ -2,16 +2,15 @@ import { useState, useEffect } from "react";
 import { collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { UserAuth } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import NotesList from "../../components/Notes/NotesList";
 import AddNoteForm from "../../components/Notes/AddNoteForm";
+import GoBack from "../../components/GoBack/GoBack";
 
 const Notes = () => {
   const { user } = UserAuth();
   const [notes, setNotes] = useState([]);
   const [isVisible, setIsVisible] = useState(true);
-  const navigate = useNavigate();
 
   /*   const getNotes = async () => {
     try {
@@ -57,18 +56,12 @@ const Notes = () => {
     setIsVisible((current) => !current);
   };
 
-  const handleGoBack = () => {
-    navigate(-1);
-  };
 
   return (
     <>
       <Navbar />
       <section className="sticky-section">
-        <i
-          onClick={handleGoBack}
-          className="back-arrow fa-solid fa-arrow-left fa-xl"
-        ></i>
+      <GoBack />
         <button onClick={handleFormState} className="plus-button">
           <i className="fa-solid fa-plus fa-2xl"></i>
         </button>

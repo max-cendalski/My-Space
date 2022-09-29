@@ -165,6 +165,7 @@ code {
 
 #ideas-page-container  {
   width: 90%;
+  margin-block-start: 0.8rem;
 }
 .date-paragraph {
   font-style: italic;
