@@ -25,21 +25,23 @@ const Ideas = () => {
   const handleGenerateIdeas = () => {
     var numbers = [];
     var number = 0;
-    for (var i = 0; i < 3; i++) {
-
+    var counter = 3
+    for (var i = 0; i < counter; i++) {
       number = Math.floor(Math.random() * ideas.length);
       if (numbers.includes(ideas[number]) === false) {
         numbers.push(ideas[number])
-
       }
-      else {
-        console.log('whee')
-         number = Math.floor(Math.random() * ideas.length);
-         numbers.push(ideas[number])
+        else if (numbers.includes(ideas[number]) === true ){
+        console.log("numbersbefore", numbers);
+        numbers.pop()
+        console.log('numbersafterpop',numbers)
+        number = Math.floor(Math.random() * ideas.length);
+        numbers.push(ideas[number])
+        counter ++
       }
     }
-    console.log('numbers',numbers)
-    setIdeasToRender(numbers);
+     console.log('nubmer',numbers)
+     setIdeasToRender(numbers)
   };
 
   return (
