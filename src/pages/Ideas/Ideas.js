@@ -1,12 +1,11 @@
 import Navbar from "../../components/Navbar/Navbar";
 import GoBack from "../../components/GoBack/GoBack";
-import { getDocs, getDoc, doc, collection } from "firebase/firestore";
+import { getDocs, collection } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { useState, useEffect } from "react";
 
 const Ideas = () => {
   const [ideas, setIdeas] = useState([]);
-  const [singleIdea, setSingleIdea] = useState("");
   const [ideasToRender, setIdeasToRender] = useState("");
 
   useEffect(() => {
@@ -19,29 +18,26 @@ const Ideas = () => {
       }
     };
     fetchIdeas();
+
     // eslint-disable-next-line
   }, []);
 
   const handleGenerateIdeas = () => {
     var numbers = [];
     var number = 0;
-    var counter = 3
+    var counter = 3;
     for (var i = 0; i < counter; i++) {
       number = Math.floor(Math.random() * ideas.length);
       if (numbers.includes(ideas[number]) === false) {
-        numbers.push(ideas[number])
-      }
-        else if (numbers.includes(ideas[number]) === true ){
-        console.log("numbersbefore", numbers);
-        numbers.pop()
-        console.log('numbersafterpop',numbers)
+        numbers.push(ideas[number]);
+      } else if (numbers.includes(ideas[number]) === true) {
+        numbers.pop();
         number = Math.floor(Math.random() * ideas.length);
-        numbers.push(ideas[number])
-        counter ++
+        numbers.push(ideas[number]);
+        counter++;
       }
     }
-     console.log('nubmer',numbers)
-     setIdeasToRender(numbers)
+    setIdeasToRender(numbers);
   };
 
   return (
