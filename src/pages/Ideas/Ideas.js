@@ -23,20 +23,22 @@ const Ideas = () => {
   }, []);
 
   const handleGenerateIdeas = () => {
-    let numbers = [];
-    let counter = 0;
-    let number = 0;
+    var numbers = [];
+    var number = 0;
     for (var i = 0; i < 3; i++) {
+
       number = Math.floor(Math.random() * ideas.length);
-      if (!numbers.includes(number)) {
-        numbers.push(ideas[number]);
-        counter++;
-      } else if (numbers.includes(number)) {
-        number = Math.floor(Math.random() * ideas.length);
-        numbers.push(ideas[number]);
-        counter++;
+      if (numbers.includes(ideas[number]) === false) {
+        numbers.push(ideas[number])
+
+      }
+      else {
+        console.log('whee')
+         number = Math.floor(Math.random() * ideas.length);
+         numbers.push(ideas[number])
       }
     }
+    console.log('numbers',numbers)
     setIdeasToRender(numbers);
   };
 
