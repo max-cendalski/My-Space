@@ -11,12 +11,8 @@ const Ideas = () => {
 
   useEffect(() => {
     const fetchIdeas = async () => {
-      const singleIdeaRef = doc(db, "ideas", "N5Kp9pe6M9mFbRrd8MZq");
       try {
         const ideasData = await getDocs(collection(db, "ideas"));
-        const singleIdeaData = await getDoc(singleIdeaRef);
-        //setSingleIdea(singleIdeaData.data())
-        //console.log("singleIdeaData", singleIdea);
         setIdeas(ideasData.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
       } catch (err) {
         console.error("ERROR", err);
@@ -56,8 +52,7 @@ const Ideas = () => {
         {ideasToRender &&
           ideasToRender.map((idea) => (
             <section key={idea.id}>
-              <h4>{idea.text}</h4>
-              <p>------------</p>
+              <h4 className="single-idea">{idea.text}</h4>
             </section>
           ))}
       </article>
