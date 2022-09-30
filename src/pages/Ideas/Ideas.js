@@ -27,19 +27,17 @@ const Ideas = () => {
   const handleGenerateIdeas = () => {
     var numbers = [];
     var number = 0;
-    var counter = 3;
-    for (var i = 0; i < counter; i++) {
+    for (var i = 0; i < 3; i++) {
       number = Math.floor(Math.random() * ideas.length);
       if (numbers.includes(ideas[number]) === false) {
         numbers.push(ideas[number]);
       } else if (numbers.includes(ideas[number]) === true) {
-        numbers.pop();
         number = Math.floor(Math.random() * ideas.length);
         numbers.push(ideas[number]);
-        counter++;
       }
     }
     setIdeasToRender(numbers);
+    console.log('ideas to render',ideasToRender)
   };
 
   const handleAddIdeaToHomepage = (id) => {
@@ -47,7 +45,8 @@ const Ideas = () => {
 
     const addIdea = async () => {
       try {
-        await addDoc(collection(db, "users", user.uid, "ideas", ideasToRender));
+        //await addDoc(collection(db, "users", user.uid, "ideas", ideasToRender));
+        console.log('ideasToRender',ideasToRender)
       } catch (err) {
         console.error("ERROR:", err);
       }
@@ -61,10 +60,13 @@ const Ideas = () => {
       <article id="ideas-page-container">
         <GoBack />
         <h1>Ideas</h1>
-        {(!ideasToRender) &&
-          <button onClick={handleGenerateIdeas} className="generate-ideas-button">
-          Generate 3 ideas
-        </button>
+        {
+          <button
+            onClick={handleGenerateIdeas}
+            className="generate-ideas-button"
+          >
+            Generate 3 ideas
+          </button>
         }
         {ideasToRender &&
           ideasToRender.map((idea) => (
