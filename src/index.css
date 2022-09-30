@@ -169,8 +169,11 @@ code {
 }
 
 .single-idea {
+  margin-block-end: 1.375rem;
+}
+
+.single-idea h4 {
   color: var(--red);
-  margin-block-end: 1.375rem
 }
 
 .date-paragraph {

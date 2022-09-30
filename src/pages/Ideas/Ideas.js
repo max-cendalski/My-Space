@@ -40,6 +40,14 @@ const Ideas = () => {
     setIdeasToRender(numbers);
   };
 
+  const handleAddIdeaToHomepage = id => {
+    const addIdea =async() => {
+      try {
+
+      }
+    }
+  }
+
   return (
     <>
       <Navbar />
@@ -51,8 +59,9 @@ const Ideas = () => {
         </button>
         {ideasToRender &&
           ideasToRender.map((idea) => (
-            <section key={idea.id}>
+            <section className="single-idea" key={idea.id}>
               <h4 className="single-idea">{idea.text}</h4>
+              <button onClick={()=>handleAddIdeaToHomepage(idea.id)} >Add To Homepage</button>
             </section>
           ))}
       </article>
