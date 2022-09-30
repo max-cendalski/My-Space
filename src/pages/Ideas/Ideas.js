@@ -1,6 +1,6 @@
 import Navbar from "../../components/Navbar/Navbar";
 import GoBack from "../../components/GoBack/GoBack";
-import { getDocs, addDoc, collection } from "firebase/firestore";
+import { getDocs, setDoc,addDoc, collection } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { useState, useEffect } from "react";
 import { UserAuth } from "../../context/AuthContext";
@@ -8,7 +8,7 @@ import { UserAuth } from "../../context/AuthContext";
 const Ideas = () => {
   const { user } = UserAuth();
   const [ideas, setIdeas] = useState([]);
-  const [ideasToRender, setIdeasToRender] = useState("");
+  const [ideasToRender, setIdeasToRender] = useState([]);
 
   useEffect(() => {
     const fetchIdeas = async () => {
@@ -36,7 +36,7 @@ const Ideas = () => {
         numbers.push(ideas[number]);
       }
     }
-    setIdeasToRender(numbers);
+    setIdeasToRender(numbers.slice());
     console.log('ideas to render',ideasToRender)
   };
 
@@ -44,9 +44,18 @@ const Ideas = () => {
     console.log("id", id);
 
     const addIdea = async () => {
+      console.log(ideasToRender[0])
       try {
+          for (const item of ideasToRender) {
+          await addDoc(
+            collection(db, "users", user.uid, "ideas"),
+            item
+          );
+          }
+
+
         //await addDoc(collection(db, "users", user.uid, "ideas", ideasToRender));
-        console.log('ideasToRender',ideasToRender)
+        console.log('ideasToRender',ideasToRender[0])
       } catch (err) {
         console.error("ERROR:", err);
       }
