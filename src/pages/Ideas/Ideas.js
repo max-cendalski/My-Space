@@ -1,10 +1,12 @@
 import Navbar from "../../components/Navbar/Navbar";
 import GoBack from "../../components/GoBack/GoBack";
-import { getDocs, collection } from "firebase/firestore";
+import { getDocs, addDoc, collection } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { useState, useEffect } from "react";
+import { UserAuth } from "../../context/AuthContext";
 
 const Ideas = () => {
+  const { user } = UserAuth();
   const [ideas, setIdeas] = useState([]);
   const [ideasToRender, setIdeasToRender] = useState("");
 
@@ -40,13 +42,18 @@ const Ideas = () => {
     setIdeasToRender(numbers);
   };
 
-  const handleAddIdeaToHomepage = id => {
-    const addIdea =async() => {
-      try {
+  const handleAddIdeaToHomepage = (id) => {
+    console.log("id", id);
 
+    const addIdea = async () => {
+      try {
+        await addDoc(collection(db, "users", user.uid, "ideas", ideasToRender));
+      } catch (err) {
+        console.error("ERROR:", err);
       }
-    }
-  }
+    };
+    addIdea();
+  };
 
   return (
     <>
@@ -54,14 +61,18 @@ const Ideas = () => {
       <article id="ideas-page-container">
         <GoBack />
         <h1>Ideas</h1>
-        <button onClick={handleGenerateIdeas} className="generate-ideas-button">
+        {(!ideasToRender) &&
+          <button onClick={handleGenerateIdeas} className="generate-ideas-button">
           Generate 3 ideas
         </button>
+        }
         {ideasToRender &&
           ideasToRender.map((idea) => (
             <section className="single-idea" key={idea.id}>
               <h4 className="single-idea">{idea.text}</h4>
-              <button onClick={()=>handleAddIdeaToHomepage(idea.id)} >Add To Homepage</button>
+              <button onClick={() => handleAddIdeaToHomepage(idea.id)}>
+                Add To Homepage
+              </button>
             </section>
           ))}
       </article>
