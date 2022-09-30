@@ -155,10 +155,24 @@ code {
   word-spacing: 4px;
   line-height: 1.3;
 }
+
 .edit-link {
   text-decoration: none;
   color: black;
 }
+
+/* Ideas */
+
+#ideas-page-container  {
+  width: 90%;
+  margin-block-start: 0.8rem;
+}
+
+.single-idea {
+  color: var(--red);
+  margin-block-end: 1.375rem
+}
+
 .date-paragraph {
   font-style: italic;
   font-size: 0.675rem;
@@ -184,6 +198,8 @@ code {
 .field {
   margin-block-end: 1rem;
 }
+
+
 
 .invisible {
   display: none;

@@ -9,6 +9,7 @@ import Weather from './pages/Weather/Weather'
 import RequireAuth from './RequireAuth/RequireAuth';
 import Login from './pages/Login/Login';
 import EditNote from './pages/Notes/EditNote';
+import Ideas from './pages/Ideas/Ideas';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         </Route>
 
 
+        <Route path="/ideas" element={<Ideas />} />
         <Route path="/tasks" element={<Tasks />} />
         <Route path="/weather" element={<Weather />} />
       </Route>

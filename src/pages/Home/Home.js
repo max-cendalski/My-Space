@@ -24,6 +24,9 @@ const Home = () => {
       <NavLink className="feature-button" to="/weather">
         Weather
       </NavLink>
+      <NavLink className="feature-button" to="/ideas">
+        Ideas
+      </NavLink>
     </article>
   );
 };
