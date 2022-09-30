@@ -1,6 +1,6 @@
 import Navbar from "../../components/Navbar/Navbar";
 import GoBack from "../../components/GoBack/GoBack";
-import { getDocs, setDoc,addDoc, collection } from "firebase/firestore";
+import { getDocs,setDoc, addDoc, collection } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { useState, useEffect } from "react";
 import { UserAuth } from "../../context/AuthContext";
@@ -37,27 +37,25 @@ const Ideas = () => {
       }
     }
     setIdeasToRender(numbers.slice());
-    console.log('ideas to render',ideasToRender)
+    console.log("ideas to render", ideasToRender);
   };
 
   const handleAddIdeaToHomepage = (id) => {
-    console.log("id", id);
-
+    const ideaToHomePage = ideasToRender.filter((item) => item.id === id);
+    console.log('ideatoh',ideaToHomePage)
     const addIdea = async () => {
-      console.log(ideasToRender[0])
       try {
-          for (const item of ideasToRender) {
-          await addDoc(
-            collection(db, "users", user.uid, "ideas"),
-            item
-          );
-          }
-
-
-        //await addDoc(collection(db, "users", user.uid, "ideas", ideasToRender));
-        console.log('ideasToRender',ideasToRender[0])
+        console.log(ideaToHomePage);
+         await addDoc(
+          collection(db, "users", user.uid, "ideaToHomePage"),
+          ideaToHomePage[0]
+        );
+        for (const item of ideasToRender) {
+          await addDoc(collection(db, "users", user.uid, "ideas"), item);
+        }
+        console.log("ideasToRender", ideasToRender);
       } catch (err) {
-        console.error("ERROR:", err);
+        console.error("Something went wrong:", err);
       }
     };
     addIdea();
