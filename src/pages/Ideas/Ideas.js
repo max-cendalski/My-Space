@@ -1,6 +1,6 @@
 import Navbar from "../../components/Navbar/Navbar";
 import GoBack from "../../components/GoBack/GoBack";
-import { getDocs,setDoc, addDoc, collection } from "firebase/firestore";
+import { getDocs, addDoc, collection } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { useState, useEffect } from "react";
 import { UserAuth } from "../../context/AuthContext";
@@ -24,6 +24,8 @@ const Ideas = () => {
     // eslint-disable-next-line
   }, []);
 
+
+
   const handleGenerateIdeas = () => {
     var numbers = [];
     var number = 0;
@@ -42,11 +44,11 @@ const Ideas = () => {
 
   const handleAddIdeaToHomepage = (id) => {
     const ideaToHomePage = ideasToRender.filter((item) => item.id === id);
-    console.log('ideatoh',ideaToHomePage)
+    console.log("ideatoh", ideaToHomePage);
     const addIdea = async () => {
       try {
         console.log(ideaToHomePage);
-         await addDoc(
+        await addDoc(
           collection(db, "users", user.uid, "ideaToHomePage"),
           ideaToHomePage[0]
         );
