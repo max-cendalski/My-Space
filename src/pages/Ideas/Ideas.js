@@ -1,6 +1,6 @@
 import Navbar from "../../components/Navbar/Navbar";
 import GoBack from "../../components/GoBack/GoBack";
-import { getDocs, addDoc, collection } from "firebase/firestore";
+import { getDocs,doc, setDoc, addDoc, collection } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { useState, useEffect } from "react";
 import { UserAuth } from "../../context/AuthContext";
@@ -24,8 +24,6 @@ const Ideas = () => {
     // eslint-disable-next-line
   }, []);
 
-
-
   const handleGenerateIdeas = () => {
     var numbers = [];
     var number = 0;
@@ -44,18 +42,15 @@ const Ideas = () => {
 
   const handleAddIdeaToHomepage = (id) => {
     const ideaToHomePage = ideasToRender.filter((item) => item.id === id);
-    console.log("ideatoh", ideaToHomePage);
     const addIdea = async () => {
       try {
-        console.log(ideaToHomePage);
-        await addDoc(
-          collection(db, "users", user.uid, "ideaToHomePage"),
+        await setDoc(
+          doc(db, "users", user.uid, "ideaToHome", "ideaToHomePageID"),
           ideaToHomePage[0]
         );
         for (const item of ideasToRender) {
-          await addDoc(collection(db, "users", user.uid, "ideas"), item);
+          await setDoc(doc(db, "users", user.uid, "ideas", item.id), item)
         }
-        console.log("ideasToRender", ideasToRender);
       } catch (err) {
         console.error("Something went wrong:", err);
       }
@@ -64,7 +59,7 @@ const Ideas = () => {
   };
 
   return (
-    <>
+    <div>
       <Navbar />
       <article id="ideas-page-container">
         <GoBack />
@@ -87,8 +82,16 @@ const Ideas = () => {
             </section>
           ))}
       </article>
-    </>
+    </div>
   );
 };
 
 export default Ideas;
+/*
+       console.log(ideaToHo);
+        await addDoc(
+          collection(db, "users", user.uid, "ideaToHomePage", ideaToHomePage.id),
+          ideaToHomePage[0]
+        );
+        for (const item of ideasToRender) {
+          await addDoc(collection(db, "users", user.uid, "ideas"), item); */
