@@ -12,14 +12,15 @@ const Home = () => {
   useEffect(() => {
     const fetchIdea = async () => {
       try {
-        const ideaToHomeCollectionRef = collection(
-          db,
-          `users/${user.uid}`,
-          "ideaToHomePage"
-        );
-        const ideasData = await getDocs(ideaToHomeCollectionRef);
-        const ideaToSave = ideasData.docs.map((doc) => ({ ...doc.data() }));
-        setIdea(ideaToSave[0]);
+        const ideaRef = doc(db,"users",user.uid,"ideaToHome","ideaToHomePageID")
+        const docSnap = await getDoc(ideaRef)
+        if (docSnap.exists()) {
+          console.log("Document data:", docSnap.data());
+          setIdea(docSnap.data())
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+        }
       } catch (err) {
         console.error("SOMETHING WENT WRONG:", err);
       }
