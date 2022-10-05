@@ -176,6 +176,13 @@ code {
   color: var(--red);
 }
 
+#idea-home-page {
+  width: 90%;
+  color: var(--red);
+  font-style: italic;
+  font-weight: 600;
+}
+
 .date-paragraph {
   font-style: italic;
   font-size: 0.675rem;

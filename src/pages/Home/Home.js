@@ -6,7 +6,7 @@ import { db } from "../../firebase/Firebase";
 import Navbar from "../../components/Navbar/Navbar";
 
 const Home = () => {
-  const [idea, setIdea] = useState({});
+  const [idea, setIdea] = useState(null);
   const { user } = UserAuth();
 
   useEffect(() => {
@@ -14,13 +14,13 @@ const Home = () => {
       try {
         const ideaRef = doc(db,"users",user.uid,"ideaToHome","ideaToHomePageID")
         const docSnap = await getDoc(ideaRef)
-        if (docSnap.exists()) {
+        setIdea(docSnap.data())
+       /*  if (docSnap.exists()) {
           console.log("Document data:", docSnap.data());
           setIdea(docSnap.data())
         } else {
-          // doc.data() will be undefined in this case
           console.log("No such document!");
-        }
+        } */
       } catch (err) {
         console.error("SOMETHING WENT WRONG:", err);
       }
@@ -28,6 +28,7 @@ const Home = () => {
     fetchIdea();
     // eslint-disable-next-line
   }, []);
+
   return (
     <article id="home-container">
       <Navbar />
@@ -38,7 +39,7 @@ const Home = () => {
           <h3>You need to be signed in to use all features! </h3>
         </article>
       )}
-      <section id="idea-home-page">{idea && <p>{idea.text}</p>}</section>
+      <section id="idea-home-page">{idea && <p>"{idea.text}"</p>}</section>
       <NavLink className="feature-button" to="/notes">
         Notes
       </NavLink>
