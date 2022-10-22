@@ -47,7 +47,7 @@ const Home = () => {
       )}
       {idea && (
         <section id="idea-home-page">
-          <p>"{idea.text}"</p>
+          <p><q>{idea.text}</q></p>
         </section>
       )}
       <NavLink className="feature-button" to="/notes">

@@ -72,7 +72,7 @@ const Ideas = () => {
         {ideasToRender ? (
           ideasToRender.map((idea) => (
             <section className="single-idea" key={idea.id}>
-              <p className="text">"{idea.text}"</p>
+              <p className="text"><q>{idea.text}</q></p>
               <button onClick={() => handleAddIdeaToHomepage(idea.id)}>
                 Add To Homepage
               </button>
