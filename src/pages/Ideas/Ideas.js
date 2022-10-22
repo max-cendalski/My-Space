@@ -1,6 +1,6 @@
 import Navbar from "../../components/Navbar/Navbar";
 import GoBack from "../../components/GoBack/GoBack";
-import { getDocs,doc, setDoc, addDoc, collection } from "firebase/firestore";
+import { getDocs, doc, setDoc, collection } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { useState, useEffect } from "react";
 import { UserAuth } from "../../context/AuthContext";
@@ -14,9 +14,13 @@ const Ideas = () => {
     const fetchIdeas = async () => {
       try {
         const ideasData = await getDocs(collection(db, "ideas"));
-        const ideasToRenderData = await getDocs(collection(db, "users",user.uid, "ideas" ))
-        setIdeas(ideasData.docs.map((doc) => ({ ...doc.data(), id: doc.id })));;
-        setIdeasToRender(ideasToRenderData.docs.map((doc) => ({ ...doc.data(), id: doc.id })));;
+        const ideasToRenderData = await getDocs(
+          collection(db, "users", user.uid, "ideas")
+        );
+        setIdeas(ideasData.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+        setIdeasToRender(
+          ideasToRenderData.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+        );
       } catch (err) {
         console.error("ERROR", err);
       }
@@ -51,7 +55,7 @@ const Ideas = () => {
           ideaToHomePage[0]
         );
         for (const item of ideasToRender) {
-          await setDoc(doc(db, "users", user.uid, "ideas", item.id), item)
+          await setDoc(doc(db, "users", user.uid, "ideas", item.id), item);
         }
       } catch (err) {
         console.error("Something went wrong:", err);
@@ -64,24 +68,26 @@ const Ideas = () => {
       <Navbar />
       <article id="ideas-page-container">
         <GoBack />
-        <h1>Ideas</h1>
-        {
-          <button
-            onClick={handleGenerateIdeas}
-            className="generate-ideas-button"
-          >
-            Generate 3 ideas
-          </button>
-        }
-        {ideasToRender &&
+        <h1 id="ideas-header">Three ideas to think about</h1>
+        {ideasToRender ? (
           ideasToRender.map((idea) => (
             <section className="single-idea" key={idea.id}>
-              <h4 className="single-idea">{idea.text}</h4>
+              <p className="text">"{idea.text}"</p>
               <button onClick={() => handleAddIdeaToHomepage(idea.id)}>
                 Add To Homepage
               </button>
             </section>
-          ))}
+          ))
+        ) : (
+          <article>
+            <button
+              onClick={handleGenerateIdeas}
+              className="generate-ideas-button"
+            >
+              Generate 3 ideas
+            </button>
+          </article>
+        )}
       </article>
     </div>
   );
