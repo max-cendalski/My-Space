@@ -36,7 +36,7 @@ const Notes = () => {
       }
     );
 
-    return () => {
+     return () => {
       unsub();
     };
     // eslint-disable-next-line
@@ -55,7 +55,6 @@ const Notes = () => {
   const handleFormState = () => {
     setIsVisible((current) => !current);
   };
-
 
   return (
     <>

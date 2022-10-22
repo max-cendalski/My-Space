@@ -14,7 +14,9 @@ const Ideas = () => {
     const fetchIdeas = async () => {
       try {
         const ideasData = await getDocs(collection(db, "ideas"));
-        setIdeas(ideasData.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+        const ideasToRenderData = await getDocs(collection(db, "users",user.uid, "ideas" ))
+        setIdeas(ideasData.docs.map((doc) => ({ ...doc.data(), id: doc.id })));;
+        setIdeasToRender(ideasToRenderData.docs.map((doc) => ({ ...doc.data(), id: doc.id })));;
       } catch (err) {
         console.error("ERROR", err);
       }
@@ -57,7 +59,6 @@ const Ideas = () => {
     };
     addIdea();
   };
-
   return (
     <div>
       <Navbar />

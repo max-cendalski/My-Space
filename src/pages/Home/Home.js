@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
 import { useState, useEffect } from "react";
-import { getDoc, getDocs, doc, collection } from "firebase/firestore";
+import { getDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import Navbar from "../../components/Navbar/Navbar";
 
@@ -12,20 +12,26 @@ const Home = () => {
   useEffect(() => {
     const fetchIdea = async () => {
       try {
-        const ideaRef = doc(db,"users",user.uid,"ideaToHome","ideaToHomePageID")
-        const docSnap = await getDoc(ideaRef)
-        setIdea(docSnap.data())
-       /*  if (docSnap.exists()) {
-          console.log("Document data:", docSnap.data());
-          setIdea(docSnap.data())
+        const ideaRef = doc(
+          db,
+          "users",
+          user.uid,
+          "ideaToHome",
+          "ideaToHomePageID"
+        );
+        const docSnap = await getDoc(ideaRef);
+        if (docSnap.exists()) {
+          setIdea(docSnap.data());
         } else {
           console.log("No such document!");
-        } */
+        }
       } catch (err) {
         console.error("SOMETHING WENT WRONG:", err);
       }
     };
-    fetchIdea();
+    if (user.uid) {
+      fetchIdea();
+    }
     // eslint-disable-next-line
   }, []);
 
@@ -39,7 +45,11 @@ const Home = () => {
           <h3>You need to be signed in to use all features! </h3>
         </article>
       )}
-      <section id="idea-home-page">{idea && <p>"{idea.text}"</p>}</section>
+      {idea && (
+        <section id="idea-home-page">
+          <p>"{idea.text}"</p>
+        </section>
+      )}
       <NavLink className="feature-button" to="/notes">
         Notes
       </NavLink>
