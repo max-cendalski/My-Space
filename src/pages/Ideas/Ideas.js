@@ -67,8 +67,6 @@ const Ideas = () => {
   };
 
   const handleCreateDate = () => {
-    const date1 = new Date()
-     console.log('date:',date1)
      const addDate = async() => {
       try {
         await setDoc(
