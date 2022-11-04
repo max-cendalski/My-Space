@@ -4,6 +4,7 @@ import { getDocs, doc, setDoc, collection } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { useState, useEffect } from "react";
 import { UserAuth } from "../../context/AuthContext";
+import { formatDistance, subDays } from "date-fns";
 
 const Ideas = () => {
   const { user } = UserAuth();
@@ -46,6 +47,7 @@ const Ideas = () => {
     console.log("ideas to render", ideasToRender);
   };
 
+
   const handleAddIdeaToHomepage = (id) => {
     const ideaToHomePage = ideasToRender.filter((item) => item.id === id);
     const addIdea = async () => {
@@ -63,11 +65,36 @@ const Ideas = () => {
     };
     addIdea();
   };
+
+  const handleCreateDate = () => {
+    const date1 = new Date()
+     console.log('date:',date1)
+     const addDate = async() => {
+      try {
+        await setDoc(
+          doc(db, "users",user.uid, "dateForIdeas", "dateID"),{
+            date: new Date()
+          })
+      } catch(err) {
+        console.error("Something went wrong!")
+      }
+     }
+     addDate()
+ /*
+    const date2 = new Date(2022, 11, 2)
+    console.log('date',date1)
+    console.log('date',date2)
+    console.log('from:',formatDistance(subDays(date1,1), date2,{ addSuffix: true }))
+    let firstTry = formatDistance(subDays(date1,1), date2,{ addSuffix: true })
+    console.log('firstTry:',firstTry[0]) */
+  }
+
   return (
     <div>
       <Navbar />
       <article id="ideas-page-container">
         <GoBack />
+        <button onClick={handleCreateDate}>Create Date</button>
         <h1 id="ideas-header">Three ideas to think about</h1>
         {ideasToRender ? (
           ideasToRender.map((idea) => (

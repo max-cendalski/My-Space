@@ -5,6 +5,7 @@ import { getDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import Navbar from "../../components/Navbar/Navbar";
 
+
 const Home = () => {
   const [idea, setIdea] = useState(null);
   const { user } = UserAuth();
