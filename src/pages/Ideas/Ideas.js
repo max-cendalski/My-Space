@@ -73,7 +73,7 @@ const Ideas = () => {
   const handleCreateDate = () => {
      const addDate = async() => {
       try {
-        let date = format(new Date(), "yyyy/mm/dd")
+        let date = format(new Date(), "PP")
         await setDoc(
           doc(db, "users",user.uid, "dateForIdeas", "dateID"),{
             date
@@ -91,10 +91,7 @@ const Ideas = () => {
     let firstTry = formatDistance(subDays(date1,1), date2,{ addSuffix: true })
     console.log('firstTry:',firstTry[0]) */
   }
-  //console.log(new Date())
-  //console.log('dateformat',format(new Date(dateToCompare.date),"MM/dd/yyyy"))
-  //console.log(formatDistance(subDays(new Date(), 1), dateToCompare[0], { addSuffix: true }))
-  console.log('format',formatDistance(new Date(),1),new Date(12, 10, 2021))
+  console.log('dateforIDe',dateToCompare.date)
   return (
     <div>
       <Navbar />
