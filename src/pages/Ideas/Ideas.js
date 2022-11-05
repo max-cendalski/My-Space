@@ -1,19 +1,22 @@
 import Navbar from "../../components/Navbar/Navbar";
 import GoBack from "../../components/GoBack/GoBack";
-import { getDocs, doc, setDoc, collection } from "firebase/firestore";
+import { getDocs,getDoc, doc, setDoc, collection } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { useState, useEffect } from "react";
 import { UserAuth } from "../../context/AuthContext";
-import { formatDistance, subDays } from "date-fns";
+import { formatDistance, subDays,format} from "date-fns";
 
 const Ideas = () => {
   const { user } = UserAuth();
   const [ideas, setIdeas] = useState([]);
   const [ideasToRender, setIdeasToRender] = useState([]);
+  const [dateToCompare, setDateToCompare] = useState('')
 
   useEffect(() => {
     const fetchIdeas = async () => {
+      const dataRef = doc(db,"users",user.uid,"dateForIdeas","dateID")
       try {
+        const dateForIdeas = await getDoc(dataRef)
         const ideasData = await getDocs(collection(db, "ideas"));
         const ideasToRenderData = await getDocs(
           collection(db, "users", user.uid, "ideas")
@@ -22,6 +25,7 @@ const Ideas = () => {
         setIdeasToRender(
           ideasToRenderData.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
         );
+        setDateToCompare(dateForIdeas.data())
       } catch (err) {
         console.error("ERROR", err);
       }
@@ -69,9 +73,10 @@ const Ideas = () => {
   const handleCreateDate = () => {
      const addDate = async() => {
       try {
+        let date = format(new Date(), "yyyy/mm/dd")
         await setDoc(
           doc(db, "users",user.uid, "dateForIdeas", "dateID"),{
-            date: new Date()
+            date
           })
       } catch(err) {
         console.error("Something went wrong!")
@@ -86,7 +91,10 @@ const Ideas = () => {
     let firstTry = formatDistance(subDays(date1,1), date2,{ addSuffix: true })
     console.log('firstTry:',firstTry[0]) */
   }
-
+  //console.log(new Date())
+  //console.log('dateformat',format(new Date(dateToCompare.date),"MM/dd/yyyy"))
+  //console.log(formatDistance(subDays(new Date(), 1), dateToCompare[0], { addSuffix: true }))
+  console.log('format',formatDistance(new Date(),1),new Date(12, 10, 2021))
   return (
     <div>
       <Navbar />
