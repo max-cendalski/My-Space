@@ -4,13 +4,13 @@ import { getDocs,getDoc, doc, setDoc, collection } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { useState, useEffect } from "react";
 import { UserAuth } from "../../context/AuthContext";
-import { formatDistance, subDays,format} from "date-fns";
 
 const Ideas = () => {
   const { user } = UserAuth();
   const [ideas, setIdeas] = useState([]);
   const [ideasToRender, setIdeasToRender] = useState([]);
   const [dateToCompare, setDateToCompare] = useState('')
+  const [generateIdea, setGenerateIdeasButton] = useState(false)
 
   useEffect(() => {
     const fetchIdeas = async () => {
@@ -75,10 +75,7 @@ const Ideas = () => {
         let dateToMiliseconds = new Date().getTime()
         let timeToChange = new Date(dateToMiliseconds).toString().split(" ")
         timeToChange[4] = "23:59:59"
-        console.log('timeToChange',timeToChange.join(" "))
         let timeToSave = new Date(timeToChange.join(" ")).getTime()
-        console.log('timeToSave',timeToSave)
-
         await setDoc(
           doc(db, "users",user.uid, "dateForIdeas", "dateID"),{
             timeToSave
@@ -89,6 +86,8 @@ const Ideas = () => {
      }
      addDate()
   }
+
+  console.log('dateToCompare',dateToCompare)
 
   return (
     <div>
@@ -122,11 +121,3 @@ const Ideas = () => {
 };
 
 export default Ideas;
-/*
-       console.log(ideaToHo);
-        await addDoc(
-          collection(db, "users", user.uid, "ideaToHomePage", ideaToHomePage.id),
-          ideaToHomePage[0]
-        );
-        for (const item of ideasToRender) {
-          await addDoc(collection(db, "users", user.uid, "ideas"), item); */
