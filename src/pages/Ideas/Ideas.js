@@ -25,14 +25,18 @@ const Ideas = () => {
         setIdeasToRender(
           ideasToRenderData.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
         );
-        setDateToCompare(dateForIdeas.data())
+        if (dateForIdeas.data()) {
+          console.log(dateForIdeas.data().timeToSave)
+          setGenerateIdeasButton(true)
+        }
       } catch (err) {
         console.error("ERROR", err);
       }
     };
     fetchIdeas();
+
     // eslint-disable-next-line
-  }, []);
+  }, [generateIdea]);
 
   const handleGenerateIdeas = () => {
     var numbers = [];
@@ -86,8 +90,6 @@ const Ideas = () => {
      }
      addDate()
   }
-
-  console.log('dateToCompare',dateToCompare)
 
   return (
     <div>
