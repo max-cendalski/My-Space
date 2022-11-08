@@ -31,7 +31,6 @@ const Ideas = () => {
       }
     };
     fetchIdeas();
-
     // eslint-disable-next-line
   }, []);
 
@@ -73,25 +72,24 @@ const Ideas = () => {
   const handleCreateDate = () => {
      const addDate = async() => {
       try {
-        let date = format(new Date(), "PP")
+        let dateToMiliseconds = new Date().getTime()
+        let timeToChange = new Date(dateToMiliseconds).toString().split(" ")
+        timeToChange[4] = "23:59:59"
+        console.log('timeToChange',timeToChange.join(" "))
+        let timeToSave = new Date(timeToChange.join(" ")).getTime()
+        console.log('timeToSave',timeToSave)
+
         await setDoc(
           doc(db, "users",user.uid, "dateForIdeas", "dateID"),{
-            date
+            timeToSave
           })
       } catch(err) {
         console.error("Something went wrong!")
       }
      }
      addDate()
- /*
-    const date2 = new Date(2022, 11, 2)
-    console.log('date',date1)
-    console.log('date',date2)
-    console.log('from:',formatDistance(subDays(date1,1), date2,{ addSuffix: true }))
-    let firstTry = formatDistance(subDays(date1,1), date2,{ addSuffix: true })
-    console.log('firstTry:',firstTry[0]) */
   }
-  console.log('dateforIDe',dateToCompare.date)
+
   return (
     <div>
       <Navbar />
