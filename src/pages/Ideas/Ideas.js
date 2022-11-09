@@ -1,6 +1,6 @@
 import Navbar from "../../components/Navbar/Navbar";
 import GoBack from "../../components/GoBack/GoBack";
-import { getDocs,getDoc, doc, setDoc, collection } from "firebase/firestore";
+import { getDocs, getDoc, doc, setDoc, collection } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { useState, useEffect } from "react";
 import { UserAuth } from "../../context/AuthContext";
@@ -9,14 +9,14 @@ const Ideas = () => {
   const { user } = UserAuth();
   const [ideas, setIdeas] = useState([]);
   const [ideasToRender, setIdeasToRender] = useState([]);
-  const [dateToCompare, setDateToCompare] = useState('')
-  const [generateIdea, setGenerateIdeasButton] = useState(false)
+  const [dateToCompare, setDateToCompare] = useState("");
+  const [generateIdea, setGenerateIdeasButton] = useState(false);
 
   useEffect(() => {
     const fetchIdeas = async () => {
-      const dataRef = doc(db,"users",user.uid,"dateForIdeas","dateID")
+      const dataRef = doc(db, "users", user.uid, "dateForIdeas", "dateID");
       try {
-        const dateForIdeas = await getDoc(dataRef)
+        const dateForIdeas = await getDoc(dataRef);
         const ideasData = await getDocs(collection(db, "ideas"));
         const ideasToRenderData = await getDocs(
           collection(db, "users", user.uid, "ideas")
@@ -26,9 +26,15 @@ const Ideas = () => {
           ideasToRenderData.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
         );
         if (dateForIdeas.data()) {
-          console.log(dateForIdeas.data().timeToSave)
+          let timeNow = new Date().getTime()
+          console.log('timeNow',timeNow)
+          let timeBefore = new Date(dateForIdeas.data().timeToSave).getTime()
+          console.log('timebefore',timeBefore)
           setGenerateIdeasButton(true)
-        }
+        } else {
+            setGenerateIdeasButton(false)
+          }
+
       } catch (err) {
         console.error("ERROR", err);
       }
@@ -36,7 +42,7 @@ const Ideas = () => {
     fetchIdeas();
 
     // eslint-disable-next-line
-  }, [generateIdea]);
+  }, []);
 
   const handleGenerateIdeas = () => {
     var numbers = [];
@@ -53,7 +59,6 @@ const Ideas = () => {
     setIdeasToRender(numbers.slice());
     console.log("ideas to render", ideasToRender);
   };
-
 
   const handleAddIdeaToHomepage = (id) => {
     const ideaToHomePage = ideasToRender.filter((item) => item.id === id);
@@ -74,22 +79,21 @@ const Ideas = () => {
   };
 
   const handleCreateDate = () => {
-     const addDate = async() => {
+    const addDate = async () => {
       try {
-        let dateToMiliseconds = new Date().getTime()
-        let timeToChange = new Date(dateToMiliseconds).toString().split(" ")
-        timeToChange[4] = "23:59:59"
-        let timeToSave = new Date(timeToChange.join(" ")).getTime()
-        await setDoc(
-          doc(db, "users",user.uid, "dateForIdeas", "dateID"),{
-            timeToSave
-          })
-      } catch(err) {
-        console.error("Something went wrong!")
+        let dateToMiliseconds = new Date().getTime();
+        let timeToChange = new Date(dateToMiliseconds).toString().split(" ");
+        timeToChange[4] = "23:59:59";
+        let timeToSave = new Date(timeToChange.join(" ")).getTime();
+        await setDoc(doc(db, "users", user.uid, "dateForIdeas", "dateID"), {
+          timeToSave,
+        });
+      } catch (err) {
+        console.error("Something went wrong!");
       }
-     }
-     addDate()
-  }
+    };
+    addDate();
+  };
 
   return (
     <div>
@@ -98,25 +102,16 @@ const Ideas = () => {
         <GoBack />
         <button onClick={handleCreateDate}>Create Date</button>
         <h1 id="ideas-header">Three ideas to think about</h1>
-        {ideasToRender ? (
-          ideasToRender.map((idea) => (
-            <section className="single-idea" key={idea.id}>
-              <p className="text"><q>{idea.text}</q></p>
-              <button onClick={() => handleAddIdeaToHomepage(idea.id)}>
-                Add To Homepage
-              </button>
-            </section>
-          ))
-        ) : (
-          <article>
-            <button
-              onClick={handleGenerateIdeas}
-              className="generate-ideas-button"
-            >
-              Generate 3 ideas
-            </button>
-          </article>
-        )}
+        {
+          generateIdea &&
+          <button
+            onClick={handleGenerateIdeas}
+            className="generate-ideas-button"
+          >
+            Generate 3 ideas
+          </button>
+
+        }
       </article>
     </div>
   );
