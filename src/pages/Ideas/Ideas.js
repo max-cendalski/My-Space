@@ -9,7 +9,7 @@ const Ideas = () => {
   const { user } = UserAuth();
   const [ideas, setIdeas] = useState([]);
   const [ideasToRender, setIdeasToRender] = useState([]);
-  const [dateToCompare, setDateToCompare] = useState("");
+
   const [generateIdea, setGenerateIdeasButton] = useState(false);
 
   useEffect(() => {
