@@ -27,14 +27,19 @@ const Ideas = () => {
         );
         if (dateForIdeas.data()) {
           let timeNow = new Date().getTime()
-          console.log('timeNow',timeNow)
+          let timeTodayToCompare = new Date(timeNow).toDateString().split(" ")
+          timeTodayToCompare[4] = "23:59:59"
+          let timeTodayToSave = new Date(timeTodayToCompare.join(" ")).getTime()
           let timeBefore = new Date(dateForIdeas.data().timeToSave).getTime()
+          console.log('timetodaytocompare',timeTodayToSave)
           console.log('timebefore',timeBefore)
-          setGenerateIdeasButton(true)
-        } else {
-            setGenerateIdeasButton(false)
+          if(timeTodayToSave - timeBefore >= 172800300) {
+            console.log('whee')
           }
+          console.log('test',new Date(172800300))
 
+          setGenerateIdeasButton(true)
+        }
       } catch (err) {
         console.error("ERROR", err);
       }
