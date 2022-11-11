@@ -31,14 +31,9 @@ const Ideas = () => {
           timeTodayToCompare[4] = "23:59:59"
           let timeTodayToSave = new Date(timeTodayToCompare.join(" ")).getTime()
           let timeBefore = new Date(dateForIdeas.data().timeToSave).getTime()
-          console.log('timetodaytocompare',timeTodayToSave)
-          console.log('timebefore',timeBefore)
           if(timeTodayToSave - timeBefore >= 172800300) {
-            console.log('whee')
+            setGenerateIdeasButton(true);
           }
-          console.log('test',new Date(172800300))
-
-          setGenerateIdeasButton(true)
         }
       } catch (err) {
         console.error("ERROR", err);
@@ -105,7 +100,6 @@ const Ideas = () => {
       <Navbar />
       <article id="ideas-page-container">
         <GoBack />
-        <button onClick={handleCreateDate}>Create Date</button>
         <h1 id="ideas-header">Three ideas to think about</h1>
         {
           generateIdea &&
