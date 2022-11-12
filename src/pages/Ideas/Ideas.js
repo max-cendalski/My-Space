@@ -57,11 +57,24 @@ const Ideas = () => {
       }
     }
     setIdeasToRender(numbers.slice());
-    console.log("ideas to render", ideasToRender);
+    const addDate = async () => {
+      try {
+        let dateToMiliseconds = new Date().getTime();
+        let timeToChange = new Date(dateToMiliseconds).toString().split(" ");
+        timeToChange[4] = "23:59:59";
+        let timeToSave = new Date(timeToChange.join(" ")).getTime();
+        await setDoc(doc(db, "users", user.uid, "dateForIdeas", "dateID"), {
+          timeToSave,
+        });
+      } catch (err) {
+        console.error("Something went wrong!");
+      }
+    };
+    addDate()
   };
 
   const handleAddIdeaToHomepage = (id) => {
-    const ideaToHomePage = ideasToRender.filter((item) => item.id == id);
+    const ideaToHomePage = ideasToRender.filter((item) => item.id === id);
     console.log('ideaTohoem:',ideaToHomePage)
     const addIdea = async () => {
        try {
@@ -79,32 +92,16 @@ const Ideas = () => {
     addIdea();
   };
 
-  const handleCreateDate = () => {
-    const addDate = async () => {
-      try {
-        let dateToMiliseconds = new Date().getTime();
-        let timeToChange = new Date(dateToMiliseconds).toString().split(" ");
-        timeToChange[4] = "23:59:59";
-        let timeToSave = new Date(timeToChange.join(" ")).getTime();
-        await setDoc(doc(db, "users", user.uid, "dateForIdeas", "dateID"), {
-          timeToSave,
-        });
-      } catch (err) {
-        console.error("Something went wrong!");
-      }
-    };
-    addDate();
-  };
 
-  console.log('ideas',ideasToRender)
   return (
     <div>
       <Navbar />
       <article id="ideas-page-container">
         <GoBack />
         <h1 id="ideas-header">Three ideas to think about</h1>
+        <section>
         {
-          generateIdea &&
+          (!generateIdea) &&
           <button
             onClick={handleGenerateIdeas}
             className="generate-ideas-button"
@@ -112,6 +109,7 @@ const Ideas = () => {
             Generate 3 new ideas!
           </button>
         }
+        </section>
         {
           ideasToRender &&
           ideasToRender.map((idea) => (
