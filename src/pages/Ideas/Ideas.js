@@ -61,9 +61,10 @@ const Ideas = () => {
   };
 
   const handleAddIdeaToHomepage = (id) => {
-    const ideaToHomePage = ideasToRender.filter((item) => item.id === id);
+    const ideaToHomePage = ideasToRender.filter((item) => item.id == id);
+    console.log('ideaTohoem:',ideaToHomePage)
     const addIdea = async () => {
-      try {
+       try {
         await setDoc(
           doc(db, "users", user.uid, "ideaToHome", "ideaToHomePageID"),
           ideaToHomePage[0]
@@ -95,6 +96,7 @@ const Ideas = () => {
     addDate();
   };
 
+  console.log('ideas',ideasToRender)
   return (
     <div>
       <Navbar />
@@ -107,9 +109,17 @@ const Ideas = () => {
             onClick={handleGenerateIdeas}
             className="generate-ideas-button"
           >
-            Generate 3 ideas
+            Generate 3 new ideas!
           </button>
-
+        }
+        {
+          ideasToRender &&
+          ideasToRender.map((idea) => (
+            <section className="single-idea" key={idea.id}>
+            <p><q>{idea.text}</q></p>
+            <button className="single-idea-button" onClick={()=>handleAddIdeaToHomepage(idea.id)}>Add Idea to Homepage</button>
+            </section>
+          ))
         }
       </article>
     </div>
