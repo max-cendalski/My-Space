@@ -26,12 +26,14 @@ const Ideas = () => {
           ideasToRenderData.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
         );
         if (dateForIdeas.data()) {
-          let timeNow = new Date().getTime()
-          let timeTodayToCompare = new Date(timeNow).toDateString().split(" ")
-          timeTodayToCompare[4] = "23:59:59"
-          let timeTodayToSave = new Date(timeTodayToCompare.join(" ")).getTime()
-          let timeBefore = new Date(dateForIdeas.data().timeToSave).getTime()
-          if(timeTodayToSave - timeBefore >= 172800300) {
+          let timeNow = new Date().getTime();
+          let timeTodayToCompare = new Date(timeNow).toDateString().split(" ");
+          timeTodayToCompare[4] = "23:59:59";
+          let timeTodayToSave = new Date(
+            timeTodayToCompare.join(" ")
+          ).getTime();
+          let timeBefore = new Date(dateForIdeas.data().timeToSave).getTime();
+          if (timeTodayToSave - timeBefore >= 172800300) {
             setGenerateIdeasButton(true);
           }
         }
@@ -40,7 +42,6 @@ const Ideas = () => {
       }
     };
     fetchIdeas();
-
     // eslint-disable-next-line
   }, []);
 
@@ -70,14 +71,14 @@ const Ideas = () => {
         console.error("Something went wrong!");
       }
     };
-    addDate()
+    addDate();
   };
 
   const handleAddIdeaToHomepage = (id) => {
     const ideaToHomePage = ideasToRender.filter((item) => item.id === id);
-    console.log('ideaTohoem:',ideaToHomePage)
+    console.log("ideaTohoem:", ideaToHomePage);
     const addIdea = async () => {
-       try {
+      try {
         await setDoc(
           doc(db, "users", user.uid, "ideaToHome", "ideaToHomePageID"),
           ideaToHomePage[0]
@@ -92,33 +93,34 @@ const Ideas = () => {
     addIdea();
   };
 
-
   return (
     <div>
       <Navbar />
       <article id="ideas-page-container">
         <GoBack />
         <h1 id="ideas-header">Three ideas to think about</h1>
-        <section>
-        {
-          (!generateIdea) &&
+        {generateIdea && (
           <button
             onClick={handleGenerateIdeas}
             className="generate-ideas-button"
           >
             Generate 3 new ideas!
           </button>
-        }
-        </section>
-        {
-          ideasToRender &&
+        )}
+        {ideasToRender &&
           ideasToRender.map((idea) => (
             <section className="single-idea" key={idea.id}>
-            <p><q>{idea.text}</q></p>
-            <button className="single-idea-button" onClick={()=>handleAddIdeaToHomepage(idea.id)}>Add Idea to Homepage</button>
+              <p>
+                <q>{idea.text}</q>
+              </p>
+              <button
+                className="single-idea-button"
+                onClick={() => handleAddIdeaToHomepage(idea.id)}
+              >
+                Add Idea to Homepage
+              </button>
             </section>
-          ))
-        }
+          ))}
       </article>
     </div>
   );
