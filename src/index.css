@@ -209,8 +209,20 @@ code {
 }
 
 /*Games */
+
+#games-page-container {
+  width: 90%;
+}
 .rps-container {
   display: flex;
+}
+
+.user-section {
+  width: 50%;
+}
+
+.computer-section {
+  width: 50%;
 }
 .date-paragraph {
   font-style: italic;

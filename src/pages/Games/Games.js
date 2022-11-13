@@ -1,20 +1,20 @@
-import Navbar from "../../components/Navbar/Navbar"
+import Navbar from "../../components/Navbar/Navbar";
 
 const Games = () => {
   return (
-    <article className="games-container">
+    <article>
       <Navbar />
-      <article className="rps-container">
+      <article id="games-page-container">
         <h1>Rock Paper Scissors</h1>
-
         <h3>Win/loose ratio: 3/6</h3>
-        <button>Click to Start Game</button>
-        <section className="user-section"></section>
-        <section className="computer-section"></section>
+        <article className="rps-container">
+          <button>Click to Start Game</button>
+          <section className="user-section"></section>
+          <section className="computer-section"></section>
+        </article>
       </article>
     </article>
   );
-}
+};
 
-
-export default Games
+export default Games;

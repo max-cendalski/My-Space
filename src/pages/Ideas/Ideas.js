@@ -94,7 +94,7 @@ const Ideas = () => {
   };
 
   return (
-    <div>
+    <article>
       <Navbar />
       <article id="ideas-page-container">
         <GoBack />
@@ -122,7 +122,7 @@ const Ideas = () => {
             </section>
           ))}
       </article>
-    </div>
+    </article>
   );
 };
 
