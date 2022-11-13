@@ -1,9 +1,40 @@
-import { NavLink } from 'react-router-dom';
-import { UserAuth } from '../../context/AuthContext';
-import Navbar from '../../components/Navbar/Navbar';
+import { NavLink } from "react-router-dom";
+import { UserAuth } from "../../context/AuthContext";
+import { useState, useEffect } from "react";
+import { getDoc, doc } from "firebase/firestore";
+import { db } from "../../firebase/Firebase";
+import Navbar from "../../components/Navbar/Navbar";
+
 
 const Home = () => {
+  const [idea, setIdea] = useState(null);
   const { user } = UserAuth();
+
+  useEffect(() => {
+    const fetchIdea = async () => {
+      try {
+        const ideaRef = doc(
+          db,
+          "users",
+          user.uid,
+          "ideaToHome",
+          "ideaToHomePageID"
+        );
+        const docSnap = await getDoc(ideaRef);
+        if (docSnap.exists()) {
+          setIdea(docSnap.data());
+        } else {
+          console.log("No such document!");
+        }
+      } catch (err) {
+        console.error("SOMETHING WENT WRONG:", err);
+      }
+    };
+    if (user.uid) {
+      fetchIdea();
+    }
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <article id="home-container">
@@ -14,6 +45,11 @@ const Home = () => {
         <article>
           <h3>You need to be signed in to use all features! </h3>
         </article>
+      )}
+      {idea && (
+        <section id="idea-home-page">
+          <p><q>{idea.text}</q></p>
+        </section>
       )}
       <NavLink className="feature-button" to="/notes">
         Notes
