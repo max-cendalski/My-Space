@@ -207,6 +207,11 @@ code {
   margin-bottom: 1rem;
   color: var(--red)
 }
+
+/*Games */
+.rps-container {
+  display: flex;
+}
 .date-paragraph {
   font-style: italic;
   font-size: 0.675rem;

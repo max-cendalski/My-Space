@@ -66,7 +66,7 @@ const Home = () => {
         Ideas
       </NavLink>
       <NavLink className="feature-button" to="/games">
-        Ideas
+        Games
       </NavLink>
     </article>
   );
