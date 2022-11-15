@@ -16,11 +16,14 @@ const Games = () => {
   }
 
   const handleChoiceClick = (e) => {
-    let computerChoice = Math.floor(Math.random() * 3);
-    let userChoice = 0
-    if (e.target.innerText === "Paper") {
+    var computerChoice = Math.floor(Math.random() * 3);
+    var userChoice = 0
+    console.log('text',e.target.innerText)
+    if (e.target.innerText === "Rock") {
+    userChoice = 0
+    } else if (e.target.innerText === "Paper") {
       userChoice = 1
-    } if (e.target.innerText === "Scissors") {
+    } else if (e.target.innerText === "Scissors") {
       userChoice = 2
     }
     console.log('user,computer:',userChoice,computerChoice)
