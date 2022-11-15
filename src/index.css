@@ -255,6 +255,11 @@ code {
   background-color: var(--lightGreen);
   text-align: center;
   cursor: pointer;
+  font-size: 1rem;
+}
+
+.result-article {
+  font-size: 3rem;
 }
 .date-paragraph {
   font-style: italic;
@@ -282,6 +287,6 @@ code {
   margin-block-end: 1rem;
 }
 
-.invisible {
+.hidden {
   display: none;
 }
