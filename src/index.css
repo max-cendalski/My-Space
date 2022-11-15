@@ -242,10 +242,20 @@ code {
   line-height: 4rem;
 }
 
-.rps-choice-section {
+.rps-choice-section-container {
   display: flex;
+  align-content: space-between ;
 }
 
+.choice-section {
+  margin: 2rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  background-color: var(--lightGreen);
+  text-align: center;
+  cursor: pointer;
+}
 .date-paragraph {
   font-style: italic;
   font-size: 0.675rem;
