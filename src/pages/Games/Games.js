@@ -18,7 +18,6 @@ const Games = () => {
   const handleChoiceClick = (e) => {
     var computerChoice = Math.floor(Math.random() * 3);
     var userChoice = 0
-    console.log('text',e.target.innerText)
     if (e.target.innerText === "Rock") {
     userChoice = 0
     } else if (e.target.innerText === "Paper") {
@@ -27,14 +26,14 @@ const Games = () => {
       userChoice = 2
     }
     console.log('user,computer:',userChoice,computerChoice)
-    if(computerChoice === userChoice) {
+    if (userChoice === computerChoice) {
       setResultArticle("result-article")
       setResult("EVEN")
-      setStartGameButton("start-game-button")
-    } else if (computerChoice === 0 && userChoice === "Paper") {
-
-    } else if (computerChoice === 1 && userChoice === "Scissors") {
-
+    } else  {
+      if ((userChoice === 0 && computerChoice === 1) || ( userChoice === 1 && computerChoice === 2) || (userChoice === 2 && computerChoice ===0)) {
+        setResultArticle("result-article");
+        setResult("COMPUTER WON")
+      }
     }
   }
   return (
