@@ -228,9 +228,9 @@ code {
   width: 30%;
   cursor: pointer;
   font-size: 1rem;
-
 }
-.user-section {
+
+.players{
   width: 70px;
   height: 70px;
   background-color: var(--red);
@@ -242,17 +242,10 @@ code {
   line-height: 4rem;
 }
 
-.computer-section {
-  width: 70px;
-  height:70px;
-  background-color: var(--red);
-  text-align: center;
-  color: white;
-  font-size: 1rem;
-  font-weight: 700;
-  border-radius: 150px;
-  line-height: 4rem;
+.rps-choice-section {
+  display: flex;
 }
+
 .date-paragraph {
   font-style: italic;
   font-size: 0.675rem;
