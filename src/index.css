@@ -48,6 +48,8 @@ code {
   font-weight: 500;
   text-decoration: none;
   color: white;
+  line-height: 3.2rem;
+  border-radius: 5px;
 }
 
 .sticky-section {
@@ -157,7 +159,7 @@ code {
   color: black;
 }
 
-/* Ideas */
+/* IDEAS */
 
 #ideas-page-container  {
   width: 90%;
@@ -208,21 +210,48 @@ code {
   color: var(--red)
 }
 
-/*Games */
+/*GAMES */
 
 #games-page-container {
   width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
 }
 .rps-container {
+  margin-block-start: 2rem;
+  width:100%;
   display: flex;
 }
 
+.start-game-button {
+  width: 30%;
+  cursor: pointer;
+  font-size: 1rem;
+
+}
 .user-section {
-  width: 50%;
+  width: 70px;
+  height: 70px;
+  background-color: var(--red);
+  text-align: center;
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 150px;
+  line-height: 4rem;
 }
 
 .computer-section {
-  width: 50%;
+  width: 70px;
+  height:70px;
+  background-color: var(--red);
+  text-align: center;
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 150px;
+  line-height: 4rem;
 }
 .date-paragraph {
   font-style: italic;
