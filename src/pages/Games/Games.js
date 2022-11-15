@@ -6,7 +6,7 @@ const Games = () => {
   const [rpsContainer, setRpsContainer] = useState("hidden")
   const [result, setResult] = useState("")
   const [resultArticle, setResultArticle] = useState("hidden")
-  const [startNewGameButton, setStartNewGameButton] = useState("hidden")
+
 
   const handleStartNewGame = (e) => {
     setResult("");
@@ -15,15 +15,16 @@ const Games = () => {
     setStartGameButton("hidden")
   }
 
-
-
   const handleChoiceClick = (e) => {
     let computerChoice = Math.floor(Math.random() * 3);
-    let userChoice = e.target.innerText
-    //setStartNewGameButton("start-game-button")
-    //setRpsContainer("hidden")
-
-    if(computerChoice === 0 && userChoice === "Rock") {
+    let userChoice = 0
+    if (e.target.innerText === "Paper") {
+      userChoice = 1
+    } if (e.target.innerText === "Scissors") {
+      userChoice = 2
+    }
+    console.log('user,computer:',userChoice,computerChoice)
+    if(computerChoice === userChoice) {
       setResultArticle("result-article")
       setResult("EVEN")
       setStartGameButton("start-game-button")
