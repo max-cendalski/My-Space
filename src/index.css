@@ -263,6 +263,11 @@ code {
   font-size: 3rem;
   display: flex;
 }
+
+.game-result {
+  margin: 0 1rem;
+}
+
 .date-paragraph {
   font-style: italic;
   font-size: 0.675rem;

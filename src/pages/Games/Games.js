@@ -29,27 +29,50 @@ const Games = () => {
     }
     console.log("user,computer:", userChoice, computerChoice);
     if (userChoice === computerChoice) {
+      let even = ""
+      if (userChoice === 0) {
+        even = "Paper"
+      } else if (userChoice ===1) {
+        even = "Rock"
+      } else {
+        even = "Scissors"
+      }
       setResultArticle("result-article");
       setResult("EVEN");
+      setComputerResult(even)
+      setUserResult(even)
     } else {
       if (userChoice === 0 && computerChoice === 1) {
         setResultArticle("result-article");
         setResult("COMPUTER WON!");
+        setComputerResult("Paper")
+        setUserResult("Rock")
       } else if (userChoice === 1 && computerChoice === 2) {
         setResultArticle("result-article");
         setResult("COMPUTER WON!");
+        setComputerResult("Scissors");
+        setUserResult("Paper");
+
       } else if (userChoice === 2 && computerChoice === 0) {
         setResultArticle("result-article");
         setResult("COMPUTER WON!");
+        setComputerResult("Rock");
+        setUserResult("Scissors");
+
       } else if (userChoice === 0 && computerChoice === 2) {
         setResultArticle("result-article");
         setResult("YOU WON!");
+        setUserResult("Rock");
+
       } else if (userChoice === 1 && computerChoice === 0) {
         setResultArticle("result-article");
         setResult("YOU WON!");
+        setUserResult("Paper");
+
       } else if (userChoice === 2 && computerChoice === 1) {
         setResultArticle("result-article");
         setResult("COMPUTER WON!");
+        setUserResult("Scissors");
       }
     }
   };
@@ -78,15 +101,12 @@ const Games = () => {
             Scissors
           </section>
         </article>
-        <article>
-        </article>
+        <article></article>
         <article className={resultArticle}>
-          <section className="user-result">
-          </section>
-          <section className="computer-result">
-          </section>
-          <h1></h1>
-        {result}</article>
+          <section className="game-result">{userResult}</section>
+          <section className="game-result">{computerResult}</section>
+        </article>
+        <h1>{result}</h1>
       </article>
     </article>
   );
