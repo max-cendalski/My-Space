@@ -1,4 +1,5 @@
 import Navbar from "../../components/Navbar/Navbar";
+import GoBack from "../../components/GoBack/GoBack";
 import { useState } from "react";
 
 const Games = () => {
@@ -73,7 +74,7 @@ const Games = () => {
         setComputerResult("Rock");
         setUserResult("Scissors");
         setRpsContainer("hidden");
-         setStartGameButton("start-game-button");
+        setStartGameButton("start-game-button");
         setComputerScore(userScore + 1);
 
 
@@ -111,9 +112,14 @@ const Games = () => {
   return (
     <article>
       <Navbar />
+
       <article id="games-page-container">
+        <GoBack />
+
         <h1>Rock Paper Scissors</h1>
-        <h3>Win/loose ratio: {userScore} / {computerScore}</h3>
+        <h3>
+          Win/loose ratio: {userScore} / {computerScore}
+        </h3>
         <article className="rps-container">
           <section className="players">USER</section>
 
