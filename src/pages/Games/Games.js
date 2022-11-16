@@ -32,7 +32,10 @@ const Games = () => {
     } else  {
       if ((userChoice === 0 && computerChoice === 1) || ( userChoice === 1 && computerChoice === 2) || (userChoice === 2 && computerChoice ===0)) {
         setResultArticle("result-article");
-        setResult("COMPUTER WON")
+        setResult("COMPUTER WON!")
+      } else if ('k' == 'l') {
+        setResultArticle("result-article")
+        setResult("YOU WON!")
       }
     }
   }
@@ -44,11 +47,12 @@ const Games = () => {
         <h3>Win/loose ratio: 3/6</h3>
         <article className="rps-container">
           <section className="players">USER</section>
-          <button className={startGameButton} onClick={handleStartNewGame}>
-            Click to start new game!
-          </button>
+
           <section className="players">COMP</section>
         </article>
+        <button className={startGameButton} onClick={handleStartNewGame}>
+          Click to start new game!
+        </button>
         <article className={rpsContainer}>
           <section onClick={handleChoiceClick} className="choice-section">
             Rock
