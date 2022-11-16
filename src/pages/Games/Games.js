@@ -3,42 +3,53 @@ import { useState } from "react";
 
 const Games = () => {
   const [startGameButton, setStartGameButton] = useState("start-game-button");
-  const [rpsContainer, setRpsContainer] = useState("hidden")
-  const [result, setResult] = useState("")
-  const [resultArticle, setResultArticle] = useState("hidden")
-
+  const [rpsContainer, setRpsContainer] = useState("hidden");
+  const [result, setResult] = useState("");
+  const [resultArticle, setResultArticle] = useState("hidden");
 
   const handleStartNewGame = (e) => {
     setResult("");
-    setRpsContainer("rps-choice-section-container")
-    setResultArticle("hidden")
-    setStartGameButton("hidden")
-  }
+    setRpsContainer("rps-choice-section-container");
+    setResultArticle("hidden");
+    setStartGameButton("hidden");
+  };
 
   const handleChoiceClick = (e) => {
     var computerChoice = Math.floor(Math.random() * 3);
-    var userChoice = 0
+    var userChoice = 0;
     if (e.target.innerText === "Rock") {
-    userChoice = 0
+      userChoice = 0;
     } else if (e.target.innerText === "Paper") {
-      userChoice = 1
+      userChoice = 1;
     } else if (e.target.innerText === "Scissors") {
-      userChoice = 2
+      userChoice = 2;
     }
-    console.log('user,computer:',userChoice,computerChoice)
+    console.log("user,computer:", userChoice, computerChoice);
     if (userChoice === computerChoice) {
-      setResultArticle("result-article")
-      setResult("EVEN")
-    } else  {
-      if ((userChoice === 0 && computerChoice === 1) || ( userChoice === 1 && computerChoice === 2) || (userChoice === 2 && computerChoice ===0)) {
+      setResultArticle("result-article");
+      setResult("EVEN");
+    } else {
+      if (userChoice === 0 && computerChoice === 1) {
         setResultArticle("result-article");
-        setResult("COMPUTER WON!")
-      } else if ('k' == 'l') {
-        setResultArticle("result-article")
-        setResult("YOU WON!")
+        setResult("COMPUTER WON!");
+      } else if (userChoice === 1 && computerChoice === 2) {
+        setResultArticle("result-article");
+        setResult("COMPUTER WON!");
+      } else if (userChoice === 2 && computerChoice === 0) {
+        setResultArticle("result-article");
+        setResult("COMPUTER WON!");
+      } else if (userChoice === 0 && computerChoice === 2) {
+        setResultArticle("result-article");
+        setResult("YOU WON!");
+      } else if (userChoice === 1 && computerChoice === 0) {
+        setResultArticle("result-article");
+        setResult("YOU WON!");
+      } else if (userChoice === 2 && computerChoice === 1) {
+        setResultArticle("result-article");
+        setResult("COMPUTER WON!");
       }
     }
-  }
+  };
   return (
     <article>
       <Navbar />
