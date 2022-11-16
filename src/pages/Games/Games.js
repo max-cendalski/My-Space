@@ -6,6 +6,9 @@ const Games = () => {
   const [rpsContainer, setRpsContainer] = useState("hidden");
   const [result, setResult] = useState("");
   const [resultArticle, setResultArticle] = useState("hidden");
+  const [userResult, setUserResult] = useState("")
+  const [computerResult, setComputerResult] = useState("")
+
 
   const handleStartNewGame = (e) => {
     setResult("");
@@ -75,7 +78,15 @@ const Games = () => {
             Scissors
           </section>
         </article>
-        <article className={resultArticle}>{result}</article>
+        <article>
+        </article>
+        <article className={resultArticle}>
+          <section className="user-result">
+          </section>
+          <section className="computer-result">
+          </section>
+          <h1></h1>
+        {result}</article>
       </article>
     </article>
   );

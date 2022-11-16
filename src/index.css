@@ -261,6 +261,7 @@ code {
 
 .result-article {
   font-size: 3rem;
+  display: flex;
 }
 .date-paragraph {
   font-style: italic;
