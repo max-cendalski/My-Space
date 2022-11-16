@@ -260,12 +260,15 @@ code {
 }
 
 .result-article {
-  font-size: 3rem;
+  font-size: 2rem;
   display: flex;
+}
+.result-article h1 {
+  font-size: 3rem;
 }
 
 .game-result {
-  margin: 0 1rem;
+  margin: 1rem;
 }
 
 .date-paragraph {

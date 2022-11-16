@@ -8,9 +8,10 @@ const Games = () => {
   const [resultArticle, setResultArticle] = useState("hidden");
   const [userResult, setUserResult] = useState("");
   const [computerResult, setComputerResult] = useState("");
-  const [winRatio, setWinRatio]  = []
+  const [userScore, setUserScore] = useState(0)
+  const [computerScore, setComputerScore] = useState(0)
 
-  const handleStartNewGame = (e) => {
+  const handleStartNewGame = () => {
     setResult("");
     setRpsContainer("rps-choice-section-container");
     setResultArticle("hidden");
@@ -18,8 +19,10 @@ const Games = () => {
   };
 
   const handleChoiceClick = (e) => {
+    e.preventDefault();
     var computerChoice = Math.floor(Math.random() * 3);
     var userChoice = 0;
+
     if (e.target.innerText === "Rock") {
       userChoice = 0;
     } else if (e.target.innerText === "Paper") {
@@ -27,7 +30,7 @@ const Games = () => {
     } else if (e.target.innerText === "Scissors") {
       userChoice = 2;
     }
-    console.log("user,computer:", userChoice, computerChoice);
+
     if (userChoice === computerChoice) {
       var even = "";
       if (userChoice === 0) {
@@ -51,6 +54,9 @@ const Games = () => {
         setUserResult("Rock");
         setRpsContainer("hidden");
         setStartGameButton("start-game-button");
+        setComputerScore(userScore+1)
+
+
       } else if (userChoice === 1 && computerChoice === 2) {
         setResultArticle("result-article");
         setResult("COMPUTER WON!");
@@ -58,14 +64,19 @@ const Games = () => {
         setUserResult("Paper");
         setRpsContainer("hidden");
         setStartGameButton("start-game-button");
+        setComputerScore(userScore + 1);
+
+
       } else if (userChoice === 2 && computerChoice === 0) {
         setResultArticle("result-article");
         setResult("COMPUTER WON!");
         setComputerResult("Rock");
         setUserResult("Scissors");
         setRpsContainer("hidden");
+         setStartGameButton("start-game-button");
+        setComputerScore(userScore + 1);
 
-        setStartGameButton("start-game-button");
+
       } else if (userChoice === 0 && computerChoice === 2) {
         setResultArticle("result-article");
         setResult("YOU WON!");
@@ -73,6 +84,8 @@ const Games = () => {
         setComputerResult("Scissors");
         setRpsContainer("hidden");
         setStartGameButton("start-game-button");
+        setUserScore(userScore + 1);
+
       } else if (userChoice === 1 && computerChoice === 0) {
         setResultArticle("result-article");
         setResult("YOU WON!");
@@ -80,6 +93,8 @@ const Games = () => {
         setComputerResult("Rock");
         setRpsContainer("hidden");
         setStartGameButton("start-game-button");
+        setUserScore(userScore + 1);
+
       } else if (userChoice === 2 && computerChoice === 1) {
         setResultArticle("result-article");
         setResult("COMPUTER WON!");
@@ -87,7 +102,10 @@ const Games = () => {
         setComputerResult("Paper");
         setRpsContainer("hidden");
         setStartGameButton("start-game-button");
+        setUserScore(userScore + 1);
+
       }
+      console.log("userScore", userScore);
     }
   };
   return (
@@ -95,7 +113,7 @@ const Games = () => {
       <Navbar />
       <article id="games-page-container">
         <h1>Rock Paper Scissors</h1>
-        <h3>Win/loose ratio: 3/6</h3>
+        <h3>Win/loose ratio: {userScore} / {computerScore}</h3>
         <article className="rps-container">
           <section className="players">USER</section>
 
