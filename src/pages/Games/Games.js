@@ -93,8 +93,7 @@ const Games = () => {
         setUserResult("Paper");
         setRpsContainer("hidden");
         setStartGameButton("start-game-button");
-                setComputerScore(computerScore + 1);
-
+        setComputerScore(computerScore + 1);
       } else if (userChoice === 2 && computerChoice === 0) {
         setResultArticle("result-article");
         setResult("COMPUTER WON!");
@@ -102,8 +101,7 @@ const Games = () => {
         setUserResult("Scissors");
         setRpsContainer("hidden");
         setStartGameButton("start-game-button");
-                setComputerScore(computerScore + 1);
-
+        setComputerScore(computerScore + 1);
       } else if (userChoice === 0 && computerChoice === 2) {
         setResultArticle("result-article");
         setResult("YOU WON!");
@@ -119,8 +117,7 @@ const Games = () => {
         setComputerResult("Rock");
         setRpsContainer("hidden");
         setStartGameButton("start-game-button");
-               setUserScore(userScore + 1);
-
+        setUserScore(userScore + 1);
       } else if (userChoice === 2 && computerChoice === 1) {
         setResultArticle("result-article");
         setResult("COMPUTER WON!");
@@ -128,12 +125,10 @@ const Games = () => {
         setComputerResult("Paper");
         setRpsContainer("hidden");
         setStartGameButton("start-game-button");
-                setUserScore(userScore + 1);
-
+        setUserScore(userScore + 1);
       }
     }
   };
-  console.log("user,computer", userScore, computerScore);
 
   return (
     <article>
@@ -147,7 +142,6 @@ const Games = () => {
 
         <article className="rps-container">
           <section className="players">USER</section>
-
           <section className="players">COMP</section>
         </article>
         <article className={rpsContainer}>
