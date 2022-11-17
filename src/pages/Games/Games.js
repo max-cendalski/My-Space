@@ -1,8 +1,8 @@
 import Navbar from "../../components/Navbar/Navbar";
 import GoBack from "../../components/GoBack/GoBack";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { db } from "../../firebase/Firebase";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 import { UserAuth } from "../../context/AuthContext";
 
 const Games = () => {
@@ -15,6 +15,19 @@ const Games = () => {
   const [computerResult, setComputerResult] = useState("");
   const [userScore, setUserScore] = useState(0);
   const [computerScore, setComputerScore] = useState(0);
+  const [test, setTest] =useState(null)
+
+  useEffect(()=> {
+    const getData = async() => {
+      try {
+        const dataFromFirebase = await getDoc(doc(db,"users",user.uid, "games","rps"))
+        setTest(dataFromFirebase.data())
+      } catch(err) {
+        console.error('ERROR: ',err)
+      }
+    }
+    getData()
+  },[])
 
   const handleStartNewGame = () => {
     setResult("");
@@ -22,7 +35,7 @@ const Games = () => {
     setResultArticle("hidden");
     setStartGameButton("hidden");
     const addGameData = async () => {
-      //const dataToSave = {user: userScore, computer: computerScore}
+
       try {
         await setDoc(doc(db, "users", user.uid, "games", "rps"), {
           user: userScore,
@@ -115,7 +128,7 @@ const Games = () => {
       }
     }
   };
-
+  console.log('test',test)
   return (
     <article>
       <Navbar />
