@@ -1,22 +1,38 @@
 import Navbar from "../../components/Navbar/Navbar";
 import GoBack from "../../components/GoBack/GoBack";
 import { useState } from "react";
+import { db } from "../../firebase/Firebase";
+import { doc, setDoc } from "firebase/firestore";
+import { UserAuth } from "../../context/AuthContext";
 
 const Games = () => {
+  const { user } = UserAuth();
   const [startGameButton, setStartGameButton] = useState("start-game-button");
   const [rpsContainer, setRpsContainer] = useState("hidden");
   const [result, setResult] = useState("");
   const [resultArticle, setResultArticle] = useState("hidden");
   const [userResult, setUserResult] = useState("");
   const [computerResult, setComputerResult] = useState("");
-  const [userScore, setUserScore] = useState(0)
-  const [computerScore, setComputerScore] = useState(0)
+  const [userScore, setUserScore] = useState(0);
+  const [computerScore, setComputerScore] = useState(0);
 
   const handleStartNewGame = () => {
     setResult("");
     setRpsContainer("rps-choice-section-container");
     setResultArticle("hidden");
     setStartGameButton("hidden");
+    const addGameData = async () => {
+      //const dataToSave = {user: userScore, computer: computerScore}
+      try {
+        await setDoc(doc(db, "users", user.uid, "games", "rps"), {
+          user: userScore,
+          computer: computerScore,
+        });
+      } catch (err) {
+        console.error("ERROR: ", err);
+      }
+    };
+    addGameData();
   };
 
   const handleChoiceClick = (e) => {
@@ -55,9 +71,7 @@ const Games = () => {
         setUserResult("Rock");
         setRpsContainer("hidden");
         setStartGameButton("start-game-button");
-        setComputerScore(userScore+1)
-
-
+        setComputerScore(computerScore + 1);
       } else if (userChoice === 1 && computerChoice === 2) {
         setResultArticle("result-article");
         setResult("COMPUTER WON!");
@@ -65,9 +79,7 @@ const Games = () => {
         setUserResult("Paper");
         setRpsContainer("hidden");
         setStartGameButton("start-game-button");
-        setComputerScore(userScore + 1);
-
-
+        setComputerScore(computerScore + 1);
       } else if (userChoice === 2 && computerChoice === 0) {
         setResultArticle("result-article");
         setResult("COMPUTER WON!");
@@ -75,9 +87,7 @@ const Games = () => {
         setUserResult("Scissors");
         setRpsContainer("hidden");
         setStartGameButton("start-game-button");
-        setComputerScore(userScore + 1);
-
-
+        setComputerScore(computerScore + 1);
       } else if (userChoice === 0 && computerChoice === 2) {
         setResultArticle("result-article");
         setResult("YOU WON!");
@@ -86,7 +96,6 @@ const Games = () => {
         setRpsContainer("hidden");
         setStartGameButton("start-game-button");
         setUserScore(userScore + 1);
-
       } else if (userChoice === 1 && computerChoice === 0) {
         setResultArticle("result-article");
         setResult("YOU WON!");
@@ -95,7 +104,6 @@ const Games = () => {
         setRpsContainer("hidden");
         setStartGameButton("start-game-button");
         setUserScore(userScore + 1);
-
       } else if (userChoice === 2 && computerChoice === 1) {
         setResultArticle("result-article");
         setResult("COMPUTER WON!");
@@ -104,15 +112,13 @@ const Games = () => {
         setRpsContainer("hidden");
         setStartGameButton("start-game-button");
         setUserScore(userScore + 1);
-
       }
-      console.log("userScore", userScore);
     }
   };
+
   return (
     <article>
       <Navbar />
-
       <article id="games-page-container">
         <GoBack />
 
@@ -125,9 +131,7 @@ const Games = () => {
 
           <section className="players">COMP</section>
         </article>
-        <button className={startGameButton} onClick={handleStartNewGame}>
-          Click to start new game!
-        </button>
+
         <article className={rpsContainer}>
           <section onClick={handleChoiceClick} className="choice-section">
             Rock
@@ -143,7 +147,10 @@ const Games = () => {
           <section className="game-result">{userResult}</section>
           <section className="game-result">{computerResult}</section>
         </article>
-        <h1>{result}</h1>
+        <h1 className="game-result-header">{result}</h1>
+        <button className={startGameButton} onClick={handleStartNewGame}>
+          Click to start new game!
+        </button>
       </article>
     </article>
   );
