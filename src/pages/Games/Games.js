@@ -15,19 +15,21 @@ const Games = () => {
   const [computerResult, setComputerResult] = useState("");
   const [userScore, setUserScore] = useState(0);
   const [computerScore, setComputerScore] = useState(0);
-  const [test, setTest] =useState(null)
 
-  useEffect(()=> {
-    const getData = async() => {
+  useEffect(() => {
+    const getData = async () => {
       try {
-        const dataFromFirebase = await getDoc(doc(db,"users",user.uid, "games","rps"))
-        setTest(dataFromFirebase.data())
-      } catch(err) {
-        console.error('ERROR: ',err)
+        const dataFromFirebase = await getDoc(
+          doc(db, "users", user.uid, "games", "rps")
+        );
+        setUserScore(dataFromFirebase.data().user);
+        setComputerScore(dataFromFirebase.data().computer);
+      } catch (err) {
+        console.error("ERROR: ", err);
       }
-    }
-    getData()
-  },[])
+    };
+    getData();
+  }, []);
 
   const handleStartNewGame = () => {
     setResult("");
@@ -35,7 +37,6 @@ const Games = () => {
     setResultArticle("hidden");
     setStartGameButton("hidden");
     const addGameData = async () => {
-
       try {
         await setDoc(doc(db, "users", user.uid, "games", "rps"), {
           user: userScore,
@@ -92,7 +93,8 @@ const Games = () => {
         setUserResult("Paper");
         setRpsContainer("hidden");
         setStartGameButton("start-game-button");
-        setComputerScore(computerScore + 1);
+                setComputerScore(computerScore + 1);
+
       } else if (userChoice === 2 && computerChoice === 0) {
         setResultArticle("result-article");
         setResult("COMPUTER WON!");
@@ -100,7 +102,8 @@ const Games = () => {
         setUserResult("Scissors");
         setRpsContainer("hidden");
         setStartGameButton("start-game-button");
-        setComputerScore(computerScore + 1);
+                setComputerScore(computerScore + 1);
+
       } else if (userChoice === 0 && computerChoice === 2) {
         setResultArticle("result-article");
         setResult("YOU WON!");
@@ -116,7 +119,8 @@ const Games = () => {
         setComputerResult("Rock");
         setRpsContainer("hidden");
         setStartGameButton("start-game-button");
-        setUserScore(userScore + 1);
+               setUserScore(userScore + 1);
+
       } else if (userChoice === 2 && computerChoice === 1) {
         setResultArticle("result-article");
         setResult("COMPUTER WON!");
@@ -124,27 +128,28 @@ const Games = () => {
         setComputerResult("Paper");
         setRpsContainer("hidden");
         setStartGameButton("start-game-button");
-        setUserScore(userScore + 1);
+                setUserScore(userScore + 1);
+
       }
     }
   };
-  console.log('test',test)
+  console.log("user,computer", userScore, computerScore);
+
   return (
     <article>
       <Navbar />
       <article id="games-page-container">
         <GoBack />
-
         <h1>Rock Paper Scissors</h1>
         <h3>
           Win/loose ratio: {userScore} / {computerScore}
         </h3>
+
         <article className="rps-container">
           <section className="players">USER</section>
 
           <section className="players">COMP</section>
         </article>
-
         <article className={rpsContainer}>
           <section onClick={handleChoiceClick} className="choice-section">
             Rock

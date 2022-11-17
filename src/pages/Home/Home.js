@@ -36,6 +36,7 @@ const Home = () => {
     // eslint-disable-next-line
   }, []);
 
+
   return (
     <article id="home-container">
       <Navbar />
