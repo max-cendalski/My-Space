@@ -146,7 +146,9 @@ const Games = () => {
 
         <article className="rps-container">
           <section className="players">USER</section>
-          <i className="fa-solid fa-robot fa-2xl"></i>
+          <section className="players">
+            <i className="fa-solid fa-robot fa-2xl"></i>
+          </section>
         </article>
         <article className={rpsContainer}>
           <section onClick={handleChoiceClick} className="choice-section">
@@ -160,8 +162,12 @@ const Games = () => {
           </section>
         </article>
         <article className={resultArticle}>
-          <section><i className={userIcon}></i></section>
-          <section><i className={computerIcon}></i></section>
+          <section>
+            <i className={userIcon}></i>
+          </section>
+          <section>
+            <i className={computerIcon}></i>
+          </section>
         </article>
         <h1 className="game-result-header">{result}</h1>
         <button className={startGameButton} onClick={handleStartNewGame}>

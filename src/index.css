@@ -234,7 +234,6 @@ code {
   margin-block-start: 1rem;
   display: flex;
   gap: 4rem;
-  align-items: baseline;
 }
 
 .start-game-button {
@@ -260,6 +259,7 @@ code {
   border-radius: 150px;
   line-height: 4.5rem;
 }
+
 
 .rps-choice-section-container {
   display: flex;
