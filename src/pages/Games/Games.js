@@ -29,6 +29,7 @@ const Games = () => {
       }
     };
     getData();
+    // eslint-disable-next-line
   }, []);
 
   const handleStartNewGame = () => {
@@ -135,10 +136,12 @@ const Games = () => {
       <Navbar />
       <article id="games-page-container">
         <GoBack />
-        <h1>Rock Paper Scissors</h1>
-        <h3>
-          Win/loose ratio: {userScore} / {computerScore}
-        </h3>
+        <header id="games-header">
+          <h1 className="header">Rock Paper Scissors</h1>
+          <h2 className="rps-ratio">
+            Win/loose ratio: {userScore} / {computerScore}
+          </h2>
+        </header>
 
         <article className="rps-container">
           <section className="players">USER</section>
