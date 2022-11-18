@@ -55,14 +55,14 @@ const Games = () => {
     var computerChoice = Math.floor(Math.random() * 3);
     var userChoice = 0;
 
-    if (e.target.innerText === "Rock") {
+    if (e.target.className === "fa-solid fa-gem fa-2xl") {
       userChoice = 0;
-    } else if (e.target.innerText === "Paper") {
+    } else if (e.target.className === "fa-regular fa-map fa-2xl") {
       userChoice = 1;
-    } else if (e.target.innerText === "Scissors") {
+    } else if (e.target.className === "fa-solid fa-scissors fa-2xl") {
       userChoice = 2;
     }
-
+console.log('e.target.className',e.target.className)
     if (userChoice === computerChoice) {
       var even = "";
       if (userChoice === 0) {
@@ -145,17 +145,17 @@ const Games = () => {
 
         <article className="rps-container">
           <section className="players">USER</section>
-          <section className="players">COMP</section>
+          <i className="fa-solid fa-robot fa-2xl"></i>
         </article>
         <article className={rpsContainer}>
           <section onClick={handleChoiceClick} className="choice-section">
-            Rock
+            <i className="fa-solid fa-gem fa-2xl"></i>
           </section>
           <section onClick={handleChoiceClick} className="choice-section">
-            Paper
+            <i className="fa-regular fa-map fa-2xl"></i>
           </section>
           <section onClick={handleChoiceClick} className="choice-section">
-            Scissors
+            <i className="fa-solid fa-scissors fa-2xl"></i>
           </section>
         </article>
         <article className={resultArticle}>
