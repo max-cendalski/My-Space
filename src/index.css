@@ -233,12 +233,12 @@ code {
   width: 100%;
   margin-block-start: 1rem;
   display: flex;
-  gap: 6rem;
+  gap: 4rem;
   align-items: baseline;
 }
 
 .start-game-button {
-  width: 90%;
+  width: 80%;
   cursor: pointer;
   font-size: 1.2rem;
   padding: 0.325rem;
@@ -278,11 +278,11 @@ code {
 }
 
 .result-article {
-  margin-block-start: 1rem;
+  margin-block-start: 2rem;
   margin-block-end: 1rem;
   display: flex;
   gap: 4rem;
-  font-size: 2.5rem;
+  font-size: 3rem;
 }
 
 .result-article h1 {

@@ -64,7 +64,6 @@ const Games = () => {
     } else if (e.target.className === "fa-solid fa-scissors fa-2xl") {
       userChoice = 2;
     }
-    console.log("e.target.className", e.target.className);
     if (userChoice === computerChoice) {
       var even = "";
       if (userChoice === 0) {
