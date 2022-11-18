@@ -278,9 +278,13 @@ code {
 }
 
 .result-article {
-  font-size: 2rem;
+  margin-block-start: 1rem;
+  margin-block-end: 1rem;
   display: flex;
+  gap: 4rem;
+  font-size: 2.5rem;
 }
+
 .result-article h1 {
   font-size: 3rem;
 }
@@ -288,6 +292,7 @@ code {
 .game-result {
   margin: 1rem;
 }
+
 .game-result-header {
   font-size: 2rem;
 }

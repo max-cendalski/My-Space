@@ -15,6 +15,8 @@ const Games = () => {
   const [computerResult, setComputerResult] = useState("");
   const [userScore, setUserScore] = useState(0);
   const [computerScore, setComputerScore] = useState(0);
+  const [userIcon, setUserIcon] = useState("");
+  const [computerIcon, setComputerIcon] = useState("");
 
   useEffect(() => {
     const getData = async () => {
@@ -62,7 +64,7 @@ const Games = () => {
     } else if (e.target.className === "fa-solid fa-scissors fa-2xl") {
       userChoice = 2;
     }
-console.log('e.target.className',e.target.className)
+    console.log("e.target.className", e.target.className);
     if (userChoice === computerChoice) {
       var even = "";
       if (userChoice === 0) {
@@ -82,48 +84,48 @@ console.log('e.target.className',e.target.className)
       if (userChoice === 0 && computerChoice === 1) {
         setResultArticle("result-article");
         setResult("COMPUTER WON!");
-        setComputerResult("Paper");
-        setUserResult("Rock");
+        setUserIcon("fa-solid fa-gem");
+        setComputerIcon("fa-regular fa-map ");
         setRpsContainer("hidden");
         setStartGameButton("start-game-button");
         setComputerScore(computerScore + 1);
       } else if (userChoice === 1 && computerChoice === 2) {
         setResultArticle("result-article");
         setResult("COMPUTER WON!");
-        setComputerResult("Scissors");
-        setUserResult("Paper");
+        setComputerIcon("fa-solid fa-scissors ");
+        setUserIcon("fa-regular fa-map ");
         setRpsContainer("hidden");
         setStartGameButton("start-game-button");
         setComputerScore(computerScore + 1);
       } else if (userChoice === 2 && computerChoice === 0) {
         setResultArticle("result-article");
         setResult("COMPUTER WON!");
-        setComputerResult("Rock");
-        setUserResult("Scissors");
+        setComputerIcon("fa-solid fa-gem");
+        setUserIcon("fa-solid fa-scissors");
         setRpsContainer("hidden");
         setStartGameButton("start-game-button");
         setComputerScore(computerScore + 1);
       } else if (userChoice === 0 && computerChoice === 2) {
         setResultArticle("result-article");
         setResult("YOU WON!");
-        setUserResult("Rock");
-        setComputerResult("Scissors");
+        setUserIcon("fa-solid fa-gem");
+        setComputerIcon("fa-solid fa-scissors ");
         setRpsContainer("hidden");
         setStartGameButton("start-game-button");
         setUserScore(userScore + 1);
       } else if (userChoice === 1 && computerChoice === 0) {
         setResultArticle("result-article");
         setResult("YOU WON!");
-        setUserResult("Paper");
-        setComputerResult("Rock");
+        setUserIcon("fa-regular fa-map");
+        setComputerIcon("fa-solid fa-gem");
         setRpsContainer("hidden");
         setStartGameButton("start-game-button");
         setUserScore(userScore + 1);
       } else if (userChoice === 2 && computerChoice === 1) {
         setResultArticle("result-article");
         setResult("COMPUTER WON!");
-        setUserResult("Scissors");
-        setComputerResult("Paper");
+        setUserIcon("fa-solid fa-scissors");
+        setComputerIcon("fa-regular fa-map");
         setRpsContainer("hidden");
         setStartGameButton("start-game-button");
         setUserScore(userScore + 1);
@@ -159,8 +161,8 @@ console.log('e.target.className',e.target.className)
           </section>
         </article>
         <article className={resultArticle}>
-          <section className="game-result">{userResult}</section>
-          <section className="game-result">{computerResult}</section>
+          <section><i className={userIcon}></i></section>
+          <section><i className={computerIcon}></i></section>
         </article>
         <h1 className="game-result-header">{result}</h1>
         <button className={startGameButton} onClick={handleStartNewGame}>
