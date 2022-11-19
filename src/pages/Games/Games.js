@@ -11,8 +11,6 @@ const Games = () => {
   const [rpsContainer, setRpsContainer] = useState("hidden");
   const [result, setResult] = useState("");
   const [resultArticle, setResultArticle] = useState("hidden");
-  const [userResult, setUserResult] = useState("");
-  const [computerResult, setComputerResult] = useState("");
   const [userScore, setUserScore] = useState(0);
   const [computerScore, setComputerScore] = useState(0);
   const [userIcon, setUserIcon] = useState("");
@@ -65,18 +63,18 @@ const Games = () => {
       userChoice = 2;
     }
     if (userChoice === computerChoice) {
-      var even = "";
       if (userChoice === 0) {
-        even = "Rock";
+        setUserIcon("fa-solid fa-gem");
+        setComputerIcon("fa-solid fa-gem");
       } else if (userChoice === 1) {
-        even = "Paper";
+        setUserIcon("fa-regular fa-map");
+        setComputerIcon("fa-regular fa-map");
       } else {
-        even = "Scissors";
+        setUserIcon("fa-solid fa-scissors");
+        setComputerIcon("fa-solid fa-scissors");
       }
       setResultArticle("result-article");
       setResult("EVEN");
-      setComputerResult(even);
-      setUserResult(even);
       setStartGameButton("start-game-button");
       setRpsContainer("hidden");
     } else {
@@ -91,7 +89,7 @@ const Games = () => {
       } else if (userChoice === 1 && computerChoice === 2) {
         setResultArticle("result-article");
         setResult("COMPUTER WON!");
-        setComputerIcon("fa-solid fa-scissors ");
+        setComputerIcon("fa-solid fa-scissors");
         setUserIcon("fa-regular fa-map ");
         setRpsContainer("hidden");
         setStartGameButton("start-game-button");
@@ -122,7 +120,7 @@ const Games = () => {
         setUserScore(userScore + 1);
       } else if (userChoice === 2 && computerChoice === 1) {
         setResultArticle("result-article");
-        setResult("COMPUTER WON!");
+        setResult("YOU WON!");
         setUserIcon("fa-solid fa-scissors");
         setComputerIcon("fa-regular fa-map");
         setRpsContainer("hidden");

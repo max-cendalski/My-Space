@@ -32,7 +32,7 @@ code {
 }
 .rps-ratio {
   margin-top: 0.625rem;
-  color: var(--red);
+  color: var(--darkGreen);
 }
 #home-container {
   display: flex;
@@ -295,6 +295,7 @@ code {
 
 .game-result-header {
   font-size: 2rem;
+  color: var(--red);
 }
 
 .date-paragraph {
