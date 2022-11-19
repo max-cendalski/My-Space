@@ -264,6 +264,7 @@ code {
 .rps-choice-section-container {
   display: flex;
   align-content: space-between ;
+  margin-top: 2rem;
 }
 
 .choice-section {
