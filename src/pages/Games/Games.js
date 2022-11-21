@@ -74,7 +74,7 @@ const Games = () => {
         setComputerIcon("fa-solid fa-scissors");
       }
       setResultArticle("result-article");
-      setResult("EVEN");
+      setResult("EVEN!");
       setStartGameButton("start-game-button");
       setRpsContainer("hidden");
     } else {
@@ -137,11 +137,10 @@ const Games = () => {
         <GoBack />
         <header id="games-header">
           <h1 className="header">Rock Paper Scissors</h1>
-          <h2 className="rps-ratio">
-            Win/loose ratio: {userScore} / {computerScore}
-          </h2>
         </header>
-
+        <h2 className="rps-ratio">
+          Win/loose ratio: {userScore} / {computerScore}
+        </h2>
         <article className="rps-container">
           <section className="players">USER</section>
           <section className="players">
