@@ -31,7 +31,7 @@ code {
   font-size: 1.825rem;
 }
 .rps-ratio {
-  margin-top: 0.625rem;
+  margin-top: 1rem;
   color: var(--darkGreen);
 }
 #home-container {
@@ -231,7 +231,7 @@ code {
 
 .rps-container {
   width: 100%;
-  margin-block-start: 1rem;
+  margin-block-start: 2.5rem;
   display: flex;
   gap: 4rem;
 }
