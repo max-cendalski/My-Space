@@ -71,8 +71,18 @@ code {
 
 .back-arrow {
   margin-inline-start: 0;
-  color: var(--red)
+  color: var(--red);
+  transition: transform 0.1s;
+  cursor: pointer;
 }
+.back-arrow:hover {
+  transform: scale(1.3);
+}
+
+.back-arrow:active {
+  transform: scale(1.5);
+}
+
 
 .navbar-container {
   border-block-end: 2px solid var(--red);
