@@ -7,14 +7,13 @@ import { UserAuth } from "../../context/AuthContext";
 
 const Games = () => {
   const { user } = UserAuth();
-  const [startGameButton, setStartGameButton] =useState("start-game-button");
+  const [startGameButton, setStartGameButton] = useState("start-game-button");
   const [gameState, setGameState] = useState({
     startGameButton: "start-game-button",
     rpsChoiceSectionContainer: "hidden",
     result: "",
     resultContainer: "hidden",
   });
-
   const [icons, setIcons] = useState({
     userIcon: "",
     computerIcon: "",
@@ -23,7 +22,6 @@ const Games = () => {
     userScore: 0,
     computerScore: 0,
   });
-
 
   useEffect(() => {
     const getData = async () => {
@@ -44,9 +42,8 @@ const Games = () => {
   }, []);
 
   const handleStartNewGame = () => {
-    setStartGameButton("hidden")
+    setStartGameButton("hidden");
     setGameState({
-      startGameButton: "hidden",
       rpsChoiceSectionContainer: "rps-choice-section-container",
       result: "",
       resultContainer: "hidden",
@@ -69,7 +66,7 @@ const Games = () => {
     e.preventDefault();
     var computerChoice = Math.floor(Math.random() * 3);
     var userChoice = 0;
-    setStartGameButton("start-game-button")
+    setStartGameButton("start-game-button");
     if (e.target.className === "fa-solid fa-gem fa-2xl") {
       userChoice = 0;
     } else if (e.target.className === "fa-regular fa-map fa-2xl") {
@@ -96,20 +93,18 @@ const Games = () => {
         });
       }
       setGameState({
-        startGameButton: "start-game-button",
         rpsChoiceSectionContainer: "hidden",
         result: "EVEN!",
         resultContainer: "result-article",
       });
+
     } else {
       if (userChoice === 0 && computerChoice === 1) {
         setGameState({
-          startGameButton: "start-game-button",
-          rpsChoiceSectionContainer: "hidden",
           result: "COMPUTER WON!",
           resultContainer: "result-article",
+          rpsChoiceSectionContainer: "hidden",
         });
-
         setIcons({
           userIcon: "fa-solid fa-gem",
           computerIcon: "fa-solid fa-map",
@@ -118,14 +113,13 @@ const Games = () => {
           userScore: scores.userScore,
           computerScore: scores.computerScore + 1,
         });
+
       } else if (userChoice === 1 && computerChoice === 2) {
         setGameState({
-          startGameButton: "start-game-button",
-          rpsChoiceSectionContainer: "hidden",
           result: "COMPUTER WON!",
           resultContainer: "result-article",
+          rpsChoiceSectionContainer: "hidden",
         });
-
         setScores({
           userScore: scores.userScore,
           computerScore: scores.computerScore + 1,
@@ -134,14 +128,13 @@ const Games = () => {
           userIcon: "fa-solid fa-map",
           computerIcon: "fa-solid fa-scissors",
         });
+
       } else if (userChoice === 2 && computerChoice === 0) {
         setGameState({
-          startGameButton: "start-game-button",
-          rpsChoiceSectionContainer: "hidden",
           result: "COMPUTER WON!",
           resultContainer: "result-article",
+          rpsChoiceSectionContainer: "hidden",
         });
-
         setScores({
           userScore: scores.userScore,
           computerScore: scores.computerScore + 1,
@@ -150,12 +143,12 @@ const Games = () => {
           userIcon: "fa-solid fa-scissors",
           computerIcon: "fa-solid fa-gem",
         });
+
       } else if (userChoice === 0 && computerChoice === 2) {
         setGameState({
-          startGameButton: "start-game-button",
-          rpsChoiceSectionContainer: "hidden",
           result: "YOU WON!",
           resultContainer: "result-article",
+          rpsChoiceSectionContainer: "hidden",
         });
         setScores({
           userScore: scores.userScore + 1,
@@ -165,12 +158,12 @@ const Games = () => {
           userIcon: "fa-solid fa-gem",
           computerIcon: "fa-solid fa-scissors",
         });
+
       } else if (userChoice === 1 && computerChoice === 0) {
         setGameState({
-          startGameButton: "start-game-button",
-          rpsChoiceSectionContainer: "hidden",
           result: "YOU WON!",
           resultContainer: "result-article",
+          rpsChoiceSectionContainer: "hidden",
         });
         setScores({
           userScore: scores.userScore + 1,
@@ -180,12 +173,12 @@ const Games = () => {
           userIcon: "fa-solid fa-map",
           computerIcon: "fa-solid fa-gem",
         });
+
       } else if (userChoice === 2 && computerChoice === 1) {
         setGameState({
-          startGameButton: "start-game-button",
-          rpsChoiceSectionContainer: "hidden",
           result: "YOU WON!",
           resultContainer: "result-article",
+          rpsChoiceSectionContainer: "hidden",
         });
         setScores({
           userScore: scores.userScore + 1,
@@ -236,10 +229,7 @@ const Games = () => {
           </section>
         </article>
         <h1 className="game-result-header">{gameState.result}</h1>
-        <button
-          className={startGameButton}
-          onClick={handleStartNewGame}
-        >
+        <button className={startGameButton} onClick={handleStartNewGame}>
           Click to start new game!
         </button>
       </article>
