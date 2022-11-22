@@ -36,6 +36,7 @@ const Home = () => {
     // eslint-disable-next-line
   }, []);
 
+
   return (
     <article id="home-container">
       <Navbar />
@@ -48,7 +49,9 @@ const Home = () => {
       )}
       {idea && (
         <section id="idea-home-page">
-          <p><q>{idea.text}</q></p>
+          <p>
+            <q>{idea.text}</q>
+          </p>
         </section>
       )}
       <NavLink className="feature-button" to="/notes">
@@ -62,6 +65,9 @@ const Home = () => {
       </NavLink>
       <NavLink className="feature-button" to="/ideas">
         Ideas
+      </NavLink>
+      <NavLink className="feature-button" to="/games">
+        Games
       </NavLink>
     </article>
   );

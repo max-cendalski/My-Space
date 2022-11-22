@@ -10,6 +10,7 @@ import RequireAuth from './RequireAuth/RequireAuth';
 import Login from './pages/Login/Login';
 import EditNote from './pages/Notes/EditNote';
 import Ideas from './pages/Ideas/Ideas';
+import Games from './pages/Games/Games';
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
         <Route path="/ideas" element={<Ideas />} />
         <Route path="/tasks" element={<Tasks />} />
         <Route path="/weather" element={<Weather />} />
+        <Route path="/games" element={<Games />} />
       </Route>
     </Routes>
   );

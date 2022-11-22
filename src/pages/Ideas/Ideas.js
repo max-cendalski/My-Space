@@ -76,7 +76,6 @@ const Ideas = () => {
 
   const handleAddIdeaToHomepage = (id) => {
     const ideaToHomePage = ideasToRender.filter((item) => item.id === id);
-    console.log("ideaTohoem:", ideaToHomePage);
     const addIdea = async () => {
       try {
         await setDoc(
@@ -94,7 +93,7 @@ const Ideas = () => {
   };
 
   return (
-    <div>
+    <article>
       <Navbar />
       <article id="ideas-page-container">
         <GoBack />
@@ -122,7 +121,7 @@ const Ideas = () => {
             </section>
           ))}
       </article>
-    </div>
+    </article>
   );
 };
 

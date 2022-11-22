@@ -43,7 +43,7 @@ const AddNoteForm = ({ isVisible, handleFormState }) => {
 
   return (
     <article>
-      <form className={isVisible ? "invisible" : "note-form"}>
+      <form className={isVisible ? "hidden" : "note-form"}>
         <p className="field">
           <label className="label-standard" htmlFor="title">
             Title

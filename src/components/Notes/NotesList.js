@@ -5,7 +5,7 @@ const NotesList = ({ isVisible,notes, deleteNote }) => {
     <article>
       {notes.map((note) => (
         <section
-          className={!isVisible ? "invisible" : "single-note-container"}
+          className={!isVisible ? "hidden" : "single-note-container"}
           key={note.id}
         >
           <h2 className="note-title">{note.title}</h2>
