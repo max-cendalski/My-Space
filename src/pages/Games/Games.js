@@ -7,10 +7,14 @@ import { UserAuth } from "../../context/AuthContext";
 
 const Games = () => {
   const { user } = UserAuth();
-  const [startGameButton, setStartGameButton] = useState("start-game-button");
-  const [rpsContainer, setRpsContainer] = useState("hidden");
-  const [result, setResult] = useState("");
-  const [resultArticle, setResultArticle] = useState("hidden");
+  const [startGameButton, setStartGameButton] =useState("start-game-button");
+  const [gameState, setGameState] = useState({
+    startGameButton: "start-game-button",
+    rpsChoiceSectionContainer: "hidden",
+    result: "",
+    resultContainer: "hidden",
+  });
+
   const [icons, setIcons] = useState({
     userIcon: "",
     computerIcon: "",
@@ -20,6 +24,7 @@ const Games = () => {
     computerScore: 0,
   });
 
+
   useEffect(() => {
     const getData = async () => {
       try {
@@ -28,7 +33,7 @@ const Games = () => {
         );
         setScores({
           userScore: dataFromFirebase.data().user,
-          computerScore: dataFromFirebase.data().computer
+          computerScore: dataFromFirebase.data().computer,
         });
       } catch (err) {
         console.error("ERROR: ", err);
@@ -39,10 +44,14 @@ const Games = () => {
   }, []);
 
   const handleStartNewGame = () => {
-    setResult("");
-    setRpsContainer("rps-choice-section-container");
-    setResultArticle("hidden");
-    setStartGameButton("hidden");
+    setStartGameButton("hidden")
+    setGameState({
+      startGameButton: "hidden",
+      rpsChoiceSectionContainer: "rps-choice-section-container",
+      result: "",
+      resultContainer: "hidden",
+    });
+
     const addGameData = async () => {
       try {
         await setDoc(doc(db, "users", user.uid, "games", "rps"), {
@@ -60,7 +69,7 @@ const Games = () => {
     e.preventDefault();
     var computerChoice = Math.floor(Math.random() * 3);
     var userChoice = 0;
-
+    setStartGameButton("start-game-button")
     if (e.target.className === "fa-solid fa-gem fa-2xl") {
       userChoice = 0;
     } else if (e.target.className === "fa-regular fa-map fa-2xl") {
@@ -86,91 +95,103 @@ const Games = () => {
           computerIcon: "fa-solid fa-scissors",
         });
       }
-      setResultArticle("result-article");
-      setResult("EVEN!");
-      setStartGameButton("start-game-button");
-      setRpsContainer("hidden");
+      setGameState({
+        startGameButton: "start-game-button",
+        rpsChoiceSectionContainer: "hidden",
+        result: "EVEN!",
+        resultContainer: "result-article",
+      });
     } else {
       if (userChoice === 0 && computerChoice === 1) {
-        setResultArticle("result-article");
-        setResult("COMPUTER WON!");
+        setGameState({
+          startGameButton: "start-game-button",
+          rpsChoiceSectionContainer: "hidden",
+          result: "COMPUTER WON!",
+          resultContainer: "result-article",
+        });
 
-        setRpsContainer("hidden");
-        setStartGameButton("start-game-button");
         setIcons({
           userIcon: "fa-solid fa-gem",
           computerIcon: "fa-solid fa-map",
         });
         setScores({
-          userScore:scores.userScore,
+          userScore: scores.userScore,
           computerScore: scores.computerScore + 1,
         });
       } else if (userChoice === 1 && computerChoice === 2) {
-        setResultArticle("result-article");
-        setResult("COMPUTER WON!");
-        setRpsContainer("hidden");
-        setStartGameButton("start-game-button");
-        setScores({
-          userScore: scores.userScore,
-          computerScore: scores.computerScore + 1,
+        setGameState({
+          startGameButton: "start-game-button",
+          rpsChoiceSectionContainer: "hidden",
+          result: "COMPUTER WON!",
+          resultContainer: "result-article",
         });
-         setIcons({
-           userIcon: "fa-solid fa-map",
-           computerIcon: "fa-solid fa-scissors",
-         });
-      } else if (userChoice === 2 && computerChoice === 0) {
-        setResultArticle("result-article");
-        setResult("COMPUTER WON!");
 
-        setRpsContainer("hidden");
-        setStartGameButton("start-game-button");
         setScores({
           userScore: scores.userScore,
           computerScore: scores.computerScore + 1,
         });
-         setIcons({
+        setIcons({
+          userIcon: "fa-solid fa-map",
+          computerIcon: "fa-solid fa-scissors",
+        });
+      } else if (userChoice === 2 && computerChoice === 0) {
+        setGameState({
+          startGameButton: "start-game-button",
+          rpsChoiceSectionContainer: "hidden",
+          result: "COMPUTER WON!",
+          resultContainer: "result-article",
+        });
+
+        setScores({
+          userScore: scores.userScore,
+          computerScore: scores.computerScore + 1,
+        });
+        setIcons({
           userIcon: "fa-solid fa-scissors",
           computerIcon: "fa-solid fa-gem",
         });
       } else if (userChoice === 0 && computerChoice === 2) {
-        setResultArticle("result-article");
-        setResult("YOU WON!");
-
-        setRpsContainer("hidden");
-        setStartGameButton("start-game-button");
+        setGameState({
+          startGameButton: "start-game-button",
+          rpsChoiceSectionContainer: "hidden",
+          result: "YOU WON!",
+          resultContainer: "result-article",
+        });
         setScores({
           userScore: scores.userScore + 1,
-          computerScore: scores.computerScore
+          computerScore: scores.computerScore,
         });
-         setIcons({
+        setIcons({
           userIcon: "fa-solid fa-gem",
           computerIcon: "fa-solid fa-scissors",
         });
       } else if (userChoice === 1 && computerChoice === 0) {
-        setResultArticle("result-article");
-        setResult("YOU WON!");
-
-        setRpsContainer("hidden");
-        setStartGameButton("start-game-button");
+        setGameState({
+          startGameButton: "start-game-button",
+          rpsChoiceSectionContainer: "hidden",
+          result: "YOU WON!",
+          resultContainer: "result-article",
+        });
         setScores({
           userScore: scores.userScore + 1,
-          computerScore: scores.computerScore
+          computerScore: scores.computerScore,
         });
-         setIcons({
+        setIcons({
           userIcon: "fa-solid fa-map",
           computerIcon: "fa-solid fa-gem",
         });
       } else if (userChoice === 2 && computerChoice === 1) {
-        setResultArticle("result-article");
-        setResult("YOU WON!");
-
-        setRpsContainer("hidden");
-        setStartGameButton("start-game-button");
+        setGameState({
+          startGameButton: "start-game-button",
+          rpsChoiceSectionContainer: "hidden",
+          result: "YOU WON!",
+          resultContainer: "result-article",
+        });
         setScores({
           userScore: scores.userScore + 1,
-          computerScore: scores.computerScore
+          computerScore: scores.computerScore,
         });
-         setIcons({
+        setIcons({
           userIcon: "fa-solid fa-scissors",
           computerIcon: "fa-solid fa-map",
         });
@@ -195,7 +216,7 @@ const Games = () => {
             <i className="fa-solid fa-robot fa-2xl"></i>
           </section>
         </article>
-        <article className={rpsContainer}>
+        <article className={gameState.rpsChoiceSectionContainer}>
           <section onClick={handleChoiceClick} className="choice-section">
             <i className="fa-solid fa-gem fa-2xl"></i>
           </section>
@@ -206,7 +227,7 @@ const Games = () => {
             <i className="fa-solid fa-scissors fa-2xl"></i>
           </section>
         </article>
-        <article className={resultArticle}>
+        <article className={gameState.resultContainer}>
           <section>
             <i className={icons.userIcon}></i>
           </section>
@@ -214,8 +235,11 @@ const Games = () => {
             <i className={icons.computerIcon}></i>
           </section>
         </article>
-        <h1 className="game-result-header">{result}</h1>
-        <button className={startGameButton} onClick={handleStartNewGame}>
+        <h1 className="game-result-header">{gameState.result}</h1>
+        <button
+          className={startGameButton}
+          onClick={handleStartNewGame}
+        >
           Click to start new game!
         </button>
       </article>
