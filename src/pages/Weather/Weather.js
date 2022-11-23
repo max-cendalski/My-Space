@@ -14,7 +14,7 @@ const Weather = () => {
         console.log("data", data.current.temp);
         setTemperature(data.current.temp)
       } catch (err) {
-        console.error("ERROR: ", err);
+        console.error("ERROR: ", err.message);
       }
     };
 
