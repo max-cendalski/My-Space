@@ -75,6 +75,7 @@ code {
   transition: transform 0.1s;
   cursor: pointer;
 }
+
 .back-arrow:hover {
   transform: scale(1.3);
 }
@@ -324,6 +325,16 @@ code {
 .game-result-header {
   font-size: 2rem;
   color: var(--red);
+}
+
+/* WEATHER */
+
+#weather-page-container {
+    margin-block-start: 1.625rem;
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+
 }
 
 .date-paragraph {
