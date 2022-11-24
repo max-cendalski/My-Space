@@ -2,7 +2,6 @@ import Navbar from "../../components/Navbar/Navbar";
 import GoBack from "../../components/GoBack/GoBack";
 import { useState, useEffect } from "react";
 
-import { db } from "../../firebase/Firebase";
 
 const Weather = () => {
   const [temperature, setTemperature] = useState(0);
