@@ -2,8 +2,12 @@ import Navbar from "../../components/Navbar/Navbar";
 import GoBack from "../../components/GoBack/GoBack";
 import { useState, useEffect } from "react";
 
+import { db } from "../../firebase/Firebase";
+
 const Weather = () => {
-  const [temperature, setTemperature] = useState(0)
+  const [temperature, setTemperature] = useState(0);
+
+
   useEffect(() => {
     const fetchtWeather = async () => {
       const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
@@ -12,15 +16,14 @@ const Weather = () => {
         const response = await fetch(API_URL);
         const data = await response.json();
         console.log("data", data.current.temp);
-        setTemperature(data.current.temp)
+        setTemperature(data.current.temp);
       } catch (err) {
         console.error("ERROR: ", err.message);
       }
     };
 
     fetchtWeather();
-  },[]);
-
+  }, []);
   return (
     <article>
       <Navbar />
@@ -28,6 +31,7 @@ const Weather = () => {
         <GoBack />
         <h1>Weather</h1>
         <p>In Chicago there is : {temperature} degree fahrenheit</p>
+
       </article>
     </article>
   );
