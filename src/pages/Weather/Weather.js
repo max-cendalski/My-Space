@@ -2,10 +2,8 @@ import Navbar from "../../components/Navbar/Navbar";
 import GoBack from "../../components/GoBack/GoBack";
 import { useState, useEffect } from "react";
 
-
 const Weather = () => {
   const [temperature, setTemperature] = useState(0);
-
 
   useEffect(() => {
     const fetchtWeather = async () => {
@@ -29,8 +27,13 @@ const Weather = () => {
       <article id="weather-page-container">
         <GoBack />
         <h1>Weather</h1>
+        <article id="weather-form-article">
+          <form>
+            <input type="text" name="location"></input>
+            <button>Submit</button>
+          </form>
+        </article>
         <p>In Chicago there is : {temperature} degree fahrenheit</p>
-
       </article>
     </article>
   );
