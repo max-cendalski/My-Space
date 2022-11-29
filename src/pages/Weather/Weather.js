@@ -1,10 +1,11 @@
 import Navbar from "../../components/Navbar/Navbar";
 import GoBack from "../../components/GoBack/GoBack";
+import LocationSearch from "../../components/PlaceSearch/PlaceSearch";
 import { useState, useEffect } from "react";
 
 const Weather = () => {
   const [temperature, setTemperature] = useState(0);
-  const [location, setLocation] =useState("")
+  const [location, setLocation] = useState("");
 
   useEffect(() => {
     const fetchtWeather = async () => {
@@ -23,30 +24,39 @@ const Weather = () => {
     fetchtWeather();
   }, []);
 
-  const handleSubmitLocation =(e)=> {
-    e.preventDefault()
-    console.log("location",location)
-  }
-const handleLocationChange =(e) => {
-  setLocation(e.target.value)
-  console.log('location',location)
-}
+  const handleSubmitLocation = (e) => {
+    e.preventDefault();
+    console.log("location", location);
+  };
+  const handleLocationChange = (e) => {
+    setLocation(e.target.value);
+    console.log("location", location);
+  };
   return (
     <article>
       <Navbar />
-      <article id="weather-page-container">
-        <GoBack />
-        <h1>Weather</h1>
-        <article id="weather-form-article">
-          <form>
-            <input type="text" name="location" value={location} onChange={handleLocationChange} placeholder="location"></input>
-            <button onClick={handleSubmitLocation}>Submit</button>
-          </form>
-        </article>
-        <p>In Chicago there is : {temperature} degree fahrenheit</p>
-      </article>
+      <GoBack />
+      <LocationSearch />
     </article>
   );
 };
 
 export default Weather;
+
+/* <article id="weather-page-container">
+  <GoBack />
+  <h1>Weather</h1>
+  <article id="weather-form-article">
+    <form>
+      <input
+        type="text"
+        name="location"
+        value={location}
+        onChange={handleLocationChange}
+        placeholder="location"
+      ></input>
+      <button onClick={handleSubmitLocation}>Submit</button>
+    </form>
+  </article>
+  <p>In Chicago there is : {temperature} degree fahrenheit</p>
+</article>; */
