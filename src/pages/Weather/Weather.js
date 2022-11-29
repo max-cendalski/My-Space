@@ -35,8 +35,11 @@ const Weather = () => {
   return (
     <article>
       <Navbar />
-      <GoBack />
-      <LocationSearch />
+
+      <article id="weather-page-container">
+        <GoBack />
+        <LocationSearch />
+      </article>
     </article>
   );
 };

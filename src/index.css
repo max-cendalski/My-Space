@@ -334,7 +334,9 @@ code {
       width: 90%;
       display: flex;
       flex-direction: column;
-
+}
+#places-autocomplete-section {
+  width: 90%;
 }
 
 .date-paragraph {

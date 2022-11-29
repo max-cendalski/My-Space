@@ -3,33 +3,36 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
-import { useState } from "react";
 
-const LocationSearch = () => {
+class LocationSearch extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { address: "" };
+  }
 
-const [address, setAddress] = useState({address: ""});
-
-const handleChange = (address) => {
-    setAddress({ address });
+  handleChange = (address) => {
+    this.setState({ address });
   };
 
-  const handleSelect = (address) => {
+  handleSelect = (address) => {
     geocodeByAddress(address)
       .then((results) => getLatLng(results[0]))
       .then((latLng) => console.log("Success", latLng))
       .catch((error) => console.error("Error", error));
   };
 
-  const onSubmit = (e) => {
-    console.log('e',e)
-  };
+  onSubmit = (e) => {
+    e.preventDefault()
+    console.log('whee')
+  }
 
 
+  render() {
     return (
       <PlacesAutocomplete
-        value={address}
-        onChange={handleChange}
-
+        value={this.state.address}
+        onChange={this.handleChange}
+        onSubmit ={this.onSubmit}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <section id="places-autocomplete-section">
@@ -76,7 +79,7 @@ const handleChange = (address) => {
         )}
       </PlacesAutocomplete>
     );
-
+  }
 }
 
 
