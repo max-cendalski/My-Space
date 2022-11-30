@@ -9,8 +9,8 @@ const LocationSearch = () => {
   const [address, setAddress] = useState(null);
 
   const handleChange = (address) => {
-    setAddress( address );
-    console.log('addres',address)
+    setAddress(address);
+    console.log("addres", address);
   };
 
   const handleSelect = (address) => {
@@ -51,10 +51,9 @@ const LocationSearch = () => {
               const className = suggestion.active
                 ? "suggestion-item--active"
                 : "suggestion-item";
-              // inline style for demonstration purpose
               const style = suggestion.active
                 ? {
-                    backgroundColor: "#1c861c",
+                    backgroundColor: "#18946F",
                     cursor: "pointer",
                     color: "#ffffff",
                   }

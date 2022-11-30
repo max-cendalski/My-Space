@@ -339,6 +339,12 @@ code {
   width: 90%;
 }
 
+.suggestion-item:hover {
+    background-color: var(--darkGreen);
+    color: white;
+    cursor: pointer;
+}
+
 .date-paragraph {
   font-style: italic;
   font-size: 0.675rem;
