@@ -6,11 +6,17 @@ import PlacesAutocomplete, {
 import { useState } from "react";
 
 const LocationSearch = () => {
-  const [address, setAddress] = useState(null);
+  const [location, setLocation] = useState(null);
+  const [address, setAddress] = useState({ city: "", country: "" });
 
-  const handleChange = (address) => {
-    setAddress(address);
-    console.log("addres", address);
+  const handleChange = (location) => {
+    setLocation(location);
+console.log("addres", address);
+    const locationArray = location.split(",");
+    const city = locationArray[0];
+    const country = locationArray[locationArray.length - 1].trim();
+    setAddress({ city, country });
+    console.log('address',address)
   };
 
   const handleSelect = (address) => {
@@ -27,13 +33,13 @@ const LocationSearch = () => {
 
   return (
     <PlacesAutocomplete
-      value={address}
+      value={location}
       onChange={handleChange}
       onSubmit={onSubmit}
     >
       {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
         <section id="places-autocomplete-section">
-          <label className="review-score-label">Your Location</label>
+          <label>Your Location</label>
           <p>
             <input
               type="text"
@@ -51,18 +57,18 @@ const LocationSearch = () => {
               const className = suggestion.active
                 ? "suggestion-item--active"
                 : "suggestion-item";
-              const style = suggestion.active
-                ? {
-                    backgroundColor: "#18946F",
-                    cursor: "pointer",
-                    color: "#ffffff",
-                  }
-                : { backgroundColor: "#ffffff", cursor: "pointer" };
+                const style = suggestion.active
+                  ? {
+                      backgroundColor: "#18946F",
+                      cursor: "pointer",
+                      color: "#ffffff",
+                    }
+                  : { backgroundColor: "#ffffff", cursor: "pointer" };
               return (
                 <div
                   {...getSuggestionItemProps(suggestion, {
                     className,
-                    style,
+                    style
                   })}
                   key={index + 1}
                 >

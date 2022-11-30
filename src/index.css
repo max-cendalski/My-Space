@@ -335,14 +335,10 @@ code {
       display: flex;
       flex-direction: column;
 }
-#places-autocomplete-section {
-  width: 90%;
-}
 
-.suggestion-item:hover {
-    background-color: var(--darkGreen);
-    color: white;
-    cursor: pointer;
+#places-autocomplete-section {
+  margin-block-start: 2rem;
+  width: 100%;
 }
 
 .date-paragraph {
