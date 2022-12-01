@@ -341,6 +341,12 @@ code {
   width: 100%;
 }
 
+.suggestion-item--active {
+    background-color: var(--darkGreen);
+      color: white;
+      cursor: pointer;
+}
+
 .date-paragraph {
   font-style: italic;
   font-size: 0.675rem;
