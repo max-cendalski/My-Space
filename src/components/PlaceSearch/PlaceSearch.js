@@ -13,15 +13,17 @@ const LocationSearch = () => {
     console.log('address',address)
     setAddress(address)
   };
+
   const handleSelect = (address) => {
+
     geocodeByAddress(address)
       .then((results) => getLatLng(results[0]))
       .then((latLng) => setLatLng(latLng))
       .catch((error) => console.error("Error", error));
+      console.log('whe')
   };
 
   return (
-    <article>
       <PlacesAutocomplete value={address} onChange={handleChange} onSelect={handleSelect}>
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <section id="places-autocomplete-section">
@@ -58,7 +60,6 @@ const LocationSearch = () => {
           </section>
         )}
       </PlacesAutocomplete>
-    </article>
   );
 };
 

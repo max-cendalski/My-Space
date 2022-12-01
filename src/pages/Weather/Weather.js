@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 const Weather = () => {
   const [temperature, setTemperature] = useState(0);
   const [location, setLocation] = useState("");
+ const [address, setAddress] = useState("");
 
   useEffect(() => {
     const fetchtWeather = async () => {
@@ -23,6 +24,8 @@ const Weather = () => {
 
     fetchtWeather();
   }, []);
+
+
 
   const handleSubmitLocation = (e) => {
     e.preventDefault();
