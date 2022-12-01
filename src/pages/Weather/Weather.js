@@ -38,7 +38,7 @@ const Weather = () => {
       .then((results) => getLatLng(results[0]))
       .then((latLng) => setLatLng(latLng))
       .catch((error) => console.error("Error", error));
-
+    setAddress("")
   };
 
 /*   const handleSubmitLocation = (e) => {
