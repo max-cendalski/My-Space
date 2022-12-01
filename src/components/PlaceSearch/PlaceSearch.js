@@ -5,23 +5,7 @@ import PlacesAutocomplete, {
 } from "react-places-autocomplete";
 import { useState } from "react";
 
-const LocationSearch = () => {
-  const [address, setAddress] = useState("");
-  const [latLng, setLatLng] = useState(null)
-
-  const handleChange = (address) => {
-    console.log('address',address)
-    setAddress(address)
-  };
-
-  const handleSelect = (address) => {
-
-    geocodeByAddress(address)
-      .then((results) => getLatLng(results[0]))
-      .then((latLng) => setLatLng(latLng))
-      .catch((error) => console.error("Error", error));
-      console.log('whe')
-  };
+const LocationSearch = ({handleChange,handleSelect, address }) => {
 
   return (
       <PlacesAutocomplete value={address} onChange={handleChange} onSelect={handleSelect}>

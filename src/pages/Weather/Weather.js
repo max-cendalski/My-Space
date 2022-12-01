@@ -1,12 +1,15 @@
 import Navbar from "../../components/Navbar/Navbar";
 import GoBack from "../../components/GoBack/GoBack";
 import LocationSearch from "../../components/PlaceSearch/PlaceSearch";
+import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
+
 import { useState, useEffect } from "react";
 
 const Weather = () => {
   const [temperature, setTemperature] = useState(0);
-  const [location, setLocation] = useState("");
- const [address, setAddress] = useState("");
+  //const [location, setLocation] = useState("");
+  const [address, setAddress] = useState("");
+  const [latLng, setLatLng] = useState(null);
 
   useEffect(() => {
     const fetchtWeather = async () => {
@@ -25,23 +28,41 @@ const Weather = () => {
     fetchtWeather();
   }, []);
 
+  const handleChange = address => {
+    console.log("address", address);
+    setAddress(address);
+  };
 
+  const handleSelect = address => {
+    geocodeByAddress(address)
+      .then((results) => getLatLng(results[0]))
+      .then((latLng) => setLatLng(latLng))
+      .catch((error) => console.error("Error", error));
 
-  const handleSubmitLocation = (e) => {
+  };
+
+/*   const handleSubmitLocation = (e) => {
     e.preventDefault();
     console.log("location", location);
   };
   const handleLocationChange = (e) => {
     setLocation(e.target.value);
     console.log("location", location);
-  };
+  }; */
+
+  console.log('latLng',latLng)
+
   return (
     <article>
       <Navbar />
 
       <article id="weather-page-container">
         <GoBack />
-        <LocationSearch />
+        <LocationSearch
+          address={address}
+          handleChange={handleChange}
+          handleSelect={handleSelect}
+        />
       </article>
     </article>
   );
