@@ -343,8 +343,8 @@ code {
 
 .suggestion-item--active {
     background-color: var(--darkGreen);
-      color: white;
-      cursor: pointer;
+    color: white;
+    cursor: pointer;
 }
 
 .date-paragraph {

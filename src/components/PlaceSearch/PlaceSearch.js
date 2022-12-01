@@ -7,27 +7,21 @@ import { useState } from "react";
 
 const LocationSearch = () => {
   const [address, setAddress] = useState("");
+  const [latLng, setLatLng] = useState(null)
 
   const handleChange = (address) => {
     console.log('address',address)
     setAddress(address)
-    /*   const locationArray = location.split(",");
-    const city = locationArray[0];
-    const country = locationArray[locationArray.length - 1].trim();
-    setAddress({ city, country });
-    console.log("address", address); */
   };
   const handleSelect = (address) => {
     geocodeByAddress(address)
       .then((results) => getLatLng(results[0]))
-      .then((latLng) => console.log("Success", latLng))
+      .then((latLng) => setLatLng(latLng))
       .catch((error) => console.error("Error", error));
   };
 
-
   return (
     <article>
-      <button onClick={handleSelect}>Get Long</button>
       <PlacesAutocomplete value={address} onChange={handleChange} onSelect={handleSelect}>
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <section id="places-autocomplete-section">
@@ -49,12 +43,10 @@ const LocationSearch = () => {
                 const className = suggestion.active
                   ? "suggestion-item--active"
                   : "suggestion-item";
-
                 return (
                   <div
                     {...getSuggestionItemProps(suggestion, {
                       className
-
                     })}
                     key={index + 1}
                   >
