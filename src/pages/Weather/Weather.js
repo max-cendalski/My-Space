@@ -2,18 +2,21 @@ import Navbar from "../../components/Navbar/Navbar";
 import GoBack from "../../components/GoBack/GoBack";
 import LocationSearch from "../../components/PlaceSearch/PlaceSearch";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "../../firebase/Firebase";
+import { UserAuth } from "../../context/AuthContext";
+
 
 import { useState, useEffect } from "react";
 
 const Weather = () => {
+  const {user} = UserAuth()
   const [temperature, setTemperature] = useState(null);
   const [address, setAddress] = useState("");
   const [latLng, setLatLng] = useState(null);
-  const [city, setCity] = useState("")
+  const [city, setCity] = useState("");
 
   useEffect(() => {
-    console.log("latLng", latLng);
-
     if (latLng !== null) {
       const fetchtWeather = async () => {
         const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
@@ -34,8 +37,6 @@ const Weather = () => {
 
   const handleChange = (address) => {
     setAddress(address);
-    const cityToSave = address.split(",")
-    setCity(cityToSave[0])
   };
 
   const handleSelect = (address) => {
@@ -43,12 +44,17 @@ const Weather = () => {
       .then((results) => getLatLng(results[0]))
       .then((latLng) => setLatLng(latLng))
       .catch((error) => console.error("Error", error));
-      setAddress("")
+    setAddress("");
+     const cityToSave = address.split(",");
+    setCity(cityToSave[0]);
+     const addNote = async () => {
+       try {
+         await addDoc(collection(db, "users", user.uid, "weather"), {address});
+       } catch (e) {
+         console.error("Error adding document:", e);
+       }
+     };
   };
-
-
-  console.log("address", address);
-  console.log("city", city);
 
   return (
     <article>
@@ -62,7 +68,12 @@ const Weather = () => {
           handleSelect={handleSelect}
         />
       </article>
-      {temperature && <h3> Temperature in {city} is : {temperature}</h3>}
+      {temperature && (
+        <h3>
+          {" "}
+          Temperature in {city} is : {temperature}
+        </h3>
+      )}
     </article>
   );
 };
