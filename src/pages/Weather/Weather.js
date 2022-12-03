@@ -6,15 +6,21 @@ import { addDoc, collection } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { UserAuth } from "../../context/AuthContext";
 
-
 import { useState, useEffect } from "react";
 
 const Weather = () => {
-  const {user} = UserAuth()
+  const { user } = UserAuth();
   const [temperature, setTemperature] = useState(null);
   const [address, setAddress] = useState("");
   const [latLng, setLatLng] = useState(null);
-  const [city, setCity] = useState("");
+  const [location, setLocation] = useState({});
+
+  /*    try {
+      const notesData = await getDocs(collection(db, `users/${user.uid}`, 'notes'));
+      setNotes(notesData.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    } catch (err) {
+      console.error("ERROR", err);
+    } */
 
   useEffect(() => {
     if (latLng !== null) {
@@ -44,16 +50,20 @@ const Weather = () => {
       .then((results) => getLatLng(results[0]))
       .then((latLng) => setLatLng(latLng))
       .catch((error) => console.error("Error", error));
+    const locationToSave = address.split(",");
+
+    setLocation({ city: locationToSave[0], country: locationToSave[locationToSave.length -1] });
     setAddress("");
-     const cityToSave = address.split(",");
-    setCity(cityToSave[0]);
-     const addNote = async () => {
-       try {
-         await addDoc(collection(db, "users", user.uid, "weather"), {address});
-       } catch (e) {
-         console.error("Error adding document:", e);
-       }
-     };
+  };
+  const handleAddLocationToDB = () => {
+    const addNote = async () => {
+      try {
+        await addDoc(collection(db, "users", user.uid, "weather"), { location });
+      } catch (e) {
+        console.error("Error adding document:", e);
+      }
+    };
+    addNote();
   };
 
   return (
@@ -71,9 +81,10 @@ const Weather = () => {
       {temperature && (
         <h3>
           {" "}
-          Temperature in {city} is : {temperature}
+          Temperature in {location.city} is : {temperature}
         </h3>
       )}
+      <button onClick={handleAddLocationToDB}>Add Location</button>
     </article>
   );
 };
