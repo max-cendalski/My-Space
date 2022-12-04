@@ -2,7 +2,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import GoBack from "../../components/GoBack/GoBack";
 import LocationSearch from "../../components/PlaceSearch/PlaceSearch";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
-import { addDoc, collection, setDoc,getDoc, doc } from "firebase/firestore";
+import { addDoc, collection, setDoc, getDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { UserAuth } from "../../context/AuthContext";
 
@@ -12,7 +12,7 @@ const Weather = () => {
   const { user } = UserAuth();
   const [temperature, setTemperature] = useState(null);
   const [address, setAddress] = useState("");
-  const [addressFromDB, setAddressFromDB] = useState("")
+  const [addressFromDB, setAddressFromDB] = useState("");
   const [latLng, setLatLng] = useState(null);
   const [location, setLocation] = useState({});
 
@@ -46,9 +46,8 @@ const Weather = () => {
     setAddress(address);
   };
 
-
   const geoTest = () => {
-    console.log('whee')
+    console.log("whee");
     const getDataFromDB = async () => {
       const docRef = doc(db, "users", user.uid, "weather", "location");
       try {
@@ -56,7 +55,7 @@ const Weather = () => {
         if (docSnap.exists()) {
           console.log("Document data:", docSnap.data().location);
           setAddressFromDB(
-            "Aliso Viejo, CA, USA"
+            `${docSnap.data().location.city},${docSnap.data().location.country}`
           );
         } else {
           // doc.data() will be undefined in this case
@@ -68,22 +67,19 @@ const Weather = () => {
     };
     getDataFromDB();
 
-     geocodeByAddress(addressFromDB)
-       .then((results) => getLatLng(results[0]))
-       .then((latLng) => setLatLng(latLng))
-       .catch((error) => console.error("Error", error));
-         const locationToSave = addressFromDB.split(",");
-         setLocation({
-           city: locationToSave[0],
-           country: locationToSave[locationToSave[1]],
-         });
+    geocodeByAddress(addressFromDB)
+      .then((results) => getLatLng(results[0]))
+      .then((latLng) => setLatLng(latLng))
+      .catch((error) => console.error("Error", error));
+    const locationToSave = addressFromDB.split(",");
+    setLocation({
+      city: locationToSave[0],
+      country: locationToSave[locationToSave[1]],
+    });
   };
 
-
-
-
   const handleSelect = (address) => {
-    console.log('add',address)
+    console.log("add", address);
     geocodeByAddress(address)
       .then((results) => getLatLng(results[0]))
       .then((latLng) => setLatLng(latLng))
@@ -108,9 +104,9 @@ const Weather = () => {
       }
     };
     addLocationToDB();
-    setAddress("")
+    setAddress("");
   };
-console.log('addresfromDb',addressFromDB)
+  console.log("addresfromDb", addressFromDB);
   return (
     <article>
       <Navbar />
