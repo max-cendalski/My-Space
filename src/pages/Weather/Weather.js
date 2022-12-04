@@ -2,7 +2,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import GoBack from "../../components/GoBack/GoBack";
 import LocationSearch from "../../components/PlaceSearch/PlaceSearch";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, setDoc,getDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { UserAuth } from "../../context/AuthContext";
 
@@ -12,6 +12,7 @@ const Weather = () => {
   const { user } = UserAuth();
   const [temperature, setTemperature] = useState(null);
   const [address, setAddress] = useState("");
+  const [addressFromDB, setAddressFromDB] = useState("")
   const [latLng, setLatLng] = useState(null);
   const [location, setLocation] = useState({});
 
@@ -45,6 +46,39 @@ const Weather = () => {
     setAddress(address);
   };
 
+
+  const geoTest = () => {
+    console.log('whee')
+    const getDataFromDB = async () => {
+      const docRef = doc(db, "users", user.uid, "weather", "location");
+      try {
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          console.log("Document data:", docSnap.data().location);
+          setAddressFromDB(
+            `${docSnap.data().location.city},${docSnap.data().location.country}`
+          );
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+        }
+      } catch (err) {
+        console.log("err", err);
+      }
+    };
+    getDataFromDB();
+
+     geocodeByAddress(addressFromDB)
+       .then((results) => getLatLng(results[0]))
+       .then((latLng) => setLatLng(latLng))
+       .catch((error) => console.error("Error", error));
+         const locationToSave = address.split(",");
+         setLocation({
+           city: locationToSave[0],
+           country: locationToSave[locationToSave.length - 1],
+         });
+  };
+
   const handleSelect = (address) => {
     geocodeByAddress(address)
       .then((results) => getLatLng(results[0]))
@@ -52,18 +86,25 @@ const Weather = () => {
       .catch((error) => console.error("Error", error));
     const locationToSave = address.split(",");
 
-    setLocation({ city: locationToSave[0], country: locationToSave[locationToSave.length -1] });
+    setLocation({
+      city: locationToSave[0],
+      country: locationToSave[locationToSave.length - 1],
+    });
     setAddress("");
   };
+
   const handleAddLocationToDB = () => {
-    const addNote = async () => {
+    const addLocationToDB = async () => {
       try {
-        await addDoc(collection(db, "users", user.uid, "weather"), { location });
+        await setDoc(doc(db, "users", user.uid, "weather", "location"), {
+          location,
+        });
       } catch (e) {
         console.error("Error adding document:", e);
       }
     };
-    addNote();
+    addLocationToDB();
+    setAddress("")
   };
 
   return (
@@ -85,6 +126,7 @@ const Weather = () => {
         </h3>
       )}
       <button onClick={handleAddLocationToDB}>Add Location</button>
+      <button onClick={geoTest}>Check geolocation</button>
     </article>
   );
 };
