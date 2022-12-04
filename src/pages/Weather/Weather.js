@@ -56,7 +56,7 @@ const Weather = () => {
         if (docSnap.exists()) {
           console.log("Document data:", docSnap.data().location);
           setAddressFromDB(
-            `${docSnap.data().location.city},${docSnap.data().location.country}`
+            "Aliso Viejo, CA, USA"
           );
         } else {
           // doc.data() will be undefined in this case
@@ -72,14 +72,18 @@ const Weather = () => {
        .then((results) => getLatLng(results[0]))
        .then((latLng) => setLatLng(latLng))
        .catch((error) => console.error("Error", error));
-         const locationToSave = address.split(",");
+         const locationToSave = addressFromDB.split(",");
          setLocation({
            city: locationToSave[0],
-           country: locationToSave[locationToSave.length - 1],
+           country: locationToSave[locationToSave[1]],
          });
   };
 
+
+
+
   const handleSelect = (address) => {
+    console.log('add',address)
     geocodeByAddress(address)
       .then((results) => getLatLng(results[0]))
       .then((latLng) => setLatLng(latLng))
@@ -106,7 +110,7 @@ const Weather = () => {
     addLocationToDB();
     setAddress("")
   };
-
+console.log('addresfromDb',addressFromDB)
   return (
     <article>
       <Navbar />
