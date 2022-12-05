@@ -121,8 +121,7 @@ const Weather = () => {
       </article>
       {temperature && (
         <h3>
-          {" "}
-          Temperature in {location.city} is : {temperature}
+        {location.city} is : {temperature}&deg;F
         </h3>
       )}
       <button onClick={handleAddLocationToDB}>Add Location</button>
