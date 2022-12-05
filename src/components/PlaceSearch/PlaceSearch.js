@@ -18,7 +18,7 @@ const LocationSearch = ({handleChange,handleSelect, address }) => {
                 name="location"
                 required
                 {...getInputProps({
-                  placeholder: "type city and country",
+                  placeholder: "city and country",
                   className: "location-search-input",
                 })}
               />
@@ -48,20 +48,3 @@ const LocationSearch = ({handleChange,handleSelect, address }) => {
 };
 
 export default LocationSearch;
-
-/*   const handleSelect = (address) => {
-    geocodeByAddress(address);
-    console
-      .log("address", address)
-      .then((results) => getLatLng(results[0]))
-      .then((latLng) => console.log("Success", latLng))
-      .catch((error) => console.error("Error", error));
-  };
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    geocodeByAddress(address)
-      .then((results) => getLatLng(results[0]))
-      .then((latLng) => console.log("Success", latLng))
-      .catch((error) => console.error("Error", error));
-  }; */

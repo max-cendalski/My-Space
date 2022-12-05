@@ -16,12 +16,7 @@ const Weather = () => {
   const [latLng, setLatLng] = useState(null);
   const [location, setLocation] = useState({});
 
-  /*    try {
-      const notesData = await getDocs(collection(db, `users/${user.uid}`, 'notes'));
-      setNotes(notesData.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    } catch (err) {
-      console.error("ERROR", err);
-    } */
+
 
   useEffect(() => {
     if (latLng !== null) {
@@ -120,8 +115,8 @@ const Weather = () => {
         />
       </article>
       {temperature && (
-        <h3>
-        {location.city} is : {temperature}&deg;F
+        <h3 className="temperature-container">
+          {location.city} -  {temperature}&deg;F
         </h3>
       )}
       <button onClick={handleAddLocationToDB}>Add Location</button>
