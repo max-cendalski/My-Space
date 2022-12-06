@@ -9,8 +9,7 @@ const Ideas = () => {
   const { user } = UserAuth();
   const [ideas, setIdeas] = useState([]);
   const [ideasToRender, setIdeasToRender] = useState([]);
-
-  const [generateIdea, setGenerateIdeasButton] = useState(false);
+  const [generateIdeaButtonStatus, setGenerateIdeasButton] = useState(false);
 
   useEffect(() => {
     const fetchIdeas = async () => {
@@ -71,6 +70,7 @@ const Ideas = () => {
         console.error("Something went wrong!");
       }
     };
+    setGenerateIdeasButton(false)
     addDate();
   };
 
@@ -98,7 +98,7 @@ const Ideas = () => {
       <article id="ideas-page-container">
         <GoBack />
         <h1 id="ideas-header">Three ideas to think about</h1>
-        {generateIdea && (
+        {generateIdeaButtonStatus && (
           <button
             onClick={handleGenerateIdeas}
             className="generate-ideas-button"
