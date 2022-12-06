@@ -2,7 +2,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import GoBack from "../../components/GoBack/GoBack";
 import LocationSearch from "../../components/PlaceSearch/PlaceSearch";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
-import {  getDoc, doc } from "firebase/firestore";
+import { getDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { UserAuth } from "../../context/AuthContext";
 
@@ -22,10 +22,21 @@ const Weather = () => {
       try {
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-          console.log("Document data:", docSnap.data().location);
           setAddressFromDB(
             `${docSnap.data().location.city},${docSnap.data().location.country}`
           );
+          console.log("Document data:", docSnap.data().location);
+          geocodeByAddress(
+            `${docSnap.data().location.city},${docSnap.data().location.country}`
+          )
+            .then((results) => getLatLng(results[0]))
+            .then((latLng) => setLatLng(latLng))
+            .catch((error) => console.error("Error", error));
+          setLocation({
+            city: docSnap.data().location.city,
+            country: docSnap.data().location.country,
+          })
+
         } else {
           // doc.data() will be undefined in this case
           console.log("No such document!");
@@ -33,18 +44,9 @@ const Weather = () => {
       } catch (err) {
         console.log("err", err);
       }
+
     })();
-    if (addressFromDB !== null) {
-      geocodeByAddress(addressFromDB)
-        .then((results) => getLatLng(results[0]))
-        .then((latLng) => setLatLng(latLng))
-        .catch((error) => console.error("Error", error));
-      const locationToSave = addressFromDB.split(",");
-      setLocation({
-        city: locationToSave[0],
-        country: locationToSave[locationToSave[1]],
-      });
-    }
+
     const fetchtWeather = async () => {
       try {
         const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
@@ -57,18 +59,19 @@ const Weather = () => {
         console.error("ERROR: ", err.message);
       }
     };
-    if (latLng !== null) {
-      fetchtWeather()
-    }
+
+     if (latLng === null) {
+       console.log("wheeeee");
+     }
+
     // eslint-disable-next-line
-  }, [addressFromDB, latLng]);
+  }, [addressFromDB]);
 
   const handleChange = (address) => {
     setAddress(address);
   };
 
   const handleSelect = (address) => {
-    console.log("add", address);
     geocodeByAddress(address)
       .then((results) => getLatLng(results[0]))
       .then((latLng) => setLatLng(latLng))
@@ -82,7 +85,6 @@ const Weather = () => {
     setAddress("");
   };
 
-  console.log("addresfromDb", addressFromDB);
   return (
     <article>
       <Navbar />
@@ -200,3 +202,26 @@ export default Weather;
               fetchtWeather();
             };
           } */
+
+/*  if (addressFromDB !== null) {
+      geocodeByAddress(addressFromDB)
+        .then((results) => getLatLng(results[0]))
+        .then((latLng) => setLatLng(latLng))
+        .catch((error) => console.error("Error", error));
+      const locationToSave = addressFromDB.split(",");
+      setLocation({
+        city: locationToSave[0],
+        country: locationToSave[locationToSave[1]],
+      });
+    } */
+
+/*     geocodeByAddress(addressFromDB)
+      .then((results) => getLatLng(results[0]))
+      .then((latLng) => setLatLng(latLng))
+      .then((lat) => console.log("latlng", latLng))
+      .catch((error) => console.error("Error", error));
+    const locationToSave = addressFromDB.split(",");
+    setLocation({
+      city: locationToSave[0],
+      country: locationToSave[locationToSave[1]],
+    }); */
