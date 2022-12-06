@@ -2,7 +2,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import GoBack from "../../components/GoBack/GoBack";
 import LocationSearch from "../../components/PlaceSearch/PlaceSearch";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
-import { addDoc, collection, setDoc, getDoc, doc } from "firebase/firestore";
+import {  getDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { UserAuth } from "../../context/AuthContext";
 
@@ -57,8 +57,11 @@ const Weather = () => {
         console.error("ERROR: ", err.message);
       }
     };
-    fetchtWeather()
-  }, [addressFromDB]);
+    if (latLng !== null) {
+      fetchtWeather()
+    }
+    // eslint-disable-next-line
+  }, [addressFromDB, latLng]);
 
   const handleChange = (address) => {
     setAddress(address);
