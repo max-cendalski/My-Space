@@ -30,13 +30,22 @@ const Weather = () => {
             `${docSnap.data().location.city},${docSnap.data().location.country}`
           )
             .then((results) => getLatLng(results[0]))
-            .then((latLng) => setLatLng(latLng))
-            .catch((error) => console.error("Error", error));
-          setLocation({
-            city: docSnap.data().location.city,
-            country: docSnap.data().location.country,
-          })
-
+            .then((latLng) => {
+               const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
+              fetch(
+                `https://api.openweathermap.org/data/3.0/onecall?lat=${latLng.lat}&lon=${latLng.lng}&units=imperial&appid=${weatherApiKey}`
+              )
+                .then((response) => response.json())
+                .then((data) => setTemperature(data.current.temp))
+                .catch((error) => console.error("Error", error));
+              if (latLng === null) {
+                console.log("wha");
+              }
+              setLocation({
+                city: docSnap.data().location.city,
+                country: docSnap.data().location.country,
+              });
+            });
         } else {
           // doc.data() will be undefined in this case
           console.log("No such document!");
@@ -44,7 +53,6 @@ const Weather = () => {
       } catch (err) {
         console.log("err", err);
       }
-
     })();
 
     const fetchtWeather = async () => {
@@ -60,9 +68,9 @@ const Weather = () => {
       }
     };
 
-     if (latLng === null) {
-       console.log("wheeeee");
-     }
+    if (latLng === null) {
+      console.log("wheeeee");
+    }
 
     // eslint-disable-next-line
   }, [addressFromDB]);
