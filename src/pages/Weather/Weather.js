@@ -16,25 +16,24 @@ const Weather = () => {
   const [latLng, setLatLng] = useState(null);
   const [location, setLocation] = useState({});
 
-  (async () => {
-    const docRef = doc(db, "users", user.uid, "weather", "location");
-    try {
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data().location);
-        setAddressFromDB(
-          `${docSnap.data().location.city},${docSnap.data().location.country}`
-        );
-      } else {
-        // doc.data() will be undefined in this case
-        console.log("No such document!");
-      }
-    } catch (err) {
-      console.log("err", err);
-    }
-  })();
-
   useEffect(() => {
+    (async () => {
+      const docRef = doc(db, "users", user.uid, "weather", "location");
+      try {
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          console.log("Document data:", docSnap.data().location);
+          setAddressFromDB(
+            `${docSnap.data().location.city},${docSnap.data().location.country}`
+          );
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+        }
+      } catch (err) {
+        console.log("err", err);
+      }
+    })();
     if (addressFromDB !== null) {
       geocodeByAddress(addressFromDB)
         .then((results) => getLatLng(results[0]))
@@ -45,20 +44,20 @@ const Weather = () => {
         city: locationToSave[0],
         country: locationToSave[locationToSave[1]],
       });
-      const fetchtWeather = async () => {
-        try {
-          const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
-          const API_URL = `https://api.openweathermap.org/data/3.0/onecall?lat=${latLng.lat}&lon=${latLng.lng}&units=imperial&appid=${weatherApiKey}`;
-          const response = await fetch(API_URL);
-          const data = await response.json();
-          console.log("data", data.current.temp);
-          setTemperature(data.current.temp);
-        } catch (err) {
-          console.error("ERROR: ", err.message);
-        }
-      };
-      fetchtWeather();
     }
+    const fetchtWeather = async () => {
+      try {
+        const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
+        const API_URL = `https://api.openweathermap.org/data/3.0/onecall?lat=${latLng.lat}&lon=${latLng.lng}&units=imperial&appid=${weatherApiKey}`;
+        const response = await fetch(API_URL);
+        const data = await response.json();
+        console.log("data", data.current.temp);
+        setTemperature(data.current.temp);
+      } catch (err) {
+        console.error("ERROR: ", err.message);
+      }
+    };
+    fetchtWeather()
   }, [addressFromDB]);
 
   const handleChange = (address) => {
@@ -171,3 +170,30 @@ export default Weather;
         addLocationToDB();
         setAddress("");
       }; */
+
+/*           if (addressFromDB !== null) {
+            geocodeByAddress(addressFromDB)
+              .then((results) => getLatLng(results[0]))
+              .then((latLng) => setLatLng(latLng))
+              .catch((error) => console.error("Error", error));
+            const locationToSave = addressFromDB.split(",");
+            setLocation({
+              city: locationToSave[0],
+              country: locationToSave[locationToSave[1]],
+            });
+          }
+          if (latLng !== null) {
+            const fetchtWeather = async () => {
+              try {
+                const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
+                const API_URL = `https://api.openweathermap.org/data/3.0/onecall?lat=${latLng.lat}&lon=${latLng.lng}&units=imperial&appid=${weatherApiKey}`;
+                const response = await fetch(API_URL);
+                const data = await response.json();
+                console.log("data", data.current.temp);
+                setTemperature(data.current.temp);
+              } catch (err) {
+                console.error("ERROR: ", err.message);
+              }
+              fetchtWeather();
+            };
+          } */
