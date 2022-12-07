@@ -340,6 +340,10 @@ code {
   margin-block-start: 2rem;
   width: 100%;
 }
+.autocomplete-dropdown-container {
+  position: absolute;
+  background-color: white;
+}
 
 .suggestion-item--active {
     background-color: var(--darkGreen);
@@ -351,7 +355,6 @@ code {
   width: 90%;
   margin-block-start: 1rem;
   margin-block-end: 1rem;
-
   border: 1px solid gray;
   padding: 0.5rem;
 }

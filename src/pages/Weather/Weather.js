@@ -69,7 +69,7 @@ const Weather = () => {
           `https://api.openweathermap.org/data/3.0/onecall?lat=${latLng.lat}&lon=${latLng.lng}&units=imperial&appid=${weatherApiKey}`
         )
           .then((response) => response.json())
-          .then((data) => setSearchTemperature(data.current.temp))
+          .then((data) => setTemperature(data.current.temp))
           .catch((error) => console.error("Error", error));
 
         const locationToSave = address.split(",");
@@ -94,14 +94,8 @@ const Weather = () => {
           handleSelect={handleSelect}
         />
       </article>
+
       {temperature && (
-        <section>
-          <h3 className="temperature-container">
-            {locationFromDB.city} - {temperature}&deg;F
-          </h3>
-        </section>
-      )}
-      {searchTemperature && (
         <h3 className="temperature-container">
           {location.city} - {searchTemperature}&deg;F
           <button>Add Location</button>
@@ -116,6 +110,16 @@ const Weather = () => {
 export default Weather;
 
 
+/*    {
+     temperature && (
+       <section>
+         <h3 className="temperature-container">
+           {locationFromDB.city} - {temperature}&deg;F
+         </h3>
+       </section>
+     );
+   }
+ */
 /*    <button onClick={handleTestButton}>Check Temperature</button>;
    {
      testArray.map((item) => (
