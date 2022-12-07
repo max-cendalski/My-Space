@@ -83,26 +83,26 @@ const Weather = () => {
       });
   };
 
-  var dataArray = [
-    {
-      city: "Los Angeles",
-      country: "US",
-      id: 1,
-    },
-    {
-      city: "Aliso Viejo",
-      country: "US",
-      id: 2,
-    },
-
-    {
-      city: "Sydney",
-      country: "Australia",
-      id: 3,
-    },
-  ];
   const handleTestButton = (e) => {
     e.preventDefault();
+    var dataArray = [
+      {
+        city: "Los Angeles",
+        country: "US",
+        id: 1,
+      },
+      {
+        city: "Aliso Viejo",
+        country: "US",
+        id: 2,
+      },
+
+      {
+        city: "Sydney",
+        country: "Australia",
+        id: 3,
+      },
+    ];
     var newArr = [];
     dataArray.forEach((item) => {
       geocodeByAddress(`${item.city},${item.country}`)
@@ -152,18 +152,22 @@ const Weather = () => {
         </h3>
       )}
 
-      <button onClick={handleTestButton}>Check Temperature</button>
-      {testArray &&
-        testArray.map((item) => (
-          <h3 className="temperature-container" key={item.id}>
-            {item.city},{item.country}: {item.temperature}
-          </h3>
-        ))}
+
     </article>
   );
 };
 
 export default Weather;
+
+
+/*    <button onClick={handleTestButton}>Check Temperature</button>;
+   {
+     testArray.map((item) => (
+       <h3 className="temperature-container" key={item.id}>
+         {item.city},{item.country}: {item.temperature}
+       </h3>
+     ));
+   } */
 
 /*   useEffect(() => {
     if (latLng !== null) {
