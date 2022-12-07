@@ -13,7 +13,6 @@ const Weather = () => {
   const [temperature, setTemperature] = useState(null);
   const [address, setAddress] = useState("");
   const [addressFromDB, setAddressFromDB] = useState(null);
-  const [latLng, setLatLng] = useState(null);
   const [location, setLocation] = useState({});
   const [locationFromDB, setLocationFromDB] = useState({});
   const [searchTemperature, setSearchTemperature] = useState(null);
