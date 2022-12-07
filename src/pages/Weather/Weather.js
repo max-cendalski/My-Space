@@ -15,11 +15,13 @@ const Weather = () => {
   const [addressFromDB, setAddressFromDB] = useState(null);
   const [latLng, setLatLng] = useState(null);
   const [location, setLocation] = useState({});
-  const [locationFromDB, setLocationFromDB] = useState({})
-  const [searchTemperature, setSearchTemperature]= useState(null)
+  const [locationFromDB, setLocationFromDB] = useState({});
+  const [searchTemperature, setSearchTemperature] = useState(null);
+  const [testArray, setTestArray] = useState([]);
 
   useEffect(() => {
     (async () => {
+
       const docRef = doc(db, "users", user.uid, "weather", "location");
       try {
         const docSnap = await getDoc(docRef);
@@ -27,7 +29,6 @@ const Weather = () => {
           setAddressFromDB(
             `${docSnap.data().location.city},${docSnap.data().location.country}`
           );
-          console.log("Document data:", docSnap.data().location);
           geocodeByAddress(
             `${docSnap.data().location.city},${docSnap.data().location.country}`
           )
@@ -46,7 +47,6 @@ const Weather = () => {
               });
             });
         } else {
-          // doc.data() will be undefined in this case
           console.log("No such document!");
         }
       } catch (err) {
@@ -55,44 +55,82 @@ const Weather = () => {
     })();
 
     // eslint-disable-next-line
-  }, [addressFromDB]);
+  }, [testArray]);
 
   const handleChange = (address) => {
     setAddress(address);
   };
 
   const handleSelect = (address) => {
+    testArray.push(address);
+    setTestArray(testArray);
+
     geocodeByAddress(address)
       .then((results) => getLatLng(results[0]))
-      .then((latLng) => setLatLng(latLng))
-      .catch((error) => console.error("Error", error));
-    const locationToSave = address.split(",");
-    setLocation({
-      city: locationToSave[0],
-      country: locationToSave[locationToSave.length - 1],
-    });
-
-    const fetchtWeather = async () => {
-      try {
+      .then((latLng) => {
         const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
-        const API_URL = `https://api.openweathermap.org/data/3.0/onecall?lat=${latLng.lat}&lon=${latLng.lng}&units=imperial&appid=${weatherApiKey}`;
-        const response = await fetch(API_URL);
-        const data = await response.json();
-        console.log("data", data.current.temp);
-        setSearchTemperature(data.current.temp);
-      } catch (err) {
-        console.error("ERROR: ", err.message);
-      }
+        fetch(
+          `https://api.openweathermap.org/data/3.0/onecall?lat=${latLng.lat}&lon=${latLng.lng}&units=imperial&appid=${weatherApiKey}`
+        )
+          .then((response) => response.json())
+          .then((data) => setSearchTemperature(data.current.temp))
+          .catch((error) => console.error("Error", error));
 
-    };
-     fetchtWeather();
-     setAddress("");
+        const locationToSave = address.split(",");
+        setLocation({
+          city: locationToSave[0],
+          country: locationToSave[locationToSave.length - 1],
+        });
+        setAddress("");
+      });
   };
-  console.log("addresfromDB", addressFromDB);
+
+  const handleTestButton = () => {
+    var tempArray = [
+      {
+        city: "Los Angeles",
+        country: "US",
+        id: 1,
+      },
+      {
+        city: "Aliso Viejo",
+        country: "US",
+        id: 2,
+      },
+
+      {
+        city: "Sydney",
+        country: "Australia",
+        id: 3,
+      },
+    ];
+    var newArr = []
+    tempArray.forEach((item) => {
+      geocodeByAddress(`${item.city},${item.country}`)
+        .then((results) => getLatLng(results[0]))
+        .then((latLng) => {
+          const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
+          fetch(
+            `https://api.openweathermap.org/data/3.0/onecall?lat=${latLng.lat}&lon=${latLng.lng}&units=imperial&appid=${weatherApiKey}`
+          )
+            .then((response) => response.json())
+            .then((data) => {
+              newArr.push({
+                city: item.city,
+                country: item.country,
+                id: item.id,
+                temperature: data.current.temp,
+              });
+            })
+            .catch((error) => console.error("Error", error));
+        });
+    });
+    console.log("newArr", testArray);
+    setTestArray(newArr);
+  };
   return (
     <article>
       <Navbar />
-
       <article id="weather-page-container">
         <GoBack />
         <LocationSearch
@@ -111,8 +149,17 @@ const Weather = () => {
       {searchTemperature && (
         <h3 className="temperature-container">
           {location.city} - {searchTemperature}&deg;F
+          <button>Add Location</button>
         </h3>
       )}
+      <section>
+        <button onClick={handleTestButton}>Check Temperature</button>
+      </section>
+      {testArray.map((item) => (
+        <h3 className="temperature-container" key={item.id}>
+          {item.city},{item.country}:  {item.temperature}
+        </h3>
+      ))}
     </article>
   );
 };
