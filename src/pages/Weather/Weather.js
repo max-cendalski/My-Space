@@ -15,6 +15,8 @@ const Weather = () => {
   const [addressFromDB, setAddressFromDB] = useState(null);
   const [latLng, setLatLng] = useState(null);
   const [location, setLocation] = useState({});
+  const [locationFromDB, setLocationFromDB] = useState({})
+  const [searchTemperature, setSearchTemperature]= useState(null)
 
   useEffect(() => {
     (async () => {
@@ -31,14 +33,14 @@ const Weather = () => {
           )
             .then((results) => getLatLng(results[0]))
             .then((latLng) => {
-               const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
+              const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
               fetch(
                 `https://api.openweathermap.org/data/3.0/onecall?lat=${latLng.lat}&lon=${latLng.lng}&units=imperial&appid=${weatherApiKey}`
               )
                 .then((response) => response.json())
                 .then((data) => setTemperature(data.current.temp))
                 .catch((error) => console.error("Error", error));
-              setLocation({
+              setLocationFromDB({
                 city: docSnap.data().location.city,
                 country: docSnap.data().location.country,
               });
@@ -51,7 +53,6 @@ const Weather = () => {
         console.log("err", err);
       }
     })();
-
 
     // eslint-disable-next-line
   }, [addressFromDB]);
@@ -66,14 +67,28 @@ const Weather = () => {
       .then((latLng) => setLatLng(latLng))
       .catch((error) => console.error("Error", error));
     const locationToSave = address.split(",");
-
     setLocation({
       city: locationToSave[0],
       country: locationToSave[locationToSave.length - 1],
     });
-    setAddress("");
-  };
 
+    const fetchtWeather = async () => {
+      try {
+        const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
+        const API_URL = `https://api.openweathermap.org/data/3.0/onecall?lat=${latLng.lat}&lon=${latLng.lng}&units=imperial&appid=${weatherApiKey}`;
+        const response = await fetch(API_URL);
+        const data = await response.json();
+        console.log("data", data.current.temp);
+        setSearchTemperature(data.current.temp);
+      } catch (err) {
+        console.error("ERROR: ", err.message);
+      }
+
+    };
+     fetchtWeather();
+     setAddress("");
+  };
+  console.log("addresfromDB", addressFromDB);
   return (
     <article>
       <Navbar />
@@ -87,8 +102,15 @@ const Weather = () => {
         />
       </article>
       {temperature && (
+        <section>
+          <h3 className="temperature-container">
+            {locationFromDB.city} - {temperature}&deg;F
+          </h3>
+        </section>
+      )}
+      {searchTemperature && (
         <h3 className="temperature-container">
-          {location.city} - {temperature}&deg;F
+          {location.city} - {searchTemperature}&deg;F
         </h3>
       )}
     </article>
