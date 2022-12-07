@@ -38,9 +38,6 @@ const Weather = () => {
                 .then((response) => response.json())
                 .then((data) => setTemperature(data.current.temp))
                 .catch((error) => console.error("Error", error));
-              if (latLng === null) {
-                console.log("wha");
-              }
               setLocation({
                 city: docSnap.data().location.city,
                 country: docSnap.data().location.country,
