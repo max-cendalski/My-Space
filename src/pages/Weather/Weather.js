@@ -21,7 +21,6 @@ const Weather = () => {
 
   useEffect(() => {
     (async () => {
-
       const docRef = doc(db, "users", user.uid, "weather", "location");
       try {
         const docSnap = await getDoc(docRef);
@@ -55,7 +54,7 @@ const Weather = () => {
     })();
 
     // eslint-disable-next-line
-  }, [testArray]);
+  }, []);
 
   const handleChange = (address) => {
     setAddress(address);
@@ -85,27 +84,28 @@ const Weather = () => {
       });
   };
 
-  const handleTestButton = () => {
-    var tempArray = [
-      {
-        city: "Los Angeles",
-        country: "US",
-        id: 1,
-      },
-      {
-        city: "Aliso Viejo",
-        country: "US",
-        id: 2,
-      },
+  var dataArray = [
+    {
+      city: "Los Angeles",
+      country: "US",
+      id: 1,
+    },
+    {
+      city: "Aliso Viejo",
+      country: "US",
+      id: 2,
+    },
 
-      {
-        city: "Sydney",
-        country: "Australia",
-        id: 3,
-      },
-    ];
-    var newArr = []
-    tempArray.forEach((item) => {
+    {
+      city: "Sydney",
+      country: "Australia",
+      id: 3,
+    },
+  ];
+  const handleTestButton = (e) => {
+    e.preventDefault();
+    var newArr = [];
+    dataArray.forEach((item) => {
       geocodeByAddress(`${item.city},${item.country}`)
         .then((results) => getLatLng(results[0]))
         .then((latLng) => {
@@ -125,9 +125,9 @@ const Weather = () => {
             .catch((error) => console.error("Error", error));
         });
     });
-    console.log("newArr", testArray);
     setTestArray(newArr);
   };
+
   return (
     <article>
       <Navbar />
@@ -152,14 +152,14 @@ const Weather = () => {
           <button>Add Location</button>
         </h3>
       )}
-      <section>
-        <button onClick={handleTestButton}>Check Temperature</button>
-      </section>
-      {testArray.map((item) => (
-        <h3 className="temperature-container" key={item.id}>
-          {item.city},{item.country}:  {item.temperature}
-        </h3>
-      ))}
+
+      <button onClick={handleTestButton}>Check Temperature</button>
+      {testArray &&
+        testArray.map((item) => (
+          <h3 className="temperature-container" key={item.id}>
+            {item.city},{item.country}: {item.temperature}
+          </h3>
+        ))}
     </article>
   );
 };
