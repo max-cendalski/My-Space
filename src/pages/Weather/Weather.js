@@ -18,7 +18,7 @@ const Weather = () => {
   const [searchTemperature, setSearchTemperature] = useState(null);
   const [testArray, setTestArray] = useState([]);
 
-  useEffect(() => {
+/*   useEffect(() => {
     (async () => {
       const docRef = doc(db, "users", user.uid, "weather", "location");
       try {
@@ -53,15 +53,13 @@ const Weather = () => {
     })();
 
     // eslint-disable-next-line
-  }, []);
+  }, []); */
 
   const handleChange = (address) => {
     setAddress(address);
   };
 
   const handleSelect = (address) => {
-    testArray.push(address);
-    setTestArray(testArray);
 
     geocodeByAddress(address)
       .then((results) => getLatLng(results[0]))
@@ -83,49 +81,7 @@ const Weather = () => {
       });
   };
 
-  const handleTestButton = (e) => {
-    e.preventDefault();
-    var dataArray = [
-      {
-        city: "Los Angeles",
-        country: "US",
-        id: 1,
-      },
-      {
-        city: "Aliso Viejo",
-        country: "US",
-        id: 2,
-      },
 
-      {
-        city: "Sydney",
-        country: "Australia",
-        id: 3,
-      },
-    ];
-    var newArr = [];
-    dataArray.forEach((item) => {
-      geocodeByAddress(`${item.city},${item.country}`)
-        .then((results) => getLatLng(results[0]))
-        .then((latLng) => {
-          const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
-          fetch(
-            `https://api.openweathermap.org/data/3.0/onecall?lat=${latLng.lat}&lon=${latLng.lng}&units=imperial&appid=${weatherApiKey}`
-          )
-            .then((response) => response.json())
-            .then((data) => {
-              newArr.push({
-                city: item.city,
-                country: item.country,
-                id: item.id,
-                temperature: data.current.temp,
-              });
-            })
-            .catch((error) => console.error("Error", error));
-        });
-    });
-    setTestArray(newArr);
-  };
 
   return (
     <article>
@@ -286,3 +242,50 @@ export default Weather;
       city: locationToSave[0],
       country: locationToSave[locationToSave[1]],
     }); */
+
+
+
+
+  /*     const handleTestButton = (e) => {
+        e.preventDefault();
+        var dataArray = [
+          {
+            city: "Los Angeles",
+            country: "US",
+            id: 1,
+          },
+          {
+            city: "Aliso Viejo",
+            country: "US",
+            id: 2,
+          },
+
+          {
+            city: "Sydney",
+            country: "Australia",
+            id: 3,
+          },
+        ];
+        var newArr = [];
+        dataArray.forEach((item) => {
+          geocodeByAddress(`${item.city},${item.country}`)
+            .then((results) => getLatLng(results[0]))
+            .then((latLng) => {
+              const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
+              fetch(
+                `https://api.openweathermap.org/data/3.0/onecall?lat=${latLng.lat}&lon=${latLng.lng}&units=imperial&appid=${weatherApiKey}`
+              )
+                .then((response) => response.json())
+                .then((data) => {
+                  newArr.push({
+                    city: item.city,
+                    country: item.country,
+                    id: item.id,
+                    temperature: data.current.temp,
+                  });
+                })
+                .catch((error) => console.error("Error", error));
+            });
+        });
+        setTestArray(newArr);
+      }; */
