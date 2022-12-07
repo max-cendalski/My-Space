@@ -55,22 +55,6 @@ const Weather = () => {
       }
     })();
 
-    const fetchtWeather = async () => {
-      try {
-        const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
-        const API_URL = `https://api.openweathermap.org/data/3.0/onecall?lat=${latLng.lat}&lon=${latLng.lng}&units=imperial&appid=${weatherApiKey}`;
-        const response = await fetch(API_URL);
-        const data = await response.json();
-        console.log("data", data.current.temp);
-        setTemperature(data.current.temp);
-      } catch (err) {
-        console.error("ERROR: ", err.message);
-      }
-    };
-
-    if (latLng === null) {
-      console.log("wheeeee");
-    }
 
     // eslint-disable-next-line
   }, [addressFromDB]);
