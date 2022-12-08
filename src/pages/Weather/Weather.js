@@ -16,8 +16,24 @@ const Weather = () => {
   const [location, setLocation] = useState(null);
   const [locations, setLocations] = useState([]);
   //const [locationFromDB, setLocationFromDB] = useState({});
-  const [testArr, setTestArray] = useState([]);
   const [searchTemperature, setSearchTemperature] = useState(null);
+
+  useEffect(() => {
+    console.log("useEffect");
+    locations.forEach((item) => {
+      const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
+      fetch(
+        `https://api.openweathermap.org/data/3.0/onecall?lat=${item.coordinates.lat}&lon=${item.coordinates.lng}&units=imperial&appid=${weatherApiKey}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("item", item);
+          setTemperature([...temperature, data.current.temp]);
+        })
+        .catch((error) => console.error("Error", error));
+      setAddress("");
+    });
+  }, [locations]);
 
   /*   useEffect(() => {
     (async () => {
@@ -61,25 +77,18 @@ const Weather = () => {
   };
 
   const handleSelect = (address) => {
-    const locationArray = address.split(",");
-    const locationToSave = {
-      city: locationArray[0],
-      country: locationArray[locationArray.length - 1],
-    };
-    setLocations([...locations, locationToSave]);
-    locations.forEach((item) => {
-      geocodeByAddress(`${item.city},${item.country}`)
-        .then((results) => getLatLng(results[0]))
-        .then((latLng) => {
-          const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
-          fetch(
-            `https://api.openweathermap.org/data/3.0/onecall?lat=${latLng.lat}&lon=${latLng.lng}&units=imperial&appid=${weatherApiKey}`
-          )
-            .then((response) => response.json())
-            .then((data) => setTemperature([...temperature, data.current.temp]))
-            .catch((error) => console.error("Error", error));
-        });
-    });
+    geocodeByAddress(address)
+      .then((results) => getLatLng(results[0]))
+      .then((latLng) => {
+        const locationArray = address.split(",");
+        const locationToSave = {
+          city: locationArray[0],
+          country: locationArray[locationArray.length - 1],
+          coordinates: latLng,
+        };
+        setLocations([...locations, locationToSave]);
+      })
+      .catch((error) => console.error("Error", error));
 
     /* geocodeByAddress(address)
       .then((results) => getLatLng(results[0]))
@@ -94,11 +103,9 @@ const Weather = () => {
 
         setAddress("");
       }); */
-
     setAddress("");
   };
 
-  console.log("LOCATIONS", locations);
   return (
     <article>
       <Navbar />
@@ -110,12 +117,8 @@ const Weather = () => {
           handleSelect={handleSelect}
         />
       </article>
-      {location && (
-        <h3>
-          {location.city} --- {location.temperature}
-        </h3>
-      )}
-      {temperature &&
+
+      {locations &&
         locations.map((location, index) => (
           <h3 className="temperature-container" key={index + 1}>
             {location.city} - {temperature[index]}&deg;F
@@ -308,3 +311,23 @@ export default Weather;
         });
         setTestArray(newArr);
       }; */
+
+/*
+       {
+          const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
+          fetch(
+            `https://api.openweathermap.org/data/3.0/onecall?lat=${latLng.lat}&lon=${latLng.lng}&units=imperial&appid=${weatherApiKey}`
+          )
+            .then((response) => response.json())
+            .then((data) =>
+              setLocations([
+                ...locations,
+                {
+                  city: item.city,
+                  country: item.country,
+                  temperature: data.current.temp,
+                },
+              ])
+            )
+            .catch((error) => console.error("Error", error));
+        } */
