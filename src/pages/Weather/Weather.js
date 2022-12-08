@@ -10,15 +10,16 @@ import { useState, useEffect } from "react";
 
 const Weather = () => {
   const { user } = UserAuth();
-  const [temperature, setTemperature] = useState(null);
+  const [temperature, setTemperature] = useState([]);
   const [address, setAddress] = useState("");
-  const [addressFromDB, setAddressFromDB] = useState(null);
-  const [location, setLocation] = useState({});
-  const [locationFromDB, setLocationFromDB] = useState({});
+  //const [addressFromDB, setAddressFromDB] = useState(null);
+  const [location, setLocation] = useState(null);
+  const [locations, setLocations] = useState([]);
+  //const [locationFromDB, setLocationFromDB] = useState({});
+  const [testArr, setTestArray] = useState([]);
   const [searchTemperature, setSearchTemperature] = useState(null);
-  const [testArray, setTestArray] = useState([]);
 
-/*   useEffect(() => {
+  /*   useEffect(() => {
     (async () => {
       const docRef = doc(db, "users", user.uid, "weather", "location");
       try {
@@ -60,8 +61,27 @@ const Weather = () => {
   };
 
   const handleSelect = (address) => {
+    const locationArray = address.split(",");
+    const locationToSave = {
+      city: locationArray[0],
+      country: locationArray[locationArray.length - 1],
+    };
+    setLocations([...locations, locationToSave]);
+    locations.forEach((item) => {
+      geocodeByAddress(`${item.city},${item.country}`)
+        .then((results) => getLatLng(results[0]))
+        .then((latLng) => {
+          const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
+          fetch(
+            `https://api.openweathermap.org/data/3.0/onecall?lat=${latLng.lat}&lon=${latLng.lng}&units=imperial&appid=${weatherApiKey}`
+          )
+            .then((response) => response.json())
+            .then((data) => setTemperature([...temperature, data.current.temp]))
+            .catch((error) => console.error("Error", error));
+        });
+    });
 
-    geocodeByAddress(address)
+    /* geocodeByAddress(address)
       .then((results) => getLatLng(results[0]))
       .then((latLng) => {
         const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
@@ -72,17 +92,13 @@ const Weather = () => {
           .then((data) => setTemperature(data.current.temp))
           .catch((error) => console.error("Error", error));
 
-        const locationToSave = address.split(",");
-        setLocation({
-          city: locationToSave[0],
-          country: locationToSave[locationToSave.length - 1],
-        });
         setAddress("");
-      });
+      }); */
+
+    setAddress("");
   };
 
-
-
+  console.log("LOCATIONS", locations);
   return (
     <article>
       <Navbar />
@@ -94,21 +110,23 @@ const Weather = () => {
           handleSelect={handleSelect}
         />
       </article>
-
-      {temperature && (
-        <h3 className="temperature-container">
-          {location.city} - {searchTemperature}&deg;F
-          <button>Add Location</button>
+      {location && (
+        <h3>
+          {location.city} --- {location.temperature}
         </h3>
       )}
-
-
+      {temperature &&
+        locations.map((location, index) => (
+          <h3 className="temperature-container" key={index + 1}>
+            {location.city} - {temperature[index]}&deg;F
+            <button>Add Location</button>
+          </h3>
+        ))}
     </article>
   );
 };
 
 export default Weather;
-
 
 /*    {
      temperature && (
@@ -247,10 +265,7 @@ export default Weather;
       country: locationToSave[locationToSave[1]],
     }); */
 
-
-
-
-  /*     const handleTestButton = (e) => {
+/*     const handleTestButton = (e) => {
         e.preventDefault();
         var dataArray = [
           {
