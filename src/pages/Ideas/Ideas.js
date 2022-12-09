@@ -18,7 +18,7 @@ const Ideas = () => {
   const { user } = UserAuth();
   const [ideas, setIdeas] = useState([]);
   const [ideasToRender, setIdeasToRender] = useState([]);
-  const [generateIdeaButtonStatus, setGenerateIdeasButton] = useState(true);
+  const [generateIdeaButtonStatus, setGenerateIdeasButton] = useState(false);
 
   useEffect(() => {
     const fetchIdeas = async () => {
