@@ -1,6 +1,15 @@
 import Navbar from "../../components/Navbar/Navbar";
 import GoBack from "../../components/GoBack/GoBack";
-import { getDocs, getDoc, doc, setDoc, collection } from "firebase/firestore";
+import {
+  getDocs,
+  deleteDoc,
+  getDoc,
+  doc,
+  setDoc,
+  addDoc,
+  collection,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { useState, useEffect } from "react";
 import { UserAuth } from "../../context/AuthContext";
@@ -58,6 +67,7 @@ const Ideas = () => {
       }
     }
     setIdeasToRender(numbers.slice());
+    console.log("numbers", numbers);
     console.log("ideasToRender", ideasToRender);
 
     const addDate = async () => {
@@ -69,9 +79,35 @@ const Ideas = () => {
         await setDoc(doc(db, "users", user.uid, "dateForIdeas", "dateID"), {
           timeToSave,
         });
-        for (const item of ideasToRender) {
-          await setDoc(doc(db, "users", user.uid, "ideas", item.id), item);
+        if (ideasToRender.length == 0) {
+          for (const item of numbers) {
+            await setDoc(doc(db, "users", user.uid, "ideas", item.id), item);
+          }
+        } else {
+          var counter = 0;
+          for (const item of ideasToRender) {
+            await updateDoc(
+              doc(db, "users", user.uid, "ideas", item.id),
+              numbers[counter]
+            );
+            counter++;
+          }
         }
+        /*   for (var i = 0; i < 3; i++) {
+          await setDoc(
+            doc(db, "users", user.uid, "ideas", numbers[i].id),
+            numbers[i]
+          );
+        } */
+        /*  var counter = 0
+        for (const item of ideasToRender) {
+          await updateDoc( doc(db, "users", user.uid, "ideas", item.id), numbers[counter] );
+          counter++
+        }
+ */
+        /*     for (const item of numbers) {
+          await setDoc(doc(db, "users", user.uid, "ideas", item.id), item);
+        } */
       } catch (err) {
         console.error("Something went wrong!");
       }
