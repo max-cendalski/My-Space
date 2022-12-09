@@ -120,10 +120,10 @@ const Weather = () => {
 
       {locations &&
         locations.map((location, index) => (
-          <h3 className="temperature-container" key={index + 1}>
+          <section className="temperature-container" key={index + 1}>
             {location.city} - {temperature[index]}&deg;F
             <button>Add Location</button>
-          </h3>
+          </section>
         ))}
     </article>
   );

@@ -9,7 +9,7 @@ const Ideas = () => {
   const { user } = UserAuth();
   const [ideas, setIdeas] = useState([]);
   const [ideasToRender, setIdeasToRender] = useState([]);
-  const [generateIdeaButtonStatus, setGenerateIdeasButton] = useState(false);
+  const [generateIdeaButtonStatus, setGenerateIdeasButton] = useState(true);
 
   useEffect(() => {
     const fetchIdeas = async () => {
@@ -45,6 +45,7 @@ const Ideas = () => {
   }, []);
 
   const handleGenerateIdeas = () => {
+    console.log("handlegenclicked");
     var numbers = [];
     var number = 0;
     for (var i = 0; i < 3; i++) {
@@ -57,6 +58,8 @@ const Ideas = () => {
       }
     }
     setIdeasToRender(numbers.slice());
+    console.log("ideasToRender", ideasToRender);
+
     const addDate = async () => {
       try {
         let dateToMiliseconds = new Date().getTime();
@@ -66,11 +69,16 @@ const Ideas = () => {
         await setDoc(doc(db, "users", user.uid, "dateForIdeas", "dateID"), {
           timeToSave,
         });
+        for (const item of ideasToRender) {
+          await setDoc(doc(db, "users", user.uid, "ideas", item.id), item);
+        }
       } catch (err) {
         console.error("Something went wrong!");
       }
     };
-    setGenerateIdeasButton(false)
+
+    setGenerateIdeasButton(true);
+    //addThreeIdeasToDb();
     addDate();
   };
 
@@ -82,9 +90,6 @@ const Ideas = () => {
           doc(db, "users", user.uid, "ideaToHome", "ideaToHomePageID"),
           ideaToHomePage[0]
         );
-        for (const item of ideasToRender) {
-          await setDoc(doc(db, "users", user.uid, "ideas", item.id), item);
-        }
       } catch (err) {
         console.error("Something went wrong:", err);
       }
