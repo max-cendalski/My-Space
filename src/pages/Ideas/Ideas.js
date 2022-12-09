@@ -2,11 +2,11 @@ import Navbar from "../../components/Navbar/Navbar";
 import GoBack from "../../components/GoBack/GoBack";
 import {
   getDocs,
-  deleteDoc,
+
   getDoc,
   doc,
   setDoc,
-  addDoc,
+
   collection,
   updateDoc,
 } from "firebase/firestore";
@@ -79,7 +79,7 @@ const Ideas = () => {
         await setDoc(doc(db, "users", user.uid, "dateForIdeas", "dateID"), {
           timeToSave,
         });
-        if (ideasToRender.length == 0) {
+        if (ideasToRender.length === 0) {
           for (const item of numbers) {
             await setDoc(doc(db, "users", user.uid, "ideas", item.id), item);
           }
