@@ -44,42 +44,7 @@ const Weather = () => {
     });
   }, [locations]);
 
-  /*   useEffect(() => {
-    (async () => {
-      const docRef = doc(db, "users", user.uid, "weather", "location");
-      try {
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          setAddressFromDB(
-            `${docSnap.data().location.city},${docSnap.data().location.country}`
-          );
-          geocodeByAddress(
-            `${docSnap.data().location.city},${docSnap.data().location.country}`
-          )
-            .then((results) => getLatLng(results[0]))
-            .then((latLng) => {
-              const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
-              fetch(
-                `https://api.openweathermap.org/data/3.0/onecall?lat=${latLng.lat}&lon=${latLng.lng}&units=imperial&appid=${weatherApiKey}`
-              )
-                .then((response) => response.json())
-                .then((data) => setTemperature(data.current.temp))
-                .catch((error) => console.error("Error", error));
-              setLocationFromDB({
-                city: docSnap.data().location.city,
-                country: docSnap.data().location.country,
-              });
-            });
-        } else {
-          console.log("No such document!");
-        }
-      } catch (err) {
-        console.log("err", err);
-      }
-    })();
 
-    // eslint-disable-next-line
-  }, []); */
 
   const handleChange = (address) => {
     setAddress(address);
