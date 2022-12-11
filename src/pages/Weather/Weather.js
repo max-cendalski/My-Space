@@ -2,7 +2,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import GoBack from "../../components/GoBack/GoBack";
 import LocationSearch from "../../components/PlaceSearch/PlaceSearch";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
-import { getDoc, doc } from "firebase/firestore";
+import { getDoc,getDocs, doc, addDoc, collection } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { UserAuth } from "../../context/AuthContext";
 
@@ -19,6 +19,16 @@ const Weather = () => {
   const [searchTemperature, setSearchTemperature] = useState(null);
 
   useEffect(() => {
+    const fetchLocationsFromDB = async() => {
+      try {
+          const querySnapshot = await getDocs(collection(db, "test"));
+          querySnapshot.forEach((doc) => {
+            console.log(doc.id, doc.data());
+          });
+      } catch(err) {
+        console.log("Error:",err)
+      }
+    }
     console.log("useEffect");
     locations.forEach((item) => {
       const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
@@ -89,23 +99,21 @@ const Weather = () => {
       })
       .catch((error) => console.error("Error", error));
 
-    /* geocodeByAddress(address)
-      .then((results) => getLatLng(results[0]))
-      .then((latLng) => {
-        const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
-        fetch(
-          `https://api.openweathermap.org/data/3.0/onecall?lat=${latLng.lat}&lon=${latLng.lng}&units=imperial&appid=${weatherApiKey}`
-        )
-          .then((response) => response.json())
-          .then((data) => setTemperature(data.current.temp))
-          .catch((error) => console.error("Error", error));
 
-        setAddress("");
-      }); */
     setAddress("");
   };
   const handleAddLocationToDB = (location) => {
-    console.log('e',location)
+    const addLocationToDB = async() => {
+       try {
+         await addDoc(
+           collection(db, "users", user.uid, "weatherLocations"),
+           location
+         );
+       } catch (err) {
+         console.log("ERROR:", err);
+       }
+    }
+   addLocationToDB()
   }
 
   return (
