@@ -2,7 +2,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import GoBack from "../../components/GoBack/GoBack";
 import LocationSearch from "../../components/PlaceSearch/PlaceSearch";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
-import { getDoc,getDocs, doc, addDoc, collection } from "firebase/firestore";
+import { getDocs, doc, addDoc, collection } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { UserAuth } from "../../context/AuthContext";
 
@@ -12,23 +12,26 @@ const Weather = () => {
   const { user } = UserAuth();
   const [temperature, setTemperature] = useState([]);
   const [address, setAddress] = useState("");
-  //const [addressFromDB, setAddressFromDB] = useState(null);
-  const [location, setLocation] = useState(null);
+  const [locationFromDB, setLocationsFromDB] = useState([])
+  //const [location, setLocation] = useState(null);
   const [locations, setLocations] = useState([]);
   //const [locationFromDB, setLocationFromDB] = useState({});
-  const [searchTemperature, setSearchTemperature] = useState(null);
+  //const [searchTemperature, setSearchTemperature] = useState(null);
 
   useEffect(() => {
-    const fetchLocationsFromDB = async() => {
+    (async() => {
+      const locationTest = []
       try {
-          const querySnapshot = await getDocs(collection(db, "test"));
+          const querySnapshot = await getDocs(collection(db, "users", user.uid, "weatherLocations"));
           querySnapshot.forEach((doc) => {
             console.log(doc.id, doc.data());
+            locationTest.push(doc.data())
           });
+          setLocations(locationTest)
       } catch(err) {
         console.log("Error:",err)
       }
-    }
+    })()
     console.log("useEffect");
     locations.forEach((item) => {
       const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
@@ -42,7 +45,8 @@ const Weather = () => {
         .catch((error) => console.error("Error", error));
       setAddress("");
     });
-  }, [locations]);
+    //eslint-disable-next-line
+  }, []);
 
 
 
