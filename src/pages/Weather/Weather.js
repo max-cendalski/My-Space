@@ -27,7 +27,6 @@ const Weather = () => {
       )
         .then((response) => response.json())
         .then((data) => {
-          console.log("item", item);
           setTemperature([...temperature, data.current.temp]);
         })
         .catch((error) => console.error("Error", error));
@@ -105,6 +104,9 @@ const Weather = () => {
       }); */
     setAddress("");
   };
+  const handleAddLocationToDB = (location) => {
+    console.log('e',location)
+  }
 
   return (
     <article>
@@ -122,7 +124,7 @@ const Weather = () => {
         locations.map((location, index) => (
           <section className="temperature-container" key={index + 1}>
             {location.city} - {temperature[index]}&deg;F
-            <button>Add Location</button>
+            <button onClick={()=>handleAddLocationToDB(location)}>Add Location</button>
           </section>
         ))}
     </article>

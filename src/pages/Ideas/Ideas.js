@@ -2,13 +2,11 @@ import Navbar from "../../components/Navbar/Navbar";
 import GoBack from "../../components/GoBack/GoBack";
 import {
   getDocs,
-
   getDoc,
   doc,
   setDoc,
-
   collection,
-  updateDoc,
+  updateDoc
 } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { useState, useEffect } from "react";
