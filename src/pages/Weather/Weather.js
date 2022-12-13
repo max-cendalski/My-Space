@@ -19,21 +19,29 @@ const Weather = () => {
   //const [searchTemperature, setSearchTemperature] = useState(null);
 
   useEffect(() => {
-    (async() => {
-      const locationTest = []
+    const locationTest = [];
+    const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
+    const fetchLocations = async() => {
       try {
           const querySnapshot = await getDocs(collection(db, "users", user.uid, "weatherLocations"));
           querySnapshot.forEach((doc) => {
             console.log(doc.id, doc.data());
             locationTest.push(doc.data())
+            fetch(
+              `https://api.openweathermap.org/data/3.0/onecall?lat=${doc.data().coordinates.lat}&lon=${doc.data().coordinates.lng}&units=imperial&appid=${weatherApiKey}`
+            )
+            .then((response) => response.json())
+            .then((data)=> console.log('data',data))
+
           });
           setLocations(locationTest)
       } catch(err) {
         console.log("Error:",err)
       }
-    })()
+    }
     console.log("useEffect");
-    locations.forEach((item) => {
+
+   /*  locationTest.forEach((item) => {
       const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
       fetch(
         `https://api.openweathermap.org/data/3.0/onecall?lat=${item.coordinates.lat}&lon=${item.coordinates.lng}&units=imperial&appid=${weatherApiKey}`
@@ -44,7 +52,8 @@ const Weather = () => {
         })
         .catch((error) => console.error("Error", error));
       setAddress("");
-    });
+    }); */
+    fetchLocations()
     //eslint-disable-next-line
   }, []);
 
