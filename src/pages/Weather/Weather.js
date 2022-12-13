@@ -95,7 +95,7 @@ const Weather = () => {
 
     setAddress("");
   };
-  const handleAddLocationToDB = (location) => {
+/*   const handleAddLocationToDB = (location) => {
     console.log("location", location);
     const addLocationToDB = async () => {
       try {
@@ -108,7 +108,7 @@ const Weather = () => {
       }
     };
     //addLocationToDB()
-  };
+  }; */
 
   return (
     <article>
@@ -126,7 +126,6 @@ const Weather = () => {
         locations.map((location, index) => (
           <section className="temperature-container" key={index + 1}>
             {location.city} - {temperature[index]}&deg;F
-            <button onClick={() => handleAddLocationToDB(location)}>
               Add Location
             </button>
           </section>
