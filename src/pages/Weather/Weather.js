@@ -12,7 +12,7 @@ const Weather = () => {
   const { user } = UserAuth();
   const [temperature, setTemperature] = useState([]);
   const [address, setAddress] = useState("");
-  const [locationFromDB, setLocationsFromDB] = useState([])
+  const [locationFromDB, setLocationsFromDB] = useState([]);
   //const [location, setLocation] = useState(null);
   const [locations, setLocations] = useState([]);
   //const [locationFromDB, setLocationFromDB] = useState({});
@@ -21,27 +21,34 @@ const Weather = () => {
   useEffect(() => {
     const locationTest = [];
     const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
-    const fetchLocations = async() => {
+    const fetchLocations = async () => {
       try {
-          const querySnapshot = await getDocs(collection(db, "users", user.uid, "weatherLocations"));
-          querySnapshot.forEach((doc) => {
-            console.log(doc.id, doc.data());
-            locationTest.push(doc.data())
-            fetch(
-              `https://api.openweathermap.org/data/3.0/onecall?lat=${doc.data().coordinates.lat}&lon=${doc.data().coordinates.lng}&units=imperial&appid=${weatherApiKey}`
-            )
-            .then((response) => response.json())
-            .then((data)=> console.log('data',data))
-
-          });
-          setLocations(locationTest)
-      } catch(err) {
-        console.log("Error:",err)
+        const querySnapshot = await getDocs(
+          collection(db, "users", user.uid, "weatherLocations")
+        );
+        querySnapshot.forEach((doc) => {
+          console.log(doc.id, doc.data());
+          locationTest.push(doc.data());
+          console.log('data.doc()',doc.data().coordinates)
+       /*    fetch(
+            `https://api.openweathermap.org/data/3.0/onecall?lat=${
+              doc.data().coordinates.lat
+            }&lon=${
+              doc.data().coordinates.lng
+            }&units=imperial&appid=${weatherApiKey}`
+          )
+             .then((response) => response.json())
+            .then((data) => console.log("data", data))
+            .catch((error) => console.error("Error", error)); */
+        });
+        setLocations(locationTest);
+      } catch (err) {
+        console.log("Error:", err);
       }
-    }
+    };
     console.log("useEffect");
 
-   /*  locationTest.forEach((item) => {
+    /*  locationTest.forEach((item) => {
       const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
       fetch(
         `https://api.openweathermap.org/data/3.0/onecall?lat=${item.coordinates.lat}&lon=${item.coordinates.lng}&units=imperial&appid=${weatherApiKey}`
@@ -57,8 +64,6 @@ const Weather = () => {
     //eslint-disable-next-line
   }, []);
 
-
-
   const handleChange = (address) => {
     setAddress(address);
   };
@@ -73,26 +78,37 @@ const Weather = () => {
           country: locationArray[locationArray.length - 1],
           coordinates: latLng,
         };
+        (async () => {
+          try {
+            await addDoc(
+              collection(db, "users", user.uid, "weatherLocations"),
+              locationToSave
+            );
+          } catch (err) {
+            console.log("ERROR:", err);
+          }
+        })();
         setLocations([...locations, locationToSave]);
       })
+      .then((data) => console.log("lts", data))
       .catch((error) => console.error("Error", error));
-
 
     setAddress("");
   };
   const handleAddLocationToDB = (location) => {
-    const addLocationToDB = async() => {
-       try {
-         await addDoc(
-           collection(db, "users", user.uid, "weatherLocations"),
-           location
-         );
-       } catch (err) {
-         console.log("ERROR:", err);
-       }
-    }
-   addLocationToDB()
-  }
+    console.log("location", location);
+    const addLocationToDB = async () => {
+      try {
+        await addDoc(
+          collection(db, "users", user.uid, "weatherLocations"),
+          location
+        );
+      } catch (err) {
+        console.log("ERROR:", err);
+      }
+    };
+    //addLocationToDB()
+  };
 
   return (
     <article>
@@ -110,7 +126,9 @@ const Weather = () => {
         locations.map((location, index) => (
           <section className="temperature-container" key={index + 1}>
             {location.city} - {temperature[index]}&deg;F
-            <button onClick={()=>handleAddLocationToDB(location)}>Add Location</button>
+            <button onClick={() => handleAddLocationToDB(location)}>
+              Add Location
+            </button>
           </section>
         ))}
     </article>
