@@ -20,14 +20,15 @@ const Weather = () => {
 
   useEffect(() => {
     const locationTest = [];
+    var counter = 0;
     const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
-    const fetchLocations = async () => {
+    (async () => {
       try {
         const querySnapshot = await getDocs(
           collection(db, "users", user.uid, "weatherLocations")
         );
         querySnapshot.forEach((doc) => {
-          locationTest.push(doc.data());
+          //locationTest.push(doc.data());
           fetch(
             `https://api.openweathermap.org/data/3.0/onecall?lat=${
               doc.data().coordinates.lat
@@ -37,19 +38,24 @@ const Weather = () => {
           )
             .then((response) => response.json())
             .then((data) => {
-              console.log("data", data.current.temp);
-              locationTest.map(item => (item.temp = data.current.temp));
-              console.log("locationtestv", locationTest);
+              const objToSave = {
+                city: doc.data().city,
+                country: doc.data().country,
+                coordinates: doc.data().coordinates,
+                temp: data.current.temp,
+              };
+              locationTest.push(objToSave);
             })
             .catch((error) => console.error("Error", error));
         });
-        setLocations(locationTest);
       } catch (err) {
         console.log("Error:", err);
       }
-    };
+        setLocations(locationTest);
 
-    /*  locationTest.forEach((item) => {
+    })();
+
+    /*     locations.forEach((item) => {
       const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
       fetch(
         `https://api.openweathermap.org/data/3.0/onecall?lat=${item.coordinates.lat}&lon=${item.coordinates.lng}&units=imperial&appid=${weatherApiKey}`
@@ -61,7 +67,6 @@ const Weather = () => {
         .catch((error) => console.error("Error", error));
       setAddress("");
     }); */
-    fetchLocations();
     //eslint-disable-next-line
   }, []);
 
@@ -96,7 +101,6 @@ const Weather = () => {
 
     setAddress("");
   };
-
 
   return (
     <article>
