@@ -13,13 +13,16 @@ const Weather = () => {
   const [temperature, setTemperature] = useState([]);
   const [address, setAddress] = useState("");
   const [locationFromDB, setLocationsFromDB] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   //const [location, setLocation] = useState(null);
   const [locations, setLocations] = useState([]);
+
   //const [locationFromDB, setLocationFromDB] = useState({});
   //const [searchTemperature, setSearchTemperature] = useState(null);
 
   useEffect(() => {
     const locationTest = [];
+    const temporaryLocation = [];
     var counter = 0;
     const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
     (async () => {
@@ -28,31 +31,29 @@ const Weather = () => {
           collection(db, "users", user.uid, "weatherLocations")
         );
         querySnapshot.forEach((doc) => {
-          //locationTest.push(doc.data());
+          locationTest.push(doc.data());
+        });
+        for (const doc of locationTest) {
           fetch(
-            `https://api.openweathermap.org/data/3.0/onecall?lat=${
-              doc.data().coordinates.lat
-            }&lon=${
-              doc.data().coordinates.lng
-            }&units=imperial&appid=${weatherApiKey}`
+            `https://api.openweathermap.org/data/3.0/onecall?lat=${doc.coordinates.lat}&lon=${doc.coordinates.lng}&units=imperial&appid=${weatherApiKey}`
           )
             .then((response) => response.json())
             .then((data) => {
+              console.log("data", data.current.temp);
               const objToSave = {
-                city: doc.data().city,
-                country: doc.data().country,
-                coordinates: doc.data().coordinates,
+                city: doc.city,
+                country: doc.country,
+                coordinates: doc.coordinates,
                 temp: data.current.temp,
               };
-              locationTest.push(objToSave);
+              temporaryLocation.push(objToSave);
             })
+            .then((whatever) => setIsLoading(false))
             .catch((error) => console.error("Error", error));
-        });
+        }
       } catch (err) {
         console.log("Error:", err);
       }
-        setLocations(locationTest);
-
     })();
 
     /*     locations.forEach((item) => {
@@ -67,6 +68,8 @@ const Weather = () => {
         .catch((error) => console.error("Error", error));
       setAddress("");
     }); */
+    setLocations(temporaryLocation);
+
     //eslint-disable-next-line
   }, []);
 
@@ -101,7 +104,7 @@ const Weather = () => {
 
     setAddress("");
   };
-
+  //(isLoading ===true)  return( <p>Loading...</p>)
   return (
     <article>
       <Navbar />
@@ -114,12 +117,11 @@ const Weather = () => {
         />
       </article>
 
-      {locations &&
-        locations.map((location, index) => (
-          <section className="temperature-container" key={index}>
-            {location.city} - {location.temp}&deg;F
-          </section>
-        ))}
+      {locations.map((location, index) => (
+        <section className="temperature-container" key={index}>
+          {location.city} - {location.temp}&deg;F
+        </section>
+      ))}
     </article>
   );
 };
