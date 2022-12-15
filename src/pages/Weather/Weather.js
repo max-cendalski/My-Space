@@ -13,17 +13,18 @@ const Weather = () => {
   const [temperature, setTemperature] = useState([]);
   const [address, setAddress] = useState("");
   const [locationFromDB, setLocationsFromDB] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   //const [location, setLocation] = useState(null);
   const [locations, setLocations] = useState([]);
+
+  const [isLoading, setIsLoading] = useState(true);
 
   //const [locationFromDB, setLocationFromDB] = useState({});
   //const [searchTemperature, setSearchTemperature] = useState(null);
 
   useEffect(() => {
+    setIsLoading(true);
     const locationTest = [];
     const temporaryLocation = [];
-    var counter = 0;
     const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
     (async () => {
       try {
@@ -48,27 +49,15 @@ const Weather = () => {
               };
               temporaryLocation.push(objToSave);
             })
-            .then((whatever) => setIsLoading(false))
             .catch((error) => console.error("Error", error));
         }
       } catch (err) {
         console.log("Error:", err);
       }
-    })();
 
-    /*     locations.forEach((item) => {
-      const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
-      fetch(
-        `https://api.openweathermap.org/data/3.0/onecall?lat=${item.coordinates.lat}&lon=${item.coordinates.lng}&units=imperial&appid=${weatherApiKey}`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          setTemperature([...temperature, data.current.temp]);
-        })
-        .catch((error) => console.error("Error", error));
-      setAddress("");
-    }); */
-    setLocations(temporaryLocation);
+      setLocations(temporaryLocation);
+      setIsLoading(false)
+    })();
 
     //eslint-disable-next-line
   }, []);
@@ -99,12 +88,10 @@ const Weather = () => {
         })();
         setLocations([...locations, locationToSave]);
       })
-      .then((data) => console.log("lts", data))
       .catch((error) => console.error("Error", error));
 
     setAddress("");
   };
-  //(isLoading ===true)  return( <p>Loading...</p>)
   return (
     <article>
       <Navbar />
@@ -116,12 +103,15 @@ const Weather = () => {
           handleSelect={handleSelect}
         />
       </article>
-
-      {locations.map((location, index) => (
-        <section className="temperature-container" key={index}>
-          {location.city} - {location.temp}&deg;F
-        </section>
-      ))}
+      {isLoading === true ? (
+        <p>Loading...</p>
+      ) : (
+        locations.map((location, index) => (
+          <section className="temperature-container" key={index}>
+            {location.city} - {location.temp}&deg;F
+          </section>
+        ))
+      )}
     </article>
   );
 };
