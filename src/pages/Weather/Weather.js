@@ -13,18 +13,12 @@ const Weather = () => {
   const [temperature, setTemperature] = useState(0);
   const [address, setAddress] = useState("");
   const [locationFromDB, setLocationsFromDB] = useState([]);
-  const [coords, setCoordinates] = useState([]);
   const [locations, setLocations] = useState([]);
 
-  const [isLoading, setIsLoading] = useState(false);
-
-  //const [locationFromDB, setLocationFromDB] = useState({});
-  //const [searchTemperature, setSearchTemperature] = useState(null);
-
   useEffect(() => {
-    //let isCanceled = false;
+    let isCanceled = false;
     const locationsFromDB = [];
-    const urls = []
+    const urls = [];
     const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
     const fetchData = async () => {
       try {
@@ -34,46 +28,33 @@ const Weather = () => {
         querySnapshot.forEach((doc) => {
           locationsFromDB.push(doc.data());
         });
-        console.log('loctest',locationsFromDB);
-        for (const location of locationFromDB) {
+        for (const location of locationsFromDB) {
           urls.push(
             `https://api.openweathermap.org/data/3.0/onecall?lat=${location.coordinates.lat}&lon=${location.coordinates.lng}&units=imperial&appid=${weatherApiKey}`
           );
         }
-        console.log('ursl',urls)
-     /*    for (const doc of locationTest) {
-          console.log("2");
-          console.log('loca',locationTest)
 
-          fetch(
-            `https://api.openweathermap.org/data/3.0/onecall?lat=${doc.coordinates.lat}&lon=${doc.coordinates.lng}&units=imperial&appid=${weatherApiKey}`
-          )
-            .then((response) => response.json())
+        Promise.all(urls.map((url) => fetch(url))).then((responses) =>
+          Promise.all(responses.map((res) => res.json()))
             .then((data) => {
-              console.log("data", data.current.temp);
-              const objToSave = {
-                city: doc.city,
-                country: doc.country,
-                coordinates: doc.coordinates,
-                temp: data.current.temp,
-              };
-              setLocations([...locations, objToSave]);
+              for (var i = 0; i < data.length; i++) {
+                locationsFromDB[i].temp = data[i].current.temp;
+              }
               if (!isCanceled) {
-                setCoordinates(doc.coordinates.lat);
-                console.log("doc.coo", doc.coordinates.lat);
+                console.log("!isCanceledd");
+                setLocations(locationsFromDB);
               }
             })
-            .catch((error) => console.error("Error", error));
-        } */
+            .catch((error) => console.log("ERROR:", error))
+        );
       } catch (err) {
         console.log("Error:", err);
       }
     };
     fetchData();
-   /*  return () => {
-      console.log("canceled!");
+    return () => {
       isCanceled = true;
-    }; */
+    };
     //eslint-disable-next-line
   }, []);
 
@@ -129,204 +110,3 @@ const Weather = () => {
 };
 
 export default Weather;
-
-/*    {
-     temperature && (
-       <section>
-         <h3 className="temperature-container">
-           {locationFromDB.city} - {temperature}&deg;F
-         </h3>
-       </section>
-     );
-   }
- */
-/*    <button onClick={handleTestButton}>Check Temperature</button>;
-   {
-     testArray.map((item) => (
-       <h3 className="temperature-container" key={item.id}>
-         {item.city},{item.country}: {item.temperature}
-       </h3>
-     ));
-   } */
-
-/*   useEffect(() => {
-    if (latLng !== null) {
-      const fetchtWeather = async () => {
-        const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
-        const API_URL = `https://api.openweathermap.org/data/3.0/onecall?lat=${latLng.lat}&lon=${latLng.lng}&units=imperial&appid=${weatherApiKey}`;
-        try {
-          const response = await fetch(API_URL);
-          const data = await response.json();
-          console.log("data", data.current.temp);
-          setTemperature(data.current.temp);
-        } catch (err) {
-          console.error("ERROR: ", err.message);
-        }
-      };
-
-      fetchtWeather();
-    }
-  }, [latLng]); */
-
-/*
-    const geoTest = () => {
-      console.log("whee");
-      const getDataFromDB = async () => {
-        const docRef = doc(db, "users", user.uid, "weather", "location");
-        try {
-          const docSnap = await getDoc(docRef);
-          if (docSnap.exists()) {
-            console.log("Document data:", docSnap.data().location);
-            setAddressFromDB(
-              `${docSnap.data().location.city},${
-                docSnap.data().location.country
-              }`
-            );
-          } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
-          }
-        } catch (err) {
-          console.log("err", err);
-        }
-      };
-      getDataFromDB();
-
-      geocodeByAddress(addressFromDB)
-        .then((results) => getLatLng(results[0]))
-        .then((latLng) => setLatLng(latLng))
-        .catch((error) => console.error("Error", error));
-      const locationToSave = addressFromDB.split(",");
-      setLocation({
-        city: locationToSave[0],
-        country: locationToSave[locationToSave[1]],
-      });
-    }; */
-
-/*       const handleAddLocationToDB = () => {
-        const addLocationToDB = async () => {
-          try {
-            await setDoc(doc(db, "users", user.uid, "weather", "location"), {
-              location,
-            });
-          } catch (e) {
-            console.error("Error adding document:", e);
-          }
-        };
-        addLocationToDB();
-        setAddress("");
-      }; */
-
-/*           if (addressFromDB !== null) {
-            geocodeByAddress(addressFromDB)
-              .then((results) => getLatLng(results[0]))
-              .then((latLng) => setLatLng(latLng))
-              .catch((error) => console.error("Error", error));
-            const locationToSave = addressFromDB.split(",");
-            setLocation({
-              city: locationToSave[0],
-              country: locationToSave[locationToSave[1]],
-            });
-          }
-          if (latLng !== null) {
-            const fetchtWeather = async () => {
-              try {
-                const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
-                const API_URL = `https://api.openweathermap.org/data/3.0/onecall?lat=${latLng.lat}&lon=${latLng.lng}&units=imperial&appid=${weatherApiKey}`;
-                const response = await fetch(API_URL);
-                const data = await response.json();
-                console.log("data", data.current.temp);
-                setTemperature(data.current.temp);
-              } catch (err) {
-                console.error("ERROR: ", err.message);
-              }
-              fetchtWeather();
-            };
-          } */
-
-/*  if (addressFromDB !== null) {
-      geocodeByAddress(addressFromDB)
-        .then((results) => getLatLng(results[0]))
-        .then((latLng) => setLatLng(latLng))
-        .catch((error) => console.error("Error", error));
-      const locationToSave = addressFromDB.split(",");
-      setLocation({
-        city: locationToSave[0],
-        country: locationToSave[locationToSave[1]],
-      });
-    } */
-
-/*     geocodeByAddress(addressFromDB)
-      .then((results) => getLatLng(results[0]))
-      .then((latLng) => setLatLng(latLng))
-      .then((lat) => console.log("latlng", latLng))
-      .catch((error) => console.error("Error", error));
-    const locationToSave = addressFromDB.split(",");
-    setLocation({
-      city: locationToSave[0],
-      country: locationToSave[locationToSave[1]],
-    }); */
-
-/*     const handleTestButton = (e) => {
-        e.preventDefault();
-        var dataArray = [
-          {
-            city: "Los Angeles",
-            country: "US",
-            id: 1,
-          },
-          {
-            city: "Aliso Viejo",
-            country: "US",
-            id: 2,
-          },
-
-          {
-            city: "Sydney",
-            country: "Australia",
-            id: 3,
-          },
-        ];
-        var newArr = [];
-        dataArray.forEach((item) => {
-          geocodeByAddress(`${item.city},${item.country}`)
-            .then((results) => getLatLng(results[0]))
-            .then((latLng) => {
-              const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
-              fetch(
-                `https://api.openweathermap.org/data/3.0/onecall?lat=${latLng.lat}&lon=${latLng.lng}&units=imperial&appid=${weatherApiKey}`
-              )
-                .then((response) => response.json())
-                .then((data) => {
-                  newArr.push({
-                    city: item.city,
-                    country: item.country,
-                    id: item.id,
-                    temperature: data.current.temp,
-                  });
-                })
-                .catch((error) => console.error("Error", error));
-            });
-        });
-        setTestArray(newArr);
-      }; */
-
-/*
-       {
-          const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
-          fetch(
-            `https://api.openweathermap.org/data/3.0/onecall?lat=${latLng.lat}&lon=${latLng.lng}&units=imperial&appid=${weatherApiKey}`
-          )
-            .then((response) => response.json())
-            .then((data) =>
-              setLocations([
-                ...locations,
-                {
-                  city: item.city,
-                  country: item.country,
-                  temperature: data.current.temp,
-                },
-              ])
-            )
-            .catch((error) => console.error("Error", error));
-        } */
