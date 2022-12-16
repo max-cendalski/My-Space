@@ -16,17 +16,17 @@ const Weather = () => {
   //const [location, setLocation] = useState(null);
   const [locations, setLocations] = useState([]);
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [value, setValue] = useState(0);
 
   //const [locationFromDB, setLocationFromDB] = useState({});
   //const [searchTemperature, setSearchTemperature] = useState(null);
 
   useEffect(() => {
-    setIsLoading(true);
+    let isCanceled = false;
     const locationTest = [];
-    const temporaryLocation = [];
     const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
-    (async () => {
+    const fetchData = async () => {
       try {
         const querySnapshot = await getDocs(
           collection(db, "users", user.uid, "weatherLocations")
@@ -34,6 +34,7 @@ const Weather = () => {
         querySnapshot.forEach((doc) => {
           locationTest.push(doc.data());
         });
+        console.log("locatTe", locationTest);
         for (const doc of locationTest) {
           fetch(
             `https://api.openweathermap.org/data/3.0/onecall?lat=${doc.coordinates.lat}&lon=${doc.coordinates.lng}&units=imperial&appid=${weatherApiKey}`
@@ -47,18 +48,20 @@ const Weather = () => {
                 coordinates: doc.coordinates,
                 temp: data.current.temp,
               };
-              temporaryLocation.push(objToSave);
+              if (!isCanceled) {
+                setLocations([...locations, objToSave]);
+              }
             })
             .catch((error) => console.error("Error", error));
         }
       } catch (err) {
         console.log("Error:", err);
       }
-
-      setLocations(temporaryLocation);
-      setIsLoading(false)
-    })();
-
+    };
+    fetchData();
+    return () => {
+      isCanceled = true;
+    };
     //eslint-disable-next-line
   }, []);
 
@@ -103,15 +106,12 @@ const Weather = () => {
           handleSelect={handleSelect}
         />
       </article>
-      {isLoading === true ? (
-        <p>Loading...</p>
-      ) : (
+      {locations &&
         locations.map((location, index) => (
           <section className="temperature-container" key={index}>
             {location.city} - {location.temp}&deg;F
           </section>
-        ))
-      )}
+        ))}
     </article>
   );
 };
