@@ -10,21 +10,21 @@ import { useState, useEffect } from "react";
 
 const Weather = () => {
   const { user } = UserAuth();
-  const [temperature, setTemperature] = useState([]);
+  const [temperature, setTemperature] = useState(0);
   const [address, setAddress] = useState("");
   const [locationFromDB, setLocationsFromDB] = useState([]);
-  //const [location, setLocation] = useState(null);
+  const [coords, setCoordinates] = useState([]);
   const [locations, setLocations] = useState([]);
 
   const [isLoading, setIsLoading] = useState(false);
-  const [value, setValue] = useState(0);
 
   //const [locationFromDB, setLocationFromDB] = useState({});
   //const [searchTemperature, setSearchTemperature] = useState(null);
 
   useEffect(() => {
-    let isCanceled = false;
-    const locationTest = [];
+    //let isCanceled = false;
+    const locationsFromDB = [];
+    const urls = []
     const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
     const fetchData = async () => {
       try {
@@ -32,10 +32,19 @@ const Weather = () => {
           collection(db, "users", user.uid, "weatherLocations")
         );
         querySnapshot.forEach((doc) => {
-          locationTest.push(doc.data());
+          locationsFromDB.push(doc.data());
         });
-        console.log("locatTe", locationTest);
-        for (const doc of locationTest) {
+        console.log('loctest',locationsFromDB);
+        for (const location of locationFromDB) {
+          urls.push(
+            `https://api.openweathermap.org/data/3.0/onecall?lat=${location.coordinates.lat}&lon=${location.coordinates.lng}&units=imperial&appid=${weatherApiKey}`
+          );
+        }
+        console.log('ursl',urls)
+     /*    for (const doc of locationTest) {
+          console.log("2");
+          console.log('loca',locationTest)
+
           fetch(
             `https://api.openweathermap.org/data/3.0/onecall?lat=${doc.coordinates.lat}&lon=${doc.coordinates.lng}&units=imperial&appid=${weatherApiKey}`
           )
@@ -48,20 +57,23 @@ const Weather = () => {
                 coordinates: doc.coordinates,
                 temp: data.current.temp,
               };
+              setLocations([...locations, objToSave]);
               if (!isCanceled) {
-                setLocations([...locations, objToSave]);
+                setCoordinates(doc.coordinates.lat);
+                console.log("doc.coo", doc.coordinates.lat);
               }
             })
             .catch((error) => console.error("Error", error));
-        }
+        } */
       } catch (err) {
         console.log("Error:", err);
       }
     };
     fetchData();
-    return () => {
+   /*  return () => {
+      console.log("canceled!");
       isCanceled = true;
-    };
+    }; */
     //eslint-disable-next-line
   }, []);
 
