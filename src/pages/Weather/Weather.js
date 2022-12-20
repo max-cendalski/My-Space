@@ -72,16 +72,6 @@ const Weather = () => {
           country: locationArray[locationArray.length - 1],
           coordinates: latLng,
         };
-        (async () => {
-          try {
-            await addDoc(
-              collection(db, "users", user.uid, "weatherLocations"),
-              locationToSave
-            );
-          } catch (err) {
-            console.log("ERROR:", err);
-          }
-        })();
         setLocations([...locations, locationToSave]);
       })
       .catch((error) => console.error("Error", error));
@@ -110,3 +100,14 @@ const Weather = () => {
 };
 
 export default Weather;
+
+/*     (async () => {
+      try {
+        await addDoc(
+          collection(db, "users", user.uid, "weatherLocations"),
+          locationToSave
+        );
+      } catch (err) {
+        console.log("ERROR:", err);
+      }
+    })(); */
