@@ -16,7 +16,6 @@ const Weather = () => {
   const [locations, setLocations] = useState([]);
 
   useEffect(() => {
-    let isCanceled = false;
     const locationsFromDB = [];
     const urls = [];
     const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
@@ -40,10 +39,7 @@ const Weather = () => {
               for (var i = 0; i < data.length; i++) {
                 locationsFromDB[i].temp = data[i].current.temp;
               }
-              if (!isCanceled) {
-                console.log("!isCanceledd");
-                setLocations(locationsFromDB);
-              }
+              setLocations(locationsFromDB);
             })
             .catch((error) => console.log("ERROR:", error))
         );
@@ -52,9 +48,9 @@ const Weather = () => {
       }
     };
     fetchData();
-    return () => {
+    /*   return () => {
       isCanceled = true;
-    };
+    }; */
     //eslint-disable-next-line
   }, []);
 
@@ -72,13 +68,12 @@ const Weather = () => {
         )
           .then((res) => res.json())
           .then((data) => {
-            console.log("latLng", latLng);
             const locationArray = address.split(",");
             const locationToSave = {
               city: locationArray[0],
               country: locationArray[locationArray.length - 1],
               coordinates: latLng,
-              temp: data.current.temp
+              temp: data.current.temp,
             };
             setLocations([...locations, locationToSave]);
           });
