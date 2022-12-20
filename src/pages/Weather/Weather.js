@@ -63,19 +63,27 @@ const Weather = () => {
   };
 
   const handleSelect = (address) => {
+    const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
     geocodeByAddress(address)
       .then((results) => getLatLng(results[0]))
       .then((latLng) => {
-        const locationArray = address.split(",");
-        const locationToSave = {
-          city: locationArray[0],
-          country: locationArray[locationArray.length - 1],
-          coordinates: latLng,
-        };
-        setLocations([...locations, locationToSave]);
+        fetch(
+          `https://api.openweathermap.org/data/3.0/onecall?lat=${latLng.lat}&lon=${latLng.lng}&units=imperial&appid=${weatherApiKey}`
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            console.log("latLng", latLng);
+            const locationArray = address.split(",");
+            const locationToSave = {
+              city: locationArray[0],
+              country: locationArray[locationArray.length - 1],
+              coordinates: latLng,
+              temp: data.current.temp
+            };
+            setLocations([...locations, locationToSave]);
+          });
       })
       .catch((error) => console.error("Error", error));
-
     setAddress("");
   };
   return (
