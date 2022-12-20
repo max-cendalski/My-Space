@@ -2,7 +2,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import GoBack from "../../components/GoBack/GoBack";
 import LocationSearch from "../../components/PlaceSearch/PlaceSearch";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
-import { getDocs, doc, addDoc, collection } from "firebase/firestore";
+import { getDocs, collection } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { UserAuth } from "../../context/AuthContext";
 
@@ -10,10 +10,8 @@ import { useState, useEffect } from "react";
 
 const Weather = () => {
   const { user } = UserAuth();
-  const [temperature, setTemperature] = useState(0);
   const [address, setAddress] = useState("");
-  const [locationFromDB, setLocationsFromDB] = useState([]);
-  const [locations, setLocations] = useState([]);
+  const [locationsFromDB, setLocationsFromDB] = useState([]);
 
   useEffect(() => {
     const locationsFromDB = [];
@@ -39,7 +37,7 @@ const Weather = () => {
               for (var i = 0; i < data.length; i++) {
                 locationsFromDB[i].temp = data[i].current.temp;
               }
-              setLocations(locationsFromDB);
+              setLocationsFromDB(locationsFromDB);
             })
             .catch((error) => console.log("ERROR:", error))
         );
@@ -75,7 +73,7 @@ const Weather = () => {
               coordinates: latLng,
               temp: data.current.temp,
             };
-            setLocations([...locations, locationToSave]);
+            setLocationsFromDB([...locationsFromDB, locationToSave]);
           });
       })
       .catch((error) => console.error("Error", error));
@@ -92,8 +90,8 @@ const Weather = () => {
           handleSelect={handleSelect}
         />
       </article>
-      {locations &&
-        locations.map((location, index) => (
+      {locationsFromDB &&
+        locationsFromDB.map((location, index) => (
           <section className="temperature-container" key={index}>
             {location.city} - {location.temp}&deg;F
           </section>
