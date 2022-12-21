@@ -12,6 +12,7 @@ const Weather = () => {
   const { user } = UserAuth();
   const [address, setAddress] = useState("");
   const [locationsFromDB, setLocationsFromDB] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const locationsFromDB = [];
@@ -43,6 +44,8 @@ const Weather = () => {
         );
       } catch (err) {
         console.log("Error:", err);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchData();
@@ -90,7 +93,8 @@ const Weather = () => {
           handleSelect={handleSelect}
         />
       </article>
-      {locationsFromDB &&
+      {isLoading && <p>Loading data from database ...</p>}
+      {locationsFromDB && !isLoading &&
         locationsFromDB.map((location, index) => (
           <section className="temperature-container" key={index}>
             {location.city} - {location.temp}&deg;F
