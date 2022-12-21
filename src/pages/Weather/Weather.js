@@ -18,7 +18,7 @@ const Weather = () => {
     const locationsFromDB = [];
     const urls = [];
     const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
-    const fetchData = async () => {
+    (async () => {
       try {
         const querySnapshot = await getDocs(
           collection(db, "users", user.uid, "weatherLocations")
@@ -47,11 +47,8 @@ const Weather = () => {
       } finally {
         setIsLoading(false);
       }
-    };
-    fetchData();
-    /*   return () => {
-      isCanceled = true;
-    }; */
+    })();
+
     //eslint-disable-next-line
   }, []);
 
@@ -93,8 +90,11 @@ const Weather = () => {
           handleSelect={handleSelect}
         />
       </article>
-      {isLoading && <p>Loading data from database ...</p>}
-      {locationsFromDB && !isLoading &&
+      {isLoading && (
+        <p className="loading-notification">Loading data from database ...</p>
+      )}
+      {locationsFromDB &&
+        !isLoading &&
         locationsFromDB.map((location, index) => (
           <section className="temperature-container" key={index}>
             {location.city} - {location.temp}&deg;F

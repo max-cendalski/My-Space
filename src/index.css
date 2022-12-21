@@ -118,6 +118,10 @@ code {
 .note-form textarea {
   height: 12rem;
 }
+.loading-notification {
+  margin-block-start: 2rem;
+  text-align: center;
+}
 
 .note-form button {
   width: 100%;
