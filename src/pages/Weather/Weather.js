@@ -74,11 +74,15 @@ const Weather = () => {
               coordinates: latLng,
               temp: data.current.temp,
             };
-            setSearchLocations([locationToSave]);
+            setSearchLocations([...searchedLocations, locationToSave]);
           });
       })
       .catch((error) => console.error("Error", error));
     setAddress("");
+  };
+
+  const handleAddLocationToDB = () => {
+    console.log("whee");
   };
   return (
     <article>
@@ -97,7 +101,9 @@ const Weather = () => {
 
       <article className="locations-fromDB-container">
         {locationsFromDB.length == 0 && searchedLocations.length == 0 ? (
-          <h3 className="no-locations-info">You don't have any saved locations</h3>
+          <h3 className="no-locations-info">
+            You don't have any saved locations!
+          </h3>
         ) : (
           locationsFromDB &&
           !isLoading &&
@@ -108,11 +114,17 @@ const Weather = () => {
           ))
         )}
       </article>
-      <article className="searched-locations">
+      <article>
         {searchedLocations &&
           searchedLocations.map((location, index) => (
-            <section className="single-location" key={index}>
-              {location.city} = {location.temp}&deg;F
+            <section className="searched-location" onClick={handleAddLocationToDB} key={index}>
+              <section className="temperature-section">
+                {" "}
+                {location.city} = {location.temp}&deg;F{" "}
+              </section>
+              <button className="add-location-button">
+                <i className="fa-solid fa-plus fa-2xl"></i>
+              </button>
             </section>
           ))}
       </article>
