@@ -355,6 +355,7 @@ code {
     cursor: pointer;
 }
 .locations-fromDB-container {
+  padding-block-end: 1rem;
   border-block-end: 1px solid var(--lightPink);
 }
 

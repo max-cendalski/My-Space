@@ -12,7 +12,7 @@ const Weather = () => {
   const { user } = UserAuth();
   const [address, setAddress] = useState("");
   const [locationsFromDB, setLocationsFromDB] = useState([]);
-  const [searchedLocations, setSearchLocations] = useState([])
+  const [searchedLocations, setSearchLocations] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -74,7 +74,7 @@ const Weather = () => {
               coordinates: latLng,
               temp: data.current.temp,
             };
-            setSearchLocations([ locationToSave]);
+            setSearchLocations([locationToSave]);
           });
       })
       .catch((error) => console.error("Error", error));
@@ -96,23 +96,25 @@ const Weather = () => {
       )}
 
       <article className="locations-fromDB-container">
-        {locationsFromDB &&
+        {locationsFromDB.length == 0 && searchedLocations.length == 0 ? (
+          <h3>You don't have any saved locations</h3>
+        ) : (
+          locationsFromDB &&
           !isLoading &&
           locationsFromDB.map((location, index) => (
             <section className="single-location" key={index}>
               {location.city} - {location.temp}&deg;F
             </section>
-          ))}
+          ))
+        )}
       </article>
       <article className="searched-locations">
-      {
-        searchedLocations &&
-        searchedLocations.map((location, index) => (
-          <section className="single-location" key={index}>
-            {location.city} = {location.temp}&deg;F
-          </section>
-        ))
-      }
+        {searchedLocations &&
+          searchedLocations.map((location, index) => (
+            <section className="single-location" key={index}>
+              {location.city} = {location.temp}&deg;F
+            </section>
+          ))}
       </article>
     </article>
   );
