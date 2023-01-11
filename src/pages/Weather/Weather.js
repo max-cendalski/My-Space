@@ -97,7 +97,7 @@ const Weather = () => {
 
       <article className="locations-fromDB-container">
         {locationsFromDB.length == 0 && searchedLocations.length == 0 ? (
-          <h3>You don't have any saved locations</h3>
+          <h3 className="no-locations-info">You don't have any saved locations</h3>
         ) : (
           locationsFromDB &&
           !isLoading &&

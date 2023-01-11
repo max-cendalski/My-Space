@@ -333,6 +333,12 @@ code {
 
 /* WEATHER */
 
+.no-locations-info {
+  margin-block-start: 1rem;
+  width: 90%;
+  color: var(--red)
+}
+
 #weather-page-container {
     margin-block-start: 1.625rem;
       width: 90%;
