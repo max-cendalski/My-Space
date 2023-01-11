@@ -12,6 +12,7 @@ const Weather = () => {
   const { user } = UserAuth();
   const [address, setAddress] = useState("");
   const [locationsFromDB, setLocationsFromDB] = useState([]);
+  const [searchedLocations, setSearchLocations] = useState([])
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -93,13 +94,26 @@ const Weather = () => {
       {isLoading && (
         <p className="loading-notification">Loading data from database ...</p>
       )}
-      {locationsFromDB &&
-        !isLoading &&
-        locationsFromDB.map((location, index) => (
-          <section className="temperature-container" key={index}>
-            {location.city} - {location.temp}&deg;F
+
+      <article className="locations-fromDB-container">
+        {locationsFromDB &&
+          !isLoading &&
+          locationsFromDB.map((location, index) => (
+            <section className="single-location" key={index}>
+              {location.city} - {location.temp}&deg;F
+            </section>
+          ))}
+      </article>
+      <article className="searched-locations">
+      {
+        searchedLocations &&
+        searchedLocations.map((location, index) => (
+          <section className="single-location" key={index}>
+            {location.city} = {location.temp}&deg;F
           </section>
-        ))}
+        ))
+      }
+      </article>
     </article>
   );
 };
