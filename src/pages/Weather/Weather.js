@@ -74,7 +74,7 @@ const Weather = () => {
               coordinates: latLng,
               temp: data.current.temp,
             };
-            setLocationsFromDB([...locationsFromDB, locationToSave]);
+            setSearchLocations([ locationToSave]);
           });
       })
       .catch((error) => console.error("Error", error));
