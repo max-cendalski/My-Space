@@ -12,7 +12,7 @@ const Weather = () => {
   const { user } = UserAuth();
   const [address, setAddress] = useState("");
   const [locationsFromDB, setLocationsFromDB] = useState([]);
-  const [searchedLocations, setSearchLocations] = useState([]);
+  const [searchedLocations, setSearchedLocations] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -49,7 +49,7 @@ const Weather = () => {
         setIsLoading(false);
       }
     })();
-
+    console.log('whee')
     //eslint-disable-next-line
   }, []);
 
@@ -74,7 +74,7 @@ const Weather = () => {
               coordinates: latLng,
               temp: data.current.temp,
             };
-            setSearchLocations([...searchedLocations, locationToSave]);
+            setSearchedLocations([...searchedLocations, locationToSave]);
           });
       })
       .catch((error) => console.error("Error", error));
@@ -82,7 +82,11 @@ const Weather = () => {
   };
 
   const handleAddLocationToDB = (location) => {
+    const locationsToKeep = searchedLocations.filter(
+      (item) => item !== location
+    );
     (async () => {
+      delete location.temp;
       try {
         await addDoc(
           collection(db, "users", user.uid, "weatherLocations"),
@@ -92,7 +96,10 @@ const Weather = () => {
         console.log("ERROR:", err);
       }
     })();
+    setSearchedLocations(locationsToKeep);
+    setLocationsFromDB([...locationsFromDB, location])
   };
+
   return (
     <article>
       <Navbar />
@@ -109,19 +116,12 @@ const Weather = () => {
       )}
 
       <article className="locations-fromDB-container">
-        {locationsFromDB.length == 0 && searchedLocations.length == 0 ? (
-          <h3 className="no-locations-info">
-            You don't have any saved locations!
-          </h3>
-        ) : (
-          locationsFromDB &&
-          !isLoading &&
+        {!isLoading &&
           locationsFromDB.map((location, index) => (
             <section className="single-location" key={index}>
               {location.city} - {location.temp}&deg;F
             </section>
-          ))
-        )}
+          ))}
       </article>
       <article>
         {searchedLocations &&
