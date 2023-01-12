@@ -117,10 +117,9 @@ const Weather = () => {
       <article>
         {searchedLocations &&
           searchedLocations.map((location, index) => (
-            <section className="searched-location" onClick={handleAddLocationToDB} key={index}>
+            <section className="searched-locations" onClick={handleAddLocationToDB} key={index}>
               <section className="temperature-section">
-                {" "}
-                {location.city} = {location.temp}&deg;F{" "}
+                {location.city} = {location.temp}&deg;F
               </section>
               <button className="add-location-button">
                 <i className="fa-solid fa-plus fa-2xl"></i>

@@ -365,8 +365,6 @@ code {
   padding-block-end: 1rem;
 }
 
-
-
 .single-location {
   width: 90%;
   margin-block-start: 1rem;
@@ -376,25 +374,31 @@ code {
 }
 
 .searched-locations {
+  width: 90%;
   display: flex;
-  justify-content: space-between;
   align-items: baseline;
-  border: 1px solid black;
+  padding: 0.275rem;
+  border: 1px solid rgb(222, 222,222);
+  margin-block-start: 0.5rem;
 }
 
 .temperature-section {
-  width: 70%
+  margin-inline-start: 0;
+  font-size: 1rem;
 }
 .add-location-button {
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   background-color: var(--darkGreen);
-  margin-inline-end: 1rem;
+  margin-inline-end: 0.8rem;
   border-radius: 50%;
   border: none;
   color: white;
 }
 
+
+
+/* ------------------*/
 .date-paragraph {
   font-style: italic;
   font-size: 0.675rem;
@@ -403,7 +407,7 @@ code {
   font-weight: 500;
 }
 
-/* ------------------*/
+
 .plus-button {
   width:50px;
   height: 50px;
