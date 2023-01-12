@@ -86,7 +86,6 @@ const Weather = () => {
       (item) => item !== location
     );
     (async () => {
-      delete location.temp;
       try {
         await addDoc(
           collection(db, "users", user.uid, "weatherLocations"),
