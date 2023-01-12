@@ -390,7 +390,7 @@ code {
   width: 35px;
   height: 35px;
   background-color: var(--darkGreen);
-  margin-inline-end: 0.8rem;
+  margin-inline-end: 0.5rem;
   border-radius: 50%;
   border: none;
   color: white;

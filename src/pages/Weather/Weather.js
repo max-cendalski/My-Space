@@ -2,7 +2,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import GoBack from "../../components/GoBack/GoBack";
 import LocationSearch from "../../components/PlaceSearch/PlaceSearch";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
-import { getDocs, collection } from "firebase/firestore";
+import { getDocs, collection, addDoc } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { UserAuth } from "../../context/AuthContext";
 
@@ -81,8 +81,17 @@ const Weather = () => {
     setAddress("");
   };
 
-  const handleAddLocationToDB = () => {
-    console.log("whee");
+  const handleAddLocationToDB = (location) => {
+    (async () => {
+      try {
+        await addDoc(
+          collection(db, "users", user.uid, "weatherLocations"),
+          location
+        );
+      } catch (err) {
+        console.log("ERROR:", err);
+      }
+    })();
   };
   return (
     <article>
@@ -117,7 +126,11 @@ const Weather = () => {
       <article>
         {searchedLocations &&
           searchedLocations.map((location, index) => (
-            <section className="searched-locations" onClick={handleAddLocationToDB} key={index}>
+            <section
+              className="searched-locations"
+              onClick={() => handleAddLocationToDB(location)}
+              key={index}
+            >
               <section className="temperature-section">
                 {location.city} = {location.temp}&deg;F
               </section>
