@@ -65,8 +65,6 @@ const Ideas = () => {
       }
     }
     setIdeasToRender(numbers.slice());
-    console.log("numbers", numbers);
-    console.log("ideasToRender", ideasToRender);
 
     const addDate = async () => {
       try {
@@ -91,28 +89,13 @@ const Ideas = () => {
             counter++;
           }
         }
-        /*   for (var i = 0; i < 3; i++) {
-          await setDoc(
-            doc(db, "users", user.uid, "ideas", numbers[i].id),
-            numbers[i]
-          );
-        } */
-        /*  var counter = 0
-        for (const item of ideasToRender) {
-          await updateDoc( doc(db, "users", user.uid, "ideas", item.id), numbers[counter] );
-          counter++
-        }
- */
-        /*     for (const item of numbers) {
-          await setDoc(doc(db, "users", user.uid, "ideas", item.id), item);
-        } */
+
       } catch (err) {
         console.error("Something went wrong!");
       }
     };
 
     setGenerateIdeasButton(false);
-    //addThreeIdeasToDb();
     addDate();
   };
 
