@@ -111,7 +111,7 @@ const Ideas = () => {
       }
     };
 
-    setGenerateIdeasButton(true);
+    setGenerateIdeasButton(false);
     //addThreeIdeasToDb();
     addDate();
   };
