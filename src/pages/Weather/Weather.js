@@ -14,6 +14,8 @@ const Weather = () => {
   const [locationsFromDB, setLocationsFromDB] = useState([]);
   const [searchedLocations, setSearchedLocations] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+ const [singleLocationContainer , setSingleLocationContainer] = useState('single-location')
+
 
   useEffect(() => {
     const locationsFromDB = [];
@@ -49,7 +51,6 @@ const Weather = () => {
         setIsLoading(false);
       }
     })();
-    console.log('whee')
     //eslint-disable-next-line
   }, []);
 
@@ -99,6 +100,14 @@ const Weather = () => {
     setLocationsFromDB([...locationsFromDB, location])
   };
 
+  const handleDBLocationsClick= (location) => {
+    console.log('location',location)
+    setSingleLocationContainer('single-location1')
+  }
+
+
+
+
   return (
     <article>
       <Navbar />
@@ -117,11 +126,16 @@ const Weather = () => {
       <article className="locations-fromDB-container">
         {!isLoading &&
           locationsFromDB.map((location, index) => (
-            <section className="single-location" key={index}>
+            <section
+              onClick={() => handleDBLocationsClick(location)}
+              className={singleLocationContainer}
+              key={index}
+            >
               {location.city} - {location.temp}&deg;F
             </section>
           ))}
       </article>
+
       <article>
         {searchedLocations &&
           searchedLocations.map((location, index) => (

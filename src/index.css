@@ -363,6 +363,7 @@ code {
 
 .single-location {
   width: 90%;
+  height: 2.4rem;
   margin-block-start: 1rem;
   margin-block-end: 1rem;
   border: 1px solid gray;
@@ -378,6 +379,8 @@ code {
   margin-block-start: 0.5rem;
 }
 
+
+
 .temperature-section {
   margin-inline-start: 0;
   font-size: 1rem;
@@ -392,7 +395,33 @@ code {
   color: white;
 }
 
+.single-location1 {
+    width: 90%;
+    margin-block-start: 1rem;
+    margin-block-end: 1rem;
+    border: 1px solid gray;
+    color: red;
+    height: 4rem;
+    padding: 0.5rem;
+    transition: 1s linear;
+}
 
+
+
+/* .photo-section {
+  width: 30rem;
+  height: 20rem;
+  background-color: rgb(142, 142, 193);
+  opacity: 0;
+}
+
+.photo-section2 {
+  width: 70rem;
+  height: 40rem;
+  background-color: rgb(142, 142, 193);
+  transition: 2s linear;
+  opacity: 2;
+} */
 
 /* ------------------*/
 .date-paragraph {
