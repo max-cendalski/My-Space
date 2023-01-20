@@ -370,7 +370,31 @@ code {
   padding: 0.5rem;
 }
 
+.detail-location-container {
+    width: 90%;
+      height: 2.4rem;
+      margin-block-start: 1rem;
+      margin-block-end: 1rem;
+      border: 1px solid white;
+      padding: 0.5rem;
+}
+
+.detail-location-container-visible {
+  position: absolute;
+  top: 3rem;
+   left: 1rem;
+   right: 1rem;
+    width: 90%;
+    height: 6rem;
+    border: 1px solid white;
+    color: red;
+    transition: 1s linear;
+    background-color: white;
+}
+
+
 .searched-locations {
+  height: 30px;
   width: 90%;
   display: flex;
   align-items: baseline;
@@ -378,7 +402,6 @@ code {
   border: 1px solid rgb(222, 222,222);
   margin-block-start: 0.5rem;
 }
-
 
 
 .temperature-section {
@@ -395,16 +418,6 @@ code {
   color: white;
 }
 
-.single-location1 {
-    width: 90%;
-    margin-block-start: 1rem;
-    margin-block-end: 1rem;
-    border: 1px solid gray;
-    color: red;
-    height: 4rem;
-    padding: 0.5rem;
-    transition: 1s linear;
-}
 
 
 
