@@ -17,7 +17,7 @@ const Weather = () => {
   const [singleLocationContainer, setSingleLocationContainer] =
     useState("single-location");
   const [detailLocationData, setDetailLocationData] = useState({
-    placeholder: "placeholder"});
+    city: "placeholder"});
     const [detailLocationContainer, setDetailLocationContainer] = useState("detail-location-container")
 
 
@@ -105,7 +105,9 @@ const Weather = () => {
   };
 
   const handleDBLocationsClick = (location) => {
-    setSingleLocationContainer("detail-location-container-visible")
+    setDetailLocationData(location)
+    setDetailLocationContainer("detail-location-container-visible")
+
   };
 
   return (
@@ -136,7 +138,7 @@ const Weather = () => {
           ))}
       </article>
       {detailLocationData && (
-        <section className={singleLocationContainer}>
+        <section className={detailLocationContainer}>
           <p>{detailLocationData.city}</p>
         </section>
       )}
