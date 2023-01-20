@@ -364,38 +364,30 @@ code {
 .single-location {
   width: 90%;
   height: 2.4rem;
-  margin-block-start: 1rem;
   margin-block-end: 1rem;
   border: 1px solid gray;
   padding: 0.5rem;
 }
 
 .detail-location-container {
+  visibility: hidden;
   width: 90%;
-  height: 2.4rem;
-  margin-block-start: 1rem;
-  margin-block-end: 1rem;
-  color: white;
-  border: 1px solid white;
-  padding: 0.5rem;
+  height: 1rem;
 }
 
 .detail-location-container-visible {
-  position: absolute;
-  top: 5rem;
-  left: 1rem;
-  right: 1rem;
+  display: block;
   width: 90%;
   height: 10rem;
   border: 1px solid grey;
   color: red;
-  transition: 0.15s linear;
-  background-color: white;
+  transition: 0.2s linear;
+  margin-block-start: 1rem;
+  margin-block-end: 1rem;
 }
 
 
 .searched-locations {
-  height: 30px;
   width: 90%;
   display: flex;
   align-items: baseline;

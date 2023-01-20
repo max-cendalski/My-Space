@@ -16,10 +16,10 @@ const Weather = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [singleLocationContainer, setSingleLocationContainer] =
     useState("single-location");
-  const [detailLocationData, setDetailLocationData] = useState({
-    city: "placeholder"});
-    const [detailLocationContainer, setDetailLocationContainer] = useState("detail-location-container")
-
+  const [detailLocationData, setDetailLocationData] = useState({});
+  const [detailLocationContainer, setDetailLocationContainer] = useState(
+    "detail-location-container"
+  );
 
   useEffect(() => {
     const locationsFromDB = [];
@@ -105,9 +105,8 @@ const Weather = () => {
   };
 
   const handleDBLocationsClick = (location) => {
-    setDetailLocationData(location)
-    setDetailLocationContainer("detail-location-container-visible")
-
+    setDetailLocationData(location);
+    setDetailLocationContainer("detail-location-container-visible");
   };
 
   return (
@@ -126,6 +125,11 @@ const Weather = () => {
       )}
 
       <article className="locations-fromDB-container">
+        {detailLocationData && (
+          <section className={detailLocationContainer}>
+            {detailLocationData.city} - {detailLocationData.temp}&deg;F
+          </section>
+        )}
         {!isLoading &&
           locationsFromDB.map((location, index) => (
             <section
@@ -137,11 +141,6 @@ const Weather = () => {
             </section>
           ))}
       </article>
-      {detailLocationData && (
-        <section className={detailLocationContainer}>
-          <p>{detailLocationData.city}</p>
-        </section>
-      )}
 
       <article>
         {searchedLocations &&
