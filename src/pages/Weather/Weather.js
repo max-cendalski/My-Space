@@ -17,9 +17,7 @@ const Weather = () => {
   const [singleLocationContainer, setSingleLocationContainer] =
     useState("single-location");
   const [detailLocationData, setDetailLocationData] = useState({});
-  const [detailLocationContainer, setDetailLocationContainer] = useState(
-    "detail-location-container"
-  );
+
 
   useEffect(() => {
     const locationsFromDB = [];
@@ -105,8 +103,8 @@ const Weather = () => {
   };
 
   const handleDBLocationsClick = (location) => {
-    setDetailLocationData(location);
-    setDetailLocationContainer("detail-location-container-visible");
+    var el = document.querySelector(".single-location")
+    el.className ="detail-location-container-visible"
   };
 
   return (
@@ -126,7 +124,7 @@ const Weather = () => {
 
       <article className="locations-fromDB-container">
         {detailLocationData && (
-          <section className={detailLocationContainer}>
+          <section className="detail-location-container">
             {detailLocationData.city} - {detailLocationData.temp}&deg;F
           </section>
         )}
@@ -134,7 +132,7 @@ const Weather = () => {
           locationsFromDB.map((location, index) => (
             <section
               className="single-location"
-              onClick={() => handleDBLocationsClick(location)}
+              onClick={()=>handleDBLocationsClick(location)}
               key={index}
             >
               {location.city} - {location.temp}&deg;F
