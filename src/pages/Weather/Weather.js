@@ -18,7 +18,6 @@ const Weather = () => {
     useState("single-location");
   const [detailLocationData, setDetailLocationData] = useState({});
 
-
   useEffect(() => {
     const locationsFromDB = [];
     const urls = [];
@@ -103,8 +102,20 @@ const Weather = () => {
   };
 
   const handleDBLocationsClick = (location) => {
-    var el = document.querySelector(".single-location")
-    el.className ="detail-location-container-visible"
+    var el = document.querySelectorAll(".single-location");
+    console.log("el", el);
+    for (var i = 0; i < el.length; i++) {
+      console.log(el[i].firstChild.data)
+      if (location.city == el[i].firstChild.data) {
+        el[i].className = "detail-location-container-visible"
+      }
+    }
+    //el.forEeach(item => console.log("item:", item));
+    //const closest = el.closest();
+    //console.log('el[0]',el[3])
+    //console.log("el", el);
+    //console.log("clos", closest);
+    //el.className = "detail-location-container-visible";
   };
 
   return (
@@ -132,7 +143,7 @@ const Weather = () => {
           locationsFromDB.map((location, index) => (
             <section
               className="single-location"
-              onClick={()=>handleDBLocationsClick(location)}
+              onClick={() => handleDBLocationsClick(location)}
               key={index}
             >
               {location.city} - {location.temp}&deg;F
@@ -173,3 +184,7 @@ export default Weather;
         console.log("ERROR:", err);
       }
     })(); */
+
+/*        <button>
+         <i class="fa-solid fa-angle-down"></i>
+       </button>; */
