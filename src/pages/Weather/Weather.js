@@ -133,12 +133,14 @@ const Weather = () => {
         )}
         {!isLoading &&
           locationsFromDB.map((location, index) => (
-            <section
-              className="single-location"
-              onClick={() => handleDBLocationsClick(location)}
-              key={index}
-            >
+            <section className="single-location" key={index}>
               {location.city} - {location.temp}&deg;F
+              <button className="down-arrow-button">
+                <i
+                  class="fa-solid fa-angle-down fa-xl"
+                  onClick={() => handleDBLocationsClick(location)}
+                ></i>
+              </button>
             </section>
           ))}
       </article>
@@ -176,7 +178,3 @@ export default Weather;
         console.log("ERROR:", err);
       }
     })(); */
-
-/*        <button>
-         <i class="fa-solid fa-angle-down"></i>
-       </button>; */

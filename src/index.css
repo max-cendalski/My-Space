@@ -362,6 +362,7 @@ code {
 }
 
 .single-location {
+  display: flex;
   width: 90%;
   height: 2.4rem;
   margin-block-end: 1rem;
@@ -369,6 +370,12 @@ code {
   padding: 0.5rem;
 }
 
+.down-arrow-button {
+  margin-inline-end: 0.7rem;
+  background-color: #18946F;
+  color: white;
+  border: none;
+}
 .detail-location-container {
   visibility: hidden;
   width: 90%;
