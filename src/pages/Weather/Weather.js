@@ -110,6 +110,9 @@ const Weather = () => {
     });
   };
 
+  const handleUpDetailLocation = () => {
+    console.log('whe')
+  }
   return (
     <article>
       <Navbar />
@@ -126,11 +129,7 @@ const Weather = () => {
       )}
 
       <article className="locations-fromDB-container">
-        {detailLocationData && (
-          <section className="detail-location-container">
-            {detailLocationData.city} - {detailLocationData.temp}&deg;F
-          </section>
-        )}
+
         {!isLoading &&
           locationsFromDB.map((location, index) => (
             <section className="single-location" key={index}>

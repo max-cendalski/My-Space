@@ -363,6 +363,7 @@ code {
 
 .single-location {
   display: flex;
+  align-items: center;
   width: 90%;
   height: 2.4rem;
   margin-block-end: 1rem;
@@ -372,18 +373,15 @@ code {
 
 .down-arrow-button {
   margin-inline-end: 0.7rem;
+  height: 1.5rem;
   background-color: #18946F;
   color: white;
   border: none;
 }
-.detail-location-container {
-  visibility: hidden;
-  width: 90%;
-  height: 1rem;
-}
+
 
 .detail-location-container-visible {
-  display: block;
+  display: flex;
   width: 90%;
   height: 10rem;
   border: 1px solid grey;
@@ -391,6 +389,7 @@ code {
   transition: 0.2s linear;
   margin-block-start: 1rem;
   margin-block-end: 1rem;
+  padding: 0.5rem;
 }
 
 
