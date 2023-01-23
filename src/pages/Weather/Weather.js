@@ -14,8 +14,7 @@ const Weather = () => {
   const [locationsFromDB, setLocationsFromDB] = useState([]);
   const [searchedLocations, setSearchedLocations] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [singleLocationContainer, setSingleLocationContainer] =
-    useState("single-location");
+
   const [detailLocationData, setDetailLocationData] = useState({});
 
   useEffect(() => {
