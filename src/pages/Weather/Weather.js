@@ -101,6 +101,7 @@ const Weather = () => {
   };
 
   const handleDBLocationsClick = (location) => {
+    console.log("locationsformDB:", locationsFromDB);
     var el = document.querySelectorAll(".single-location");
     el.forEach((item) => {
       if (item.firstChild.data == location.city) {
@@ -110,8 +111,8 @@ const Weather = () => {
   };
 
   const handleUpDetailLocation = () => {
-    console.log('whe')
-  }
+    console.log("whe");
+  };
   return (
     <article>
       <Navbar />
@@ -128,16 +129,22 @@ const Weather = () => {
       )}
 
       <article className="locations-fromDB-container">
-
         {!isLoading &&
           locationsFromDB.map((location, index) => (
             <section className="single-location" key={index}>
               {location.city} - {location.temp}&deg;F
               <button className="down-arrow-button">
-                <i
-                  class="fa-solid fa-angle-down fa-xl"
-                  onClick={() => handleDBLocationsClick(location)}
-                ></i>
+                {location.extend == true ? (
+                  <i
+                    class="fa-solid fa-angle-up fa-xl"
+                    onClick={() => handleDBLocationsClick(location)}
+                  ></i>
+                ) : (
+                  <i
+                    class="fa-solid fa-angle-down fa-xl"
+                    onClick={() => handleDBLocationsClick(location)}
+                  ></i>
+                )}
               </button>
             </section>
           ))}
