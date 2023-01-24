@@ -14,8 +14,7 @@ const Weather = () => {
   const [locationsFromDB, setLocationsFromDB] = useState([]);
   const [searchedLocations, setSearchedLocations] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [modal , setModal] = useState('hidden')
-
+  const [modal, setModal] = useState("hidden");
 
   useEffect(() => {
     const locationsFromDB = [];
@@ -76,7 +75,19 @@ const Weather = () => {
               coordinates: latLng,
               temp: data.current.temp,
             };
-            setSearchedLocations([...searchedLocations, locationToSave]);
+            locationsFromDB.forEach((item) => {
+              if (item.city === locationToSave.city) {
+                setModal("modal-visible");
+                console.log("searche", searchedLocations);
+                setTimeout(() => {
+                  setModal("hidden");
+                }, 800);
+              } else {
+                setSearchedLocations([...searchedLocations, locationToSave]);
+              }
+            });
+
+            //setSearchedLocations([...searchedLocations, locationToSave]);
           });
       })
       .catch((error) => console.error("Error", error));
@@ -84,18 +95,35 @@ const Weather = () => {
   };
 
   const handleAddLocationToDB = (location) => {
-    console.log('location',location)
-    console.log('locationsfromDb',locationsFromDB)
-    locationsFromDB.forEach(item => {
+    locationsFromDB.forEach((item) => {
       if (item.city === location.city) {
         setModal("modal-visible");
+        console.log("searche", searchedLocations);
         setTimeout(() => {
-           setModal("hidden");
-        },1000)
-        setSearchedLocations([])
+          setModal("hidden");
+        }, 1000);
+      } else {
+        const locationsToKeep = searchedLocations.filter(
+          (item) => item !== location
+        );
+        console.log(
+          "loctokee",
+          locationsToKeep
+        )(async () => {
+          try {
+            await addDoc(
+              collection(db, "users", user.uid, "weatherLocations"),
+              location
+            );
+          } catch (err) {
+            console.log("ERROR:", err);
+          }
+        })();
+        setSearchedLocations(locationsToKeep);
+        setLocationsFromDB([...locationsFromDB, location]);
       }
-    })
- /*    const locationsToKeep = searchedLocations.filter(
+    });
+    /*    const locationsToKeep = searchedLocations.filter(
       (item) => item !== location
     );
     (async () => {
@@ -201,7 +229,9 @@ const Weather = () => {
       </article>
 
       <article className={modal}>
-            <h3 className="modal-info">You already have this location in your database!</h3>
+        <h3 className="modal-info">
+          You already have this location in your database!
+        </h3>
       </article>
     </article>
   );
