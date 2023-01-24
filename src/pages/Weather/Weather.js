@@ -74,19 +74,21 @@ const Weather = () => {
               country: locationArray[locationArray.length - 1],
               coordinates: latLng,
               temp: data.current.temp,
+              extend: false
             };
-            locationsFromDB.forEach((item) => {
+         /*    locationsFromDB.forEach((item) => {
+              console.log("whee");
               if (item.city === locationToSave.city) {
                 setModal("modal-visible");
                 console.log("searche", searchedLocations);
                 setTimeout(() => {
                   setModal("hidden");
-                }, 800);
-              } else {
-                setSearchedLocations([...searchedLocations, locationToSave]);
+                }, 1000);
               }
-            });
-
+            }); */
+            if (locationsFromDB.includes(locationToSave)) {
+              console.log('whee')
+            }
             //setSearchedLocations([...searchedLocations, locationToSave]);
           });
       })
@@ -95,35 +97,7 @@ const Weather = () => {
   };
 
   const handleAddLocationToDB = (location) => {
-    locationsFromDB.forEach((item) => {
-      if (item.city === location.city) {
-        setModal("modal-visible");
-        console.log("searche", searchedLocations);
-        setTimeout(() => {
-          setModal("hidden");
-        }, 1000);
-      } else {
-        const locationsToKeep = searchedLocations.filter(
-          (item) => item !== location
-        );
-        console.log(
-          "loctokee",
-          locationsToKeep
-        )(async () => {
-          try {
-            await addDoc(
-              collection(db, "users", user.uid, "weatherLocations"),
-              location
-            );
-          } catch (err) {
-            console.log("ERROR:", err);
-          }
-        })();
-        setSearchedLocations(locationsToKeep);
-        setLocationsFromDB([...locationsFromDB, location]);
-      }
-    });
-    /*    const locationsToKeep = searchedLocations.filter(
+    const locationsToKeep = searchedLocations.filter(
       (item) => item !== location
     );
     (async () => {
@@ -137,7 +111,7 @@ const Weather = () => {
       }
     })();
     setSearchedLocations(locationsToKeep);
-    setLocationsFromDB([...locationsFromDB, location]); */
+    setLocationsFromDB([...locationsFromDB, location]);
   };
 
   const handleDBLocationArrowClick = (location) => {
@@ -196,12 +170,12 @@ const Weather = () => {
               <button className="down-arrow-button">
                 {location.extend === true ? (
                   <i
-                    class="fa-solid fa-angle-up fa-xl"
+                    className="fa-solid fa-angle-up fa-xl"
                     onClick={() => handleDBLocationArrowClick(location)}
                   ></i>
                 ) : (
                   <i
-                    class="fa-solid fa-angle-down fa-xl"
+                    className="fa-solid fa-angle-down fa-xl"
                     onClick={() => handleDBLocationArrowClick(location)}
                   ></i>
                 )}
