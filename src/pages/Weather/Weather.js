@@ -14,6 +14,7 @@ const Weather = () => {
   const [locationsFromDB, setLocationsFromDB] = useState([]);
   const [searchedLocations, setSearchedLocations] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [modal , setModal] = useState('hidden')
 
 
   useEffect(() => {
@@ -83,7 +84,18 @@ const Weather = () => {
   };
 
   const handleAddLocationToDB = (location) => {
-    const locationsToKeep = searchedLocations.filter(
+    console.log('location',location)
+    console.log('locationsfromDb',locationsFromDB)
+    locationsFromDB.forEach(item => {
+      if (item.city === location.city) {
+        setModal("modal-visible");
+        setTimeout(() => {
+           setModal("hidden");
+        },1000)
+        setSearchedLocations([])
+      }
+    })
+ /*    const locationsToKeep = searchedLocations.filter(
       (item) => item !== location
     );
     (async () => {
@@ -97,7 +109,7 @@ const Weather = () => {
       }
     })();
     setSearchedLocations(locationsToKeep);
-    setLocationsFromDB([...locationsFromDB, location]);
+    setLocationsFromDB([...locationsFromDB, location]); */
   };
 
   const handleDBLocationArrowClick = (location) => {
@@ -188,8 +200,8 @@ const Weather = () => {
           ))}
       </article>
 
-      <article className="hidden">
-            <h1>You already have this location in your database!</h1>
+      <article className={modal}>
+            <h3 className="modal-info">You already have this location in your database!</h3>
       </article>
     </article>
   );
