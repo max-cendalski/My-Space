@@ -40,6 +40,7 @@ const Weather = () => {
             .then((data) => {
               for (var i = 0; i < data.length; i++) {
                 locationsFromDB[i].temp = data[i].current.temp;
+                locationsFromDB[i].extend = false;
               }
               setLocationsFromDB(locationsFromDB);
             })
@@ -100,19 +101,39 @@ const Weather = () => {
     setLocationsFromDB([...locationsFromDB, location]);
   };
 
-  const handleDBLocationsClick = (location) => {
-    console.log("locationsformDB:", locationsFromDB);
-    var el = document.querySelectorAll(".single-location");
-    el.forEach((item) => {
-      if (item.firstChild.data == location.city) {
-        item.className = "detail-location-container-visible";
-      }
-    });
+  const handleDBLocationArrowClick = (location) => {
+    if (location.extend == false) {
+      location.extend = true;
+      let itemToExtend = locationsFromDB.findIndex(
+        (item) => item.city == location.city
+      );
+      let locationsToRender = Array.from(locationsFromDB);
+      locationsToRender.splice(itemToExtend, 1, location);
+      setLocationsFromDB(locationsToRender);
+      var el = document.querySelectorAll(".single-location");
+      el.forEach((item) => {
+        if (item.firstChild.data == location.city) {
+          item.className = "detail-location";
+        }
+      });
+    } else {
+      console.log("location:", location);
+      location.extend = false;
+      let itemToHide = locationsFromDB.findIndex(
+        (item) => item.city == location.city
+      );
+      let locationsToRender = Array.from(locationsFromDB);
+      locationsToRender.splice(itemToHide, 1, location);
+      setLocationsFromDB(locationsToRender);
+      var el = document.querySelectorAll(".detail-location");
+      el.forEach((item) => {
+        if (item.firstChild.data == location.city) {
+          item.className = "single-location";
+        }
+      });
+    }
   };
 
-  const handleUpDetailLocation = () => {
-    console.log("whe");
-  };
   return (
     <article>
       <Navbar />
@@ -137,12 +158,12 @@ const Weather = () => {
                 {location.extend == true ? (
                   <i
                     class="fa-solid fa-angle-up fa-xl"
-                    onClick={() => handleDBLocationsClick(location)}
+                    onClick={() => handleDBLocationArrowClick(location)}
                   ></i>
                 ) : (
                   <i
                     class="fa-solid fa-angle-down fa-xl"
-                    onClick={() => handleDBLocationsClick(location)}
+                    onClick={() => handleDBLocationArrowClick(location)}
                   ></i>
                 )}
               </button>

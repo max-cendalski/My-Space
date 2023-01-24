@@ -358,7 +358,8 @@ code {
     cursor: pointer;
 }
 .locations-fromDB-container {
-  padding-block-end: 1rem;
+  margin-block-start: 2rem;
+  margin-block-end: 1rem;
 }
 
 .single-location {
@@ -371,6 +372,18 @@ code {
   padding: 0.5rem;
 }
 
+.detail-location {
+  display: flex;
+  width: 90%;
+  height: 10rem;
+  border: 1px solid grey;
+  color: red;
+  transition: 0.3s linear;
+  margin-block-start: 1rem;
+  margin-block-end: 1rem;
+  padding: 0.5rem;
+}
+
 .down-arrow-button {
   margin-inline-end: 0.7rem;
   height: 1.5rem;
@@ -380,7 +393,7 @@ code {
 }
 
 
-.detail-location-container-visible {
+.detail-location {
   display: flex;
   width: 90%;
   height: 10rem;
