@@ -15,7 +15,6 @@ const Weather = () => {
   const [searchedLocations, setSearchedLocations] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const [detailLocationData, setDetailLocationData] = useState({});
 
   useEffect(() => {
     const locationsFromDB = [];
@@ -102,17 +101,17 @@ const Weather = () => {
   };
 
   const handleDBLocationArrowClick = (location) => {
-    if (location.extend == false) {
+    if (location.extend === false) {
       location.extend = true;
       let itemToExtend = locationsFromDB.findIndex(
-        (item) => item.city == location.city
+        (item) => item.city === location.city
       );
       let locationsToRender = Array.from(locationsFromDB);
       locationsToRender.splice(itemToExtend, 1, location);
       setLocationsFromDB(locationsToRender);
       var el = document.querySelectorAll(".single-location");
       el.forEach((item) => {
-        if (item.firstChild.data == location.city) {
+        if (item.firstChild.data === location.city) {
           item.className = "detail-location";
         }
       });
@@ -120,14 +119,14 @@ const Weather = () => {
       console.log("location:", location);
       location.extend = false;
       let itemToHide = locationsFromDB.findIndex(
-        (item) => item.city == location.city
+        (item) => item.city === location.city
       );
       let locationsToRender = Array.from(locationsFromDB);
       locationsToRender.splice(itemToHide, 1, location);
       setLocationsFromDB(locationsToRender);
-      var el = document.querySelectorAll(".detail-location");
+      el = document.querySelectorAll(".detail-location");
       el.forEach((item) => {
-        if (item.firstChild.data == location.city) {
+        if (item.firstChild.data === location.city) {
           item.className = "single-location";
         }
       });
@@ -155,7 +154,7 @@ const Weather = () => {
             <section className="single-location" key={index}>
               {location.city} - {location.temp}&deg;F
               <button className="down-arrow-button">
-                {location.extend == true ? (
+                {location.extend === true ? (
                   <i
                     class="fa-solid fa-angle-up fa-xl"
                     onClick={() => handleDBLocationArrowClick(location)}
@@ -187,6 +186,10 @@ const Weather = () => {
               </button>
             </section>
           ))}
+      </article>
+
+      <article className="hidden">
+            <h1>You already have this location in your database!</h1>
       </article>
     </article>
   );

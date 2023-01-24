@@ -364,11 +364,11 @@ code {
 
 .single-location {
   display: flex;
-  align-items: center;
   width: 90%;
   height: 2.4rem;
   margin-block-end: 1rem;
   border: 1px solid gray;
+  transition: 0.2s linear;
   padding: 0.5rem;
 }
 
