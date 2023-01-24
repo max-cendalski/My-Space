@@ -74,9 +74,9 @@ const Weather = () => {
               country: locationArray[locationArray.length - 1],
               coordinates: latLng,
               temp: data.current.temp,
-              extend: false
+              extend: false,
             };
-         /*    locationsFromDB.forEach((item) => {
+            /*    locationsFromDB.forEach((item) => {
               console.log("whee");
               if (item.city === locationToSave.city) {
                 setModal("modal-visible");
@@ -86,8 +86,20 @@ const Weather = () => {
                 }, 1000);
               }
             }); */
-            if (locationsFromDB.includes(locationToSave)) {
+            let check;
+            locationsFromDB.forEach((item) => {
+              if (item.city === locationToSave.city) {
+                check = true;
+              }
+            });
+            if (check === true) {
               console.log('whee')
+              setModal("modal-visible");
+              setTimeout(() => {
+                setModal("hidden");
+              }, 1000);
+            } else {
+              setSearchedLocations([...searchedLocations, locationToSave]);
             }
             //setSearchedLocations([...searchedLocations, locationToSave]);
           });
