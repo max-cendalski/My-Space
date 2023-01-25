@@ -365,7 +365,7 @@ code {
 .single-location {
   display: flex;
   width: 90%;
-  height: 2.4rem;
+  height: 2.5rem;
   margin-block-end: 1rem;
   border: 1px solid gray;
   transition: 0.2s linear;
@@ -383,6 +383,14 @@ code {
   margin-block-start: 1rem;
   margin-block-end: 1rem;
   padding: 0.5rem;
+  overflow: hidden;
+}
+
+.location-data {
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .down-arrow-button {
