@@ -126,6 +126,7 @@ const Weather = () => {
       locationsToRender.splice(itemToExtend, 1, location);
       setLocationsFromDB(locationsToRender);
       var el = document.querySelectorAll(".single-location");
+      console.log('el',el[0].closest('SECTION').textContent.split("-")[0])
       el.forEach((item) => {
         if (item.firstChild.data === location.city) {
           item.className = "detail-location";
@@ -163,10 +164,13 @@ const Weather = () => {
         <p className="loading-notification">Loading data from database ...</p>
       )}
 
-      <article className="locations-fromDB-container">
+      <article id="locations-fromDB-container">
         {!isLoading &&
           locationsFromDB.map((location, index) => (
-            <section className="single-location" key={index}>
+            <section
+              className="single-location"
+              key={index}
+            >
               <p className="location-header">
                 {location.city} - {location.temp}&deg;F
               </p>
@@ -189,7 +193,6 @@ const Weather = () => {
                 <p>whatever</p>
                 <p>whatever</p>
               </section>
-
             </section>
           ))}
       </article>

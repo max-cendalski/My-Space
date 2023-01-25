@@ -357,7 +357,7 @@ code {
     color: white;
     cursor: pointer;
 }
-.locations-fromDB-container {
+#locations-fromDB-container {
   margin-block-start: 2rem;
   margin-block-end: 1rem;
 }
