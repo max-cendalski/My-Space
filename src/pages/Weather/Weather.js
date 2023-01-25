@@ -13,6 +13,7 @@ const Weather = () => {
   const [address, setAddress] = useState("");
   const [locationsFromDB, setLocationsFromDB] = useState([]);
   const [searchedLocations, setSearchedLocations] = useState([]);
+  const [detailData, setDetailData] = useState(null)
   const [isLoading, setIsLoading] = useState(true);
   const [modal, setModal] = useState("hidden");
 
@@ -76,16 +77,6 @@ const Weather = () => {
               temp: data.current.temp,
               extend: false,
             };
-            /*    locationsFromDB.forEach((item) => {
-              console.log("whee");
-              if (item.city === locationToSave.city) {
-                setModal("modal-visible");
-                console.log("searche", searchedLocations);
-                setTimeout(() => {
-                  setModal("hidden");
-                }, 1000);
-              }
-            }); */
             let check;
             locationsFromDB.forEach((item) => {
               if (item.city === locationToSave.city) {
@@ -142,7 +133,6 @@ const Weather = () => {
         }
       });
     } else {
-      console.log("location:", location);
       location.extend = false;
       let itemToHide = locationsFromDB.findIndex(
         (item) => item.city === location.city
@@ -179,6 +169,7 @@ const Weather = () => {
           locationsFromDB.map((location, index) => (
             <section className="single-location" key={index}>
               {location.city} - {location.temp}&deg;F
+
               <button className="down-arrow-button">
                 {location.extend === true ? (
                   <i
@@ -205,7 +196,7 @@ const Weather = () => {
               key={index}
             >
               <section className="temperature-section">
-                {location.city} = {location.temp}&deg;F
+                {location.city} : {location.temp}&deg;F
               </section>
               <button className="add-location-button">
                 <i className="fa-solid fa-plus fa-2xl"></i>

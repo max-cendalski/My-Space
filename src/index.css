@@ -370,6 +370,7 @@ code {
   border: 1px solid gray;
   transition: 0.2s linear;
   padding: 0.5rem;
+  overflow: hidden;
 }
 
 .detail-location {
@@ -405,6 +406,10 @@ code {
   padding: 0.5rem;
 }
 
+.detailLocationData {
+  display: flex;
+  flex-direction: column;
+}
 
 .searched-locations {
   width: 90%;
@@ -414,7 +419,6 @@ code {
   border: 1px solid rgb(222, 222,222);
   margin-block-start: 0.5rem;
 }
-
 
 .temperature-section {
   margin-inline-start: 0;
