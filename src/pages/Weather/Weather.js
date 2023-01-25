@@ -13,7 +13,6 @@ const Weather = () => {
   const [address, setAddress] = useState("");
   const [locationsFromDB, setLocationsFromDB] = useState([]);
   const [searchedLocations, setSearchedLocations] = useState([]);
-  const [detailData, setDetailData] = useState(null)
   const [isLoading, setIsLoading] = useState(true);
   const [modal, setModal] = useState("hidden");
 
