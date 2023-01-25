@@ -434,17 +434,14 @@ code {
   position: absolute;
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.8);
     width: 100%;
     height: 100vh;
 }
 .modal-info {
   margin-top: 6rem;
-  color: red;
+  color: white;
   width: 90%;
-  background-color: white;
-  padding: 2rem;
-  border-radius: 5px;
 }
 
 
