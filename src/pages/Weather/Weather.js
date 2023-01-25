@@ -167,8 +167,9 @@ const Weather = () => {
         {!isLoading &&
           locationsFromDB.map((location, index) => (
             <section className="single-location" key={index}>
-              {location.city} - {location.temp}&deg;F
-
+              <p className="location-header">
+                {location.city} - {location.temp}&deg;F
+              </p>
               <button className="down-arrow-button">
                 {location.extend === true ? (
                   <i
@@ -182,6 +183,13 @@ const Weather = () => {
                   ></i>
                 )}
               </button>
+              <section className="detail-location-data">
+                <p>whatever</p>
+                <p>whatever</p>
+                <p>whatever</p>
+                <p>whatever</p>
+              </section>
+
             </section>
           ))}
       </article>
