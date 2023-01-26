@@ -359,15 +359,14 @@ code {
 }
 #locations-fromDB-container {
   margin-block-start: 2rem;
-  margin-block-end: 1rem;
+  margin-block-end: 2rem;
 }
 
 .single-location {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   width: 90%;
-  height: 2.4rem;
+  height: 2.3rem;
   margin-block-end: 1rem;
   border: 1px solid gray;
   transition: 0.2s linear;
@@ -378,6 +377,7 @@ code {
 .detail-location {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   width: 90%;
   height: 10rem;
   border: 1px solid grey;
@@ -401,7 +401,7 @@ code {
 
 .down-arrow-button {
   margin-inline-end: 0.7rem;
-  height: 1.5rem;
+  height: 1.4rem;
   background-color: #18946F;
   color: white;
   border: none;

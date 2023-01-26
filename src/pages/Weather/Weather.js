@@ -117,7 +117,6 @@ const Weather = () => {
   };
 
   const handleDBLocationArrowClick = (location) => {
-    console.log("loca", location);
     if (location.extend === false) {
       location.extend = true;
       let itemToExtend = locationsFromDB.findIndex(
@@ -127,11 +126,9 @@ const Weather = () => {
       locationsToRender.splice(itemToExtend, 1, location);
       setLocationsFromDB(locationsToRender);
       var el = document.querySelectorAll(".single-location");
-      //console.log("el", el[0].firstChild.textContent.split('-')[0]);
       el.forEach((item) => {
         let cityName = item.firstChild.textContent.split("-")[0].trim();
         if (cityName === location.city) {
-
           item.className = "detail-location";
         }
       });
@@ -145,7 +142,8 @@ const Weather = () => {
       setLocationsFromDB(locationsToRender);
       el = document.querySelectorAll(".detail-location");
       el.forEach((item) => {
-        if (item.firstChild.data === location.city) {
+        let cityName = item.firstChild.textContent.split("-")[0].trim();
+        if (cityName === location.city) {
           item.className = "single-location";
         }
       });
