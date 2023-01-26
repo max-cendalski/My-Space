@@ -408,11 +408,6 @@ code {
 }
 
 
-.detailLocationData {
-  display: flex;
-  flex-direction: column;
-}
-
 .searched-locations {
   width: 90%;
   display: flex;

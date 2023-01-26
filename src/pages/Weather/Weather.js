@@ -37,8 +37,16 @@ const Weather = () => {
         Promise.all(urls.map((url) => fetch(url))).then((responses) =>
           Promise.all(responses.map((res) => res.json()))
             .then((data) => {
+                console.log("data", data);
               for (var i = 0; i < data.length; i++) {
                 locationsFromDB[i].temp = data[i].current.temp;
+                locationsFromDB[i].sunset = data[i].current.sunset;
+                locationsFromDB[i].sunrise = data[i].current.sunrise;
+                locationsFromDB[i].humidity = data[i].current.humidity;
+                locationsFromDB[i].pressure = data[i].current.pressure;
+                locationsFromDB[i].windSpeed = data[i].current.wind_speed;
+                locationsFromDB[i].visibility = data[i].current.visibility;
+                locationsFromDB[i].clouds = data[i].current.clouds;
                 locationsFromDB[i].extend = false;
               }
               setLocationsFromDB(locationsFromDB);
@@ -68,6 +76,7 @@ const Weather = () => {
         )
           .then((res) => res.json())
           .then((data) => {
+
             const locationArray = address.split(",");
             const locationToSave = {
               city: locationArray[0],
@@ -91,7 +100,6 @@ const Weather = () => {
             } else {
               setSearchedLocations([...searchedLocations, locationToSave]);
             }
-            //setSearchedLocations([...searchedLocations, locationToSave]);
           });
       })
       .catch((error) => console.error("Error", error));
@@ -183,10 +191,13 @@ const Weather = () => {
                 )}
               </button>
               <section className="detail-location-data">
-                <p>{location.city}</p>
-                <p>{location.city}</p>
-                <p>whatever</p>
-                <p>whatever</p>
+                <p>Sunrise: {location.sunrise}</p>
+                <p>Sunset: {location.sunset}</p>
+                <p>Humidity: {location.humidity}</p>
+                <p>Pressure: {location.pressure}</p>
+                <p>Wind Speed: {location.windSpeed}</p>
+                <p>Vsibility: {location.visibility}</p>
+                <p>Clouds: {location.clouds}</p>
               </section>
             </section>
           ))}
