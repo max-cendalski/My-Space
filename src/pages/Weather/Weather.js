@@ -83,7 +83,7 @@ const Weather = () => {
               }
             });
             if (check === true) {
-              console.log('whee')
+              console.log("whee");
               setModal("modal-visible");
               setTimeout(() => {
                 setModal("hidden");
@@ -117,6 +117,7 @@ const Weather = () => {
   };
 
   const handleDBLocationArrowClick = (location) => {
+    console.log("loca", location);
     if (location.extend === false) {
       location.extend = true;
       let itemToExtend = locationsFromDB.findIndex(
@@ -126,9 +127,11 @@ const Weather = () => {
       locationsToRender.splice(itemToExtend, 1, location);
       setLocationsFromDB(locationsToRender);
       var el = document.querySelectorAll(".single-location");
-      console.log('el',el[0].closest('SECTION').textContent.split("-")[0])
+      //console.log("el", el[0].firstChild.textContent.split('-')[0]);
       el.forEach((item) => {
-        if (item.firstChild.data === location.city) {
+        let cityName = item.firstChild.textContent.split("-")[0].trim();
+        if (cityName === location.city) {
+
           item.className = "detail-location";
         }
       });
@@ -167,29 +170,23 @@ const Weather = () => {
       <article id="locations-fromDB-container">
         {!isLoading &&
           locationsFromDB.map((location, index) => (
-            <section
-              className="single-location"
-              key={index}
-            >
-              <p className="location-header">
+            <section className="single-location" key={index}>
+              <p className="location-header" value={location.city}>
                 {location.city} - {location.temp}&deg;F
               </p>
-              <button className="down-arrow-button">
+              <button
+                className="down-arrow-button"
+                onClick={() => handleDBLocationArrowClick(location)}
+              >
                 {location.extend === true ? (
-                  <i
-                    className="fa-solid fa-angle-up fa-xl"
-                    onClick={() => handleDBLocationArrowClick(location)}
-                  ></i>
+                  <i className="fa-solid fa-angle-up fa-xl"></i>
                 ) : (
-                  <i
-                    className="fa-solid fa-angle-down fa-xl"
-                    onClick={() => handleDBLocationArrowClick(location)}
-                  ></i>
+                  <i className="fa-solid fa-angle-down fa-xl"></i>
                 )}
               </button>
               <section className="detail-location-data">
-                <p>whatever</p>
-                <p>whatever</p>
+                <p>{location.city}</p>
+                <p>{location.city}</p>
                 <p>whatever</p>
                 <p>whatever</p>
               </section>

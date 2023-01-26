@@ -381,7 +381,6 @@ code {
   width: 90%;
   height: 10rem;
   border: 1px solid grey;
-  color: red;
   transition: 0.3s linear;
   margin-block-start: 1rem;
   margin-block-end: 1rem;
@@ -390,12 +389,14 @@ code {
 }
 
 .location-header {
-  margin-inline-start: 0.2rem;
   width: 80%;
+  font-size: 1rem;
+  margin-inline-start: 0.2rem;
 }
 .detail-location-data {
-  padding-block-start: 0.3rem;
   width: 100%;
+  margin-inline-start: 0.2rem;
+  margin-block-end: 1rem;
 }
 
 .down-arrow-button {
@@ -406,18 +407,6 @@ code {
   border: none;
 }
 
-
-.detail-location {
-  display: flex;
-  width: 90%;
-  height: 10rem;
-  border: 1px solid grey;
-  color: red;
-  transition: 0.2s linear;
-  margin-block-start: 1rem;
-  margin-block-end: 1rem;
-  padding: 0.5rem;
-}
 
 .detailLocationData {
   display: flex;
