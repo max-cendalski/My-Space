@@ -158,6 +158,10 @@ const Weather = () => {
     }
   };
 
+  const handleDeleteLocation = (location) => {
+    console.log('delte')
+  }
+
   return (
     <article>
       <Navbar />
@@ -198,6 +202,12 @@ const Weather = () => {
                 <p>Wind Speed: {location.windSpeed}</p>
                 <p>Vsibility: {location.visibility}</p>
                 <p>Clouds: {location.clouds}</p>
+                <button
+                  className="delete-button"
+                  onClick={() => handleDeleteLocation(location)}
+                >
+                  Delete
+                </button>
               </section>
             </section>
           ))}

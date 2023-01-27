@@ -365,6 +365,7 @@ code {
 .single-location {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   width: 90%;
   height: 2.3rem;
   margin-block-end: 1rem;
@@ -379,7 +380,7 @@ code {
   flex-wrap: wrap;
   align-items: center;
   width: 90%;
-  height: 10rem;
+  height: 14rem;
   border: 1px solid grey;
   transition: 0.3s linear;
   margin-block-start: 1rem;
@@ -400,7 +401,7 @@ code {
 }
 
 .down-arrow-button {
-  margin-inline-end: 0.7rem;
+  margin-inline-end: 0.5rem;
   height: 1.4rem;
   background-color: #18946F;
   color: white;
