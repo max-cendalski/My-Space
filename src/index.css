@@ -380,7 +380,7 @@ code {
   flex-wrap: wrap;
   align-items: center;
   width: 90%;
-  height: 14rem;
+  height: 19rem;
   border: 1px solid grey;
   transition: 0.3s linear;
   margin-block-start: 1rem;
@@ -392,12 +392,18 @@ code {
 .location-header {
   width: 80%;
   font-size: 1rem;
+  font-weight: 500;
   margin-inline-start: 0.2rem;
+
 }
 .detail-location-data {
   width: 100%;
-  margin-inline-start: 0.2rem;
+
   margin-block-end: 1rem;
+}
+
+.detail-location-data * {
+  margin: 0.4rem;
 }
 
 .down-arrow-button {

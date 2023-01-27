@@ -5,8 +5,9 @@ import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import { getDocs, collection, addDoc } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { UserAuth } from "../../context/AuthContext";
-
 import { useState, useEffect } from "react";
+
+import { format } from "date-fns";
 
 const Weather = () => {
   const { user } = UserAuth();
@@ -37,19 +38,25 @@ const Weather = () => {
         Promise.all(urls.map((url) => fetch(url))).then((responses) =>
           Promise.all(responses.map((res) => res.json()))
             .then((data) => {
-                console.log("data", data);
+              console.log("data", data);
               for (var i = 0; i < data.length; i++) {
                 locationsFromDB[i].temp = data[i].current.temp;
-                locationsFromDB[i].sunset = data[i].current.sunset;
-                locationsFromDB[i].sunrise = data[i].current.sunrise;
+                locationsFromDB[i].tempFeelsLike = data[i].current.feels_like;
+                locationsFromDB[i].cloudsDescription =data[i].current.weather[0].description;
+                locationsFromDB[i].cloudIcon =data[i].current.weather[0].icon;
+                locationsFromDB[i].timeZone = data[i].current.timeZone_offset;
+                locationsFromDB[i].sunrise = format(data[i].current.sunrise,"p");
+                locationsFromDB[i].sunset = format(data[i].current.sunset, "p");
                 locationsFromDB[i].humidity = data[i].current.humidity;
                 locationsFromDB[i].pressure = data[i].current.pressure;
                 locationsFromDB[i].windSpeed = data[i].current.wind_speed;
                 locationsFromDB[i].visibility = data[i].current.visibility;
                 locationsFromDB[i].clouds = data[i].current.clouds;
+
                 locationsFromDB[i].extend = false;
               }
               setLocationsFromDB(locationsFromDB);
+              console.log('location',locationsFromDB)
             })
             .catch((error) => console.log("ERROR:", error))
         );
@@ -76,7 +83,6 @@ const Weather = () => {
         )
           .then((res) => res.json())
           .then((data) => {
-
             const locationArray = address.split(",");
             const locationToSave = {
               city: locationArray[0],
@@ -159,8 +165,8 @@ const Weather = () => {
   };
 
   const handleDeleteLocation = (location) => {
-    console.log('delte')
-  }
+    console.log("delte");
+  };
 
   return (
     <article>
@@ -195,13 +201,15 @@ const Weather = () => {
                 )}
               </button>
               <section className="detail-location-data">
+                <p>Feels like {location.tempFeelsLike}&deg;F</p>
+                <p>Clouds: <em>{location.cloudsDescription}</em></p>
+                <p>Clouds: {location.cloudIcon}</p>
                 <p>Sunrise: {location.sunrise}</p>
                 <p>Sunset: {location.sunset}</p>
-                <p>Humidity: {location.humidity}</p>
-                <p>Pressure: {location.pressure}</p>
-                <p>Wind Speed: {location.windSpeed}</p>
-                <p>Vsibility: {location.visibility}</p>
-                <p>Clouds: {location.clouds}</p>
+                <p>Humidity: {location.humidity} %</p>
+                <p>Pressure: {location.pressure} hPa</p>
+                <p>Wind Speed: {location.windSpeed} m/s</p>
+                <p>visibility: {location.visibility}</p>
                 <button
                   className="delete-button"
                   onClick={() => handleDeleteLocation(location)}
