@@ -27,7 +27,7 @@ const Weather = () => {
           collection(db, "users", user.uid, "weatherLocations")
         );
         querySnapshot.forEach((doc) => {
-          locationsFromDB.push(doc.data());
+          locationsFromDB.push({ id: doc.id, ...doc.data() });
         });
         for (const location of locationsFromDB) {
           urls.push(
@@ -38,25 +38,27 @@ const Weather = () => {
         Promise.all(urls.map((url) => fetch(url))).then((responses) =>
           Promise.all(responses.map((res) => res.json()))
             .then((data) => {
-              console.log("data", data);
+              //console.log("data", data);
               for (var i = 0; i < data.length; i++) {
                 locationsFromDB[i].temp = data[i].current.temp;
                 locationsFromDB[i].tempFeelsLike = data[i].current.feels_like;
-                locationsFromDB[i].cloudsDescription =data[i].current.weather[0].description;
-                locationsFromDB[i].cloudIcon =data[i].current.weather[0].icon;
+                locationsFromDB[i].cloudsDescription =
+                  data[i].current.weather[0].description;
                 locationsFromDB[i].timeZone = data[i].current.timeZone_offset;
-                locationsFromDB[i].sunrise = format(data[i].current.sunrise,"p");
+                locationsFromDB[i].sunrise = format(
+                  data[i].current.sunrise,
+                  "p"
+                );
                 locationsFromDB[i].sunset = format(data[i].current.sunset, "p");
                 locationsFromDB[i].humidity = data[i].current.humidity;
                 locationsFromDB[i].pressure = data[i].current.pressure;
                 locationsFromDB[i].windSpeed = data[i].current.wind_speed;
                 locationsFromDB[i].visibility = data[i].current.visibility;
-                locationsFromDB[i].clouds = data[i].current.clouds;
 
                 locationsFromDB[i].extend = false;
               }
               setLocationsFromDB(locationsFromDB);
-              console.log('location',locationsFromDB)
+              //console.log("location", locationsFromDB);
             })
             .catch((error) => console.log("ERROR:", error))
         );
@@ -131,7 +133,12 @@ const Weather = () => {
   };
 
   const handleDBLocationArrowClick = (location) => {
-    if (location.extend === false) {
+
+    var el = document.getElementById(location.id)
+    console.log('el',el)
+    el.className = ('detail-location')
+    //location.id.className ="detail-location"
+  /*   if (location.extend === false) {
       location.extend = true;
       let itemToExtend = locationsFromDB.findIndex(
         (item) => item.city === location.city
@@ -161,7 +168,7 @@ const Weather = () => {
           item.className = "single-location";
         }
       });
-    }
+    } */
   };
 
   const handleDeleteLocation = (location) => {
@@ -186,7 +193,7 @@ const Weather = () => {
       <article id="locations-fromDB-container">
         {!isLoading &&
           locationsFromDB.map((location, index) => (
-            <section className="single-location" key={index}>
+            <section className="single-location" id={location.id} key={location.id}>
               <p className="location-header" value={location.city}>
                 {location.city} - {location.temp}&deg;F
               </p>
@@ -202,14 +209,14 @@ const Weather = () => {
               </button>
               <section className="detail-location-data">
                 <p>Feels like {location.tempFeelsLike}&deg;F</p>
-                <p>Clouds: <em>{location.cloudsDescription}</em></p>
-                <p>Clouds: {location.cloudIcon}</p>
+                <p>
+                  Clouds: <em>{location.cloudsDescription}</em>
+                </p>
                 <p>Sunrise: {location.sunrise}</p>
                 <p>Sunset: {location.sunset}</p>
                 <p>Humidity: {location.humidity} %</p>
                 <p>Pressure: {location.pressure} hPa</p>
                 <p>Wind Speed: {location.windSpeed} m/s</p>
-                <p>visibility: {location.visibility}</p>
                 <button
                   className="delete-button"
                   onClick={() => handleDeleteLocation(location)}
