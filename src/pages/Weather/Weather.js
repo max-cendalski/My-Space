@@ -136,7 +136,14 @@ const Weather = () => {
 
     var el = document.getElementById(location.id)
     console.log('el',el)
-    el.className = ('detail-location')
+    //el.className = ('detail-location')
+    if (location.extend === false ) {
+      location.extend = true
+      el.className = 'detail-location'
+    } else {
+      location.extend = false
+      el.className = 'single-location'
+    }
     //location.id.className ="detail-location"
   /*   if (location.extend === false) {
       location.extend = true;
