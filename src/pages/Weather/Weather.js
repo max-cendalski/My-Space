@@ -133,49 +133,23 @@ const Weather = () => {
   };
 
   const handleDBLocationArrowClick = (location) => {
-
-    var el = document.getElementById(location.id)
-    console.log('el',el)
-    //el.className = ('detail-location')
-    if (location.extend === false ) {
-      location.extend = true
-      el.className = 'detail-location'
-    } else {
-      location.extend = false
-      el.className = 'single-location'
-    }
-    //location.id.className ="detail-location"
-  /*   if (location.extend === false) {
+    let locationIndex = locationsFromDB.findIndex(
+      (item) => item.id === location.id
+    );
+    var el = document.getElementById(location.id);
+    if (location.extend === false) {
       location.extend = true;
-      let itemToExtend = locationsFromDB.findIndex(
-        (item) => item.city === location.city
-      );
+      el.className = "detail-location";
       let locationsToRender = Array.from(locationsFromDB);
-      locationsToRender.splice(itemToExtend, 1, location);
+      locationsToRender.splice(locationIndex, 1, location);
       setLocationsFromDB(locationsToRender);
-      var el = document.querySelectorAll(".single-location");
-      el.forEach((item) => {
-        let cityName = item.firstChild.textContent.split("-")[0].trim();
-        if (cityName === location.city) {
-          item.className = "detail-location";
-        }
-      });
     } else {
       location.extend = false;
-      let itemToHide = locationsFromDB.findIndex(
-        (item) => item.city === location.city
-      );
+      el.className = "single-location";
       let locationsToRender = Array.from(locationsFromDB);
-      locationsToRender.splice(itemToHide, 1, location);
+      locationsToRender.splice(locationIndex, 1, location);
       setLocationsFromDB(locationsToRender);
-      el = document.querySelectorAll(".detail-location");
-      el.forEach((item) => {
-        let cityName = item.firstChild.textContent.split("-")[0].trim();
-        if (cityName === location.city) {
-          item.className = "single-location";
-        }
-      });
-    } */
+    }
   };
 
   const handleDeleteLocation = (location) => {
@@ -200,8 +174,12 @@ const Weather = () => {
       <article id="locations-fromDB-container">
         {!isLoading &&
           locationsFromDB.map((location, index) => (
-            <section className="single-location" id={location.id} key={location.id}>
-              <p className="location-header" value={location.city}>
+            <section
+              className="single-location"
+              id={location.id}
+              key={location.id}
+            >
+              <p className="location-header">
                 {location.city} - {location.temp}&deg;F
               </p>
               <button
