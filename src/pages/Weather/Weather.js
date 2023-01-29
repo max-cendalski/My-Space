@@ -2,7 +2,13 @@ import Navbar from "../../components/Navbar/Navbar";
 import GoBack from "../../components/GoBack/GoBack";
 import LocationSearch from "../../components/PlaceSearch/PlaceSearch";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
-import { getDocs, collection, addDoc } from "firebase/firestore";
+import {
+  getDocs,
+  doc,
+  collection,
+  addDoc,
+  deleteDoc,
+} from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { UserAuth } from "../../context/AuthContext";
 import { useState, useEffect } from "react";
@@ -153,9 +159,25 @@ const Weather = () => {
   };
 
   const handleDeleteLocation = (location) => {
-    console.log("delte");
+    (async () => {
+      try {
+        await deleteDoc(
+          doc(db, "users", user.uid, "weatherLocations", location.id)
+        );
+        setLocationsFromDB(
+          locationsFromDB.filter((item) => item.id !== location.id)
+        );
+      } catch (err) {
+        console.log("ERROR:", err);
+      }
+    })();
+    console.log("locid", location.id);
   };
-
+  /*
+         const noteRef = doc(db, "users", user.uid, "notes", id);
+      await deleteDoc(noteRef);
+      setNotes(notes.filter((item) => item.id !== id));
+ */
   return (
     <article>
       <Navbar />
@@ -177,7 +199,7 @@ const Weather = () => {
             <section
               className="single-location"
               id={location.id}
-              key={location.id}
+              key={index}
             >
               <p className="location-header">
                 {location.city} - {location.temp}&deg;F
