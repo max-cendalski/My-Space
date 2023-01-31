@@ -44,6 +44,8 @@ const Weather = () => {
         }
         if (cityA > cityB) {
           return 1;
+        } else {
+          return 0
         }
       });
 
