@@ -35,7 +35,19 @@ const Weather = () => {
         querySnapshot.forEach((doc) => {
           locationsFromDB.push({ id: doc.id, ...doc.data() });
         });
-        locationsFromDB.sort()
+
+      locationsFromDB.sort((a, b) => {
+        const cityA = a.city.toUpperCase(); // ignore upper and lowercase
+        const cityB = b.city.toUpperCase(); // ignore upper and lowercase
+        if (cityA < cityB) {
+          return -1;
+        }
+        if (cityA > cityB) {
+          return 1;
+        }
+      });
+
+
         for (const location of locationsFromDB) {
           urls.push(
             `https://api.openweathermap.org/data/3.0/onecall?lat=${location.coordinates.lat}&lon=${location.coordinates.lng}&units=imperial&appid=${weatherApiKey}`
