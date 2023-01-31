@@ -35,6 +35,7 @@ const Weather = () => {
         querySnapshot.forEach((doc) => {
           locationsFromDB.push({ id: doc.id, ...doc.data() });
         });
+        locationsFromDB.sort()
         for (const location of locationsFromDB) {
           urls.push(
             `https://api.openweathermap.org/data/3.0/onecall?lat=${location.coordinates.lat}&lon=${location.coordinates.lng}&units=imperial&appid=${weatherApiKey}`
@@ -44,7 +45,6 @@ const Weather = () => {
         Promise.all(urls.map((url) => fetch(url))).then((responses) =>
           Promise.all(responses.map((res) => res.json()))
             .then((data) => {
-              //console.log("data", data);
               for (var i = 0; i < data.length; i++) {
                 locationsFromDB[i].temp = data[i].current.temp;
                 locationsFromDB[i].tempFeelsLike = data[i].current.feels_like;
@@ -64,7 +64,6 @@ const Weather = () => {
                 locationsFromDB[i].extend = false;
               }
               setLocationsFromDB(locationsFromDB);
-              //console.log("location", locationsFromDB);
             })
             .catch((error) => console.log("ERROR:", error))
         );
@@ -73,9 +72,10 @@ const Weather = () => {
       } finally {
         setIsLoading(false);
       }
+      console.log('whee')
     })();
     //eslint-disable-next-line
-  }, []);
+  }, [searchedLocations]);
 
   const handleChange = (address) => {
     setAddress(address);
@@ -110,7 +110,7 @@ const Weather = () => {
               setModal("modal-visible");
               setTimeout(() => {
                 setModal("hidden");
-              }, 1000);
+              }, 1500);
             } else {
               setSearchedLocations([...searchedLocations, locationToSave]);
             }
@@ -121,6 +121,7 @@ const Weather = () => {
   };
 
   const handleAddLocationToDB = (location) => {
+    console.log("location", location);
     const locationsToKeep = searchedLocations.filter(
       (item) => item !== location
     );
@@ -134,6 +135,7 @@ const Weather = () => {
         console.log("ERROR:", err);
       }
     })();
+    //THIS NEEDS TO BE FIXED
     setSearchedLocations(locationsToKeep);
     setLocationsFromDB([...locationsFromDB, location]);
   };
@@ -196,11 +198,7 @@ const Weather = () => {
       <article id="locations-fromDB-container">
         {!isLoading &&
           locationsFromDB.map((location, index) => (
-            <section
-              className="single-location"
-              id={location.id}
-              key={index}
-            >
+            <section className="single-location" id={location.id} key={location.id}>
               <p className="location-header">
                 {location.city} - {location.temp}&deg;F
               </p>
@@ -241,7 +239,7 @@ const Weather = () => {
             <section
               className="searched-locations"
               onClick={() => handleAddLocationToDB(location)}
-              key={index}
+              key={location.city}
             >
               <section className="temperature-section">
                 {location.city} : {location.temp}&deg;F
@@ -263,14 +261,3 @@ const Weather = () => {
 };
 
 export default Weather;
-
-/*     (async () => {
-      try {
-        await addDoc(
-          collection(db, "users", user.uid, "weatherLocations"),
-          locationToSave
-        );
-      } catch (err) {
-        console.log("ERROR:", err);
-      }
-    })(); */
