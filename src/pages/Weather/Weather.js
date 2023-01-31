@@ -37,8 +37,8 @@ const Weather = () => {
         });
 
       locationsFromDB.sort((a, b) => {
-        const cityA = a.city.toUpperCase(); // ignore upper and lowercase
-        const cityB = b.city.toUpperCase(); // ignore upper and lowercase
+        const cityA = a.city.toUpperCase();
+        const cityB = b.city.toUpperCase();
         if (cityA < cityB) {
           return -1;
         }
@@ -84,7 +84,7 @@ const Weather = () => {
       } finally {
         setIsLoading(false);
       }
-      console.log('whee')
+      console.log('useEffect')
     })();
     //eslint-disable-next-line
   }, [searchedLocations]);
@@ -133,7 +133,6 @@ const Weather = () => {
   };
 
   const handleAddLocationToDB = (location) => {
-    console.log("location", location);
     const locationsToKeep = searchedLocations.filter(
       (item) => item !== location
     );
@@ -147,7 +146,6 @@ const Weather = () => {
         console.log("ERROR:", err);
       }
     })();
-    //THIS NEEDS TO BE FIXED
     setSearchedLocations(locationsToKeep);
     setLocationsFromDB([...locationsFromDB, location]);
   };
@@ -187,11 +185,7 @@ const Weather = () => {
     })();
     console.log("locid", location.id);
   };
-  /*
-         const noteRef = doc(db, "users", user.uid, "notes", id);
-      await deleteDoc(noteRef);
-      setNotes(notes.filter((item) => item.id !== id));
- */
+
   return (
     <article>
       <Navbar />
