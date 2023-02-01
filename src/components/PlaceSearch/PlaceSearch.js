@@ -1,9 +1,6 @@
 import React from "react";
-import PlacesAutocomplete, {
-  geocodeByAddress,
-  getLatLng,
-} from "react-places-autocomplete";
-import { useState } from "react";
+import PlacesAutocomplete from "react-places-autocomplete";
+//import { useState } from "react";
 
 const LocationSearch = ({handleChange,handleSelect, address }) => {
 
@@ -11,7 +8,7 @@ const LocationSearch = ({handleChange,handleSelect, address }) => {
       <PlacesAutocomplete value={address} onChange={handleChange} onSelect={handleSelect}>
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <section id="places-autocomplete-section">
-            <label>Your Location</label>
+            <label>Your Location.</label>
             <p>
               <input
                 type="text"

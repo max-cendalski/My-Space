@@ -367,9 +367,9 @@ code {
   flex-wrap: wrap;
   align-items: center;
   width: 90%;
+  border: 1px solid rgb(193, 190, 190);
   height: 2.5rem;
   margin-block-end: 1rem;
-  border: 1px solid gray;
   transition: 0.2s linear;
   padding: 0.5rem;
   overflow: hidden;
@@ -380,8 +380,8 @@ code {
   flex-wrap: wrap;
   align-items: center;
   width: 90%;
+  border: 1px solid rgb(193, 190, 190);
   height: 17.5rem;
-  border: 1px solid grey;
   transition: 0.3s linear;
   margin-block-start: 1rem;
   margin-block-end: 1rem;

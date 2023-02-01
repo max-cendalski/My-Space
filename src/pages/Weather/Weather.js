@@ -123,7 +123,7 @@ const Weather = () => {
               setModal("modal-visible");
               setTimeout(() => {
                 setModal("hidden");
-              }, 1500);
+              }, 1300);
             } else {
               let searchedLocationsToRender = searchedLocations.filter((item)=> item.city !== locationToSave.city)
               setSearchedLocations([...searchedLocationsToRender, locationToSave]);
