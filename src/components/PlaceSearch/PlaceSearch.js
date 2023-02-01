@@ -8,14 +8,14 @@ const LocationSearch = ({handleChange,handleSelect, address }) => {
       <PlacesAutocomplete value={address} onChange={handleChange} onSelect={handleSelect}>
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <section id="places-autocomplete-section">
-            <label>Your Location.</label>
+            <label>Location</label>
             <p>
               <input
                 type="text"
                 name="location"
+                placeholder="type city and country"
                 required
                 {...getInputProps({
-                  placeholder: "city and country",
                   className: "location-search-input",
                 })}
               />
