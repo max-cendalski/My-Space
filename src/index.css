@@ -381,7 +381,7 @@ code {
   align-items: center;
   width: 90%;
   border: 1px solid rgb(193, 190, 190);
-  height: 20.5rem;
+  height: 21rem;
   transition: 0.3s linear;
   margin-block-end: 1rem;
   padding: 0.5rem;
@@ -396,10 +396,11 @@ code {
 }
 .detail-location-data {
   width: 100%;
+  margin-block-end: 0.8rem;
 }
 
 .detail-location-data * {
-  margin: 0.3rem;
+  margin: 0.5rem;
 }
 
 .down-arrow-button {
@@ -463,20 +464,7 @@ code {
 
 
 
-/* .photo-section {
-  width: 30rem;
-  height: 20rem;
-  background-color: rgb(142, 142, 193);
-  opacity: 0;
-}
 
-.photo-section2 {
-  width: 70rem;
-  height: 40rem;
-  background-color: rgb(142, 142, 193);
-  transition: 2s linear;
-  opacity: 2;
-} */
 
 /* ------------------*/
 .date-paragraph {
