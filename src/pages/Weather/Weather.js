@@ -36,19 +36,18 @@ const Weather = () => {
           locationsFromDB.push({ id: doc.id, ...doc.data() });
         });
 
-      locationsFromDB.sort((a, b) => {
-        const cityA = a.city.toUpperCase();
-        const cityB = b.city.toUpperCase();
-        if (cityA < cityB) {
-          return -1;
-        }
-        if (cityA > cityB) {
-          return 1;
-        } else {
-          return 0
-        }
-      });
-
+        locationsFromDB.sort((a, b) => {
+          const cityA = a.city.toUpperCase();
+          const cityB = b.city.toUpperCase();
+          if (cityA < cityB) {
+            return -1;
+          }
+          if (cityA > cityB) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
 
         for (const location of locationsFromDB) {
           urls.push(
@@ -86,7 +85,7 @@ const Weather = () => {
       } finally {
         setIsLoading(false);
       }
-      console.log('useEffect')
+      console.log("useEffect");
     })();
     //eslint-disable-next-line
   }, [searchedLocations]);
@@ -113,21 +112,53 @@ const Weather = () => {
               temp: data.current.temp,
               extend: false,
             };
-            let check;
-            locationsFromDB.forEach((item) => {
-              if (item.city === locationToSave.city) {
-                check = true;
+
+            for (var i = 0; i < locationsFromDB.length; i++) {
+              if (locationsFromDB[i].city === locationToSave.city ) {
+                setModal("modal-visible");
+                setTimeout(() => {
+                  setModal("hidden");
+                }, 1300);
+                break;
+              } else {
+                  let searchedLocationsToRender = searchedLocations.filter(
+                    (item) => item.city !== locationToSave.city
+                  );
               }
-            });
-            if (check === true) {
+            }
+     /*        locationsFromDB.forEach((item) => {
+               if (item.city === locationToSave.city) {
+                let searchedLocationsToRender = searchedLocations.filter(
+                  (item) => item.city !== locationToSave.city
+                );
+                setModal("modal-visible");
+                setTimeout(() => {
+                  setModal("hidden");
+                }, 1300);
+              }  else {
+                let searchedLocationsToRender = searchedLocations.filter(
+                  (item) => item.city !== locationToSave.city
+                );
+                setSearchedLocations([
+                  ...searchedLocationsToRender,
+                  locationToSave,
+                ]);
+              }
+            }); */
+            /*    if (check === true) {
               setModal("modal-visible");
               setTimeout(() => {
                 setModal("hidden");
               }, 1300);
             } else {
-              let searchedLocationsToRender = searchedLocations.filter((item)=> item.city !== locationToSave.city)
-              setSearchedLocations([...searchedLocationsToRender, locationToSave]);
-            }
+              let searchedLocationsToRender = searchedLocations.filter(
+                (item) => item.city !== locationToSave.city
+              );
+              setSearchedLocations([
+                ...searchedLocationsToRender,
+                locationToSave,
+              ]);
+            } */
           });
       })
       .catch((error) => console.error("Error", error));
@@ -150,6 +181,7 @@ const Weather = () => {
     })();
     setSearchedLocations(locationsToKeep);
     setLocationsFromDB([...locationsFromDB, location]);
+    console.log("locfrodv", locationsFromDB);
   };
 
   const handleDBLocationArrowClick = (location) => {
@@ -206,7 +238,11 @@ const Weather = () => {
       <article id="locations-fromDB-container">
         {!isLoading &&
           locationsFromDB.map((location, index) => (
-            <section className="single-location" id={location.id} key={location.id}>
+            <section
+              className="single-location"
+              id={location.id}
+              key={location.id}
+            >
               <p className="location-header">
                 {location.city} - {location.temp}&deg;F
               </p>
