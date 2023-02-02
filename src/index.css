@@ -381,9 +381,8 @@ code {
   align-items: center;
   width: 90%;
   border: 1px solid rgb(193, 190, 190);
-  height: 17.5rem;
+  height: 20.5rem;
   transition: 0.3s linear;
-  margin-block-start: 1rem;
   margin-block-end: 1rem;
   padding: 0.5rem;
   overflow: hidden;
@@ -393,27 +392,23 @@ code {
   width: 80%;
   font-size: 1rem;
   font-weight: 500;
-  margin-inline-start: 0.2rem;
-
+  margin-inline-start: 0.3rem;
 }
 .detail-location-data {
   width: 100%;
-
-  margin-block-end: 1rem;
 }
 
 .detail-location-data * {
-  margin: 0.4rem;
+  margin: 0.3rem;
 }
 
 .down-arrow-button {
-  margin-inline-end: 0.5rem;
+  margin-inline-end: 0.3rem;
   height: 1.4rem;
   background-color: #18946F;
   color: white;
   border: none;
 }
-
 
 .searched-locations {
   width: 90%;
@@ -428,6 +423,7 @@ code {
   margin-inline-start: 0;
   font-size: 1rem;
 }
+
 .add-location-button {
   width: 35px;
   height: 35px;
@@ -438,13 +434,25 @@ code {
   color: white;
 }
 
+.add-location-to-homepage {
+  width: 100%;
+  font-size: 1rem;
+  color: white;
+  background-color: var(--darkGreen);
+  padding-block: 0.375rem;
+  margin-inline: 0.3rem;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
 .modal-visible {
   position: absolute;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.8);
-    width: 100%;
-    height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  height: 100vh;
 }
 
 .modal-info {

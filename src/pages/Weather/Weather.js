@@ -12,7 +12,6 @@ import {
 import { db } from "../../firebase/Firebase";
 import { UserAuth } from "../../context/AuthContext";
 import { useState, useEffect } from "react";
-
 import { format } from "date-fns";
 
 const Weather = () => {
@@ -73,7 +72,6 @@ const Weather = () => {
                 locationsFromDB[i].pressure = data[i].current.pressure;
                 locationsFromDB[i].windSpeed = data[i].current.wind_speed;
                 locationsFromDB[i].visibility = data[i].current.visibility;
-
                 locationsFromDB[i].extend = false;
               }
               setLocationsFromDB(locationsFromDB);
@@ -112,7 +110,6 @@ const Weather = () => {
               temp: data.current.temp,
               extend: false,
             };
-            console.log("loccity", locationToSave.city);
             if (
               locationsFromDB.some((item) => item.city === locationToSave.city)
             ) {
@@ -121,13 +118,13 @@ const Weather = () => {
                 setModal("hidden");
               }, 1300);
             } else {
-               let searchedLocationsToRender = searchedLocations.filter(
-                 (item) => item.city !== locationToSave.city
-               );
-               setSearchedLocations([
-                 ...searchedLocationsToRender,
-                 locationToSave,
-               ]);
+              let searchedLocationsToRender = searchedLocations.filter(
+                (item) => item.city !== locationToSave.city
+              );
+              setSearchedLocations([
+                ...searchedLocationsToRender,
+                locationToSave,
+              ]);
             }
           });
       })
@@ -190,6 +187,10 @@ const Weather = () => {
     console.log("locid", location.id);
   };
 
+  const handleAddLocationToHomepage = (location) => {
+    console.log('loc.id',location.id)
+  }
+
   return (
     <article>
       <Navbar />
@@ -243,6 +244,12 @@ const Weather = () => {
                   Delete
                 </button>
               </section>
+              <button
+                className="add-location-to-homepage"
+                onClick={() => handleAddLocationToHomepage(location)}
+              >
+                Add Location to Homepage
+              </button>
             </section>
           ))}
       </article>
