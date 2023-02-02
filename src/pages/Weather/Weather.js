@@ -114,28 +114,13 @@ const Weather = () => {
             };
 
             for (var i = 0; i < locationsFromDB.length; i++) {
-              if (locationsFromDB[i].city === locationToSave.city ) {
+              if (locationsFromDB[i].city === locationToSave.city) {
                 setModal("modal-visible");
                 setTimeout(() => {
                   setModal("hidden");
                 }, 1300);
                 break;
               } else {
-                  let searchedLocationsToRender = searchedLocations.filter(
-                    (item) => item.city !== locationToSave.city
-                  );
-              }
-            }
-     /*        locationsFromDB.forEach((item) => {
-               if (item.city === locationToSave.city) {
-                let searchedLocationsToRender = searchedLocations.filter(
-                  (item) => item.city !== locationToSave.city
-                );
-                setModal("modal-visible");
-                setTimeout(() => {
-                  setModal("hidden");
-                }, 1300);
-              }  else {
                 let searchedLocationsToRender = searchedLocations.filter(
                   (item) => item.city !== locationToSave.city
                 );
@@ -144,21 +129,7 @@ const Weather = () => {
                   locationToSave,
                 ]);
               }
-            }); */
-            /*    if (check === true) {
-              setModal("modal-visible");
-              setTimeout(() => {
-                setModal("hidden");
-              }, 1300);
-            } else {
-              let searchedLocationsToRender = searchedLocations.filter(
-                (item) => item.city !== locationToSave.city
-              );
-              setSearchedLocations([
-                ...searchedLocationsToRender,
-                locationToSave,
-              ]);
-            } */
+            }
           });
       })
       .catch((error) => console.error("Error", error));
