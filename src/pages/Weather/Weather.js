@@ -112,23 +112,22 @@ const Weather = () => {
               temp: data.current.temp,
               extend: false,
             };
-
-            for (var i = 0; i < locationsFromDB.length; i++) {
-              if (locationsFromDB[i].city === locationToSave.city) {
-                setModal("modal-visible");
-                setTimeout(() => {
-                  setModal("hidden");
-                }, 1300);
-                break;
-              } else {
-                let searchedLocationsToRender = searchedLocations.filter(
-                  (item) => item.city !== locationToSave.city
-                );
-                setSearchedLocations([
-                  ...searchedLocationsToRender,
-                  locationToSave,
-                ]);
-              }
+            console.log("loccity", locationToSave.city);
+            if (
+              locationsFromDB.some((item) => item.city === locationToSave.city)
+            ) {
+              setModal("modal-visible");
+              setTimeout(() => {
+                setModal("hidden");
+              }, 1300);
+            } else {
+               let searchedLocationsToRender = searchedLocations.filter(
+                 (item) => item.city !== locationToSave.city
+               );
+               setSearchedLocations([
+                 ...searchedLocationsToRender,
+                 locationToSave,
+               ]);
             }
           });
       })
