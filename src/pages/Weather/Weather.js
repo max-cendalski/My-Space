@@ -194,7 +194,8 @@ const Weather = () => {
       country: location.country,
       temperature: location.temp,
       cluds: location.cloudsDescription,
-      coordinates: location.coordinates
+      coordinates: location.coordinates,
+      extended: true
     }
     console.log("loc.id", locationToHomepage);
         const addLocationToHome = async () => {
