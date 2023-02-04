@@ -59,17 +59,12 @@ const Weather = () => {
           Promise.all(responses.map((res) => res.json()))
             .then((data) => {
               for (var i = 0; i < data.length; i++) {
-
-
                 locationsFromDB[i].temp = data[i].current.temp;
                 locationsFromDB[i].tempFeelsLike = data[i].current.feels_like;
                 locationsFromDB[i].cloudsDescription =
-                  data[i].current.weather[0].description;
+                data[i].current.weather[0].description;
                 locationsFromDB[i].timeZone = data[i].current.timeZone_offset;
-                locationsFromDB[i].sunrise = format(
-                  data[i].current.sunrise * 1000,
-                  "p"
-                );
+                locationsFromDB[i].sunrise = format(data[i].current.sunrise * 1000,"p");
                 locationsFromDB[i].sunset = format(data[i].current.sunset * 1000, "p");
                 locationsFromDB[i].uvi = data[i].current.uvi;
                 locationsFromDB[i].humidity = data[i].current.humidity;
@@ -78,7 +73,6 @@ const Weather = () => {
                 locationsFromDB[i].visibility = data[i].current.visibility;
                 locationsFromDB[i].extend = false;
               }
-
               setLocationsFromDB(locationsFromDB);
             })
             .catch((error) => console.log("ERROR:", error))
