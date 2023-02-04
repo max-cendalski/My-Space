@@ -51,7 +51,7 @@ const Weather = () => {
 
         for (const location of locationsFromDB) {
           urls.push(
-            `https://api.openweathermap.org/data/3.0/onecall?lat=${location.coordinates.lat}&lon=${location.coordinates.lng}&units=imperial&appid=${weatherApiKey}`
+            `https://api.openweathermap.org/data/3.0/onecall?lat=${location.coordinates.lat}&lon=${location.coordinates.lng}&units=imperial&exclude=minutely,hourly,daily&appid=${weatherApiKey}`
           );
         }
 
