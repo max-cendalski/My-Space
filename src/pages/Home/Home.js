@@ -4,19 +4,15 @@ import { useState, useEffect } from "react";
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import Navbar from "../../components/Navbar/Navbar";
-import {format} from "date-fns";
-
+import { format } from "date-fns";
 
 const Home = () => {
   const [idea, setIdea] = useState(null);
   const { user } = UserAuth();
-  const [currentTime, setCurrentTime] = useState("")
-
-  setTimeout(()=>{
-    setCurrentTime(format(new Date, "pp"))
-  }, 1000)
+  const [currentTime, setCurrentTime] = useState("");
 
   useEffect(() => {
+    setCurrentTime(format(new Date(), "pp"));
     const fetchIdea = async () => {
       try {
         const ideaRef = doc(
@@ -42,6 +38,9 @@ const Home = () => {
     // eslint-disable-next-line
   }, []);
 
+  setTimeout(() => {
+    setCurrentTime(format(new Date(), "pp"));
+  }, 1000);
 
   return (
     <article id="home-container">
@@ -53,7 +52,7 @@ const Home = () => {
           <h3>You need to be signed in to use all features! </h3>
         </article>
       )}
-      <article>Time: {currentTime} </article>
+      <article>{currentTime && <p>Time: {currentTime} </p>}</article>
       {idea && (
         <section id="idea-home-page">
           <p>
