@@ -8,7 +8,7 @@ import {
   collection,
   addDoc,
   deleteDoc,
-  setDoc
+  setDoc,
 } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { UserAuth } from "../../context/AuthContext";
@@ -59,16 +59,18 @@ const Weather = () => {
           Promise.all(responses.map((res) => res.json()))
             .then((data) => {
               for (var i = 0; i < data.length; i++) {
+
+
                 locationsFromDB[i].temp = data[i].current.temp;
                 locationsFromDB[i].tempFeelsLike = data[i].current.feels_like;
                 locationsFromDB[i].cloudsDescription =
                   data[i].current.weather[0].description;
                 locationsFromDB[i].timeZone = data[i].current.timeZone_offset;
                 locationsFromDB[i].sunrise = format(
-                  data[i].current.sunrise,
+                  data[i].current.sunrise * 1000,
                   "p"
                 );
-                locationsFromDB[i].sunset = format(data[i].current.sunset, "p");
+                locationsFromDB[i].sunset = format(data[i].current.sunset * 1000, "p");
                 locationsFromDB[i].uvi = data[i].current.uvi;
                 locationsFromDB[i].humidity = data[i].current.humidity;
                 locationsFromDB[i].pressure = data[i].current.pressure;
@@ -76,6 +78,7 @@ const Weather = () => {
                 locationsFromDB[i].visibility = data[i].current.visibility;
                 locationsFromDB[i].extend = false;
               }
+
               setLocationsFromDB(locationsFromDB);
             })
             .catch((error) => console.log("ERROR:", error))
@@ -196,21 +199,21 @@ const Weather = () => {
       temperature: location.temp,
       cluds: location.cloudsDescription,
       coordinates: location.coordinates,
-      extended: true
-    }
+      extended: true,
+    };
     console.log("loc.id", locationToHomepage);
-        const addLocationToHome = async () => {
-          try {
-            await setDoc(
-              doc(db, "users", user.uid, "locationHome", "locationHomePageID"),
-              locationToHomepage
-            );
-          } catch (err) {
-            console.error("Something went wrong:", err);
-          }
-        };
-        addLocationToHome();
-  }
+    const addLocationToHome = async () => {
+      try {
+        await setDoc(
+          doc(db, "users", user.uid, "locationHome", "locationHomePageID"),
+          locationToHomepage
+        );
+      } catch (err) {
+        console.error("Something went wrong:", err);
+      }
+    };
+    addLocationToHome();
+  };
 
   return (
     <article>
