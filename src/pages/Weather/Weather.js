@@ -8,6 +8,7 @@ import {
   collection,
   addDoc,
   deleteDoc,
+  setDoc
 } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { UserAuth } from "../../context/AuthContext";
@@ -188,7 +189,25 @@ const Weather = () => {
   };
 
   const handleAddLocationToHomepage = (location) => {
-    console.log('loc.id',location.id)
+    const locationToHomepage = {
+      city: location.city,
+      country: location.country,
+      temperature: location.temp,
+      cluds: location.cloudsDescription,
+      coordinates: location.coordinates
+    }
+    console.log("loc.id", locationToHomepage);
+        const addLocationToHome = async () => {
+          try {
+            await setDoc(
+              doc(db, "users", user.uid, "locationHome", "locationHomePageID"),
+              locationToHomepage
+            );
+          } catch (err) {
+            console.error("Something went wrong:", err);
+          }
+        };
+        addLocationToHome();
   }
 
   return (
