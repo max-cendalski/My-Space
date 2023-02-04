@@ -69,6 +69,7 @@ const Weather = () => {
                   "p"
                 );
                 locationsFromDB[i].sunset = format(data[i].current.sunset, "p");
+                locationsFromDB[i].uvi = data[i].current.uvi;
                 locationsFromDB[i].humidity = data[i].current.humidity;
                 locationsFromDB[i].pressure = data[i].current.pressure;
                 locationsFromDB[i].windSpeed = data[i].current.wind_speed;
@@ -254,6 +255,7 @@ const Weather = () => {
                 </p>
                 <p>Sunrise: {location.sunrise}</p>
                 <p>Sunset: {location.sunset}</p>
+                <p>UV index: {location.uvi}</p>
                 <p>Humidity: {location.humidity} %</p>
                 <p>Pressure: {location.pressure} hPa</p>
                 <p>Wind Speed: {location.windSpeed} m/s</p>
