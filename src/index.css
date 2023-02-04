@@ -373,6 +373,7 @@ code {
   transition: 0.2s linear;
   padding: 0.5rem;
   overflow: hidden;
+  border-radius: 5px;
 }
 
 .detail-location {
@@ -386,6 +387,7 @@ code {
   margin-block-end: 1rem;
   padding: 0.5rem;
   overflow: hidden;
+  border-radius: 5px;
 }
 
 .location-header {
@@ -409,6 +411,7 @@ code {
   background-color: #18946F;
   color: white;
   border: none;
+  border-radius: 3px;
 }
 
 .searched-locations {
