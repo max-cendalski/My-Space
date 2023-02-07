@@ -199,7 +199,7 @@ const Weather = () => {
     const addLocationToHome = async () => {
       try {
         await setDoc(
-          doc(db, "users", user.uid, "locationHome", "locationHomePageID"),
+          doc(db, "users", user.uid, "locationHome", "locationHomepageID"),
           locationToHomepage
         );
       } catch (err) {
