@@ -263,6 +263,8 @@ code {
 }
 
 #idea-home-page {
+  display: flex;
+  flex-direction: column;
   width: 90%;
   color: var(--red);
   font-style: italic;

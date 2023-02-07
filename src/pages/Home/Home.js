@@ -80,6 +80,10 @@ const Home = () => {
     // eslint-disable-next-line
   }, []);
 
+  const handleIdeaHomepageArrowButton = () => {
+    console.log('whee')
+  }
+
   return (
     <article id="home-container">
       <Navbar />
@@ -100,6 +104,16 @@ const Home = () => {
 
       {idea && (
         <section id="idea-home-page">
+          <button
+            className="down-arrow-button"
+            onClick = {()=> handleIdeaHomepageArrowButton(idea)}
+          >
+            {idea.extend === true ? (
+              <i className="fa-solid fa-angle-up fa-xl"></i>
+            ) : (
+              <i className="fa-solid fa-angle-down fa-xl"></i>
+            )}
+          </button>
           <p>
             <q>{idea.text}</q>
           </p>

@@ -101,6 +101,7 @@ const Ideas = () => {
 
   const handleAddIdeaToHomepage = (id) => {
     const ideaToHomePage = ideasToRender.filter((item) => item.id === id);
+    ideaToHomePage[0].extend = true
     const addIdea = async () => {
       try {
         await setDoc(
