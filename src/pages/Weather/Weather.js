@@ -191,7 +191,7 @@ const Weather = () => {
       city: location.city,
       country: location.country,
       temperature: location.temp,
-      cluds: location.cloudsDescription,
+      clouds: location.cloudsDescription,
       coordinates: location.coordinates,
       extended: true,
     };

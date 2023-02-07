@@ -12,19 +12,16 @@ const Home = () => {
   const [currentTime, setCurrentTime] = useState("");
   const [currentDay, setCurrentDay] = useState("");
   const [locationHomepage, setLocationHomepage] = useState(null);
-  const [homepageWeather, setHomepageWeather] = useState({
-    city: "",
-    temperatur: "",
-    clouds: "",
-  });
+
 
   useEffect(() => {
+    const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
     setCurrentDay(format(new Date(), "E, MMMM dd"));
     const timeInterval = setInterval(() => {
       setCurrentTime(format(new Date(), "pp"));
     }, 1000);
 
-    const fetchWeather = async () => {
+    (async () => {
       try {
         const locationHomeRef = doc(
           db,
@@ -35,14 +32,22 @@ const Home = () => {
         );
         const docSnap = await getDoc(locationHomeRef);
         if (docSnap.exists()) {
+          console.log('docsnapexist')
           setLocationHomepage(docSnap.data());
+          fetch(
+            `https://api.openweathermap.org/data/3.0/onecall?lat=${docSnap.data().coordinates.lat}&lon=${docSnap.data().coordinates.lng}&units=imperial&exclude=minutely,hourly,daily&appid=${weatherApiKey}`
+          )
+            .then((res) => res.json())
+            .then((data) => {
+              console.log("fetchData", data);
+            });
         } else {
           console.log("No such document!");
         }
       } catch (err) {
         console.log("SOMETHING WENT WRONG", err);
       }
-    };
+    })();
 
     const fetchIdea = async () => {
       try {
@@ -65,9 +70,8 @@ const Home = () => {
     };
     if (user.uid) {
       fetchIdea();
-      fetchWeather();
     }
-
+    console.log('useEffeuns')
     return () => {
       clearInterval(timeInterval);
     };
@@ -84,17 +88,20 @@ const Home = () => {
           <h3>You need to be signed in to use all features! </h3>
         </article>
       )}
-      <article id="time-location-container">
-        <section className="time-container">
-          <h4>{currentDay}</h4>
-          <h2>{currentTime}</h2>
-        </section>
-        <section className="location-homepage-container">
-          <h4>Aliso Viejo</h4>
-          <h2>70&deg;</h2>
-          <p>clear sky</p>
-        </section>
-      </article>
+      {locationHomepage && (
+        <article id="time-location-container">
+          <section className="time-container">
+            <h4>{currentDay}</h4>
+            <h2>{currentTime}</h2>
+          </section>
+          <section className="location-homepage-container">
+            <h4>{locationHomepage.city}</h4>
+            <h2>{locationHomepage.temperature}&deg;</h2>
+            <p>{locationHomepage.clouds}</p>
+          </section>
+        </article>
+      )}
+
       {idea && (
         <section id="idea-home-page">
           <p>
@@ -122,9 +129,3 @@ const Home = () => {
 };
 
 export default Home;
-
-/*  fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${location.coordinates.lat}&lon=${location.coordinates.lng}&units=imperial&exclude=minutely,hourly,daily&appid=${weatherApiKey}`)
-            .then(res=> res.json())
-            .then((data) => {
-              console.log(data)
-            }) */
