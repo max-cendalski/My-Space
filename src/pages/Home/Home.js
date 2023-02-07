@@ -10,8 +10,11 @@ const Home = () => {
   const [idea, setIdea] = useState(null);
   const { user } = UserAuth();
   const [currentTime, setCurrentTime] = useState("");
+  const [currentDay, setCurrentDay] = useState("");
 
   useEffect(() => {
+
+    setCurrentDay(format(new Date(), "E, MMMM dd"));
     const timeInterval = setInterval(() => {
       setCurrentTime(format(new Date(), "pp"));
     }, 1000);
@@ -56,8 +59,10 @@ const Home = () => {
         </article>
       )}
       <article id="time-location-container">
-        <section className="time-container">{currentTime}</section>
-        <section className="location-homepage-container"><h1>Aliso Viejo</h1></section>
+        <section className="time-container"><h4>{currentDay}</h4><h2>{currentTime}</h2></section>
+        <section className="location-homepage-container"><h4>Aliso Viejo</h4>
+        <h2>70&deg;</h2>
+        <p>clear sky</p></section>
       </article>
       {idea && (
         <section id="idea-home-page">
