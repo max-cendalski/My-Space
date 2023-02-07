@@ -12,7 +12,10 @@ const Home = () => {
   const [currentTime, setCurrentTime] = useState("");
 
   useEffect(() => {
-    setCurrentTime(format(new Date(), "pp"));
+    const timeInterval = setInterval(() => {
+      setCurrentTime(format(new Date(), "pp"));
+    }, 1000);
+
     const fetchIdea = async () => {
       try {
         const ideaRef = doc(
@@ -35,12 +38,12 @@ const Home = () => {
     if (user.uid) {
       fetchIdea();
     }
+
+    return () => {
+      clearInterval(timeInterval);
+    };
     // eslint-disable-next-line
   }, []);
-
-  setTimeout(() => {
-    setCurrentTime(format(new Date(), "pp"));
-  }, 1000);
 
   return (
     <article id="home-container">
@@ -52,7 +55,10 @@ const Home = () => {
           <h3>You need to be signed in to use all features! </h3>
         </article>
       )}
-      <article>{currentTime && <p>Time: {currentTime} </p>}</article>
+      <article id="time-location-container">
+        <section className="time-container">{currentTime}</section>
+        <section className="location-homepage-container"><h1>Aliso Viejo</h1></section>
+      </article>
       {idea && (
         <section id="idea-home-page">
           <p>
