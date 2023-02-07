@@ -73,16 +73,15 @@ const Weather = () => {
                 locationsFromDB[i].visibility = data[i].current.visibility;
                 locationsFromDB[i].extend = false;
               }
-              setLocationsFromDB(locationsFromDB);
+              setIsLoading(false);
             })
             .catch((error) => console.log("ERROR:", error))
         );
       } catch (err) {
         console.log("Error:", err);
       } finally {
-        setIsLoading(false);
+        setLocationsFromDB(locationsFromDB);
       }
-      console.log("useEffect");
     })();
     //eslint-disable-next-line
   }, [searchedLocations]);

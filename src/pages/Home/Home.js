@@ -11,12 +11,13 @@ const Home = () => {
   const { user } = UserAuth();
   const [currentTime, setCurrentTime] = useState("");
   const [currentDay, setCurrentDay] = useState("");
-  const [locationHomepage, setLocationHomepage] = useState(null);
-
+  const [homepageWeather, setHomepageWeather] = useState(null);
 
   useEffect(() => {
     const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
     setCurrentDay(format(new Date(), "E, MMMM dd"));
+    setCurrentTime(format(new Date(), "pp"));
+
     const timeInterval = setInterval(() => {
       setCurrentTime(format(new Date(), "pp"));
     }, 1000);
@@ -32,14 +33,16 @@ const Home = () => {
         );
         const docSnap = await getDoc(locationHomeRef);
         if (docSnap.exists()) {
-          console.log('docsnapexist')
-          setLocationHomepage(docSnap.data());
           fetch(
-            `https://api.openweathermap.org/data/3.0/onecall?lat=${docSnap.data().coordinates.lat}&lon=${docSnap.data().coordinates.lng}&units=imperial&exclude=minutely,hourly,daily&appid=${weatherApiKey}`
+            `https://api.openweathermap.org/data/3.0/onecall?lat=${docSnap.data().coordinates.lat}&lon=${docSnap.data().coordinates.lng}&units=imperial&exclude=minutely,hourly,daily,alerts&appid=${weatherApiKey}`
           )
             .then((res) => res.json())
             .then((data) => {
-              console.log("fetchData", data);
+              setHomepageWeather({
+                city: docSnap.data().city,
+                temp: data.current.temp,
+                clouds: data.current.weather[0].description
+              })
             });
         } else {
           console.log("No such document!");
@@ -71,7 +74,6 @@ const Home = () => {
     if (user.uid) {
       fetchIdea();
     }
-    console.log('useEffeuns')
     return () => {
       clearInterval(timeInterval);
     };
@@ -81,23 +83,17 @@ const Home = () => {
   return (
     <article id="home-container">
       <Navbar />
-      {user ? (
-        <h3>{user.displayName}</h3>
-      ) : (
-        <article>
-          <h3>You need to be signed in to use all features! </h3>
-        </article>
-      )}
-      {locationHomepage && (
+
+      {homepageWeather && (
         <article id="time-location-container">
           <section className="time-container">
             <h4>{currentDay}</h4>
             <h2>{currentTime}</h2>
           </section>
           <section className="location-homepage-container">
-            <h4>{locationHomepage.city}</h4>
-            <h2>{locationHomepage.temperature}&deg;</h2>
-            <p>{locationHomepage.clouds}</p>
+            <h4>{homepageWeather.city}</h4>
+            <h2>{homepageWeather.temp}&deg;</h2>
+            <p>{homepageWeather.clouds}</p>
           </section>
         </article>
       )}
