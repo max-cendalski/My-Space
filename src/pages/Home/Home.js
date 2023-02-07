@@ -84,13 +84,15 @@ const Home = () => {
     // eslint-disable-next-line
   }, []);
 
-  const handleIdeaHomepageArrowButton = () => {
+  const handleIdeaHomepageArrowButton = (idea) => {
     if (idea.extend === true) {
       idea.extend = false;
+      setIdea(idea)
       var el = document.querySelector(".idea-homepage-visible");
       el.className = "idea-homepage-hidden";
     } else {
       idea.extend = true;
+      setIdea(idea)
       el = document.querySelector(".idea-homepage-hidden");
       el.className = "idea-homepage-visible";
     }
