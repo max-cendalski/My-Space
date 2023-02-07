@@ -262,15 +262,32 @@ code {
   font-size: 1.375rem;
 }
 
-#idea-home-page {
+.idea-homepage-visible {
   display: flex;
   flex-direction: column;
   width: 90%;
+  height: auto;
   color: var(--red);
   font-style: italic;
   font-weight: 600;
   text-indent: 10px;
+  transition: 0.4s linear;
 }
+
+.idea-homepage-hidden {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  height: 1rem;
+  color: white;
+  font-style: italic;
+  font-weight: 600;
+  text-indent: 10px;
+  transition: 0.3s linear;
+  overflow: hidden;
+}
+
+
 #ideas-header {
   text-align: center;
   margin-bottom: 1rem;
@@ -551,7 +568,6 @@ code {
 .field {
   margin-block-end: 1rem;
 }
-
 
 .hidden {
   display: none;

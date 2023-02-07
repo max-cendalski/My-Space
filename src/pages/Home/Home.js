@@ -34,15 +34,19 @@ const Home = () => {
         const docSnap = await getDoc(locationHomeRef);
         if (docSnap.exists()) {
           fetch(
-            `https://api.openweathermap.org/data/3.0/onecall?lat=${docSnap.data().coordinates.lat}&lon=${docSnap.data().coordinates.lng}&units=imperial&exclude=minutely,hourly,daily,alerts&appid=${weatherApiKey}`
+            `https://api.openweathermap.org/data/3.0/onecall?lat=${
+              docSnap.data().coordinates.lat
+            }&lon=${
+              docSnap.data().coordinates.lng
+            }&units=imperial&exclude=minutely,hourly,daily,alerts&appid=${weatherApiKey}`
           )
             .then((res) => res.json())
             .then((data) => {
               setHomepageWeather({
                 city: docSnap.data().city,
                 temp: data.current.temp,
-                clouds: data.current.weather[0].description
-              })
+                clouds: data.current.weather[0].description,
+              });
             });
         } else {
           console.log("No such document!");
@@ -81,13 +85,20 @@ const Home = () => {
   }, []);
 
   const handleIdeaHomepageArrowButton = () => {
-    console.log('whee')
-  }
+    if (idea.extend === true) {
+      idea.extend = false;
+      var el = document.querySelector(".idea-homepage-visible");
+      el.className = "idea-homepage-hidden";
+    } else {
+      idea.extend = true;
+      el = document.querySelector(".idea-homepage-hidden");
+      el.className = "idea-homepage-visible";
+    }
+  };
 
   return (
     <article id="home-container">
       <Navbar />
-
       {homepageWeather && (
         <article id="time-location-container">
           <section className="time-container">
@@ -103,15 +114,15 @@ const Home = () => {
       )}
 
       {idea && (
-        <section id="idea-home-page">
+        <section className="idea-homepage-visible">
           <button
             className="down-arrow-button"
-            onClick = {()=> handleIdeaHomepageArrowButton(idea)}
+            onClick={() => handleIdeaHomepageArrowButton(idea)}
           >
             {idea.extend === true ? (
-              <i className="fa-solid fa-angle-up fa-xl"></i>
+              <i className="fa-solid fa-angle-up fa-2xl"></i>
             ) : (
-              <i className="fa-solid fa-angle-down fa-xl"></i>
+              <i className="fa-solid fa-angle-down fa-2xl"></i>
             )}
           </button>
           <p>
