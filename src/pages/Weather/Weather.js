@@ -182,7 +182,6 @@ const Weather = () => {
         console.log("ERROR:", err);
       }
     })();
-    console.log("locid", location.id);
   };
 
   const handleAddLocationToHomepage = (location) => {
