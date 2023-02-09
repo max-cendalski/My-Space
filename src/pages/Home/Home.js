@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
 import { useState, useEffect } from "react";
-import { getDoc, doc } from "firebase/firestore";
+import { getDoc, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import Navbar from "../../components/Navbar/Navbar";
 import { format } from "date-fns";
@@ -75,27 +75,52 @@ const Home = () => {
         console.error("SOMETHING WENT WRONG:", err);
       }
     };
+
     if (user.uid) {
       fetchIdea();
     }
     return () => {
       clearInterval(timeInterval);
     };
-    // eslint-disable-next-line
-  }, []);
+  }, [user.uid]);
 
-  const handleIdeaHomepageArrowButton = (idea) => {
-    if (idea.extend === true) {
+  const handleIdeaHomepageArrowButton = () => {
+    console.log("idea.extend", idea.extend);
+    idea.extend = !idea.extend;
+    setIdea(idea)
+    console.log('idea.exte',idea.extend)
+
+    /*    if (idea.extend === true) {
       idea.extend = false;
-      setIdea(idea)
+      setIdea(idea);
       var el = document.querySelector(".idea-homepage-visible");
+      console.log("el1", el);
       el.className = "idea-homepage-hidden";
     } else {
       idea.extend = true;
-      setIdea(idea)
+      setIdea(idea);
       el = document.querySelector(".idea-homepage-hidden");
+      console.log("el2", el);
       el.className = "idea-homepage-visible";
-    }
+    } */
+
+    const saveExtend = async () => {
+      try {
+        const extendRef = doc(
+          db,
+          "users",
+          user.uid,
+          "ideaToHome",
+          "ideaToHomePageID"
+        );
+        await updateDoc(extendRef, {
+          extend: idea.extend,
+        });
+      } catch (err) {
+        console.error("SOMETHING WENT WRONG:", err);
+      }
+    };
+    saveExtend();
   };
 
   return (
@@ -114,24 +139,26 @@ const Home = () => {
           </section>
         </article>
       )}
-
       {idea && (
-        <section className="idea-homepage-visible">
+        <section
+          className={
+            idea.extend ? "idea-homepage-visible" : "idea-homepage-hidden"
+          }
+        >
           <button
             className="down-arrow-button"
-            onClick={() => handleIdeaHomepageArrowButton(idea)}
+            onClick={handleIdeaHomepageArrowButton}
           >
-            {idea.extend === true ? (
+            {idea.extend ? (
               <i className="fa-solid fa-angle-up fa-2xl"></i>
             ) : (
               <i className="fa-solid fa-angle-down fa-2xl"></i>
             )}
           </button>
-          <p>
-            <q>{idea.text}</q>
-          </p>
+          <q>{idea.text}</q>
         </section>
       )}
+
       <NavLink className="feature-button" to="/notes">
         Notes
       </NavLink>
@@ -152,3 +179,19 @@ const Home = () => {
 };
 
 export default Home;
+
+/*      {idea && (
+        <section className="idea-homepage-visible">
+          <button
+            className="down-arrow-button"
+            onClick={() => handleIdeaHomepageArrowButton(idea)}
+          >
+            {idea.extend === true ? (
+              <i className="fa-solid fa-angle-up fa-2xl"></i>
+            ) : (
+              <i className="fa-solid fa-angle-down fa-2xl"></i>
+            )}
+          </button>
+          <q>{idea.text}</q>
+        </section>
+      )} */

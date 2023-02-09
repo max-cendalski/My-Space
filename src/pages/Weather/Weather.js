@@ -83,8 +83,7 @@ const Weather = () => {
         setLocationsFromDB(locationsFromDB);
       }
     })();
-    //eslint-disable-next-line
-  }, [searchedLocations]);
+  }, [searchedLocations, user.uid]);
 
   const handleChange = (address) => {
     setAddress(address);
@@ -146,7 +145,6 @@ const Weather = () => {
     })();
     setSearchedLocations(locationsToKeep);
     setLocationsFromDB([...locationsFromDB, location]);
-    console.log("locfrodv", locationsFromDB);
   };
 
   const handleDBLocationArrowClick = (location) => {
@@ -193,7 +191,6 @@ const Weather = () => {
       coordinates: location.coordinates,
       extended: true,
     };
-    console.log("loc.id", locationToHomepage);
     const addLocationToHome = async () => {
       try {
         await setDoc(
