@@ -266,12 +266,11 @@ code {
   display: flex;
   flex-direction: column;
   width: 90%;
-  height: auto;
   color: var(--red);
   font-style: italic;
   font-weight: 600;
   text-indent: 10px;
-  transition: 0.4s linear;
+  transition: 0.3s linear;
 }
 
 .idea-homepage-hidden {
@@ -283,7 +282,6 @@ code {
   font-style: italic;
   font-weight: 600;
   text-indent: 10px;
-  transition: 0.3s linear;
   overflow: hidden;
 }
 
@@ -437,7 +435,7 @@ code {
 .single-location {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: baseline;
   width: 90%;
   border: 1px solid rgb(193, 190, 190);
   height: 2.5rem;
@@ -451,7 +449,7 @@ code {
 .detail-location {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: baseline;
   width: 90%;
   border: 1px solid rgb(193, 190, 190);
   height: 23rem;
@@ -484,6 +482,7 @@ code {
   background-color: white;
   border: none;
   border-radius: 3px;
+  cursor: pointer;
 }
 
 .searched-locations {

@@ -85,26 +85,10 @@ const Home = () => {
   }, [user.uid]);
 
   const handleIdeaHomepageArrowButton = () => {
-    console.log("idea.extend", idea.extend);
     idea.extend = !idea.extend;
-    setIdea(idea)
-    console.log('idea.exte',idea.extend)
+    setIdea(idea);
 
-    /*    if (idea.extend === true) {
-      idea.extend = false;
-      setIdea(idea);
-      var el = document.querySelector(".idea-homepage-visible");
-      console.log("el1", el);
-      el.className = "idea-homepage-hidden";
-    } else {
-      idea.extend = true;
-      setIdea(idea);
-      el = document.querySelector(".idea-homepage-hidden");
-      console.log("el2", el);
-      el.className = "idea-homepage-visible";
-    } */
-
-    const saveExtend = async () => {
+    const updateIdea = async () => {
       try {
         const extendRef = doc(
           db,
@@ -120,7 +104,7 @@ const Home = () => {
         console.error("SOMETHING WENT WRONG:", err);
       }
     };
-    saveExtend();
+    updateIdea();
   };
 
   return (
