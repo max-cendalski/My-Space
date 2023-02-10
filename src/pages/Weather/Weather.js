@@ -62,10 +62,16 @@ const Weather = () => {
                 locationsFromDB[i].temp = data[i].current.temp;
                 locationsFromDB[i].tempFeelsLike = data[i].current.feels_like;
                 locationsFromDB[i].cloudsDescription =
-                data[i].current.weather[0].description;
+                  data[i].current.weather[0].description;
                 locationsFromDB[i].timeZone = data[i].current.timeZone_offset;
-                locationsFromDB[i].sunrise = format(data[i].current.sunrise * 1000,"p");
-                locationsFromDB[i].sunset = format(data[i].current.sunset * 1000, "p");
+                locationsFromDB[i].sunrise = format(
+                  data[i].current.sunrise * 1000,
+                  "p"
+                );
+                locationsFromDB[i].sunset = format(
+                  data[i].current.sunset * 1000,
+                  "p"
+                );
                 locationsFromDB[i].uvi = data[i].current.uvi;
                 locationsFromDB[i].humidity = data[i].current.humidity;
                 locationsFromDB[i].pressure = data[i].current.pressure;
@@ -83,8 +89,7 @@ const Weather = () => {
         setLocationsFromDB(locationsFromDB);
       }
     })();
-        console.log("useEffect");
-
+    console.log("useEffect");
   }, [searchedLocations, user.uid]);
 
   const handleChange = (address) => {
@@ -148,27 +153,17 @@ const Weather = () => {
     })();
     setSearchedLocations(locationsToKeep);
     setLocationsFromDB([...locationsFromDB, location]);
-    console.log('loc',locationsFromDB)
+    console.log("loc", locationsFromDB);
   };
 
   const handleDBLocationArrowClick = (location) => {
     let locationIndex = locationsFromDB.findIndex(
       (item) => item.id === location.id
     );
-    var el = document.getElementById(location.id);
-    if (location.extend === false) {
-      location.extend = true;
-      el.className = "detail-location";
-      let locationsToRender = Array.from(locationsFromDB);
-      locationsToRender.splice(locationIndex, 1, location);
-      setLocationsFromDB(locationsToRender);
-    } else {
-      location.extend = false;
-      el.className = "single-location";
-      let locationsToRender = Array.from(locationsFromDB);
-      locationsToRender.splice(locationIndex, 1, location);
-      setLocationsFromDB(locationsToRender);
-    }
+    location.extend = !location.extend;
+    const locationsToChange = Array.from(locationsFromDB)
+    locationsToChange.slice(locationIndex, location)
+    setLocationsFromDB(locationsToChange)
   };
 
   const handleDeleteLocation = (location) => {
@@ -227,7 +222,9 @@ const Weather = () => {
         {!isLoading &&
           locationsFromDB.map((location, index) => (
             <section
-              className="single-location"
+              className={
+                location.extend === true ? "detail-location" : "single-location"
+              }
               id={location.id}
               key={location.id}
             >
