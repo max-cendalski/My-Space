@@ -83,6 +83,8 @@ const Weather = () => {
         setLocationsFromDB(locationsFromDB);
       }
     })();
+        console.log("useEffect");
+
   }, [searchedLocations, user.uid]);
 
   const handleChange = (address) => {
@@ -101,6 +103,7 @@ const Weather = () => {
           .then((data) => {
             const locationArray = address.split(",");
             const locationToSave = {
+              id: locationArray[0],
               city: locationArray[0],
               country: locationArray[locationArray.length - 1],
               coordinates: latLng,
@@ -145,6 +148,7 @@ const Weather = () => {
     })();
     setSearchedLocations(locationsToKeep);
     setLocationsFromDB([...locationsFromDB, location]);
+    console.log('loc',locationsFromDB)
   };
 
   const handleDBLocationArrowClick = (location) => {
