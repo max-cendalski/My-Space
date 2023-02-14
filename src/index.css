@@ -543,6 +543,9 @@ code {
   width: 100%;
 }
 
+.calendar-header-container {
+  width: 95%;
+}
 
 /* ------------------*/
 .date-paragraph {

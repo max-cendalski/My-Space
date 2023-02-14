@@ -6,10 +6,12 @@ export const Calendar = () => {
   return (
     <article id="calendar-container">
       <Navbar />
-      <GoBack />
-      <h1>Tasks</h1>
+      <article className='calendar-header-container'>
+        <GoBack />
+        <h1>Tasks</h1>
+      </article>
     </article>
-  )
+  );
 }
 
 export default Calendar;
