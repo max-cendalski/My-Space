@@ -537,7 +537,11 @@ code {
 }
 
 
+/*CALENDAR */
 
+#calendar-container {
+  width: 100%;
+}
 
 
 /* ------------------*/

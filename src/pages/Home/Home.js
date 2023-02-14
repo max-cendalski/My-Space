@@ -147,8 +147,8 @@ const Home = () => {
       <NavLink className="feature-button" to="/notes">
         Notes
       </NavLink>
-      <NavLink className="feature-button" to="/tasks">
-        Tasks
+      <NavLink className="feature-button" to="/Calendar">
+        Calendar
       </NavLink>
       <NavLink className="feature-button" to="/weather">
         Weather

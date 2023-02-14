@@ -4,7 +4,7 @@ import {Routes,Route} from 'react-router-dom';
 import Home from '../src/pages/Home/Home';
 import Layout from './components/Layout/Layout';
 import Notes from './pages/Notes/Notes';
-import Tasks from './pages/Tasks/Tasks';
+import Calendar from './pages/Calendar/Calendar';
 import Weather from './pages/Weather/Weather'
 import RequireAuth from './RequireAuth/RequireAuth';
 import Login from './pages/Login/Login';
@@ -31,7 +31,7 @@ function App() {
 
 
         <Route path="/ideas" element={<Ideas />} />
-        <Route path="/tasks" element={<Tasks />} />
+        <Route path="/calendar" element={<Calendar />} />
         <Route path="/weather" element={<Weather />} />
         <Route path="/games" element={<Games />} />
       </Route>
