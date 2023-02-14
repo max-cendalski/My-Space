@@ -6,7 +6,6 @@ import {
   getDocs,
   doc,
   collection,
-  addDoc,
   deleteDoc,
   setDoc,
 } from "firebase/firestore";
@@ -48,7 +47,6 @@ const Weather = () => {
             return 0;
           }
         });
-
         for (const location of locationsFromDB) {
           urls.push(
             `https://api.openweathermap.org/data/3.0/onecall?lat=${location.coordinates.lat}&lon=${location.coordinates.lng}&units=imperial&exclude=minutely,hourly,daily&appid=${weatherApiKey}`
@@ -89,7 +87,6 @@ const Weather = () => {
         setLocationsFromDB(locationsFromDB);
       }
     })();
-    console.log("useEffect");
   }, [searchedLocations, user.uid]);
 
   const handleChange = (address) => {
@@ -108,7 +105,7 @@ const Weather = () => {
           .then((data) => {
             const locationArray = address.split(",");
             const locationToSave = {
-              id: locationArray[0],
+              id: `${locationArray[0]}${latLng.lat}`,
               city: locationArray[0],
               country: locationArray[locationArray.length - 1],
               coordinates: latLng,
@@ -141,10 +138,11 @@ const Weather = () => {
     const locationsToKeep = searchedLocations.filter(
       (item) => item !== location
     );
-    (async () => {
+
+     (async () => {
       try {
-        await addDoc(
-          collection(db, "users", user.uid, "weatherLocations"),
+        await setDoc(
+          doc(db, "users", user.uid, "weatherLocations", location.id),
           location
         );
       } catch (err) {
@@ -153,7 +151,6 @@ const Weather = () => {
     })();
     setSearchedLocations(locationsToKeep);
     setLocationsFromDB([...locationsFromDB, location]);
-    console.log("loc", locationsFromDB);
   };
 
   const handleDBLocationArrowClick = (location) => {
@@ -161,13 +158,13 @@ const Weather = () => {
       (item) => item.id === location.id
     );
     location.extend = !location.extend;
-    const locationsToChange = Array.from(locationsFromDB)
-    locationsToChange.slice(locationIndex, location)
-    setLocationsFromDB(locationsToChange)
+    const locationsToChange = Array.from(locationsFromDB);
+    locationsToChange.slice(locationIndex, location);
+    setLocationsFromDB(locationsToChange);
   };
 
   const handleDeleteLocation = (location) => {
-    (async () => {
+      (async () => {
       try {
         await deleteDoc(
           doc(db, "users", user.uid, "weatherLocations", location.id)

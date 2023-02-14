@@ -49,7 +49,7 @@ const Home = () => {
               });
             });
         } else {
-          console.log("No such document!");
+          console.log("NO SUCH DOCUMENT!");
         }
       } catch (err) {
         console.log("SOMETHING WENT WRONG", err);
@@ -82,7 +82,8 @@ const Home = () => {
     return () => {
       clearInterval(timeInterval);
     };
-  }, [user.uid]);
+    // eslint-disable-next-line
+  }, []);
 
   const handleIdeaHomepageArrowButton = () => {
     idea.extend = !idea.extend;
@@ -110,19 +111,20 @@ const Home = () => {
   return (
     <article id="home-container">
       <Navbar />
-      {homepageWeather && (
-        <article id="time-location-container">
-          <section className="time-container">
-            <h4>{currentDay}</h4>
-            <h2>{currentTime}</h2>
-          </section>
+      <article id="time-location-container">
+        <section className="time-container">
+          <h4>{currentDay}</h4>
+          <h2>{currentTime}</h2>
+        </section>
+        {homepageWeather &&
           <section className="location-homepage-container">
             <h4>{homepageWeather.city}</h4>
             <h2>{homepageWeather.temp}&deg;</h2>
             <p>{homepageWeather.clouds}</p>
           </section>
-        </article>
-      )}
+        }
+      </article>
+
       {idea && (
         <section
           className={
@@ -142,7 +144,6 @@ const Home = () => {
           <q>{idea.text}</q>
         </section>
       )}
-
       <NavLink className="feature-button" to="/notes">
         Notes
       </NavLink>
