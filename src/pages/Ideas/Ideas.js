@@ -1,6 +1,13 @@
 import Navbar from "../../components/Navbar/Navbar";
 import GoBack from "../../components/GoBack/GoBack";
-import { getDocs, getDoc, doc, setDoc, collection } from "firebase/firestore";
+import {
+  getDocs,
+  getDoc,
+  doc,
+  setDoc,
+  collection,
+  updateDoc
+} from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { useState, useEffect } from "react";
 import { UserAuth } from "../../context/AuthContext";
@@ -9,8 +16,7 @@ const Ideas = () => {
   const { user } = UserAuth();
   const [ideas, setIdeas] = useState([]);
   const [ideasToRender, setIdeasToRender] = useState([]);
-
-  const [generateIdea, setGenerateIdeasButton] = useState(false);
+  const [generateIdeaButtonStatus, setGenerateIdeasButton] = useState(false);
 
   useEffect(() => {
     const fetchIdeas = async () => {
@@ -46,6 +52,7 @@ const Ideas = () => {
   }, []);
 
   const handleGenerateIdeas = () => {
+    console.log("handlegenclicked");
     var numbers = [];
     var number = 0;
     for (var i = 0; i < 3; i++) {
@@ -58,6 +65,7 @@ const Ideas = () => {
       }
     }
     setIdeasToRender(numbers.slice());
+
     const addDate = async () => {
       try {
         let dateToMiliseconds = new Date().getTime();
@@ -67,24 +75,39 @@ const Ideas = () => {
         await setDoc(doc(db, "users", user.uid, "dateForIdeas", "dateID"), {
           timeToSave,
         });
+        if (ideasToRender.length === 0) {
+          for (const item of numbers) {
+            await setDoc(doc(db, "users", user.uid, "ideas", item.id), item);
+          }
+        } else {
+          var counter = 0;
+          for (const item of ideasToRender) {
+            await updateDoc(
+              doc(db, "users", user.uid, "ideas", item.id),
+              numbers[counter]
+            );
+            counter++;
+          }
+        }
+
       } catch (err) {
         console.error("Something went wrong!");
       }
     };
+
+    setGenerateIdeasButton(false);
     addDate();
   };
 
   const handleAddIdeaToHomepage = (id) => {
     const ideaToHomePage = ideasToRender.filter((item) => item.id === id);
+    ideaToHomePage[0].extend = true
     const addIdea = async () => {
       try {
         await setDoc(
           doc(db, "users", user.uid, "ideaToHome", "ideaToHomePageID"),
           ideaToHomePage[0]
         );
-        for (const item of ideasToRender) {
-          await setDoc(doc(db, "users", user.uid, "ideas", item.id), item);
-        }
       } catch (err) {
         console.error("Something went wrong:", err);
       }
@@ -98,7 +121,7 @@ const Ideas = () => {
       <article id="ideas-page-container">
         <GoBack />
         <h1 id="ideas-header">Three ideas to think about</h1>
-        {generateIdea && (
+        {generateIdeaButtonStatus && (
           <button
             onClick={handleGenerateIdeas}
             className="generate-ideas-button"
