@@ -1,6 +1,6 @@
 import { useState, useEffect} from "react";
 
-const Ships = () => {
+const ShipsGame = () => {
 const [squares, setSquares] = useState([]);
 const [alphabet, setAlphabet] = useState([]);
 const [yAxis, setYAxis] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
@@ -40,39 +40,45 @@ const [yAxis, setYAxis] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
         arr.push({ char: alphabet[j], num: i });
       }
     }
-
     setSquares(arr);
     setAlphabet(alphabet);
   }, []);
 
+  const handleSquareClick = (item) => {
+    let sq = { num: item.num, char: item.char };
+    let index = squares.findIndex(
+      (item) => item.num === sq.num && item.char === sq.char
+    );
+    console.log("index:", squares[index]);
+  };
 
   return (
-   <article className="ships">
-        <h1>Game area</h1>
-      </article>
-      <article id="game-area-container">
-        <section className="alphabet-container">
-          {alphabet.map((item) => (
-            <div className="alphabet-square">{item}</div>
-          ))}
-        </section>
-        <section id="numbers-container">
-          {yAxis.map((item, index) => (
-            <div className="numbers-square" key={index}>
-              {item}
-            </div>
-          ))}
-        </section>
-        <article id="game-area">
-          {squares.map((item) => (
-            <div
-              onClick={() => handleSquareClick(item)}
-              className="square"
-            ></div>
-          ))}
+      <article className="ships">
+      <h1>SHIPS</h1>
+        <article id="game-area-container">
+          <section className="alphabet-container">
+            {alphabet.map((item) => (
+              <div className="alphabet-square">{item}</div>
+            ))}
+          </section>
+          <section id="numbers-container">
+            {yAxis.map((item, index) => (
+              <div className="numbers-square" key={index}>
+                {item}
+              </div>
+            ))}
+          </section>
+          <article id="game-area">
+            {squares.map((item) => (
+              <div
+                onClick={() => handleSquareClick(item)}
+                className="square"
+              ></div>
+            ))}
+          </article>
         </article>
-      </article>
+    </article>
   )
 }
 
-export default Ships;
+export default ShipsGame;
