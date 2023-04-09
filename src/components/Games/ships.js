@@ -47,9 +47,31 @@ const [yAxis, setYAxis] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 
 
   return (
-    <article>
-
-    </article>
+   <article className="ships">
+        <h1>Game area</h1>
+      </article>
+      <article id="game-area-container">
+        <section className="alphabet-container">
+          {alphabet.map((item) => (
+            <div className="alphabet-square">{item}</div>
+          ))}
+        </section>
+        <section id="numbers-container">
+          {yAxis.map((item, index) => (
+            <div className="numbers-square" key={index}>
+              {item}
+            </div>
+          ))}
+        </section>
+        <article id="game-area">
+          {squares.map((item) => (
+            <div
+              onClick={() => handleSquareClick(item)}
+              className="square"
+            ></div>
+          ))}
+        </article>
+      </article>
   )
 }
 
