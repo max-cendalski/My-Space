@@ -185,7 +185,7 @@ const RPS = () => {
   };
 
   return (
-    <article>
+    <article id="rps-game-container">
       <header id="games-header">
         <h1 className="header">Rock Paper Scissors</h1>
       </header>
