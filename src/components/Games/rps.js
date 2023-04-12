@@ -224,3 +224,6 @@ const RPS = () => {
     </article>
   );
 };
+
+
+export default RPS;

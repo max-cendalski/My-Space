@@ -9,7 +9,7 @@ const Games = () => {
       <Navbar />
       <GoBack />
       <h1 id="games-header">Games</h1>
-      <NavLink className="game-link-button" to="/rps">
+      <NavLink className="game-link-button" to="/games/rps">
         RPS
       </NavLink>
       <NavLink className="game-link-button" to="/ships">
