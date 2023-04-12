@@ -1,5 +1,22 @@
 import Navbar from "../../components/Navbar/Navbar";
 import GoBack from "../../components/GoBack/GoBack";
+import RPS from "../../components/Games/rps";
+
+const Games = () => {
+  return (
+    <article>
+      <article id="game-page-container">
+        <Navbar />
+        <GoBack />
+      </article>
+    </article>
+  );
+};
+
+export default Games;
+
+/* import Navbar from "../../components/Navbar/Navbar";
+import GoBack from "../../components/GoBack/GoBack";
 import { useState, useEffect } from "react";
 import { db } from "../../firebase/Firebase";
 import { doc, setDoc, getDoc } from "firebase/firestore";
@@ -238,3 +255,4 @@ const Games = () => {
 };
 
 export default Games;
+ */
