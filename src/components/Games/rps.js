@@ -1,3 +1,5 @@
+import Navbar from "../../components/Navbar/Navbar";
+import GoBack from "../../components/GoBack/GoBack";
 import { useState, useEffect } from "react";
 import { db } from "../../firebase/Firebase";
 import { doc, setDoc, getDoc } from "firebase/firestore";
@@ -185,45 +187,49 @@ const RPS = () => {
   };
 
   return (
-    <article id="rps-game-container">
-      <header id="games-header">
-        <h1 className="header">Rock Paper Scissors</h1>
-      </header>
-      <h2 className="rps-ratio">
-        Win/loose ratio: {scores.userScore} / {scores.computerScore}
-      </h2>
-      <article className="rps-container">
-        <section className="players">USER</section>
-        <section className="players">
-          <i className="fa-solid fa-robot fa-2xl"></i>
-        </section>
+    <>
+      <Navbar />
+      <GoBack />
+
+      <article id="rps-game-container">
+        <header id="games-header">
+          <h1 className="header">Rock Paper Scissors</h1>
+        </header>
+        <h2 className="rps-ratio">
+          Win/loose ratio: {scores.userScore} / {scores.computerScore}
+        </h2>
+        <article className="rps-container">
+          <section className="players">USER</section>
+          <section className="players">
+            <i className="fa-solid fa-robot fa-2xl"></i>
+          </section>
+        </article>
+        <article className={gameState.rpsChoiceSectionContainer}>
+          <section onClick={handleChoiceClick} className="choice-section">
+            <i className="fa-solid fa-gem fa-2xl"></i>
+          </section>
+          <section onClick={handleChoiceClick} className="choice-section">
+            <i className="fa-regular fa-map fa-2xl"></i>
+          </section>
+          <section onClick={handleChoiceClick} className="choice-section">
+            <i className="fa-solid fa-scissors fa-2xl"></i>
+          </section>
+        </article>
+        <article className={gameState.resultContainer}>
+          <section>
+            <i className={icons.userIcon}></i>
+          </section>
+          <section>
+            <i className={icons.computerIcon}></i>
+          </section>
+        </article>
+        <h1 className="game-result-header">{gameState.result}</h1>
+        <button className={startGameButton} onClick={handleStartNewGame}>
+          Click to start new game!
+        </button>
       </article>
-      <article className={gameState.rpsChoiceSectionContainer}>
-        <section onClick={handleChoiceClick} className="choice-section">
-          <i className="fa-solid fa-gem fa-2xl"></i>
-        </section>
-        <section onClick={handleChoiceClick} className="choice-section">
-          <i className="fa-regular fa-map fa-2xl"></i>
-        </section>
-        <section onClick={handleChoiceClick} className="choice-section">
-          <i className="fa-solid fa-scissors fa-2xl"></i>
-        </section>
-      </article>
-      <article className={gameState.resultContainer}>
-        <section>
-          <i className={icons.userIcon}></i>
-        </section>
-        <section>
-          <i className={icons.computerIcon}></i>
-        </section>
-      </article>
-      <h1 className="game-result-header">{gameState.result}</h1>
-      <button className={startGameButton} onClick={handleStartNewGame}>
-        Click to start new game!
-      </button>
-    </article>
+    </>
   );
 };
-
 
 export default RPS;

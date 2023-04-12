@@ -1,4 +1,6 @@
 import { useState, useEffect} from "react";
+import Navbar from "../Navbar/Navbar";
+import GoBack from "../GoBack/GoBack";
 
 const ShipsGame = () => {
 const [squares, setSquares] = useState([]);
@@ -53,7 +55,10 @@ const [yAxis, setYAxis] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
   };
 
   return (
+    <>
       <article className="ships-container">
+      <Navbar />
+      <GoBack />
       <h1>SHIPS</h1>
         <article id="ships-game-area-container">
           <section className="ships-alphabet-container">
@@ -78,6 +83,7 @@ const [yAxis, setYAxis] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
           </article>
         </article>
     </article>
+    </>
   )
 }
 

@@ -1,6 +1,5 @@
 import Navbar from "../../components/Navbar/Navbar";
 import GoBack from "../../components/GoBack/GoBack";
-import RPS from "../../components/Games/rps";
 import { NavLink } from "react-router-dom";
 
 const Games = () => {
@@ -12,7 +11,7 @@ const Games = () => {
       <NavLink className="game-link-button" to="/games/rps">
         RPS
       </NavLink>
-      <NavLink className="game-link-button" to="/ships">
+      <NavLink className="game-link-button" to="/games/ships">
         SHIPS
       </NavLink>
     </article>

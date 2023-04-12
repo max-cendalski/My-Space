@@ -12,6 +12,7 @@ import EditNote from './pages/Notes/EditNote';
 import Ideas from './pages/Ideas/Ideas';
 import Games from './pages/Games/Games';
 import RPS from './components/Games/rps'
+import ShipsGame from './components/Games/ships';
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
         <Route path="/games">
           <Route  index element={<Games />} />
           <Route path="/games/rps" element={<RPS />} />
+          <Route path="/games/ships" element={<ShipsGame />} />
         </Route>
 
         <Route path="/ideas" element={<Ideas />} />
