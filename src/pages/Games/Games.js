@@ -1,14 +1,20 @@
 import Navbar from "../../components/Navbar/Navbar";
 import GoBack from "../../components/GoBack/GoBack";
 import RPS from "../../components/Games/rps";
+import { NavLink } from "react-router-dom";
 
 const Games = () => {
   return (
-    <article>
-      <article id="game-page-container">
-        <Navbar />
-        <GoBack />
-      </article>
+    <article id="game-page-container">
+      <Navbar />
+      <GoBack />
+      <h1 id="games-header">Games</h1>
+      <NavLink className="game-link-button" to="/rps">
+        RPS
+      </NavLink>
+      <NavLink className="game-link-button" to="/ships">
+        SHIPS
+      </NavLink>
     </article>
   );
 };
