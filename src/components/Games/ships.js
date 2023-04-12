@@ -1,11 +1,11 @@
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import Navbar from "../Navbar/Navbar";
 import GoBack from "../GoBack/GoBack";
 
 const ShipsGame = () => {
-const [squares, setSquares] = useState([]);
-const [alphabet, setAlphabet] = useState([]);
-const [yAxis, setYAxis] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+  const [squares, setSquares] = useState([]);
+  const [alphabet, setAlphabet] = useState([]);
+  const [yAxis, setYAxis] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 
   useEffect(() => {
     const alphabet = [
@@ -56,35 +56,35 @@ const [yAxis, setYAxis] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 
   return (
     <>
-      <article className="ships-container">
       <Navbar />
       <GoBack />
-      <h1>SHIPS</h1>
-        <article id="ships-game-area-container">
-          <section className="ships-alphabet-container">
-            {alphabet.map((item) => (
-              <div className="alphabet-square">{item}</div>
-            ))}
-          </section>
-          <section id="ships-numbers-container">
-            {yAxis.map((item, index) => (
-              <div className="numbers-square" key={index}>
-                {item}
-              </div>
-            ))}
-          </section>
-          <article id="ships-game-area">
-            {squares.map((item) => (
-              <div
-                onClick={() => handleSquareClick(item)}
-                className="square"
-              ></div>
-            ))}
-          </article>
+      <article id="ships-game-area-container">
+        <h1>Game area</h1>
+      </article>
+      <article id="game-area-container">
+        <section className="alphabet-container">
+          {alphabet.map((item) => (
+            <div className="alphabet-square">{item}</div>
+          ))}
+        </section>
+        <section id="numbers-container">
+          {yAxis.map((item, index) => (
+            <div className="numbers-square" key={index}>
+              {item}
+            </div>
+          ))}
+        </section>
+        <article id="game-area">
+          {squares.map((item) => (
+            <div
+              onClick={() => handleSquareClick(item)}
+              className="square"
+            ></div>
+          ))}
         </article>
-    </article>
+      </article>
     </>
-  )
-}
+  );
+};
 
 export default ShipsGame;
