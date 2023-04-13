@@ -413,18 +413,27 @@ code {
 }
 
 /*ShipsGame*/
-#ships-game-area-container {
-  font-family: sans-serif;
-  text-align: center;
-  grid-row-start: 1;
-  grid-row-end: 1;
-}
-#game-area-container {
-  display: grid;
-  grid-template-rows: 1.5rem 3rem auto;
-  grid-template-columns: 5rem 3rem 52rem 5rem;
-}
 
+
+#ships-computer-area {
+    display: grid;
+      gap: 0.5rem;
+      grid-template-rows: 1.5rem 2rem auto;
+      grid-template-columns: 2rem auto 1rem;grid-row: 2/3;
+
+}
+.alphabet-container {
+  display: flex;
+  grid-row: 2/2;
+  grid-column: 2/3;
+}
+.alphabet-ships-square {
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid grey;
+}
+/*
 #game-area {
   display: flex;
   width: 100%;
@@ -435,8 +444,8 @@ code {
 }
 
 .square {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   border: 1px solid blue;
   cursor: pointer;
   background-color: lightblue;
@@ -453,12 +462,7 @@ code {
   background-color: grey;
 }
 
-.alphabet-container {
-  display: flex;
-  flex-wrap: wrap;
-  grid-row: 2;
-  grid-column: 3;
-}
+
 
 .alphabet-square {
   text-align: center;
@@ -488,7 +492,7 @@ code {
   width: 80%;
   align-items: center;
   margin: 0 auto;
-}
+} */
 
 .grid-element-border {
   border: 1px solid black;

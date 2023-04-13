@@ -5,7 +5,7 @@ import GoBack from "../GoBack/GoBack";
 const ShipsGame = () => {
   const [squares, setSquares] = useState([]);
   const [alphabet, setAlphabet] = useState([]);
-  const [yAxis, setYAxis] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+  const [yAxisMobile, setYMobile] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11,12,13]);
 
   useEffect(() => {
     const alphabet = [
@@ -23,8 +23,8 @@ const ShipsGame = () => {
       "l",
       "m",
       "n",
-      "o",
-      "p",
+      "o"
+ /*      "p",
       "q",
       "r",
       "s",
@@ -34,11 +34,11 @@ const ShipsGame = () => {
       "w",
       "x",
       "y",
-      "z",
+      "z", */
     ];
     let arr = [];
-    for (var i = 0; i <= 10; i++) {
-      for (var j = 0; j < 26; j++) {
+    for (var i = 0; i <= 25; i++) {
+      for (var j = 0; j < 15; j++) {
         arr.push({ char: alphabet[j], num: i });
       }
     }
@@ -58,29 +58,29 @@ const ShipsGame = () => {
     <>
       <Navbar />
       <GoBack />
+      <h1 className="ships-header">Game area</h1>
       <article id="ships-game-area-container">
-        <h1>Game area</h1>
-      </article>
-      <article id="game-area-container">
-        <section className="alphabet-container">
-          {alphabet.map((item) => (
-            <div className="alphabet-square">{item}</div>
-          ))}
-        </section>
-        <section id="numbers-container">
-          {yAxis.map((item, index) => (
-            <div className="numbers-square" key={index}>
-              {item}
-            </div>
-          ))}
-        </section>
-        <article id="game-area">
-          {squares.map((item) => (
-            <div
-              onClick={() => handleSquareClick(item)}
-              className="square"
-            ></div>
-          ))}
+        <article id="ships-computer-area">
+          <section className="alphabet-container">
+            {alphabet.map((item) => (
+              <div className="alphabet-ships-square">{item}</div>
+            ))}
+          </section>
+          <section id="numbers-container">
+            {yAxisMobile.map((item, index) => (
+              <div className="numbers-square" key={index}>
+                {item}
+              </div>
+            ))}
+          </section>
+          <article id="game-area">
+            {squares.map((item) => (
+              <div
+                onClick={() => handleSquareClick(item)}
+                className="square"
+              ></div>
+            ))}
+          </article>
         </article>
       </article>
     </>
