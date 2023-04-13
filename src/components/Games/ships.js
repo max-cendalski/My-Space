@@ -63,7 +63,7 @@ const ShipsGame = () => {
         <article id="ships-computer-area">
           <section className="alphabet-container">
             {alphabet.map((item) => (
-              <div className="alphabet-ships-square">{item}</div>
+              <div className="alphabet-ships-square" key={item}>{item}</div>
             ))}
           </section>
           <section id="numbers-container">
@@ -74,8 +74,9 @@ const ShipsGame = () => {
             ))}
           </section>
           <article id="game-area">
-            {squares.map((item) => (
+            {squares.map((item, index) => (
               <div
+              key={index}
                 onClick={() => handleSquareClick(item)}
                 className="square"
               ></div>
