@@ -24,7 +24,7 @@ const ShipsGame = () => {
       "m",
       "n",
       "o"
- /*      "p",
+     /* "p",
       "q",
       "r",
       "s",
@@ -81,6 +81,9 @@ const ShipsGame = () => {
               ></div>
             ))}
           </article>
+        </article>
+        <article id="ships-user-area">
+
         </article>
       </article>
     </>
