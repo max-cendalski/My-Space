@@ -451,15 +451,6 @@ code {
   height: 25px;
   border: 1px solid grey;
 }
-/*
-#game-area {
-  display: flex;
-  width: 100%;
-  flex-wrap: wrap;
-  grid-row: 3;
-  grid-column: 3;
-  text-align: center;
-}
 
 .square {
   width: 25px;
@@ -469,6 +460,16 @@ code {
   background-color: lightblue;
 }
 
+#game-area {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  grid-row: 2/3;
+  grid-column: 2/3;
+  text-align: center;
+}
+
+/*
 .square:active {
   background-color: lightcoral;
   transform: scale(1.4);
