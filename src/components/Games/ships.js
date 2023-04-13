@@ -60,7 +60,11 @@ const ShipsGame = () => {
     var ship5 = []
     var ship4 = []
     var ship3 = []
-
+    function generateShip5() {
+      var letterShip5 = alphabet[Math.round(Math.random() * 15)]
+      console.log('let',letterShip5)
+    }
+    generateShip5()
   }
 
   return (
