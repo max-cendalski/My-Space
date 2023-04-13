@@ -5,7 +5,9 @@ import GoBack from "../GoBack/GoBack";
 const ShipsGame = () => {
   const [squares, setSquares] = useState([]);
   const [alphabet, setAlphabet] = useState([]);
-  const [yAxisMobile, setYMobile] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11,12,13,14,15,16,17,18,19,20]);
+  const [yAxisMobile, setYMobile] = useState([
+    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+  ]);
 
   useEffect(() => {
     const alphabet = [
@@ -23,8 +25,8 @@ const ShipsGame = () => {
       "l",
       "m",
       "n",
-      "o"
-     /* "p",
+      "o",
+      /* "p",
       "q",
       "r",
       "s",
@@ -53,17 +55,28 @@ const ShipsGame = () => {
     );
     console.log("index:", squares[index]);
   };
+  const handleStartGame = ()=> {
+    console.log('whee')
+    var ship5 = []
+    var ship4 = []
+    var ship3 = []
+
+  }
 
   return (
     <>
       <Navbar />
       <GoBack />
       <h1 className="ships-header">Game area</h1>
+      <button onClick={handleStartGame}>Start Game</button>
+
       <article id="ships-game-area-container">
         <article id="ships-computer-area">
           <section className="alphabet-container">
             {alphabet.map((item) => (
-              <div className="alphabet-ships-square" key={item}>{item}</div>
+              <div className="alphabet-ships-square" key={item}>
+                {item}
+              </div>
             ))}
           </section>
           <section id="numbers-container">
@@ -76,16 +89,14 @@ const ShipsGame = () => {
           <article id="game-area">
             {squares.map((item, index) => (
               <div
-              key={index}
+                key={index}
                 onClick={() => handleSquareClick(item)}
                 className="square"
               ></div>
             ))}
           </article>
         </article>
-        <article id="ships-user-area">
-
-        </article>
+        <article id="ships-user-area"></article>
       </article>
     </>
   );
