@@ -62,17 +62,17 @@ const ShipsGame = () => {
     var ship3 = [];
     function generateShip5() {
       var frsLetS5 = alphabet[Math.round(Math.random() * 14)];
-      var ship = {}
       console.log("frsLetS5", frsLetS5);
-      if (alphabet.indexOf(frsLetS5) > 9) {
+      if (alphabet.indexOf(frsLetS5) > 10) {
         let frsNumS5 = Math.round(Math.random() * 16);
         for (let i = 0; i < 5; i++) {
-          console.log(i + frsNumS5);
+          console.log(i + frsNumS5)
+          let ship = {}
           ship.char = frsLetS5
           ship.num = (i+frsNumS5)
           ship5.push(ship)
         }
-        console.log('ship',ship)
+        console.log('ship',ship5)
       }
     }
     generateShip5();
