@@ -61,8 +61,11 @@ const ShipsGame = () => {
     var ship4 = []
     var ship3 = []
     function generateShip5() {
-      var letterShip5 = alphabet[Math.round(Math.random() * 15)]
-      console.log('let',letterShip5)
+      var firstLetterShip5 = alphabet[Math.round(Math.random() * 14)]
+      console.log('let',firstLetterShip5)
+      if (alphabet.indexOf(firstLetterShip5) > 9) {
+        let numberShipt5
+      }
     }
     generateShip5()
   }
