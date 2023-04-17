@@ -71,10 +71,18 @@ const ShipsGame = () => {
         }
         console.log('ship',ship5)
       } else {
-        console.log('frsLet',frsLetS5)
+            let frsNumS5 = Math.round(Math.random() * 16);
+            for (let i = 0; i < 5; i++) {
+              let ship = {};
+              ship.char = frsLetS5;
+              ship.num = i + frsNumS5;
+              ship5.push(ship);
+            }
+
       }
     }
     generateShip5();
+    console.log(ship5)
   };
 
   return (
