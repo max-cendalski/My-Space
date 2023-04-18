@@ -59,31 +59,33 @@ const ShipsGame = () => {
     var ship5=[]
     var ship4=[]
     var ship3=[]
-    function generateShip5(size,shipArr) {
+    function generateShip(size,shipArr) {
       var ship = [];
-      var frsLetS5 = alphabet[Math.round(Math.random() * 14)];
-      if (alphabet.indexOf(frsLetS5) > 10) {
-        let frsNumS5 = Math.round(Math.random() * 16);
+      var frsLetS = alphabet[Math.round(Math.random() * 14)];
+      if (alphabet.indexOf(frsLetS) > 10) {
+        let frsNumS = Math.round(Math.random() * 16);
         for (let i = 0; i < size; i++) {
           let ship = {};
-          ship.char = frsLetS5;
-          ship.num = i + frsNumS5;
+          ship.char = frsLetS;
+          ship.num = i + frsNumS;
           shipArr.push(ship);
         }
       } else {
-        let frsNumS5 = Math.round(Math.random() * 20);
+        let frsNumS = Math.round(Math.random() * 20);
         for (let i = 0; i < size; i++) {
           let ship = {};
-          ship.char = alphabet[alphabet.indexOf(frsLetS5) + i];
-          ship.num = frsNumS5;
+          ship.char = alphabet[alphabet.indexOf(frsLetS) + i];
+          ship.num = frsNumS;
           shipArr.push(ship);
         }
       }
     }
-    generateShip5(5, ship5);
-    generateShip5(4, ship4);
-    generateShip5(3,ship3);
-    console.log('ships',ship5,ship4,ship3)
+    generateShip(5, ship5);
+    generateShip(4, ship4);
+    generateShip(3,ship3);
+    console.log('ships',ship5)
+    console.log('ships',ship4)
+    console.log('ships',ship3)
   };
 
   return (
