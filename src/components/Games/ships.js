@@ -56,32 +56,34 @@ const ShipsGame = () => {
     console.log("index:", squares[index]);
   };
   const handleStartGame = () => {
-    var ship4 = [];
-    var ship3 = [];
-    function generateShip5() {
-      var ship5 = [];
+    var ship5=[]
+    var ship4=[]
+    var ship3=[]
+    function generateShip5(size,shipArr) {
+      var ship = [];
       var frsLetS5 = alphabet[Math.round(Math.random() * 14)];
       if (alphabet.indexOf(frsLetS5) > 10) {
         let frsNumS5 = Math.round(Math.random() * 16);
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < size; i++) {
           let ship = {};
           ship.char = frsLetS5;
           ship.num = i + frsNumS5;
-          ship5.push(ship);
+          shipArr.push(ship);
         }
       } else {
         let frsNumS5 = Math.round(Math.random() * 20);
-        console.log("frsLetS5", frsLetS5);
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < size; i++) {
           let ship = {};
           ship.char = alphabet[alphabet.indexOf(frsLetS5) + i];
           ship.num = frsNumS5;
-          ship5.push(ship);
+          shipArr.push(ship);
         }
       }
-      console.log(ship5);
     }
-    generateShip5();
+    generateShip5(5, ship5);
+    generateShip5(4, ship4);
+    generateShip5(3,ship3);
+    console.log('ships',ship5,ship4,ship3)
   };
 
   return (
