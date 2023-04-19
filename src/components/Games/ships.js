@@ -87,6 +87,9 @@ const ShipsGame = () => {
     generateShip(5, ship5);
     generateShip(4, ship4);
     generateShip(3,ship3);
+    setShip5(ship5)
+    setShip4(ship4)
+    setShip3(ship3)
     console.log('ships',ship5)
     console.log('ships',ship4)
     console.log('ships',ship3)
