@@ -8,6 +8,9 @@ const ShipsGame = () => {
   const [yAxisMobile, setYMobile] = useState([
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
   ]);
+  const [ship5, setShip5] = useState([])
+  const [ship4, setShip4] = useState([])
+  const [ship3, setShip3] = useState([])
 
   useEffect(() => {
     const alphabet = [
@@ -76,6 +79,7 @@ const ShipsGame = () => {
           let ship = {};
           ship.char = alphabet[alphabet.indexOf(frsLetS) + i];
           ship.num = frsNumS;
+          ship.hit = false;
           shipArr.push(ship);
         }
       }
