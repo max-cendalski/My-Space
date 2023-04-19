@@ -8,9 +8,9 @@ const ShipsGame = () => {
   const [yAxisMobile, setYMobile] = useState([
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
   ]);
-  const [ship5, setShip5] = useState([])
-  const [ship4, setShip4] = useState([])
-  const [ship3, setShip3] = useState([])
+  const [ship5, setShip5] = useState([]);
+  const [ship4, setShip4] = useState([]);
+  const [ship3, setShip3] = useState([]);
 
   useEffect(() => {
     const alphabet = [
@@ -57,12 +57,16 @@ const ShipsGame = () => {
       (item) => item.num === sq.num && item.char === sq.char
     );
     console.log("index:", squares[index]);
+    let hitedSquare = (element) => element.char === squares[index].char && element.num === squares[index].num;
+    if (ship5.some(hitedSquare)) {
+      console.log("bingo");
+    }
   };
   const handleStartGame = () => {
-    var ship5=[]
-    var ship4=[]
-    var ship3=[]
-    function generateShip(size,shipArr) {
+    var ship5 = [];
+    var ship4 = [];
+    var ship3 = [];
+    function generateShip(size, shipArr) {
       var ship = [];
       var frsLetS = alphabet[Math.round(Math.random() * 14)];
       if (alphabet.indexOf(frsLetS) > 10) {
@@ -79,20 +83,19 @@ const ShipsGame = () => {
           let ship = {};
           ship.char = alphabet[alphabet.indexOf(frsLetS) + i];
           ship.num = frsNumS;
-          ship.hit = false;
           shipArr.push(ship);
         }
       }
     }
     generateShip(5, ship5);
     generateShip(4, ship4);
-    generateShip(3,ship3);
-    setShip5(ship5)
-    setShip4(ship4)
-    setShip3(ship3)
-    console.log('ships',ship5)
-    console.log('ships',ship4)
-    console.log('ships',ship3)
+    generateShip(3, ship3);
+    setShip5(ship5);
+    setShip4(ship4);
+    setShip3(ship3);
+    console.log("ships", ship5);
+    console.log("ships", ship4);
+    console.log("ships", ship3);
   };
 
   return (
