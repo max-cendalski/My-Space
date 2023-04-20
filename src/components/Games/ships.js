@@ -44,7 +44,7 @@ const ShipsGame = () => {
     let arr = [];
     for (var i = 0; i <= 20; i++) {
       for (var j = 0; j < 15; j++) {
-        arr.push({ char: alphabet[j], num: i });
+        arr.push({ char: alphabet[j], num: i, hit: false });
       }
     }
     setSquares(arr);
@@ -52,12 +52,9 @@ const ShipsGame = () => {
   }, []);
 
   const handleSquareClick = (item) => {
-    let sq = { num: item.num, char: item.char };
-    let index = squares.findIndex(
-      (item) => item.num === sq.num && item.char === sq.char
-    );
+    let index = squares.findIndex( (sq) => sq.num === item.num && sq.char === item.char);
     console.log("index:", squares[index]);
-    let hitedSquare = (element) => element.char === squares[index].char && element.num === squares[index].num;
+    let hitedSquare = (element) =>element.char === squares[index].char &&element.num === squares[index].num;
     if (ship5.some(hitedSquare)) {
       console.log("bingo");
     }
@@ -83,6 +80,7 @@ const ShipsGame = () => {
           let ship = {};
           ship.char = alphabet[alphabet.indexOf(frsLetS) + i];
           ship.num = frsNumS;
+          ship.hit = false;
           shipArr.push(ship);
         }
       }
@@ -126,7 +124,7 @@ const ShipsGame = () => {
               <div
                 key={index}
                 onClick={() => handleSquareClick(item)}
-                className="square"
+                className={!item.hit ? "square" : "square-hit"}
               ></div>
             ))}
           </article>
@@ -138,3 +136,20 @@ const ShipsGame = () => {
 };
 
 export default ShipsGame;
+
+/*
+//   Function to update object with 'hit' property set to true
+  //const updateObject = () => {
+    // Find the index of the target object
+    //const targetIndex = myArray.findIndex(obj => obj.char === 'a' && obj.num === 1);
+
+    // If the target object is found, update it with 'hit' property set to true
+    //if (targetIndex !== -1) {
+      //setMyArray(prevArray => {
+      //  const newArray = [...prevArray];
+        //newArray[targetIndex] = { ...newArray[targetIndex], hit: true };
+        //return newArray;
+      //});
+    }
+  };
+ */

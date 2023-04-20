@@ -459,6 +459,9 @@ code {
   cursor: pointer;
   background-color: lightblue;
 }
+.square-hit {
+  background-color: #4FE0B5;
+}
 
 #game-area {
   display: flex;
@@ -469,43 +472,15 @@ code {
   text-align: center;
 }
 
-/*
-.square:active {
-  background-color: lightcoral;
-  transform: scale(1.4);
-  border-radius: 50%;
-  border: 1px solid coral;
-}
-
-.square-hit {
-  background-color: grey;
-}
 
 
 
-.alphabet-square {
-  text-align: center;
-  width: 30px;
-  height: 30px;
-  border: 1px solid grey;
-}
-
-#numbers-container {
-  display: flex;
-  flex-direction: column;
-  grid-row: 3;
-  grid-column: 2;
-}
 
 
-.test-container {
-  display: grid;
-  grid-template-columns: repeat 4fr;
-  grid-template-rows: 4rem;
-  width: 80%;
-  align-items: center;
-  margin: 0 auto;
-} */
+
+
+
+
 
 .grid-element-border {
   border: 1px solid black;
