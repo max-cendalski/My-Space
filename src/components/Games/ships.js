@@ -52,12 +52,17 @@ const ShipsGame = () => {
   }, []);
 
   const handleSquareClick = (item) => {
-    let index = squares.findIndex( (sq) => sq.num === item.num && sq.char === item.char);
-    console.log("index:", squares[index]);
-    let hitedSquare = (element) =>element.char === squares[index].char &&element.num === squares[index].num;
-    if (ship5.some(hitedSquare)) {
-      console.log("bingo");
-    }
+    let index = squares.findIndex(
+      (squ) => squ.num === item.num && squ.char === item.char
+    );
+    let hitedSquare = { ...squares[index], hit: true };
+    setSquares((currentSquares) => {
+      let newSq = [...currentSquares];
+      newSq[index] = hitedSquare;
+      return newSq;
+    });
+
+    //console.log(newSq)
   };
   const handleStartGame = () => {
     var ship5 = [];
@@ -124,7 +129,7 @@ const ShipsGame = () => {
               <div
                 key={index}
                 onClick={() => handleSquareClick(item)}
-                className={!item.hit ? "square" : "square-hit"}
+                className={!item.hit ? "square" : "square-hit "}
               ></div>
             ))}
           </article>
@@ -136,20 +141,3 @@ const ShipsGame = () => {
 };
 
 export default ShipsGame;
-
-/*
-//   Function to update object with 'hit' property set to true
-  //const updateObject = () => {
-    // Find the index of the target object
-    //const targetIndex = myArray.findIndex(obj => obj.char === 'a' && obj.num === 1);
-
-    // If the target object is found, update it with 'hit' property set to true
-    //if (targetIndex !== -1) {
-      //setMyArray(prevArray => {
-      //  const newArray = [...prevArray];
-        //newArray[targetIndex] = { ...newArray[targetIndex], hit: true };
-        //return newArray;
-      //});
-    }
-  };
- */

@@ -457,10 +457,14 @@ code {
   height: 25px;
   border: 1px solid blue;
   cursor: pointer;
-  background-color: lightblue;
+  background-color: rgb(196, 229, 240);
 }
 .square-hit {
-  background-color: #4FE0B5;
+  width: 25px;
+  height: 25px;
+  border: 1px solid blue;
+  cursor: pointer;
+  background-color:rgb(161, 185, 209);
 }
 
 #game-area {
