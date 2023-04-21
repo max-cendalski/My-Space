@@ -466,6 +466,13 @@ code {
   cursor: pointer;
   background-color:rgb(161, 185, 209);
 }
+.ship-hit {
+  width: 25px;
+    height: 25px;
+    border: 1px solid blue;
+    cursor: pointer;
+    background-color: var(--red);
+}
 
 #game-area {
   display: flex;

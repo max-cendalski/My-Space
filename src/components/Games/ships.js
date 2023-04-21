@@ -44,7 +44,7 @@ const ShipsGame = () => {
     let arr = [];
     for (var i = 0; i <= 20; i++) {
       for (var j = 0; j < 15; j++) {
-        arr.push({ char: alphabet[j], num: i, hit: false });
+        arr.push({ char: alphabet[j], num: i, squareHit: false, shipHit: false });
       }
     }
     setSquares(arr);
@@ -52,17 +52,16 @@ const ShipsGame = () => {
   }, []);
 
   const handleSquareClick = (item) => {
+    console.log('squares',squares.slice(0, 30))
     let index = squares.findIndex(
       (squ) => squ.num === item.num && squ.char === item.char
     );
-    let hitedSquare = { ...squares[index], hit: true };
+    let hitedSquare = { ...squares[index], squareHit: true };
     setSquares((currentSquares) => {
       let newSq = [...currentSquares];
       newSq[index] = hitedSquare;
       return newSq;
     });
-
-    //console.log(newSq)
   };
   const handleStartGame = () => {
     var ship5 = [];
@@ -129,7 +128,8 @@ const ShipsGame = () => {
               <div
                 key={index}
                 onClick={() => handleSquareClick(item)}
-                className={!item.hit ? "square" : "square-hit "}
+                className={!item.squareHit ? "square":(item.shipHit ? "ship-hit":"square-hit")}
+                //{user ? "square":(isShip ? "ship-hit":"square-hit")}
               ></div>
             ))}
           </article>
