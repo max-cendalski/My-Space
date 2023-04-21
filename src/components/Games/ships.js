@@ -44,7 +44,10 @@ const ShipsGame = () => {
     let arr = [];
     for (var i = 0; i <= 20; i++) {
       for (var j = 0; j < 15; j++) {
-        arr.push({ char: alphabet[j], num: i, squareHit: false, shipHit: false });
+        arr.push({
+          char: alphabet[j],
+          num: i,
+        });
       }
     }
     setSquares(arr);
@@ -52,16 +55,55 @@ const ShipsGame = () => {
   }, []);
 
   const handleSquareClick = (item) => {
-    console.log('squares',squares.slice(0, 30))
-    let index = squares.findIndex(
+    var squaresIndex = squares.findIndex(
       (squ) => squ.num === item.num && squ.char === item.char
     );
-    let hitedSquare = { ...squares[index], squareHit: true };
+    /*     var shipIndex = ship5.findIndex(
+      (squ) => squ.num === item.num && squ.char === item.char
+    );
+    console.log("squareindex", squaresIndex);
+    console.log("shipindex", shipIndex); */
+    ship5.forEach((item) => {
+      if (
+        item.char === squares[squaresIndex].char &&
+        item.num === squares[squaresIndex].num
+      ) {
+        let hitedSquare = {
+          ...squares[squaresIndex],
+          shipHit: true,
+        };
+        console.log("hited", hitedSquare);
+        setSquares((currentSquares) => {
+          let newSq = [...currentSquares];
+          newSq[squaresIndex] = hitedSquare;
+          return newSq;
+        });
+      } else {
+        let hitedSquare = {
+          ...squares[squaresIndex],
+          squareHit: true,
+        };
+        console.log("eleshit", hitedSquare);
+
+        setSquares((currentSquares) => {
+          let newSq = [...currentSquares];
+          newSq[squaresIndex] = hitedSquare;
+          return newSq;
+        });
+      }
+    });
+    /* */
+
+    /*  let hitedSquare = {
+      ...squares[squaresIndex],
+      squareHit: true,
+      shipHit: true,
+    };
     setSquares((currentSquares) => {
       let newSq = [...currentSquares];
-      newSq[index] = hitedSquare;
+      newSq[squaresIndex] = hitedSquare;
       return newSq;
-    });
+    }); */
   };
   const handleStartGame = () => {
     var ship5 = [];
@@ -128,8 +170,9 @@ const ShipsGame = () => {
               <div
                 key={index}
                 onClick={() => handleSquareClick(item)}
-                className={!item.squareHit ? "square":(item.shipHit ? "ship-hit":"square-hit")}
-                //{user ? "square":(isShip ? "ship-hit":"square-hit")}
+                className={`square
+                ${item.shipHit ? "ship-hit" : ""}
+                ${item.squareHit ? "square-hit" : ""}`}
               ></div>
             ))}
           </article>

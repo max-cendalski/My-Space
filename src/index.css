@@ -457,7 +457,7 @@ code {
   height: 25px;
   border: 1px solid blue;
   cursor: pointer;
-  background-color: rgb(196, 229, 240);
+  background-color: inherit;
 }
 .square-hit {
   width: 25px;
@@ -481,6 +481,7 @@ code {
   grid-row: 2/3;
   grid-column: 2/3;
   text-align: center;
+  background-color: rgb(196, 229, 240);
 }
 
 
