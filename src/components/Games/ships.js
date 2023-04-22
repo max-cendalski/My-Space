@@ -58,15 +58,16 @@ const ShipsGame = () => {
 
 
     const handleSquareClick = (item) => {
-      let index = squares.findIndex(
-        (square) => square.num === item.num && square.char === item.char
-      );
-      let squareToUpdate = { ...squares[index], squareHit: true };
-      console.log("sqtoUp", squareToUpdate);
-      let arrToUpdate = [...squares];
-      arrToUpdate[index] = squareToUpdate;
-      console.log("last", arrToUpdate[index]);
-      setSquares(arrToUpdate)
+
+      setSquares(currentSquares => {
+           let index = squares.findIndex(
+             (square) => square.num === item.num && square.char === item.char
+           );
+        let updatedSquares = [...currentSquares]
+        updatedSquares[index].squareHit = true
+        return updatedSquares
+      })
+
     };
 
   const handleStartGame = () => {
