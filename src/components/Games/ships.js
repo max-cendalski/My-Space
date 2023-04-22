@@ -66,6 +66,7 @@ const ShipsGame = () => {
       let arrToUpdate = [...squares];
       arrToUpdate[index] = squareToUpdate;
       console.log("last", arrToUpdate[index]);
+      setSquares(arrToUpdate)
     };
 
   const handleStartGame = () => {
