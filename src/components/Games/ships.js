@@ -64,11 +64,14 @@ const ShipsGame = () => {
       );
 
       let updatedSquares = [...currentSquares];
-      for (const ship of ship5) {
+      let updatedShip5= [...ship5]
+      for (const ship of updatedShip5) {
         if (ship.num === item.num && ship.char === item.char) {
           updatedSquares[index].shipHit = true;
+          ship.shipHit = true
         }
       }
+      console.log('updatedSHip5',updatedShip5)
       updatedSquares[index].squareHit = true;
       return updatedSquares;
     });
