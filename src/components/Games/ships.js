@@ -66,7 +66,7 @@ const ShipsGame = () => {
       let updatedSquares = [...currentSquares];
       for (const ship of ship5) {
         if (ship.num === item.num && ship.char === item.char) {
-          updatedSquares[index].squareShip = true;
+          updatedSquares[index].shipHit = true;
         }
       }
       updatedSquares[index].squareHit = true;
@@ -87,7 +87,6 @@ const ShipsGame = () => {
           let ship = {};
           ship.char = frsLetS;
           ship.num = i + frsNumS;
-          ship.squareShip = false;
           shipArr.push(ship);
         }
       } else {
@@ -96,7 +95,6 @@ const ShipsGame = () => {
           let ship = {};
           ship.char = alphabet[alphabet.indexOf(frsLetS) + i];
           ship.num = frsNumS;
-          ship.squareShip = false;
           shipArr.push(ship);
         }
       }
@@ -140,7 +138,7 @@ const ShipsGame = () => {
               <div
                 key={index}
                 onClick={() => handleSquareClick(item)}
-                className={`square  ${item.squareShip ? "ship-hit" : ""}
+                className={`square  ${item.shipHit ? "ship-hit" : ""}
                 ${item.squareHit ? "square-hit" : ""}`}
               ></div>
             ))}
