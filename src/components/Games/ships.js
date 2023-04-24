@@ -56,19 +56,24 @@ const ShipsGame = () => {
     setAlphabet(alphabet);
   }, []);
 
+  const handleSquareClick = (item) => {
+    setSquares((currentSquares) => {
+      let index = squares.findIndex(
+        (square) => square.char=== item.char && square.item === item.item
+      );
 
-    const handleSquareClick = (item) => {
-
-      setSquares(currentSquares => {
-           let index = squares.findIndex(
-             (square) => square.num === item.num && square.char === item.char
-           );
-        let updatedSquares = [...currentSquares]
-        updatedSquares[index].squareHit = true
-        return updatedSquares
-      })
-
-    };
+      let updatedSquares = [...currentSquares];
+      for (const ship of ship5) {
+        if (ship.char === item.char && ship.num === item.num) {
+          console.log("whee");
+        }
+      }
+      updatedSquares[index].squareHit = true;
+      console.log("updated", updatedSquares[index]);
+      console.log("shipt5", ship5);
+      return updatedSquares;
+    });
+  };
 
   const handleStartGame = () => {
     var ship5 = [];
@@ -83,6 +88,7 @@ const ShipsGame = () => {
           let ship = {};
           ship.char = frsLetS;
           ship.num = i + frsNumS;
+          ship.squareShip = false;
           shipArr.push(ship);
         }
       } else {
@@ -91,7 +97,7 @@ const ShipsGame = () => {
           let ship = {};
           ship.char = alphabet[alphabet.indexOf(frsLetS) + i];
           ship.num = frsNumS;
-          ship.hit = false;
+          ship.squareShip = false;
           shipArr.push(ship);
         }
       }
