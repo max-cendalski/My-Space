@@ -56,12 +56,15 @@ const ShipsGame = () => {
     setSquares(arr);
     setAlphabet(alphabet);
     console.log("whee");
-  }, []);
+  }, [ship5]);
 
   const handleSquareClick = (item) => {
     function updateShipHit(ship5, ship4, ship3) {
       for (let i = 0; i < ship5.length; i++) {
-        if (ship5.current[i].char === item.char && ship5.current[i].num === item.num) {
+        if (
+          ship5.current[i].char === item.char &&
+          ship5.current[i].num === item.num
+        ) {
           ship5.current[i].shipHit = true;
           break;
         }
@@ -82,27 +85,31 @@ const ShipsGame = () => {
     updateShipHit(ship5, ship4, ship3);
 
     setSquares((currentSquares) => {
-      var isMatch = false
+      var isMatch = false;
       let index = squares.findIndex(
         (square) => square.num === item.num && square.char === item.char
       );
       let updatedSquares = [...currentSquares];
 
-
       ship5.current.forEach((ele) => {
+        if (isMatch) return;
         if (ele.num === item.num && ele.char === item.char) {
           ele.shipHit = true;
           updatedSquares[index].shipHit = true;
+          isMatch = true;
         }
         ship4.current.forEach((ele) => {
+          if (isMatch) return;
           if (ele.num === item.num && ele.char === item.char) {
             ele.shipHit = true;
             updatedSquares[index].shipHit = true;
+            isMatch = true;
           }
           ship3.current.forEach((ele) => {
             if (ele.num === item.num && ele.char === item.char) {
               ele.shipHit = true;
               updatedSquares[index].shipHit = true;
+              isMatch = true;
             }
           });
         });
@@ -141,9 +148,6 @@ const ShipsGame = () => {
     generateShip(5, newShip5, ship5);
     generateShip(4, newShip4, ship4);
     generateShip(3, newShip3, ship3);
-    console.log('ship5',ship5)
-    console.log('ship4',ship4)
-    console.log('ship3',ship3)
   };
 
   return (
@@ -187,25 +191,3 @@ const ShipsGame = () => {
 };
 
 export default ShipsGame;
-
-
-
-/*
-   ship5.current.forEach((ele) => {
-     if (ele.num === item.num && ele.char === item.char) {
-       ele.shipHit = true;
-       updatedSquares[index].shipHit = true;
-     }
-     ship4.current.forEach((ele) => {
-       if (ele.num === item.num && ele.char === item.char) {
-         ele.shipHit = true;
-         updatedSquares[index].shipHit = true;
-       }
-       ship3.current.forEach((ele) => {
-         if (ele.num === item.num && ele.char === item.char) {
-           ele.shipHit = true;
-           updatedSquares[index].shipHit = true;
-         }
-       });
-     });
-   }); */
