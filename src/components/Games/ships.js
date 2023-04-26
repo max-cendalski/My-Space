@@ -8,12 +8,10 @@ const ShipsGame = () => {
   const [yAxisMobile, setYMobile] = useState([
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
   ]);
-  /*   const [ship5, setShip5] = useState([]);
-  const [ship4, setShip4] = useState([]);
-  const [ship3, setShip3] = useState([]); */
-  const ship5R = useRef([]);
-  const ship4R = useRef([]);
-  const ship3R = useRef([]);
+
+  const ship5 = useRef([]);
+  const ship4 = useRef([]);
+  const ship3 = useRef([]);
 
   useEffect(() => {
     const alphabet = [
@@ -64,34 +62,34 @@ const ShipsGame = () => {
     function updateShipHit(ship5, ship4, ship3) {
       for (let i = 0; i < ship5.length; i++) {
         if (
-          ship5R.current[i].char === item.char &&
-          ship5R.current[i].num === item.num
+          ship5.current[i].char === item.char &&
+          ship5.current[i].num === item.num
         ) {
           /*     setShip5((prevShip5) => {
             const updatedShip5 = [...prevShip5];
             updatedShip5[i] = { ...updatedShip5[i], shipHit: true };
             return updatedShip5;
           }); */
-          ship5R.current[i].shipHit = true;
+          ship5.current[i].shipHit = true;
           break;
         }
       }
 
       for (let i = 0; i < ship4.length; i++) {
         if (ship4[i].char === item.char && ship4[i].num === item.num) {
-          ship4R.current[i].shipHit = true;
+          ship4.current[i].shipHit = true;
           break;
         }
       }
       for (let i = 0; i < ship3.length; i++) {
         if (ship3[i].char === item.char && ship3[i].num === item.num) {
-          ship3R.current[i].shipHit = true;
+          ship3.current[i].shipHit = true;
 
           break;
         }
       }
     }
-    updateShipHit(ship5R, ship4R, ship3R);
+    updateShipHit(ship5, ship4, ship3);
 
     setSquares((currentSquares) => {
       let index = squares.findIndex(
@@ -100,17 +98,17 @@ const ShipsGame = () => {
 
       let updatedSquares = [...currentSquares];
 
-      ship5R.current.forEach((ele) => {
+      ship5.current.forEach((ele) => {
         if (ele.num === item.num && ele.char === item.char) {
           ele.shipHit = true;
           updatedSquares[index].shipHit = true;
         }
-        ship4R.current.forEach((ele) => {
+        ship4.current.forEach((ele) => {
           if (ele.num === item.num && ele.char === item.char) {
             ele.shipHit = true;
             updatedSquares[index].shipHit = true;
           }
-          ship3R.current.forEach((ele) => {
+          ship3.current.forEach((ele) => {
             if (ele.num === item.num && ele.char === item.char) {
               ele.shipHit = true;
               updatedSquares[index].shipHit = true;
@@ -127,12 +125,6 @@ const ShipsGame = () => {
       updatedSquares[index].squareHit = true;
       return updatedSquares;
     });
-    /*   console.log("ship5R", ship5R.current);
-    console.log("ship4R", ship4R.current);
-    console.log("ship3R", ship3R.current);
-    console.log("ships", ship5);
-    console.log("ships", ship4);
-    console.log("ships", ship3); */
   };
 
   const handleStartGame = () => {
@@ -161,17 +153,9 @@ const ShipsGame = () => {
         }
       }
     }
-    generateShip(5, ship5, ship5R);
+    generateShip(5, ship5, ship5);
     generateShip(4, ship4, ship4);
     generateShip(3, ship3, ship3);
-    /*     setShip5(ship5);
-    setShip4(ship4);
-    setShip3(ship3);
-    ship5R.current = ship5;
-    ship4R.current = ship4;
-    ship3R.current = ship3; */
-    ship5R.current = ship5;
-    console.log("ship5R", ship5R);
   };
 
   return (
