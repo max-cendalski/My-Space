@@ -54,24 +54,69 @@ const ShipsGame = () => {
     }
     setSquares(arr);
     setAlphabet(alphabet);
-    console.log("whee")
+    console.log("whee");
   }, [ship5]);
 
   const handleSquareClick = (item) => {
+    function updateShipHit(ship5, ship4, ship3) {
+      let matchFound = false;
+
+      for (let i = 0; i < ship5.length; i++) {
+        if (ship5[i].char === item.char && ship5[i].num === item.num) {
+          setShip5((prevShip5) => {
+            const updatedShip5 = [...prevShip5];
+            updatedShip5[i] = { ...updatedShip5[i], hit: true };
+            return updatedShip5;
+          });
+          matchFound = true;
+          break;
+        }
+      }
+
+      if (matchFound) {
+        return;
+      }
+
+      for (let i = 0; i < ship4.length; i++) {
+        if (ship4[i].char === item.char && ship4[i].num === item.num) {
+          setShip4((prevShip4) => {
+            const updatedShip4 = [...prevShip4];
+            updatedShip4[i] = { ...updatedShip4[i], hit: true };
+            return updatedShip4;
+          });
+          break;
+        }
+      }
+      if (matchFound) {
+        return;
+      }
+
+      for (let i = 0; i < ship3.length; i++) {
+        if (ship3[i].char === item.char && ship3[i].num === item.num) {
+          setShip3((prevShip3) => {
+            const updatedShip3 = [...prevShip3];
+            updatedShip3[i] = { ...updatedShip3[i], hit: true };
+            return updatedShip3;
+          });
+          break;
+        }
+      }
+    }
+    updateShipHit(ship5,ship4,ship3);
     setSquares((currentSquares) => {
       let index = squares.findIndex(
         (square) => square.num === item.num && square.char === item.char
       );
 
       let updatedSquares = [...currentSquares];
-      let updatedShip5= [...ship5]
+      let updatedShip5 = [...ship5];
       for (const ship of updatedShip5) {
         if (ship.num === item.num && ship.char === item.char) {
           updatedSquares[index].shipHit = true;
-          ship.shipHit = true
+          ship.shipHit = true;
         }
       }
-      console.log('updatedSHip5',updatedShip5)
+      console.log("updatedSHip5", updatedShip5);
       updatedSquares[index].squareHit = true;
       return updatedSquares;
     });
