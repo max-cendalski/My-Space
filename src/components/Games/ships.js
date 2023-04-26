@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Navbar from "../Navbar/Navbar";
 import GoBack from "../GoBack/GoBack";
 
@@ -11,6 +11,9 @@ const ShipsGame = () => {
   const [ship5, setShip5] = useState([]);
   const [ship4, setShip4] = useState([]);
   const [ship3, setShip3] = useState([]);
+  const ship5R = useRef([])
+  const ship4R = useRef([])
+  const ship3R = useRef([])
 
   useEffect(() => {
     const alphabet = [
@@ -155,6 +158,12 @@ const ShipsGame = () => {
     setShip5(ship5);
     setShip4(ship4);
     setShip3(ship3);
+    ship5R.current = ship5
+    ship4R.current = ship4
+    ship3R.current = ship3
+    console.log('ship5R',ship5R.current)
+    console.log('ship4R',ship4R.current)
+    console.log('ship3R',ship3R.current)
     console.log("ships", ship5);
     console.log("ships", ship4);
     console.log("ships", ship3);
