@@ -61,20 +61,11 @@ const ShipsGame = () => {
   const handleSquareClick = (item) => {
     function updateShipHit(ship5, ship4, ship3) {
       for (let i = 0; i < ship5.length; i++) {
-        if (
-          ship5.current[i].char === item.char &&
-          ship5.current[i].num === item.num
-        ) {
-          /*     setShip5((prevShip5) => {
-            const updatedShip5 = [...prevShip5];
-            updatedShip5[i] = { ...updatedShip5[i], shipHit: true };
-            return updatedShip5;
-          }); */
+        if (ship5.current[i].char === item.char && ship5.current[i].num === item.num) {
           ship5.current[i].shipHit = true;
           break;
         }
       }
-
       for (let i = 0; i < ship4.length; i++) {
         if (ship4[i].char === item.char && ship4[i].num === item.num) {
           ship4.current[i].shipHit = true;
@@ -84,7 +75,6 @@ const ShipsGame = () => {
       for (let i = 0; i < ship3.length; i++) {
         if (ship3[i].char === item.char && ship3[i].num === item.num) {
           ship3.current[i].shipHit = true;
-
           break;
         }
       }
@@ -92,11 +82,12 @@ const ShipsGame = () => {
     updateShipHit(ship5, ship4, ship3);
 
     setSquares((currentSquares) => {
+      var isMatch = false
       let index = squares.findIndex(
         (square) => square.num === item.num && square.char === item.char
       );
-
       let updatedSquares = [...currentSquares];
+
 
       ship5.current.forEach((ele) => {
         if (ele.num === item.num && ele.char === item.char) {
@@ -116,21 +107,15 @@ const ShipsGame = () => {
           });
         });
       });
-      /*  for (const ship of updatedShip5) {
-        if (ship.num === item.num && ship.char === item.char) {
-          updatedSquares[index].shipHit = true;
-          ship.shipHit = true;
-        }
-      } */
       updatedSquares[index].squareHit = true;
       return updatedSquares;
     });
   };
 
   const handleStartGame = () => {
-    var ship5 = [];
-    var ship4 = [];
-    var ship3 = [];
+    var newShip5 = [];
+    var newShip4 = [];
+    var newShip3 = [];
     function generateShip(size, shipArr, newShip) {
       var frsLetS = alphabet[Math.round(Math.random() * 14)];
       if (alphabet.indexOf(frsLetS) > 10) {
@@ -153,9 +138,12 @@ const ShipsGame = () => {
         }
       }
     }
-    generateShip(5, ship5, ship5);
-    generateShip(4, ship4, ship4);
-    generateShip(3, ship3, ship3);
+    generateShip(5, newShip5, ship5);
+    generateShip(4, newShip4, ship4);
+    generateShip(3, newShip3, ship3);
+    console.log('ship5',ship5)
+    console.log('ship4',ship4)
+    console.log('ship3',ship3)
   };
 
   return (
@@ -199,3 +187,25 @@ const ShipsGame = () => {
 };
 
 export default ShipsGame;
+
+
+
+/*
+   ship5.current.forEach((ele) => {
+     if (ele.num === item.num && ele.char === item.char) {
+       ele.shipHit = true;
+       updatedSquares[index].shipHit = true;
+     }
+     ship4.current.forEach((ele) => {
+       if (ele.num === item.num && ele.char === item.char) {
+         ele.shipHit = true;
+         updatedSquares[index].shipHit = true;
+       }
+       ship3.current.forEach((ele) => {
+         if (ele.num === item.num && ele.char === item.char) {
+           ele.shipHit = true;
+           updatedSquares[index].shipHit = true;
+         }
+       });
+     });
+   }); */
