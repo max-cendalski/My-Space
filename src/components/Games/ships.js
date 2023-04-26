@@ -59,13 +59,12 @@ const ShipsGame = () => {
 
   const handleSquareClick = (item) => {
     function updateShipHit(ship5, ship4, ship3) {
-      let matchFound = false;
-
+      let matchFound = false
       for (let i = 0; i < ship5.length; i++) {
         if (ship5[i].char === item.char && ship5[i].num === item.num) {
           setShip5((prevShip5) => {
             const updatedShip5 = [...prevShip5];
-            updatedShip5[i] = { ...updatedShip5[i], hit: true };
+            updatedShip5[i] = { ...updatedShip5[i], shipHit: true };
             return updatedShip5;
           });
           matchFound = true;
@@ -81,12 +80,14 @@ const ShipsGame = () => {
         if (ship4[i].char === item.char && ship4[i].num === item.num) {
           setShip4((prevShip4) => {
             const updatedShip4 = [...prevShip4];
-            updatedShip4[i] = { ...updatedShip4[i], hit: true };
+            updatedShip4[i] = { ...updatedShip4[i], shipHit: true };
             return updatedShip4;
           });
+          matchFound = true;
           break;
         }
       }
+
       if (matchFound) {
         return;
       }
@@ -95,14 +96,15 @@ const ShipsGame = () => {
         if (ship3[i].char === item.char && ship3[i].num === item.num) {
           setShip3((prevShip3) => {
             const updatedShip3 = [...prevShip3];
-            updatedShip3[i] = { ...updatedShip3[i], hit: true };
+            updatedShip3[i] = { ...updatedShip3[i], shipHit: true };
             return updatedShip3;
           });
           break;
         }
       }
     }
-    updateShipHit(ship5,ship4,ship3);
+    updateShipHit(ship5, ship4, ship3);
+
     setSquares((currentSquares) => {
       let index = squares.findIndex(
         (square) => square.num === item.num && square.char === item.char
