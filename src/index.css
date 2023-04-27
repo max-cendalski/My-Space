@@ -476,7 +476,7 @@ code {
 
 #game-area {
   display: flex;
-  width: 100%;
+  width: 375px;
   flex-wrap: wrap;
   grid-row: 2/3;
   grid-column: 2/3;

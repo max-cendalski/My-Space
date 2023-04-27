@@ -12,6 +12,7 @@ const ShipsGame = () => {
   const ship5 = useRef([]);
   const ship4 = useRef([]);
   const ship3 = useRef([]);
+  const [gameStarted, setGameStarted]  =useState(false)
 
   useEffect(() => {
     const alphabet = [
@@ -56,9 +57,10 @@ const ShipsGame = () => {
     setSquares(arr);
     setAlphabet(alphabet);
     console.log("whee");
-  }, [ship5]);
+  }, [gameStarted]);
 
   const handleSquareClick = (item) => {
+
     function updateShipHit(ship5, ship4, ship3) {
       for (let i = 0; i < ship5.length; i++) {
         if (
@@ -82,6 +84,7 @@ const ShipsGame = () => {
         }
       }
     }
+
     updateShipHit(ship5, ship4, ship3);
 
     setSquares((currentSquares) => {
@@ -120,6 +123,7 @@ const ShipsGame = () => {
   };
 
   const handleStartGame = () => {
+    setGameStarted(!gameStarted)
     var newShip5 = [];
     var newShip4 = [];
     var newShip3 = [];
