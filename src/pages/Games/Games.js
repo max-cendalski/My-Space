@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 const Games = () => {
   return (
-    <article id="game-page-container">
+    <article>
       <Navbar />
       <GoBack />
       <h1 id="games-header">Games</h1>

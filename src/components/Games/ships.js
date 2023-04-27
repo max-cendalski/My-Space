@@ -188,8 +188,8 @@ const ShipsGame = () => {
             ))}
           </article>
         </article>
-        <article id="ships-user-area"></article>
       </article>
+      <article id="ships-user-area"></article>
     </>
   );
 };

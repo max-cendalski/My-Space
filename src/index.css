@@ -415,8 +415,9 @@ code {
 /*ShipsGame*/
 
 #ships-game-area-container {
-
+  display: flex;
 }
+
 .ships-header {
   grid-row: 1;
   grid-column: 1/3;
@@ -424,9 +425,9 @@ code {
 
 #ships-computer-area {
   display: grid;
-  gap: 0.1rem;
-  grid-template-rows: 1.5rem 2rem auto;
-  grid-template-columns: 2rem auto 1rem;
+  gap: 0.2rem;
+  grid-template-rows: 1.8rem 1.8rem auto;
+  grid-template-columns: 1rem 400px auto
 }
 .alphabet-container {
   display: flex;
@@ -438,11 +439,11 @@ code {
   width: 25px;
   height: 25px;
   border: 1px solid grey;
-  margin: 0;
 }
+
 #numbers-container {
   grid-row: 2/3;
-  grid-column: 1;
+  grid-column: 1
 }
 
 .numbers-square {
@@ -475,8 +476,8 @@ code {
 }
 
 #game-area {
-  display: flex;
   width: 375px;
+  display: flex;
   flex-wrap: wrap;
   grid-row: 2/3;
   grid-column: 2/3;
@@ -703,4 +704,8 @@ code {
 
 .hidden {
   display: none;
+}
+
+@media screen {
+
 }
