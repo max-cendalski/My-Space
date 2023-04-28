@@ -56,7 +56,7 @@ const ShipsGame = () => {
     }
     setSquares(arr);
     setAlphabet(alphabet);
-    console.log("whee");
+    console.log(arr.slice(0,5));
   }, [gameStarted]);
 
   const handleSquareClick = (item) => {
@@ -127,23 +127,28 @@ const ShipsGame = () => {
     var newShip5 = [];
     var newShip4 = [];
     var newShip3 = [];
+    var id =0
     function generateShip(size, shipArr, newShip) {
       var frsLetS = alphabet[Math.round(Math.random() * 14)];
       if (alphabet.indexOf(frsLetS) > 10) {
         let frsNumS = Math.round(Math.random() * 16);
         for (let i = 0; i < size; i++) {
+          id++
           let ship = {};
           ship.char = frsLetS;
           ship.num = i + frsNumS;
+          ship.id = id
           shipArr.push(ship);
           newShip.current = shipArr;
         }
       } else {
         let frsNumS = Math.round(Math.random() * 20);
         for (let i = 0; i < size; i++) {
+          id++
           let ship = {};
           ship.char = alphabet[alphabet.indexOf(frsLetS) + i];
           ship.num = frsNumS;
+          ship.id=id
           shipArr.push(ship);
           newShip.current = shipArr;
         }
@@ -152,6 +157,7 @@ const ShipsGame = () => {
     generateShip(5, newShip5, ship5);
     generateShip(4, newShip4, ship4);
     generateShip(3, newShip3, ship3);
+    console.log('ship5',ship5,ship4,ship3)
   };
 
   return (
