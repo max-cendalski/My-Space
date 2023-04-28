@@ -56,7 +56,6 @@ const ShipsGame = () => {
     }
     setSquares(arr);
     setAlphabet(alphabet);
-    console.log(arr.slice(0, 5));
   }, [gameStarted]);
 
   const handleSquareClick = (item) => {
@@ -129,10 +128,10 @@ const ShipsGame = () => {
 
     function generateShip(size, shipArr, newShip) {
       var frsLetS = alphabet[Math.round(Math.random() * 14)];
+
       if (alphabet.indexOf(frsLetS) > 10) {
         let frsNumS = Math.round(Math.random() * 16);
         for (let i = 0; i < size; i++) {
-
           let ship = {};
           ship.char = frsLetS;
           ship.num = i + frsNumS;
@@ -142,7 +141,6 @@ const ShipsGame = () => {
       } else {
         let frsNumS = Math.round(Math.random() * 20);
         for (let i = 0; i < size; i++) {
-
           let ship = {};
           ship.char = alphabet[alphabet.indexOf(frsLetS) + i];
           ship.num = frsNumS;
@@ -151,12 +149,13 @@ const ShipsGame = () => {
         }
       }
     }
-
+    var shipGenerated = false
     generateShip(5, newShip5, ship5);
     generateShip(4, newShip4, ship4);
     generateShip(3, newShip3, ship3);
-    console.log("ship5", ship5);
     var allShips = [...ship5.current, ...ship4.current, ...ship3.current];
+
+
     function checkDuplicateShips(allShips) {
       for (let i = 0; i < allShips.length - 1; i++) {
         let obj1 = allShips[i];
@@ -164,7 +163,7 @@ const ShipsGame = () => {
         for (let j = i + 1; j < allShips.length; j++) {
           let obj2 = allShips[j];
           if (JSON.stringify(obj1) === JSON.stringify(obj2)) {
-            console.log("Same ship", obj1);
+            console.log('Ship are the same')
             return true;
           }
         }
@@ -172,8 +171,8 @@ const ShipsGame = () => {
       console.log("All ships different");
       return false;
     }
-    checkDuplicateShips(allShips);
   };
+  console.log("ships", ship5.current, ship4.current, ship3.current);
   return (
     <>
       <Navbar />
