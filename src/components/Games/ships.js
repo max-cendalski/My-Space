@@ -126,13 +126,13 @@ const ShipsGame = () => {
     var newShip5 = [];
     var newShip4 = [];
     var newShip3 = [];
-    var id = 0;
+
     function generateShip(size, shipArr, newShip) {
       var frsLetS = alphabet[Math.round(Math.random() * 14)];
       if (alphabet.indexOf(frsLetS) > 10) {
         let frsNumS = Math.round(Math.random() * 16);
         for (let i = 0; i < size; i++) {
-          id++;
+
           let ship = {};
           ship.char = frsLetS;
           ship.num = i + frsNumS;
@@ -142,7 +142,7 @@ const ShipsGame = () => {
       } else {
         let frsNumS = Math.round(Math.random() * 20);
         for (let i = 0; i < size; i++) {
-          id++;
+
           let ship = {};
           ship.char = alphabet[alphabet.indexOf(frsLetS) + i];
           ship.num = frsNumS;
