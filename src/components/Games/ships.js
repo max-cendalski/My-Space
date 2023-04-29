@@ -5,7 +5,7 @@ import GoBack from "../GoBack/GoBack";
 const ShipsGame = () => {
   const [squares, setSquares] = useState([]);
   const [alphabet, setAlphabet] = useState([]);
-  const [yAxisMobile, setYMobile] = useState([
+  const yAxisMobile = useRef([
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
   ]);
 
@@ -56,6 +56,7 @@ const ShipsGame = () => {
     }
     setSquares(arr);
     setAlphabet(alphabet);
+    console.log('whe')
   }, []);
 
   const handleSquareClick = (item) => {
@@ -173,7 +174,6 @@ const ShipsGame = () => {
         }
       }
     }
-
     checkShips();
     console.log("shipt", ship5.current, ship4.current, ship3.current);
   };
@@ -194,7 +194,7 @@ const ShipsGame = () => {
             ))}
           </section>
           <section id="numbers-container">
-            {yAxisMobile.map((item, index) => (
+            {yAxisMobile.current.map((item, index) => (
               <div className="numbers-square" key={index}>
                 {item}
               </div>
