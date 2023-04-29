@@ -485,6 +485,14 @@ code {
   background-color: rgb(196, 229, 240);
 }
 
+#ships-header {
+  display: flex;
+  flex-direction: column;
+}
+.start-ships-game-button {
+  margin-block-start: 1rem;
+  margin-block-end: 1rem;
+}
 
 
 

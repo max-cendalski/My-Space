@@ -60,6 +60,7 @@ const ShipsGame = () => {
   }, []);
 
   const handleSquareClick = (item) => {
+    setGameStarted(true)
     function updateShipHit(ship5, ship4, ship3) {
       for (let i = 0; i < ship5.length; i++) {
         if (
@@ -88,7 +89,7 @@ const ShipsGame = () => {
 
     setSquares((currentSquares) => {
       var isMatch = false;
-      let index = squares.findIndex(
+      var index = squares.findIndex(
         (square) => square.num === item.num && square.char === item.char
       );
       let updatedSquares = [...currentSquares];
@@ -175,14 +176,18 @@ const ShipsGame = () => {
       }
     }
     checkShips();
-    console.log("shipt", ship5.current, ship4.current, ship3.current);
+    console.log("shipt", ship5.current);
   };
   return (
     <>
       <Navbar />
       <GoBack />
-      <h1 className="ships-header">Game area</h1>
-      <button onClick={handleStartGame}>Start Game</button>
+      <article id="ships-header">
+        <h1 className="ships-header">Game area</h1>
+        <button className="start-ships-game-button" disabled={gameStarted} onClick={handleStartGame}>
+          Start Game
+        </button>
+      </article>
 
       <article id="ships-game-area-container">
         <article id="ships-computer-area">
