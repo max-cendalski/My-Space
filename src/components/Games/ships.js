@@ -184,9 +184,14 @@ const ShipsGame = () => {
       <GoBack />
       <article id="ships-header">
         <h1 className="ships-header">Game area</h1>
-        <button className="start-ships-game-button" disabled={gameStarted} onClick={handleStartGame}>
+        <button
+          className="start-ships-game-button"
+          disabled={gameStarted}
+          onClick={handleStartGame}
+        >
           Start Game
         </button>
+        <h2>Enemy's Area</h2>
       </article>
 
       <article id="ships-game-area-container">
@@ -215,6 +220,9 @@ const ShipsGame = () => {
               ></div>
             ))}
           </article>
+        </article>
+        <article>
+          <h2>Your ships</h2>
         </article>
       </article>
       <article id="ships-user-area"></article>
