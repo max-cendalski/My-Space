@@ -56,7 +56,7 @@ const ShipsGame = () => {
     }
     setSquares(arr);
     setAlphabet(alphabet);
-  }, [gameStarted]);
+  }, []);
 
   const handleSquareClick = (item) => {
     function updateShipHit(ship5, ship4, ship3) {
@@ -122,11 +122,11 @@ const ShipsGame = () => {
 
   const handleStartGame = () => {
     setGameStarted(!gameStarted);
-    var newShip5 = [];
-    var newShip4 = [];
-    var newShip3 = [];
+    var newShip5 =[]
+    var newShip4 =[]
+    var newShip3=[]
 
-    function generateShip(size, shipArr, newShip) {
+    function generateShip(size, shipArr,newShip) {
       var frsLetS = alphabet[Math.round(Math.random() * 14)];
 
       if (alphabet.indexOf(frsLetS) > 10) {
@@ -149,30 +149,43 @@ const ShipsGame = () => {
         }
       }
     }
-    var shipGenerated = false
-    generateShip(5, newShip5, ship5);
-    generateShip(4, newShip4, ship4);
-    generateShip(3, newShip3, ship3);
-    var allShips = [...ship5.current, ...ship4.current, ...ship3.current];
 
+    const checkShips = () => {
+      //debugger;
+      var theSame = true;
 
-    function checkDuplicateShips(allShips) {
-      for (let i = 0; i < allShips.length - 1; i++) {
-        let obj1 = allShips[i];
+      while (theSame) {
+        newShip5 =[]
+        newShip4 =[]
+        newShip3 =[]
+        theSame = false;
+        generateShip(5, newShip5, ship5);
+        generateShip(4, newShip4,ship4);
+        generateShip(3, newShip3,ship3);
 
-        for (let j = i + 1; j < allShips.length; j++) {
-          let obj2 = allShips[j];
-          if (JSON.stringify(obj1) === JSON.stringify(obj2)) {
-            console.log('Ship are the same')
-            return true;
+        const allShips = [...newShip5, ...newShip4, ...newShip3];
+
+        loop1: for (let i = 0; i < allShips.length - 1; i++) {
+          let obj1 = allShips[i];
+
+          for (let j = i + 1; j < allShips.length; j++) {
+            let obj2 = allShips[j];
+            if (JSON.stringify(obj1) === JSON.stringify(obj2)) {
+              console.log("Ships are the same");
+              theSame = true;
+
+              break loop1;
+            }
           }
         }
       }
       console.log("All ships different");
-      return false;
-    }
+    };
+
+    checkShips();
+    console.log("newShip5", newShip5, newShip4, newShip3);
+    console.log("shipt", ship5.current, ship4.current, ship3.current);
   };
-  console.log("ships", ship5.current, ship4.current, ship3.current);
   return (
     <>
       <Navbar />
