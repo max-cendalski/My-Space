@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 
-
 const ShipsComputerArea = () => {
   const [squares, setSquares] = useState([]);
   const [alphabet, setAlphabet] = useState([]);
@@ -59,7 +58,11 @@ const ShipsComputerArea = () => {
   }, []);
 
   const handleSquareClick = (item) => {
-    setGameStarted(true);
+    if (!gameStarted) {
+      alert("click start game button")
+      return;
+    }
+
     function updateShipHit(ship5, ship4, ship3) {
       for (let i = 0; i < ship5.length; i++) {
         if (
@@ -175,12 +178,12 @@ const ShipsComputerArea = () => {
       }
     }
     checkShips();
-    console.log("shipt", ship5.current);
+    console.log("ships", ship5.current,ship4.current, ship3.current);
   };
   return (
     <>
-      <article id="ships-header">
-        <h1 className="ships-header">Game area</h1>
+      <article id="ships-header-container">
+        <h2>Computer's Area</h2>
         <button
           className="start-ships-game-button"
           disabled={gameStarted}
@@ -188,7 +191,6 @@ const ShipsComputerArea = () => {
         >
           Start Game
         </button>
-        <h2>Enemy's Area</h2>
       </article>
 
       <article id="ships-game-area-container">
