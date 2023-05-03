@@ -41,9 +41,9 @@ const ShipsComputerArea = () => {
       "y",
       "z", */
     ];
-    let arr = [];
-    for (var i = 0; i <= 20; i++) {
-      for (var j = 0; j < 15; j++) {
+    var arr = [];
+    for (let i = 0; i <= 20; i++) {
+      for (let j = 0; j < 15; j++) {
         arr.push({
           char: alphabet[j],
           num: i,
