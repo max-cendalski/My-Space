@@ -59,9 +59,9 @@ const ShipsUserArea = () => {
 
   return (
     <>
-      <article>
+      <article id="user-game-area">
         <h1> User Area</h1>
-        <article>
+        <article id="user-battle-field">
           {squares.map((item, index) => (
             <div
               key={index}

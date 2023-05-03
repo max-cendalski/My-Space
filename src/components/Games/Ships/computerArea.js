@@ -193,7 +193,6 @@ const ShipsComputerArea = () => {
         </button>
       </article>
 
-      <article id="ships-game-area-container">
         <article id="ships-computer-area">
           <section className="alphabet-container">
             {alphabet.map((item) => (
@@ -219,7 +218,7 @@ const ShipsComputerArea = () => {
               ></div>
             ))}
           </article>
-        </article>
+
       </article>
     </>
   );

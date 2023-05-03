@@ -416,6 +416,8 @@ code {
 
 #ships-game-area-container {
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .ships-header {
@@ -483,6 +485,15 @@ code {
   grid-column: 2/3;
   text-align: center;
   background-color: rgb(196, 229, 240);
+}
+
+#user-game-area {
+  grid-row: 5/6;
+}
+#user-battle-field {
+  width: 375px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 #ships-header-container {
