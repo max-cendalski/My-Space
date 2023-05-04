@@ -55,7 +55,7 @@ const ShipsComputerArea = () => {
     }
     setSquaresC(arr);
     setAlphabetC(alphabet);
-    console.log("whe");
+    console.log("computeruseEffect");
   }, []);
 
   const handleSquareClickC = (item) => {
@@ -219,7 +219,7 @@ const ShipsComputerArea = () => {
         </button>
       </article>
 
-      <article id="ships-computer-area">
+      <article id="ships-battle-area">
         <section className="alphabet-container">
           {alphabetC.map((item) => (
             <div className="alphabet-ships-square" key={item}>

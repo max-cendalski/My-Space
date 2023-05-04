@@ -419,7 +419,7 @@ code {
   grid-column: 1/3;
 }
 
-#ships-computer-area {
+#ships-battle-area {
   display: grid;
   gap: 0.2rem;
   height: 38rem;

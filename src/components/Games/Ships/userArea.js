@@ -13,7 +13,16 @@ const ShipsUserArea = () => {
   const ship3U = useRef([]);
 
   const handleSquareClick = (item) => {
-    console.log("whee");
+    console.log('item',item)
+    setSquaresU((currentSquares) => {
+      var index = squaresU.findIndex(
+        (square) => square.num === item.num && square.char === item.char
+      );
+      console.log('index',index)
+      let updatedSquares = [...currentSquares];
+      updatedSquares[index].shipHit = true;
+      return updatedSquares;
+    });
   };
   useEffect(() => {
     const alphabet = [
@@ -57,36 +66,39 @@ const ShipsUserArea = () => {
     }
     setSquaresU(arr);
     setAlphabetU(alphabet);
-    console.log("whe");
+    console.log("useruseEffect");
   }, []);
 
   return (
     <>
-    <article id="ships-computer-area">
-      <section className="alphabet-container">
-        {alphabetU.map((item) => (
-          <div className="alphabet-ships-square" key={item}>
-            {item}
-          </div>
-        ))}
-      </section>
-      <section id="numbers-container">
-        {yAxisMobileU.current.map((item, index) => (
-          <div className="numbers-square" key={index}>
-            {item}
-          </div>
-        ))}
-      </section>
-      <article id="battle-area">
-        {squaresU.map((item, index) => (
-          <div
-            key={index}
-            onClick={() => handleSquareClick(item)}
-            className={`square  ${item.shipHit ? "ship-hit" : ""}
+      <article id="ships-battle-area">
+        <section className="alphabet-container">
+          {alphabetU.map((item) => (
+            <div className="alphabet-ships-square" key={item}>
+              {item}
+            </div>
+          ))}
+        </section>
+        <section id="numbers-container">
+          {yAxisMobileU.current.map((item, index) => (
+            <div className="numbers-square" key={index}>
+              {item}
+            </div>
+          ))}
+        </section>
+        <article id="battle-area">
+          {squaresU.map((item, index) => (
+            <div
+              key={index}
+              onClick={() => handleSquareClick(item)}
+              className={`square  ${item.shipHit ? "ship-hit" : ""}
                 ${item.squareHit ? "square-hit" : ""}`}
-          ></div>
-        ))}
-      </article>
+            ></div>
+          ))}
+        </article>
+        <section className="hidden">
+          <p></p>
+        </section>
       </article>
     </>
   );
