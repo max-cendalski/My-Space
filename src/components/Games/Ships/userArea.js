@@ -71,6 +71,9 @@ const ShipsUserArea = () => {
 
   return (
     <>
+      <section>
+        <h2>Player Area</h2>
+      </section>
       <article id="ships-battle-area">
         <section className="alphabet-container">
           {alphabetU.map((item) => (
