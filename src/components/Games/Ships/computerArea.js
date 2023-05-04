@@ -234,7 +234,7 @@ const ShipsComputerArea = () => {
             </div>
           ))}
         </section>
-        <article id="game-area">
+        <article id="battle-area">
           {squaresC.map((item, index) => (
             <div
               key={index}

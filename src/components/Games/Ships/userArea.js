@@ -1,17 +1,20 @@
 import { useState, useEffect, useRef } from "react";
 
 const ShipsUserArea = () => {
-  const [squares, setSquares] = useState([]);
-  const [alphabet, setAlphabet] = useState([]);
-  const yAxisMobile = useRef([
+  const [squaresU, setSquaresU] = useState([]);
+  const [alphabetU, setAlphabetU] = useState([]);
+  const yAxisMobileU = useRef([
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
   ]);
 
-  const ship5 = useRef([]);
-  const ship4 = useRef([]);
-  const ship3 = useRef([]);
-  const [gameStarted, setGameStarted] = useState(false);
+  const ship6U = useRef([]);
+  const ship5U = useRef([]);
+  const ship4U = useRef([]);
+  const ship3U = useRef([]);
 
+  const handleSquareClick = (item) => {
+    console.log("whee");
+  };
   useEffect(() => {
     const alphabet = [
       "a",
@@ -52,24 +55,38 @@ const ShipsUserArea = () => {
         });
       }
     }
-    setSquares(arr);
-    setAlphabet(alphabet);
+    setSquaresU(arr);
+    setAlphabetU(alphabet);
     console.log("whe");
   }, []);
 
   return (
     <>
-      <article id="user-game-area">
-        <h1> User Area</h1>
-        <article id="user-battle-field">
-          {squares.map((item, index) => (
-            <div
-              key={index}
-              className={`square  ${item.shipHit ? "ship-hit" : ""}
+    <article id="ships-computer-area">
+      <section className="alphabet-container">
+        {alphabetU.map((item) => (
+          <div className="alphabet-ships-square" key={item}>
+            {item}
+          </div>
+        ))}
+      </section>
+      <section id="numbers-container">
+        {yAxisMobileU.current.map((item, index) => (
+          <div className="numbers-square" key={index}>
+            {item}
+          </div>
+        ))}
+      </section>
+      <article id="battle-area">
+        {squaresU.map((item, index) => (
+          <div
+            key={index}
+            onClick={() => handleSquareClick(item)}
+            className={`square  ${item.shipHit ? "ship-hit" : ""}
                 ${item.squareHit ? "square-hit" : ""}`}
-            ></div>
-          ))}
-        </article>
+          ></div>
+        ))}
+      </article>
       </article>
     </>
   );

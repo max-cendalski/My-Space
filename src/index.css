@@ -472,7 +472,7 @@ code {
     background-color: var(--red);
 }
 
-#game-area {
+#battle-area {
   width: 375px;
   display: flex;
   flex-wrap: wrap;
@@ -482,9 +482,6 @@ code {
   background-color: rgb(196, 229, 240);
 }
 
-#user-game-area {
-  grid-row: 2
-}
 
 
 #ships-header-container {
