@@ -18,9 +18,9 @@ const ShipsGame = () => {
       <Navbar />
       <GoBack />
       {isLoaded && (
-        <article id="ships-game-area-container">
-          <ShipsUserArea />
+        <article>
           <ShipsComputerArea />
+          <ShipsUserArea />
         </article>
       )}
     </>

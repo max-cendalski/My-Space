@@ -1,15 +1,16 @@
 import { useState, useEffect, useRef } from "react";
 
 const ShipsComputerArea = () => {
-  const [squares, setSquares] = useState([]);
-  const [alphabet, setAlphabet] = useState([]);
-  const yAxisMobile = useRef([
+  const [squaresC, setSquaresC] = useState([]);
+  const [alphabetC, setAlphabetC] = useState([]);
+  const yAxisMobileC = useRef([
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
   ]);
 
-  const ship5 = useRef([]);
-  const ship4 = useRef([]);
-  const ship3 = useRef([]);
+  const ship6C = useRef([]);
+  const ship5C = useRef([]);
+  const ship4C = useRef([]);
+  const ship3C = useRef([]);
   const [gameStarted, setGameStarted] = useState(false);
 
   useEffect(() => {
@@ -52,18 +53,27 @@ const ShipsComputerArea = () => {
         });
       }
     }
-    setSquares(arr);
-    setAlphabet(alphabet);
+    setSquaresC(arr);
+    setAlphabetC(alphabet);
     console.log("whe");
   }, []);
 
-  const handleSquareClick = (item) => {
+  const handleSquareClickC = (item) => {
     if (!gameStarted) {
-      alert("click start game button")
+      alert("click start game button");
       return;
     }
 
-    function updateShipHit(ship5, ship4, ship3) {
+    function updateShipHitC(ship6, ship5, ship4, ship3) {
+      for (let i = 0; i < ship6.length; i++) {
+        if (
+          ship6.current[i].char === item.char &&
+          ship6.current[i].num === item.num
+        ) {
+          ship6.current[i].shipHit = true;
+          break;
+        }
+      }
       for (let i = 0; i < ship5.length; i++) {
         if (
           ship5.current[i].char === item.char &&
@@ -87,35 +97,42 @@ const ShipsComputerArea = () => {
       }
     }
 
-    updateShipHit(ship5, ship4, ship3);
+    updateShipHitC(ship6C, ship5C, ship4C, ship3C);
 
-    setSquares((currentSquares) => {
+    setSquaresC((currentSquares) => {
       var isMatch = false;
-      var index = squares.findIndex(
+      var index = squaresC.findIndex(
         (square) => square.num === item.num && square.char === item.char
       );
       let updatedSquares = [...currentSquares];
-
-      ship5.current.forEach((ele) => {
+      ship6C.current.forEach((ele) => {
         if (isMatch) return;
         if (ele.num === item.num && ele.char === item.char) {
           ele.shipHit = true;
           updatedSquares[index].shipHit = true;
           isMatch = true;
         }
-        ship4.current.forEach((ele) => {
+        ship5C.current.forEach((ele) => {
           if (isMatch) return;
           if (ele.num === item.num && ele.char === item.char) {
             ele.shipHit = true;
             updatedSquares[index].shipHit = true;
             isMatch = true;
           }
-          ship3.current.forEach((ele) => {
+          ship4C.current.forEach((ele) => {
+            if (isMatch) return;
             if (ele.num === item.num && ele.char === item.char) {
               ele.shipHit = true;
               updatedSquares[index].shipHit = true;
               isMatch = true;
             }
+            ship3C.current.forEach((ele) => {
+              if (ele.num === item.num && ele.char === item.char) {
+                ele.shipHit = true;
+                updatedSquares[index].shipHit = true;
+                isMatch = true;
+              }
+            });
           });
         });
       });
@@ -126,14 +143,15 @@ const ShipsComputerArea = () => {
 
   const handleStartGame = () => {
     setGameStarted(!gameStarted);
+    var newShip6 = [];
     var newShip5 = [];
     var newShip4 = [];
     var newShip3 = [];
 
-    function generateShip(size, shipArr, newShip) {
-      var frsLetS = alphabet[Math.round(Math.random() * 14)];
+    function generateShipC(size, shipArr, newShip) {
+      var frsLetS = alphabetC[Math.round(Math.random() * 14)];
 
-      if (alphabet.indexOf(frsLetS) > 10) {
+      if (alphabetC.indexOf(frsLetS) > 10) {
         let frsNumS = Math.round(Math.random() * 16);
         for (let i = 0; i < size; i++) {
           let ship = {};
@@ -146,7 +164,7 @@ const ShipsComputerArea = () => {
         let frsNumS = Math.round(Math.random() * 20);
         for (let i = 0; i < size; i++) {
           let ship = {};
-          ship.char = alphabet[alphabet.indexOf(frsLetS) + i];
+          ship.char = alphabetC[alphabetC.indexOf(frsLetS) + i];
           ship.num = frsNumS;
           shipArr.push(ship);
           newShip.current = shipArr;
@@ -157,14 +175,16 @@ const ShipsComputerArea = () => {
       var theSame = true;
 
       while (theSame) {
+        newShip6 = [];
         newShip5 = [];
         newShip4 = [];
         newShip3 = [];
         theSame = false;
-        generateShip(5, newShip5, ship5);
-        generateShip(4, newShip4, ship4);
-        generateShip(3, newShip3, ship3);
-        const allShips = [...newShip5, ...newShip4, ...newShip3];
+        generateShipC(6, newShip6, ship6C);
+        generateShipC(5, newShip5, ship5C);
+        generateShipC(4, newShip4, ship4C);
+        generateShipC(3, newShip3, ship3C);
+        const allShips = [...newShip6, ...newShip5, ...newShip4, ...newShip3];
         loop1: for (let i = 0; i < allShips.length - 1; i++) {
           let obj1 = allShips[i];
           for (let j = i + 1; j < allShips.length; j++) {
@@ -178,7 +198,13 @@ const ShipsComputerArea = () => {
       }
     }
     checkShips();
-    console.log("ships", ship5.current,ship4.current, ship3.current);
+    console.log(
+      "ships",
+      ship6C.current,
+      ship5C.current,
+      ship4C.current,
+      ship3C.current
+    );
   };
   return (
     <>
@@ -193,32 +219,31 @@ const ShipsComputerArea = () => {
         </button>
       </article>
 
-        <article id="ships-computer-area">
-          <section className="alphabet-container">
-            {alphabet.map((item) => (
-              <div className="alphabet-ships-square" key={item}>
-                {item}
-              </div>
-            ))}
-          </section>
-          <section id="numbers-container">
-            {yAxisMobile.current.map((item, index) => (
-              <div className="numbers-square" key={index}>
-                {item}
-              </div>
-            ))}
-          </section>
-          <article id="game-area">
-            {squares.map((item, index) => (
-              <div
-                key={index}
-                onClick={() => handleSquareClick(item)}
-                className={`square  ${item.shipHit ? "ship-hit" : ""}
+      <article id="ships-computer-area">
+        <section className="alphabet-container">
+          {alphabetC.map((item) => (
+            <div className="alphabet-ships-square" key={item}>
+              {item}
+            </div>
+          ))}
+        </section>
+        <section id="numbers-container">
+          {yAxisMobileC.current.map((item, index) => (
+            <div className="numbers-square" key={index}>
+              {item}
+            </div>
+          ))}
+        </section>
+        <article id="game-area">
+          {squaresC.map((item, index) => (
+            <div
+              key={index}
+              onClick={() => handleSquareClickC(item)}
+              className={`square  ${item.shipHit ? "ship-hit" : ""}
                 ${item.squareHit ? "square-hit" : ""}`}
-              ></div>
-            ))}
-          </article>
-
+            ></div>
+          ))}
+        </article>
       </article>
     </>
   );
