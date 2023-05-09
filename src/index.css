@@ -154,16 +154,39 @@ code {
 #notes-page-container {
   display: flex;
   flex-wrap: wrap;
+  padding-block-start: 1rem;
   justify-content: flex-start;
   width: 100%;
 }
 
 .single-note-container {
   width: 25%;
-  height: 6rem;
-  margin: 0 1rem;
+  height: 7rem;
+  margin: 1rem 1rem;
+  background-color: white;
+  text-align:center;
+}
+.single-note-container-tilt-left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25%;
+  height: 7rem;
+  margin: 1rem 1rem;
+  padding: 0.5rem;
+  background-color: white;
+  transform: rotate(-2deg);
+}
+.single-note-container-tilt-right {
+  width: 25%;
+  height: 7rem;
+  margin: 1rem 1rem;
   background-color: white;
   text-align: center;
+  transform: rotate(-2deg);
+}
+
+.notes-header-list {
 
 }
 .note-form {
