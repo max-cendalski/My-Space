@@ -295,10 +295,29 @@ code {
 /*GAMES */
 
 #games-page-container {
-  margin-block-start: 1.625rem;
   width: 90%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+}
+.game-link-button {
+  text-align: center;
+  display: block;
+  margin: 2rem auto;
+  width: 90%;
+  height: 4rem;
+  text-align: center;
+  background-color: var(--darkGreen);
+  color: white;
+  font-size: 3rem;
+  text-decoration: none;
+}
+
+#rps-game-container {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 #games-header {
@@ -391,6 +410,126 @@ code {
 .game-result-header {
   font-size: 2rem;
   color: var(--red);
+}
+
+/*ShipsGame*/
+
+.ships-header {
+  grid-row: 1;
+  grid-column: 1/3;
+}
+
+#ships-battle-area {
+  display: grid;
+  gap: 0.2rem;
+  height: 38rem;
+  grid-template-rows: 1.8rem 1.8rem auto;
+  grid-template-columns: 1rem 400px auto;
+}
+.alphabet-container {
+  display: flex;
+  grid-row: 1;
+  grid-column: 2/3;
+}
+.alphabet-ships-square {
+  text-align: center;
+  width: 25px;
+  height: 25px;
+  border: 1px solid grey;
+}
+
+#numbers-container {
+  grid-row: 2/3;
+  grid-column: 1
+}
+
+.numbers-square {
+  text-align: center;
+  width: 25px;
+  height: 25px;
+  border: 1px solid grey;
+}
+
+.square {
+  width: 25px;
+  height: 25px;
+  border: 1px solid blue;
+  cursor: pointer;
+  background-color: inherit;
+}
+.square-hit {
+  width: 25px;
+  height: 25px;
+  border: 1px solid blue;
+  cursor: pointer;
+  background-color:rgb(161, 185, 209);
+}
+.ship-hit {
+  width: 25px;
+    height: 25px;
+    border: 1px solid blue;
+    cursor: pointer;
+    background-color: var(--red);
+}
+
+#battle-area {
+  width: 375px;
+  display: flex;
+  flex-wrap: wrap;
+  grid-row: 2/3;
+  grid-column: 2/3;
+  text-align: center;
+  background-color: rgb(196, 229, 240);
+}
+
+
+
+#ships-header-container {
+  display: flex;
+  flex-direction: column;
+  margin-block-end: 1rem;
+}
+.start-ships-game-button {
+  margin-block-start: 1rem;
+  margin-block-end: 1rem;
+}
+
+ #user-battle-field {
+   width: 375px;
+   display: flex;
+   flex-wrap: wrap;
+ }
+
+
+
+
+
+
+
+
+.grid-element-border {
+  border: 1px solid black;
+}
+
+.grid-element1 {
+  grid-column: 1;
+  grid-row: 1;
+  justify-content: right;
+}
+
+.grid-element2 {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.grid-element3 {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.grid-element4 {
+  grid-column: 4;
+  grid-row: 1;
 }
 
 /* WEATHER */
@@ -543,6 +682,9 @@ code {
   width: 100%;
 }
 
+.calendar-header-container {
+  width: 95%;
+}
 
 /* ------------------*/
 .date-paragraph {
@@ -574,4 +716,8 @@ code {
 
 .hidden {
   display: none;
+}
+
+@media screen {
+
 }
