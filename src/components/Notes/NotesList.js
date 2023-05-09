@@ -5,11 +5,11 @@ const NotesList = ({ isVisible,notes, deleteNote }) => {
     <article id="notes-page-container">
       {notes.map((note) => (
         <section
-          className={
+          className={`single-note-container ${
             isNaN(note.id.charAt(0))
               ? "single-note-container-tilt-left"
               : "single-note-container-tilt-right"
-          }
+          }`}
           key={note.id}
         >
           <section>

@@ -160,6 +160,9 @@ code {
 }
 
 .single-note-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 25%;
   height: 7rem;
   margin: 1rem 1rem;
@@ -167,25 +170,9 @@ code {
   text-align:center;
 }
 .single-note-container-tilt-left {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 25%;
-  height: 7rem;
-  margin: 1rem 1rem;
-  padding: 0.5rem;
-  background-color: white;
   transform: rotate(-1.5deg);
 }
 .single-note-container-tilt-right {
-    display: flex;
-      align-items: center;
-      justify-content: center;
-  width: 25%;
-  height: 7rem;
-  margin: 1rem 1rem;
-  background-color: white;
-  text-align: center;
   transform: rotate(1.5deg);
 }
 
