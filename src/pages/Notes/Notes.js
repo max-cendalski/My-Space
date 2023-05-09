@@ -65,7 +65,7 @@ const Notes = () => {
           <i className="fa-solid fa-plus fa-2xl"></i>
         </button>
       </section>
-      <article id="notes-page-container">
+      <article id="notes-list-container">
         <AddNoteForm isVisible={isVisible} handleFormState={handleFormState} />
         <NotesList
           isVisible={isVisible}

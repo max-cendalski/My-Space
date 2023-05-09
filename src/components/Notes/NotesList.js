@@ -2,29 +2,34 @@ import { Link } from "react-router-dom";
 
 const NotesList = ({ isVisible,notes, deleteNote }) => {
   return (
-    <article>
+    <article id="notes-page-container">
       {notes.map((note) => (
-        <section
-          className={!isVisible ? "hidden" : "single-note-container"}
-          key={note.id}
-        >
-          <h2 className="note-title">{note.title}</h2>
-          <Link className="edit-link" to={`/notes/edit/${note.id}`}>
-            <p className="text">{note.text}</p>
-          </Link>
-          <footer className="single-note-footer">
-            <p className="date-paragraph">Created: {note.date}</p>
-            <button
-              className="delete-button"
-              onClick={() => deleteNote(note.id)}
-            >
-              Delete
-            </button>
-          </footer>
-        </section>
+        <article className="single-note-container" key={note.id}>
+          <section>
+            <p>{note.title}</p>
+
+
+          </section>
+        </article>
       ))}
     </article>
   );
 };
 
 export default NotesList;
+
+
+
+//<p className="date-paragraph">Created: {note.date}</p>;
+
+
+    // <footer className="single-note-footer">
+    //   <button className="delete-button" onClick={() => deleteNote(note.id)}>
+    //     Delete
+    //   </button>
+    // </footer>;
+
+
+      // <Link className="edit-link" to={`/notes/edit/${note.id}`}>
+      //   <p>{note.text}</p>
+      // </Link>;
