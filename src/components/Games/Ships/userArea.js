@@ -3,27 +3,31 @@ import { useState, useEffect, useRef } from "react";
 const ShipsUserArea = () => {
   const [squaresU, setSquaresU] = useState([]);
   const [alphabetU, setAlphabetU] = useState([]);
+
   const yAxisMobileU = useRef([
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
   ]);
 
-  const ship6U = useRef([]);
-  const ship5U = useRef([]);
-  const ship4U = useRef([]);
-  const ship3U = useRef([]);
+  const shipsU = useRef({
+    ship6U: [],
+    ship5U: [],
+    ship4U: [],
+    ship3U: [],
+  });
 
   const handleSquareClick = (item) => {
-    console.log('item',item)
+
     setSquaresU((currentSquares) => {
-      var index = squaresU.findIndex(
+      let updatedSquares = [...currentSquares];
+      let index = squaresU.findIndex(
         (square) => square.num === item.num && square.char === item.char
       );
-      console.log('index',index)
-      let updatedSquares = [...currentSquares];
       updatedSquares[index].shipHit = true;
+      console.log("item2", item);
       return updatedSquares;
     });
   };
+
   useEffect(() => {
     const alphabet = [
       "a",
@@ -60,7 +64,7 @@ const ShipsUserArea = () => {
           char: alphabet[j],
           num: i,
           squareHit: false,
-          squareShip: false,
+          shipHit: false,
         });
       }
     }
