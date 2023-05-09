@@ -165,7 +165,6 @@ code {
   height: 7rem;
   margin: 1rem 1rem;
   background-color: white;
-  text-align:center;
   cursor: pointer;
   overflow: hidden;
 }
@@ -177,11 +176,16 @@ code {
 }
 
 .notes-pin {
-  padding-block-start: 1px;
+  margin-inline-start: 2.5rem;
+}
+.notes-header-list {
+  margin-inline-start: 0.2rem;
+  margin-inline-end: 0.2rem;
 }
 .notes-text-tiny {
+  width: 100%;
   font-size: 0.6rem;
-  wordWrap: 'break-word'
+  margin: 0.2rem;
 }
 
 .note-form {
