@@ -18,7 +18,7 @@ const NotesList = ({ isVisible,notes, deleteNote }) => {
           <section>
             <img className="notes-pin" alt="pin" src={PinL} height="20px"/>
             <h5 className="notes-header-list">{note.title.substr(0,12)}...</h5>
-            <p className="notes-text-tiny">{note.text.substr(0,70)}...</p>
+            <p className="notes-text-tiny">{note.text.substr(0,80)}...</p>
           </section>
         </section>
       ))}
