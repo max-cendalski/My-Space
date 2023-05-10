@@ -1,7 +1,15 @@
 /* For now using My Space 2 color palette */
 @font-face {
   font-family: 'indie-flower';
-  src: url('../public//Fonts/Indie_Flower/IndieFlower-Regular.ttf')
+  src: url('../public/Fonts/Indie_Flower/IndieFlower-Regular.ttf')
+}
+@font-face {
+  font-family: 'kalam-regular';
+  src: url('../public/Fonts/Kalam/Kalam-Regular.ttf')
+}
+@font-face {
+  font-family: 'kalam-light';
+  src: url('../public/Fonts/Kalam/Kalam-Light.ttf')
 }
 body {
   margin: 0;
@@ -150,8 +158,9 @@ code {
 
 /*NOTES */
 #notes-list-container {
+  position: relative;
   background-image: url('../public/corkboard.jpg');
-  height: 95vh;
+  height:150vh;
 }
 
 #notes-page-container {
@@ -163,7 +172,7 @@ code {
 
 .single-note-container {
   width: 25%;
-  height: 7rem;
+  height: 9rem;
   margin: 1rem 1rem;
   background-color: white;
   cursor: pointer;
@@ -187,17 +196,18 @@ code {
   margin-inline-start: 45%;
 }
 .notes-header-list {
-  font-family: 'indie-flower';
+  font-family: 'kalam-regular';
 }
 .notes-text-small{
   width: 100%;
   font-size: 0.9rem;
-  font-family: 'indie-flower';
+  font-family: 'kalam-regular';
+  white-space: pre-line;
 }
 
 .selected-note {
-  position: fixed;
-  top: 15%;
+  position:absolute;
+  top: 3rem;
   left: 0;
   right: 0;
   margin: 0 auto;

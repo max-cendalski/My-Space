@@ -19,7 +19,6 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
           } ${note === selectedNote ? "selected-note" : ""}`}
           key={note.id}
           onClick={() => {
-            console.log("note", note);
             setSelectedNote(note);
           }}
         >
