@@ -4,6 +4,10 @@ import PinL from "./../../PinL.png";
 
 const NotesList = ({ isVisible, notes, deleteNote }) => {
   const [selectedNote, setSelectedNote] = useState(null);
+  const handleButtonClick = (e) => {
+    e.stopPropagation();
+    setSelectedNote(null);
+  };
   return (
     <article id="notes-page-container">
       {notes.map((note) => (
@@ -12,7 +16,7 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
             isNaN(note.id.charAt(0))
               ? "single-note-container-tilt-left"
               : "single-note-container-tilt-right"
-          }`}
+          } ${note === selectedNote ? "selected-note" : ""}`}
           key={note.id}
           onClick={() => {
             console.log("note", note);
@@ -21,20 +25,23 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
         >
           <section>
             <img className="notes-pin" alt="pin" src={PinL} height="20px" />
-            <h5 className="notes-header-list">{note.title.substr(0, 12)}...</h5>
-            <p className="notes-text-tiny">{note.text.substr(0, 80)}...</p>
+            <h4 className="notes-header-list">
+              {" "}
+              {selectedNote && note.id === selectedNote.id
+                ? note.title
+                : note.title.substr(0, 10) + "..."}{" "}
+            </h4>
+            <p className="notes-text-small">
+              {selectedNote && note.id === selectedNote.id
+                ? note.text
+                : note.text.substr(0, 80) + "..."}{" "}
+            </p>
+            {selectedNote && note.id === selectedNote.id && (
+              <button onClick={handleButtonClick}>Close</button>
+            )}
           </section>
         </section>
       ))}
-      {selectedNote && (
-        <section className="selected">
-          <img className="notes-pin" alt="pin" src={PinL} height="20px" />
-          <h2>{selectedNote.title}</h2>
-          <p>{selectedNote.text}</p>
-          <p>{selectedNote.date}</p>
-          <button onClick={() => setSelectedNote(null)}>Close</button>
-        </section>
-      )}
     </article>
   );
 };

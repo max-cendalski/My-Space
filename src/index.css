@@ -158,23 +158,23 @@ code {
   display: flex;
   flex-wrap: wrap;
   padding-block-start: 1rem;
-  justify-content: flex-start;
   width: 100%;
 }
 
 .single-note-container {
-  display: flex;
   width: 25%;
   height: 7rem;
   margin: 1rem 1rem;
   background-color: white;
   cursor: pointer;
   overflow: hidden;
-  padding-inline-start: 0.2rem;
-  padding-inline-end: 0.2rem;
-  box-shadow: 0 3px 4px rgb(0,0,0,0.2);
+  padding-inline-start: 0.3rem;
+  padding-inline-end: 0.3rem;
+  box-shadow:3px 4px 4px 4px rgb(0,0,0,0.4);
 }
-
+.section-for-test {
+ align-items: center;
+}
 .single-note-container-tilt-left {
   transform: rotate(-1.8deg);
 }
@@ -183,30 +183,36 @@ code {
   transform: rotate(1.8deg);
 }
 
-.notes-pin {
-  margin-inline-start: 2.5rem;
+.notes-pin{
+  margin-inline-start: 45%;
 }
 .notes-header-list {
   font-family: 'indie-flower';
 }
-.notes-text-tiny {
+.notes-text-small{
   width: 100%;
-  font-size: 0.6rem;
+  font-size: 0.9rem;
   font-family: 'indie-flower';
 }
 
-.selected {
+.selected-note {
   position: fixed;
-  padding: 1rem;
   top: 15%;
-  left: 10%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   width: 80%;
+  height: auto;
   z-index: 10;
+  padding-inline-start: 0.6rem;
+  padding-inline-end: 0.6rem;
   background-color: white;
   overflow: auto;
-  box-shadow: 0 3px 4px rgb(0, 0, 0, 0.2);
+  box-shadow: 10px 10px 10px 5px rgb(0, 0, 0, 0.7);
+  transform: rotate(0deg);
+  font-size: 2.2rem;
+  line-height: 1.8;
 }
-
 
 .note-form {
   position: absolute;
