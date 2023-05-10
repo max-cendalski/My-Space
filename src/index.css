@@ -160,7 +160,8 @@ code {
 #notes-list-container {
   position: relative;
   background-image: url('../public/corkboard.jpg');
-  height:150vh;
+  min-height:120vh;
+  max-height: 300vh;
 }
 
 #notes-page-container {
@@ -185,11 +186,11 @@ code {
  align-items: center;
 }
 .single-note-container-tilt-left {
-  transform: rotate(-1.8deg);
+  transform: rotate(-1.3deg);
 }
 
 .single-note-container-tilt-right {
-  transform: rotate(1.8deg);
+  transform: rotate(1.3deg);
 }
 
 .notes-pin{
