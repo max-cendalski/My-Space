@@ -24,7 +24,12 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
           }}
         >
           <section>
-            <img className="notes-pin" alt="pin" src={PinL} height="20px" />
+            {selectedNote && note.id === selectedNote.id ? (
+              " "
+            ) : (
+              <img className="notes-pin" alt="pin" src={PinL} height="20px" />
+            )}
+
             <h4 className="notes-header-list">
               {" "}
               {selectedNote && note.id === selectedNote.id
