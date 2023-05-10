@@ -37,7 +37,10 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
                 : note.text.substr(0, 80) + "..."}{" "}
             </p>
             {selectedNote && note.id === selectedNote.id && (
-              <button onClick={handleButtonClick}>Close</button>
+              <footer>
+                <button onClick={handleButtonClick}>Close</button>
+                <button onClick={() => deleteNote(note.id)}>Delete</button>
+              </footer>
             )}
           </section>
         </section>
