@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import PinL from "./../../PinL.png";
+import PinL from "../../icons/PinL.png";
+import TrashL from "../../icons/trashL.png";
 
 const NotesList = ({ isVisible, notes, deleteNote }) => {
   const [selectedNote, setSelectedNote] = useState(null);
@@ -41,9 +42,9 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
                 : note.text.substr(0, 80) + "..."}{" "}
             </p>
             {selectedNote && note.id === selectedNote.id && (
-              <footer>
+              <footer className="note-footer">
                 <button onClick={handleButtonClick}>Close</button>
-                <button onClick={() => deleteNote(note.id)}>Delete</button>
+                <img className="notes-trash" src={TrashL} alt="trash" onClick={() => deleteNote(note.id)} />
               </footer>
             )}
           </section>
