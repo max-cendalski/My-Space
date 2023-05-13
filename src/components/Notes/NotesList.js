@@ -54,7 +54,10 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
                 ? note.text
                 : note.text.substr(0, 80) + "..."}{" "}
             </p>
-            <p className="date-paragraph">Created: {note.date}</p>
+            <p className="date-paragraph">
+                {selectedNote && note.id=== selectedNote.id ? note.date : ""}
+            </p>
+
             {selectedNote && note.id === selectedNote.id && (
               <footer className="note-footer">
                 <button onClick={handleButtonClick}>Close</button>

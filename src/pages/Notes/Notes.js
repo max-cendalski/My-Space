@@ -66,7 +66,7 @@ const Notes = () => {
           notes={notes}
           deleteNote={handleDeleteNote}
         />
-        <button onClick={handleFormState} className="notes-plus-button">
+        <button onClick={handleFormState} className="notes-add-button">
           <i className="fa-solid fa-plus fa-2xl"></i>
         </button>
       </article>
