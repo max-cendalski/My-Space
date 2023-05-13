@@ -172,6 +172,7 @@ code {
 }
 
 .single-note-container {
+  position: relative;
   width: 25%;
   height: 9rem;
   margin: 1rem 1rem;
@@ -196,12 +197,12 @@ code {
 .notes-pin{
   margin-inline-start: 45%;
 }
-.notes-header-list {
+.note-header-list {
   font-family: 'kalam-regular';
 }
 .notes-text-small{
   width: 100%;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   font-family: 'kalam-regular';
   white-space: pre-line;
 }
@@ -221,16 +222,31 @@ code {
   box-shadow: 10px 10px 10px 5px rgb(0, 0, 0, 0.7);
   transform: rotate(0deg);
   font-size: 2rem;
-  line-height: 1.8;
   cursor:auto;
   transition: all 100ms ease-out;
 }
+.note-header {
+  display: flex;
+  flex-direction: column;
+}
 
+.note-close {
+  width: 1.8rem;
+  height: 1.8rem;
+  margin-block-start: 0.3rem;
+  margin-inline-end: 0;
+}
 .note-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-block-start: 0.5rem;
+  padding-block-end: 0.5rem;
 }
+.note-pencil {
+
+}
+
 .note-footer button {
   margin-right: auto;
   margin-left: 1px;
@@ -779,7 +795,8 @@ code {
 }
 
 
-.plus-button {
+.notes-plus-button {
+  position: absolute;
   width:50px;
   height: 50px;
   margin-inline-end: 0;

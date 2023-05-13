@@ -59,12 +59,6 @@ const Notes = () => {
   return (
     <>
       <Navbar />
-      <section className="sticky-section">
-      <GoBack />
-        <button onClick={handleFormState} className="plus-button">
-          <i className="fa-solid fa-plus fa-2xl"></i>
-        </button>
-      </section>
       <article id="notes-list-container">
         <AddNoteForm isVisible={isVisible} handleFormState={handleFormState} />
         <NotesList
@@ -72,6 +66,9 @@ const Notes = () => {
           notes={notes}
           deleteNote={handleDeleteNote}
         />
+        <button onClick={handleFormState} className="notes-plus-button">
+          <i className="fa-solid fa-plus fa-2xl"></i>
+        </button>
       </article>
     </>
   );
