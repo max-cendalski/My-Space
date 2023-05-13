@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import PinL from "../../icons/PinL.png";
 import TrashL from "../../icons/trashL.png";
 import Close from "../../icons/closeS.png";
@@ -10,6 +9,9 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
     e.stopPropagation();
     setSelectedNote(null);
   };
+    if (!isVisible) {
+      return null; // if isVisible is false, return null to render nothing
+    }
   return (
     <article className="notes-page-container">
       {notes.map((note) => (
@@ -48,16 +50,16 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
                   : note.title.substr(0, 10) + "..."}{" "}
               </h4>
             </header>
-
             <p className="notes-text-small">
               {selectedNote && note.id === selectedNote.id
                 ? note.text
                 : note.text.substr(0, 80) + "..."}{" "}
             </p>
-            <p className="date-paragraph">
-                {selectedNote && note.id=== selectedNote.id ? note.date : ""}
-            </p>
-
+            {selectedNote && note.id === selectedNote.id ? (
+              <p className="date-paragraph">Created: {note.date}</p>
+            ) : (
+              ""
+            )}
             {selectedNote && note.id === selectedNote.id && (
               <footer className="note-footer">
                 <button onClick={handleButtonClick}>Close</button>

@@ -5,7 +5,6 @@ import { UserAuth } from "../../context/AuthContext";
 import Navbar from "../../components/Navbar/Navbar";
 import NotesList from "../../components/Notes/NotesList";
 import AddNoteForm from "../../components/Notes/AddNoteForm";
-import GoBack from "../../components/GoBack/GoBack";
 
 const Notes = () => {
   const { user } = UserAuth();

@@ -9,13 +9,12 @@ const AddNoteForm = ({ isVisible, handleFormState }) => {
   const [formData, setFormData] = useState({
     title: "",
     text: "",
-    date: format(new Date(), "PP"),
+    date: ""
   });
 
   const canSave = [...Object.values(formData)].every(Boolean);
 
   const handleAddNote = (e) => {
-    e.preventDefault();
     const addNote = async () => {
       try {
         await addDoc(collection(db, "users", user.uid, "notes"), formData);
@@ -24,11 +23,12 @@ const AddNoteForm = ({ isVisible, handleFormState }) => {
       }
     };
     addNote();
+    handleFormState();
     setFormData({
       title: "",
       text: "",
+      date: ""
     });
-    handleFormState();
   };
 
   const handleChange = (e) => {
@@ -38,6 +38,7 @@ const AddNoteForm = ({ isVisible, handleFormState }) => {
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
+      date: format(new Date(), "PP")
     }));
   };
 
