@@ -42,13 +42,14 @@ const Notes = () => {
   }, []);
 
   const handleDeleteNote = async (id) => {
-    try {
-      const noteRef = doc(db, "users", user.uid, "notes", id);
-      await deleteDoc(noteRef);
-      setNotes(notes.filter((item) => item.id !== id));
-    } catch (err) {
-      console.error("ERROR:", err);
-    }
+    console.log('id',id)
+    // try {
+    //   const noteRef = doc(db, "users", user.uid, "notes", id);
+    //   await deleteDoc(noteRef);
+    //   setNotes(notes.filter((item) => item.id !== id));
+    // } catch (err) {
+    //   console.error("ERROR:", err);
+    // }
   };
 
   const handleFormState = () => {

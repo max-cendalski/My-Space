@@ -10,7 +10,7 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
     setSelectedNote(null);
   };
     if (!isVisible) {
-      return null; // if isVisible is false, return null to render nothing
+      return null;
     }
   return (
     <article className="notes-page-container">
@@ -53,7 +53,7 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
             <p className="notes-text-small">
               {selectedNote && note.id === selectedNote.id
                 ? note.text
-                : note.text.substr(0, 80) + "..."}{" "}
+                : note.text.substr(0, 20) + "..."}{" "}
             </p>
             {selectedNote && note.id === selectedNote.id ? (
               <p className="date-paragraph">Created: {note.date}</p>
