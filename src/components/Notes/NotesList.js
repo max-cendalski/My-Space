@@ -2,6 +2,7 @@ import { useState } from "react";
 import PinL from "../../icons/PinL.png";
 import TrashL from "../../icons/trashL.png";
 import Close from "../../icons/closeS.png";
+import Pencil from "../../icons/pencilS.png";
 
 const NotesList = ({ isVisible, notes, deleteNote }) => {
   const [selectedNote, setSelectedNote] = useState(null);
@@ -64,7 +65,7 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
             )}
             {selectedNote && note.id === selectedNote.id && (
               <footer className="note-footer">
-                <button onClick={handleCloseButton}>Close</button>
+                <img src={Pencil} alt="pencil" onClick={handleCloseButton} />
                 <img
                   className="notes-trash"
                   src={TrashL}

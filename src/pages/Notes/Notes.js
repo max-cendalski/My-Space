@@ -32,23 +32,20 @@ const Notes = () => {
     // eslint-disable-next-line
   }, []);
 
-  const handleDeleteNote =  (id) => {
-    let index = notes.findIndex((item) => item.id === id);
+  const handleDeleteNote = (id) => {
+    const index = notes.findIndex((item) => item.id === id);
     const newNotes = [...notes];
     newNotes[index] = { ...newNotes[index], toBeRemoved: true };
     setNotes(newNotes);
-    setTimeout( async()=> {
-  try {
-      const noteRef = doc(db, "users", user.uid, "notes", id);
-      await deleteDoc(noteRef);
-      setNotes(notes.filter((item) => item.id !== id));
-    } catch (err) {
-      console.error("ERROR:", err);
-    }
-    },300)
-
-
-
+    setTimeout(async () => {
+      try {
+        const noteRef = doc(db, "users", user.uid, "notes", id);
+        await deleteDoc(noteRef);
+        setNotes(notes.filter((item) => item.id !== id));
+      } catch (err) {
+        console.error("ERROR:", err);
+      }
+    }, 300);
   };
 
   const handleFormState = () => {

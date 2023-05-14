@@ -158,9 +158,8 @@ code {
 
 /*NOTES */
 #notes-list-container {
-  position: relative;
   background-image: url('../public/corkboard.jpg');
-  min-height: 120vh;
+  min-height: 150vh;
   max-height: 300vh;
 }
 
@@ -208,13 +207,14 @@ code {
 }
 
 .selected-note {
-  position:absolute;
-  top: 3rem;
+  position:fixed;
+  top: 10%;
   left: 0;
   right: 0;
   margin: 0 auto;
   width: 80%;
   height: auto;
+  max-height: 80%;
   z-index: 10;
   padding-inline-start: 0.6rem;
   padding-inline-end: 0.6rem;
@@ -807,12 +807,12 @@ code {
 
 
 .notes-add-button {
-  position: sticky;
+  position: fixed;
+  margin-inline-end: 1rem;
+  bottom: 5%;
+  right: 5%;
   width:60px;
   height: 60px;
-  bottom: 1rem;
-  right: 1rem;
-  float: right;
   background-color: var(--darkGreen);
   border-radius: 50%;
   border: none;
