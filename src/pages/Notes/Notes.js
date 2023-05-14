@@ -35,14 +35,15 @@ const Notes = () => {
       }
     );
 
-     return () => {
+    return () => {
       unsub();
     };
     // eslint-disable-next-line
   }, []);
 
   const handleDeleteNote = async (id) => {
-    console.log('id',id)
+    console.log("id", id);
+
     // try {
     //   const noteRef = doc(db, "users", user.uid, "notes", id);
     //   await deleteDoc(noteRef);
@@ -66,9 +67,11 @@ const Notes = () => {
           notes={notes}
           deleteNote={handleDeleteNote}
         />
-        <button onClick={handleFormState} className="notes-add-button">
-          <i className="fa-solid fa-plus fa-2xl"></i>
-        </button>
+        {isVisible ? (
+          <button onClick={handleFormState} className="notes-add-button">
+            <i className="fa-solid fa-plus fa-2xl"></i>
+          </button>
+        ) : null}
       </article>
     </>
   );
