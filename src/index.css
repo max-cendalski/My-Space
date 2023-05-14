@@ -236,17 +236,17 @@ code {
   margin-block-start: 0.3rem;
   margin-inline-end: 0;
 }
+
 .note-to-be-removed {
-  animation: move-to-the-left 1s forwards
+  animation: move-left 500ms forwards
 }
 
-@keyframes move-to-the-left {
+@keyframes move-left {
   100% {
-    transform: translate(-200%);
-    background-color: white;
-    color: white;
+    transform: translate(-600%);
   }
 }
+
 .note-footer {
   display: flex;
   justify-content: space-between;

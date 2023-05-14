@@ -11,15 +11,6 @@ const Notes = () => {
   const [notes, setNotes] = useState([]);
   const [isVisible, setIsVisible] = useState(true);
 
-  /*   const getNotes = async () => {
-    try {
-      const notesData = await getDocs(collection(db, `users/${user.uid}`, 'notes'));
-      setNotes(notesData.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    } catch (err) {
-      console.error("ERROR", err);
-    }
-  }; */
-
   useEffect(() => {
     const unsub = onSnapshot(
       collection(db, `users/${user.uid}`, "notes"),
@@ -41,16 +32,23 @@ const Notes = () => {
     // eslint-disable-next-line
   }, []);
 
-  const handleDeleteNote = async (id) => {
-    console.log("id", id);
+  const handleDeleteNote =  (id) => {
+    let index = notes.findIndex((item) => item.id === id);
+    const newNotes = [...notes];
+    newNotes[index] = { ...newNotes[index], toBeRemoved: true };
+    setNotes(newNotes);
+    setTimeout( async()=> {
+  try {
+      const noteRef = doc(db, "users", user.uid, "notes", id);
+      await deleteDoc(noteRef);
+      setNotes(notes.filter((item) => item.id !== id));
+    } catch (err) {
+      console.error("ERROR:", err);
+    }
+    },300)
 
-    // try {
-    //   const noteRef = doc(db, "users", user.uid, "notes", id);
-    //   await deleteDoc(noteRef);
-    //   setNotes(notes.filter((item) => item.id !== id));
-    // } catch (err) {
-    //   console.error("ERROR:", err);
-    // }
+
+
   };
 
   const handleFormState = () => {

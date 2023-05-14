@@ -5,7 +5,7 @@ import Close from "../../icons/closeS.png";
 
 const NotesList = ({ isVisible, notes, deleteNote }) => {
   const [selectedNote, setSelectedNote] = useState(null);
-  const handleButtonClick = (e) => {
+  const handleCloseButton = (e) => {
     e.stopPropagation();
     setSelectedNote(null);
   };
@@ -20,7 +20,9 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
             isNaN(note.id.charAt(0))
               ? "single-note-container-tilt-left"
               : "single-note-container-tilt-right"
-          } ${note === selectedNote ? "selected-note" : ""}`}
+          } ${note === selectedNote ? "selected-note" : ""}  ${
+            note.toBeRemoved ? "note-to-be-removed" : ""
+          }`}
           key={note.id}
           onClick={() => {
             setSelectedNote(note);
@@ -35,7 +37,7 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
               )}
               {selectedNote && note.id === selectedNote.id ? (
                 <img
-                  onClick={handleButtonClick}
+                  onClick={handleCloseButton}
                   className="note-close"
                   alt="close"
                   src={Close}
@@ -62,7 +64,7 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
             )}
             {selectedNote && note.id === selectedNote.id && (
               <footer className="note-footer">
-                <button onClick={handleButtonClick}>Close</button>
+                <button onClick={handleCloseButton}>Close</button>
                 <img
                   className="notes-trash"
                   src={TrashL}
