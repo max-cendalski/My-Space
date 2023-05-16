@@ -182,9 +182,7 @@ code {
   padding-inline-end: 0.3rem;
   box-shadow:3px 4px 4px 4px rgb(0,0,0,0.4);
 }
-.section-for-test {
- align-items: center;
-}
+
 .single-note-container-tilt-left {
   transform: rotate(-1.3deg);
 }
@@ -227,12 +225,10 @@ code {
   transition: all 100ms ease-out;
 }
 
-
-
 .note-close {
   position: absolute;
   z-index: 99;
- margin-top: -1rem;
+ top: -1rem;
 }
 
 .note-to-be-removed {

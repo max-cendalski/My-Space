@@ -29,15 +29,9 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
             setSelectedNote(note);
           }}
         >
-          <section className="note-header-container">
-            <header className="note-header">
+
               {selectedNote && note.id === selectedNote.id ? (
-                   <img
-                  onClick={handleCloseButton}
-                  className="note-close"
-                  alt="close"
-                  src={Close}
-                />
+            ""
               ) : (
                 <img className="notes-pin" alt="pin" src={PinL} height="20px" />
               )}
@@ -48,7 +42,7 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
                   ? note.title
                   : note.title.substr(0, 10) + "..."}{" "}
               </h4>
-            </header>
+
             <p className="notes-text-small">
               {selectedNote && note.id === selectedNote.id
                 ? note.text
@@ -60,6 +54,14 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
               ""
             )}
             {selectedNote && note.id === selectedNote.id && (
+              <section>        <img
+                  onClick={handleCloseButton}
+                  className="note-close"
+                  alt="close"
+                  src={Close}
+                />
+
+
               <footer className="note-footer">
                 <img src={Pencil} alt="pencil" onClick={handleCloseButton} />
                 <img
@@ -69,8 +71,9 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
                   onClick={() => deleteNote(note.id)}
                 />
               </footer>
+              </section>
             )}
-          </section>
+
         </section>
       ))}
     </article>
