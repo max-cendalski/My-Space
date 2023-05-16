@@ -10,9 +10,9 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
     e.stopPropagation();
     setSelectedNote(null);
   };
-    if (!isVisible) {
-      return null;
-    }
+  if (!isVisible) {
+    return null;
+  }
   return (
     <article className="notes-page-container">
       {notes.map((note) => (
@@ -30,38 +30,36 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
           }}
         >
 
-              {selectedNote && note.id === selectedNote.id ? (
+          {selectedNote && note.id === selectedNote.id ? (
             ""
-              ) : (
-                <img className="notes-pin" alt="pin" src={PinL} height="20px" />
-              )}
+          ) : (
+            <img className="notes-pin" alt="pin" src={PinL} height="20px" />
+          )}
 
-              <h4 className="note-header-list">
-                {" "}
-                {selectedNote && note.id === selectedNote.id
-                  ? note.title
-                  : note.title.substr(0, 10) + "..."}{" "}
-              </h4>
-
-            <p className="notes-text-small">
-              {selectedNote && note.id === selectedNote.id
-                ? note.text
-                : note.text.substr(0, 20) + "..."}{" "}
-            </p>
-            {selectedNote && note.id === selectedNote.id ? (
-              <p className="date-paragraph">Created: {note.date}</p>
-            ) : (
-              ""
-            )}
-            {selectedNote && note.id === selectedNote.id && (
-              <section>        <img
-                  onClick={handleCloseButton}
-                  className="note-close"
-                  alt="close"
-                  src={Close}
-                />
+          <h4 className="note-header-list">
+            {" "}
 
 
+            {selectedNote && note.id === selectedNote.id
+              ? note.title
+              : note.title.substr(0, 10) + "..."}{" "}
+          </h4>
+          <p className="notes-text-small">
+
+
+            {selectedNote && note.id === selectedNote.id
+              ? note.text
+              : note.text.substr(0, 20) + "..."}{" "}
+          </p>
+          {selectedNote && note.id === selectedNote.id ? (
+            <p className="date-paragraph">Created: {note.date}</p>
+          ) : (
+            ""
+          )}
+
+
+          {selectedNote && note.id === selectedNote.id && (
+            <section>
               <footer className="note-footer">
                 <img src={Pencil} alt="pencil" onClick={handleCloseButton} />
                 <img
@@ -71,9 +69,8 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
                   onClick={() => deleteNote(note.id)}
                 />
               </footer>
-              </section>
-            )}
-
+            </section>
+          )}
         </section>
       ))}
     </article>
