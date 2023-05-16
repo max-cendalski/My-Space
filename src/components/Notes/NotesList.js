@@ -29,23 +29,19 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
             setSelectedNote(note);
           }}
         >
-          <section>
+          <section className="note-header-container">
             <header className="note-header">
               {selectedNote && note.id === selectedNote.id ? (
-                " "
-              ) : (
-                <img className="notes-pin" alt="pin" src={PinL} height="20px" />
-              )}
-              {selectedNote && note.id === selectedNote.id ? (
-                <img
+                   <img
                   onClick={handleCloseButton}
                   className="note-close"
                   alt="close"
                   src={Close}
                 />
               ) : (
-                ""
+                <img className="notes-pin" alt="pin" src={PinL} height="20px" />
               )}
+
               <h4 className="note-header-list">
                 {" "}
                 {selectedNote && note.id === selectedNote.id
