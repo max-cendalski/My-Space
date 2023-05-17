@@ -29,7 +29,7 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
             setSelectedNote(note);
           }}
         >
-          {!selectedNote ? (
+
             <section>
               <img className="notes-pin" alt="pin" src={PinL} height="20px" />
               <h4 className="note-header-list">
@@ -39,8 +39,11 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
                 {note.text.substr(0, 20) + "..."}
               </p>
             </section>
-          ) : (
+
+
+          {selectedNote && note.id === selectedNote.id && (
             <section>
+              <img className="note-close" src={Close} alt="x" />
               <h4 className="note-header-list">{note.title}</h4>
               <p className="notes-text-small">{note.text}</p>
               <p className="date-paragraph">Created: {note.date}</p>

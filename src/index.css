@@ -172,7 +172,6 @@ code {
 }
 
 .single-note-container {
-
   width: 25%;
   height: 9rem;
   margin: 1rem 1rem;
@@ -228,7 +227,7 @@ code {
 
 .note-close {
 position: absolute;
- margin-top: -7rem;
+top:-1rem
 }
 
 .note-to-be-removed {
