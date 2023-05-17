@@ -41,12 +41,9 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
             </section>
           ) : (
             <section>
-              <h4 className="note-header-list">
-                {note.title}
-              </h4>
-              <p className="notes-text-small">
-                {note.text}
-              </p>
+              <h4 className="note-header-list">{note.title}</h4>
+              <p className="notes-text-small">{note.text}</p>
+              <p className="date-paragraph">Created: {note.date}</p>
               <footer className="note-footer">
                 <img src={Pencil} alt="pencil" onClick={handleCloseButton} />
                 <img
