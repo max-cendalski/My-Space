@@ -46,11 +46,11 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
               <p className="notes-text-small">{note.text}</p>
               <p className="date-paragraph">Created: {note.date}</p>
               <footer className="note-footer">
-                <img className="note-pencil" src={Pencil} alt="pencil" />
+                <img className="note-pencil" src={Pencil} alt="pencil-icon" />
                 <img
                   className="note-trash"
                   src={TrashL}
-                  alt="trash"
+                  alt="trash-icon"
                   onClick={() => deleteNote(note.id)}
                 />
               </footer>
