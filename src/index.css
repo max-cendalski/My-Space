@@ -165,7 +165,6 @@ code {
 
 
 
-
 /*NOTES */
 #notes-list-container {
   background-image: url('../public/corkboard.jpg');
@@ -192,22 +191,14 @@ code {
   box-shadow:3px 4px 4px 4px rgb(0,0,0,0.4);
 }
 
-
-.note-tilt-left {
-  transform: rotate(-1.3deg);
-
-}
-
-.note-tilt-right {
-  transform: rotate(1.3deg);
-}
-
 .notes-pin{
   margin-inline-start: 45%;
 }
+
 .note-header-list {
   font-family: 'kalam-regular';
 }
+
 .notes-text-small{
   margin: 1rem 0 1rem 0;
   width: 100%;
@@ -221,20 +212,16 @@ code {
   top: 8rem;
   left: 0;
   right: 0;
-  margin: 0 auto;
   width: 80%;
-  height: auto;
   max-height: 80%;
-  overflow-y:scroll;
   z-index: 3;
+  overflow-y:scroll;
   padding: 1rem;
   background-color: white;
   box-shadow: 10px 10px 10px 5px rgb(0, 0, 0, 0.7);
-  transform: rotate(0deg);
   font-size: 2rem;
   cursor:auto;
-  transition: all 100ms ease-out;
-  background-color: white;
+  transition: all 600ms ease-out;
 }
 
 .note-close {
