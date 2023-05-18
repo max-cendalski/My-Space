@@ -17,32 +17,24 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
     <article className="notes-page-container">
       {notes.map((note) => (
         <section
-          className={`single-note-container ${
-            isNaN(note.id.charAt(0))
-              ? "single-note-container-tilt-left"
-              : "single-note-container-tilt-right"
-          } ${note === selectedNote ? "selected-note" : ""}  ${
-            note.toBeRemoved ? "note-to-be-removed" : ""
-          }`}
+          className="single-note-container "
           key={note.id}
           onClick={() => {
             setSelectedNote(note);
           }}
         >
-
-            <section>
-              <img className="notes-pin" alt="pin" src={PinL} height="20px" />
-              <h4 className="note-header-list">
-                {note.title.substr(0, 10) + "..."}
-              </h4>
-              <p className="notes-text-small">
-                {note.text.substr(0, 20) + "..."}
-              </p>
-            </section>
-
+          <section>
+            <img className="notes-pin" alt="pin" src={PinL} height="20px" />
+            <h4 className="note-header-list">
+              {note.title.substr(0, 10) + "..."}
+            </h4>
+            <p className="notes-text-small">
+              {note.text.substr(0, 20) + "..."}
+            </p>
+          </section>
 
           {selectedNote && note.id === selectedNote.id && (
-            <section>
+            <section className="selected-note">
               <img className="note-close" src={Close} alt="x" />
               <h4 className="note-header-list">{note.title}</h4>
               <p className="notes-text-small">{note.text}</p>

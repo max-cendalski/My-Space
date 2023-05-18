@@ -223,11 +223,12 @@ code {
   font-size: 2rem;
   cursor:auto;
   transition: all 100ms ease-out;
+  background-color: white;
 }
 
 .note-close {
-position: absolute;
-top:-1rem
+  width: fit-content;
+  background-color: #4FE0B5;
 }
 
 .note-to-be-removed {
