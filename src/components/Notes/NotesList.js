@@ -17,7 +17,9 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
     <article className="notes-page-container">
       {notes.map((note) => (
         <section
-          className="single-note-container "
+          className={`single-note-container ${
+            note.toBeRemoved ? `note-to-be-removed` : ""
+          } `}
           key={note.id}
           onClick={() => {
             setSelectedNote(note);
@@ -32,23 +34,29 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
               {note.text.substr(0, 20) + "..."}
             </p>
           </section>
-
           {selectedNote && note.id === selectedNote.id && (
-            <section className="selected-note">
-              <img className="note-close" src={Close} alt="x" />
+            <img
+              className='note-close'
+              src={Close}
+              alt="x"
+              onClick={handleCloseButton}
+            />
+          )}
+          {selectedNote && note.id === selectedNote.id && (
+            <article className="selected-note">
               <h4 className="note-header-list">{note.title}</h4>
               <p className="notes-text-small">{note.text}</p>
               <p className="date-paragraph">Created: {note.date}</p>
               <footer className="note-footer">
-                <img src={Pencil} alt="pencil" onClick={handleCloseButton} />
+                <img className= "note-pencil" src={Pencil} alt="pencil" />
                 <img
-                  className="notes-trash"
+                  className="note-trash"
                   src={TrashL}
                   alt="trash"
                   onClick={() => deleteNote(note.id)}
                 />
               </footer>
-            </section>
+            </article>
           )}
         </section>
       ))}

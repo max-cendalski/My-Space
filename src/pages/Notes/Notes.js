@@ -45,7 +45,7 @@ const Notes = () => {
       } catch (err) {
         console.error("ERROR:", err);
       }
-    }, 300);
+    },300);
   };
 
   const handleFormState = () => {

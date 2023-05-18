@@ -11,6 +11,7 @@
   font-family: 'kalam-light';
   src: url('../public/Fonts/Kalam/Kalam-Light.ttf')
 }
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -18,6 +19,15 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+input,
+textarea,
+button,
+select,
+a,
+i,
+section {
+  -webkit-tap-highlight-color: transparent;
 }
 
 code {
@@ -164,7 +174,6 @@ code {
 }
 
 .notes-page-container {
-  position: relative;
   display: flex;
   flex-wrap: wrap;
   padding-block-start: 1rem;
@@ -183,11 +192,13 @@ code {
   box-shadow:3px 4px 4px 4px rgb(0,0,0,0.4);
 }
 
-.single-note-container-tilt-left {
+
+.note-tilt-left {
   transform: rotate(-1.3deg);
+
 }
 
-.single-note-container-tilt-right {
+.note-tilt-right {
   transform: rotate(1.3deg);
 }
 
@@ -198,6 +209,7 @@ code {
   font-family: 'kalam-regular';
 }
 .notes-text-small{
+  margin: 1rem 0 1rem 0;
   width: 100%;
   font-size: 1.1rem;
   font-family: 'kalam-regular';
@@ -206,7 +218,7 @@ code {
 
 .selected-note {
   position: fixed;
-  top: 10%;
+  top: 8rem;
   left: 0;
   right: 0;
   margin: 0 auto;
@@ -215,8 +227,7 @@ code {
   max-height: 80%;
   overflow-y:scroll;
   z-index: 3;
-  padding-inline-start: 0.6rem;
-  padding-inline-end: 0.6rem;
+  padding: 1rem;
   background-color: white;
   box-shadow: 10px 10px 10px 5px rgb(0, 0, 0, 0.7);
   transform: rotate(0deg);
@@ -227,12 +238,15 @@ code {
 }
 
 .note-close {
-  width: fit-content;
-  background-color: #4FE0B5;
+  position:fixed;
+  top: 5.8rem;
+  right:10%;
+  padding: 0.2rem;
+  background-color: rgb(224, 224, 224)
 }
 
 .note-to-be-removed {
-  animation: move-left 500ms forwards
+  animation: move-left 300ms forwards
 }
 
 @keyframes move-left {
@@ -243,23 +257,19 @@ code {
 
 .note-footer {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding-block-start: 0.5rem;
-  padding-block-end: 0.5rem;
-}
-.note-pencil {
-
+  margin-block-start: 1rem;
 }
 
-.note-footer button {
-  margin-right: auto;
-  margin-left: 1px;
-}
-.notes-trash {
+.note-pencil{
   cursor: pointer;
-  width: 2.5rem;
-  height: 2.3rem;
+  height: 2.2rem;
+  margin-inline-start: 0;
+}
+
+.note-trash {
+  cursor: pointer;
+  height: 2.6rem;
   margin-inline-end: 0;
 }
 
