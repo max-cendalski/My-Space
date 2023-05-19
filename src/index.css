@@ -200,8 +200,7 @@ code {
 }
 
 .notes-text-small{
-  margin: 1rem 0 1rem 0;
-  width: 100%;
+  margin-block-start: 0.5rem;
   font-size: 1.1rem;
   font-family: 'kalam-regular';
   white-space: pre-line;

@@ -13,11 +13,17 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
   if (!isVisible) {
     return null;
   }
+
+  const editNote = (note) => {
+    console.log('id',note)
+  }
   return (
     <article className="notes-page-container">
       {notes.map((note) => (
         <section
-          className={`single-note-container ${note.toBeRemoved ? `note-to-be-removed` : ""} `}
+          className={`single-note-container ${
+            note.toBeRemoved ? `note-to-be-removed` : ""
+          } `}
           key={note.id}
           onClick={() => {
             setSelectedNote(note);
@@ -46,7 +52,12 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
               <p className="notes-text-small">{note.text}</p>
               <p className="date-paragraph">Created: {note.date}</p>
               <footer className="note-footer">
-                <img className="note-pencil" src={Pencil} alt="pencil-icon" />
+                <img
+                  onClick={() => editNote(note)}
+                  className="note-pencil"
+                  src={Pencil}
+                  alt="pencil-icon"
+                />
                 <img
                   className="note-trash"
                   src={TrashL}
