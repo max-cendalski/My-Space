@@ -172,6 +172,11 @@ code {
   max-height: 300vh;
 }
 
+.notes-form-container {
+  position: relative;
+  min-height: 100vh;
+  background-image: url('../public/corkboard.jpg');
+}
 .notes-page-container {
   display: flex;
   flex-wrap: wrap;
@@ -288,13 +293,15 @@ code {
 .notes-form-footer {
   position: absolute;
   display: flex;
-  width: 100%;
+  left:5%;
+  width: 90%;
   top: 27rem;
 }
 
 .note-submit-button {
   width: 30%;
   font-size: 1rem;
+  margin-inline-end: 0;
   color: white;
   box-shadow: 3px 4px 4px 4px rgb(0, 0, 0, 0.4);
   background-color: var(--darkGreen);
@@ -304,6 +311,7 @@ code {
   border: none;
   cursor: pointer;
 }
+
 .note-submit-button:active {
   transform: scale(110%);
 }
@@ -311,6 +319,7 @@ code {
 .note-cancel-button {
       width: 30%;
       font-size: 1rem;
+      margin-inline-start: 0;
       color: white;
       box-shadow: 3px 4px 4px 4px rgb(0, 0, 0, 0.4);
       background-color: var(--darkGreen);
@@ -319,6 +328,9 @@ code {
       border-radius: 5px;
       border: none;
       cursor: pointer;
+}
+.note-cancel-button:active {
+  transform: scale(110%);
 }
 
 .delete-button {

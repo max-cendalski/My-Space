@@ -65,7 +65,7 @@ const NoteEdit = () => {
   return (
     <article>
       <Navbar />
-      <article id="edit-note-container">
+      <article className="notes-form-container">
         <form className="note-form">
           <p className="field">
             <label className="label-standard" htmlFor="title">
@@ -89,20 +89,17 @@ const NoteEdit = () => {
               onChange={handleChange}
             />
           </p>
-
         </form>
-            <footer className="notes-form-footer">
-            <button className="note-cancel-button">
-              Cancel
-            </button>
-            <button
-              className="note-submit-button"
-              onClick={handleUpdateNote}
-              disabled={!canSave}
-            >
-              Submit
-            </button>
-          </footer>
+        <footer className="notes-form-footer">
+          <button className="note-cancel-button">Cancel</button>
+          <button
+            className="note-submit-button"
+            onClick={handleUpdateNote}
+            disabled={!canSave}
+          >
+            Submit
+          </button>
+        </footer>
       </article>
     </article>
   );

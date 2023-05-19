@@ -9,7 +9,7 @@ const AddNoteForm = ({ isVisible, handleFormState }) => {
   const [formData, setFormData] = useState({
     title: "",
     text: "",
-    date: ""
+    date: "",
   });
 
   const canSave = [...Object.values(formData)].every(Boolean);
@@ -27,7 +27,7 @@ const AddNoteForm = ({ isVisible, handleFormState }) => {
     setFormData({
       title: "",
       text: "",
-      date: ""
+      date: "",
     });
   };
 
@@ -38,13 +38,13 @@ const AddNoteForm = ({ isVisible, handleFormState }) => {
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
-      date: format(new Date(), "PP")
+      date: format(new Date(), "PP"),
     }));
   };
 
   return (
-    <article>
-      <form className={isVisible ? "hidden" : "note-form"}>
+    <article className={isVisible ? "hidden" : "notes-form-container"}>
+      <form className="note-form">
         <p className="field">
           <label className="label-standard" htmlFor="title">
             Title
@@ -67,19 +67,17 @@ const AddNoteForm = ({ isVisible, handleFormState }) => {
             onChange={handleChange}
           />
         </p>
-         <footer className="notes-form-footer">
-            <button className="note-cancel-button">
-              Cancel
-            </button>
-            <button
-              className="note-submit-button"
-              onClick={handleAddNote}
-              disabled={!canSave}
-            >
-              Submit
-            </button>
-          </footer>
       </form>
+      <footer className="notes-form-footer">
+        <button className="note-cancel-button">Cancel</button>
+        <button
+          className="note-submit-button"
+          onClick={handleAddNote}
+          disabled={!canSave}
+        >
+          Submit
+        </button>
+      </footer>
     </article>
   );
 };

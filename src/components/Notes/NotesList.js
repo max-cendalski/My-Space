@@ -9,7 +9,6 @@ import NoteEdit from "../../pages/Notes/EditNote";
 const NotesList = ({ isVisible, notes, deleteNote }) => {
   const [selectedNote, setSelectedNote] = useState(null);
   const [showEditWindow, setShowEditWindow] = useState(false)
-  const [editedNoteId , setEditedNoteId]  = useState('')
   const handleCloseButton = (e) => {
     e.stopPropagation();
     setSelectedNote(null);
