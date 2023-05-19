@@ -68,13 +68,8 @@ const NoteEdit = () => {
   return (
     <article>
       <Navbar />
-
       <article id="edit-note-container">
-        <section className="sticky-section"></section>
-        <i
-          onClick={handleGoBack}
-          className="back-arrow fa-solid fa-arrow-left fa-xl"
-        ></i>
+
         <form className="note-form">
           <p className="field">
             <label className="label-standard" htmlFor="title">

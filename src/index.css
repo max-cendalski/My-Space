@@ -306,7 +306,8 @@ code {
 }
 
 #edit-note-container {
-  width: 90%;
+    background-image: url('../public/corkboard.jpg');
+      min-height: 100vh;
 }
 
 
@@ -319,6 +320,7 @@ code {
 }
 
 .edit-link {
+  margin-inline-start: 0;
   text-decoration: none;
   color: black;
 }

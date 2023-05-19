@@ -1,11 +1,15 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import PinL from "../../icons/PinL.png";
 import TrashL from "../../icons/trashL.png";
 import Close from "../../icons/closeS.png";
 import Pencil from "../../icons/pencilS.png";
+import NoteEdit from "../../pages/Notes/EditNote";
 
 const NotesList = ({ isVisible, notes, deleteNote }) => {
   const [selectedNote, setSelectedNote] = useState(null);
+  const [showEditWindow, setShowEditWindow] = useState(false)
+  const [editedNoteId , setEditedNoteId]  = useState('')
   const handleCloseButton = (e) => {
     e.stopPropagation();
     setSelectedNote(null);
@@ -14,9 +18,6 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
     return null;
   }
 
-  const editNote = (note) => {
-    console.log('id',note)
-  }
   return (
     <article className="notes-page-container">
       {notes.map((note) => (
@@ -52,12 +53,15 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
               <p className="notes-text-small">{note.text}</p>
               <p className="date-paragraph">Created: {note.date}</p>
               <footer className="note-footer">
-                <img
-                  onClick={() => editNote(note)}
-                  className="note-pencil"
-                  src={Pencil}
-                  alt="pencil-icon"
-                />
+
+
+                <Link className="edit-link" to={`/notes/edit/${note.id}`}>
+                  <img
+                    className="note-pencil"
+                    src={Pencil}
+                    alt="pencil-icon"
+                  />
+                </Link>
                 <img
                   className="note-trash"
                   src={TrashL}
@@ -69,6 +73,7 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
           )}
         </section>
       ))}
+      {showEditWindow && <NoteEdit />}
     </article>
   );
 };
