@@ -67,8 +67,11 @@ const AddNoteForm = ({ isVisible, handleFormState }) => {
             onChange={handleChange}
           />
         </p>
-        <button className="note-form-button" onClick={handleAddNote} disabled={!canSave}>
-          Add Note
+        <button
+          className="note-form-button"
+          onClick={handleAddNote}
+          disabled={!canSave}
+        >
         </button>
       </form>
     </article>

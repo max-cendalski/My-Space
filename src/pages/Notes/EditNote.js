@@ -33,6 +33,7 @@ const NoteEdit = () => {
 
   const handleUpdateNote = (e) => {
     e.preventDefault();
+
     const noteToUpdateRef = doc(db, "users", user.uid, "notes", noteId);
 
     const addNote = async () => {
@@ -60,6 +61,7 @@ const NoteEdit = () => {
     }));
   };
 
+  const canSave = [...Object.values(formData)].every(Boolean);
   if (isLoading && !formData) return <p>Loading</p>;
   return (
     <article>
@@ -88,7 +90,13 @@ const NoteEdit = () => {
               onChange={handleChange}
             />
           </p>
-          <button className="note-form-button" onClick={handleUpdateNote}>Submit</button>
+          <button
+            className="note-form-button"
+            onClick={handleUpdateNote}
+            disabled={!canSave}
+          >
+            Submit
+          </button>
         </form>
       </article>
     </article>
