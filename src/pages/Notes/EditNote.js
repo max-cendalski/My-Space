@@ -33,7 +33,6 @@ const NoteEdit = () => {
 
   const handleUpdateNote = (e) => {
     e.preventDefault();
-
     const noteToUpdateRef = doc(db, "users", user.uid, "notes", noteId);
 
     const addNote = async () => {
@@ -90,14 +89,20 @@ const NoteEdit = () => {
               onChange={handleChange}
             />
           </p>
-          <button
-            className="note-form-button"
-            onClick={handleUpdateNote}
-            disabled={!canSave}
-          >
-            Submit
-          </button>
+
         </form>
+            <footer className="notes-form-footer">
+            <button className="note-cancel-button">
+              Cancel
+            </button>
+            <button
+              className="note-submit-button"
+              onClick={handleUpdateNote}
+              disabled={!canSave}
+            >
+              Submit
+            </button>
+          </footer>
       </article>
     </article>
   );

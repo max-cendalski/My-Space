@@ -67,12 +67,18 @@ const AddNoteForm = ({ isVisible, handleFormState }) => {
             onChange={handleChange}
           />
         </p>
-        <button
-          className="note-form-button"
-          onClick={handleAddNote}
-          disabled={!canSave}
-        >
-        </button>
+         <footer className="notes-form-footer">
+            <button className="note-cancel-button">
+              Cancel
+            </button>
+            <button
+              className="note-submit-button"
+              onClick={handleAddNote}
+              disabled={!canSave}
+            >
+              Submit
+            </button>
+          </footer>
       </form>
     </article>
   );
