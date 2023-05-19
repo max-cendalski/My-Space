@@ -1,9 +1,9 @@
-import { useParams, useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import { UserAuth } from '../../context/AuthContext';
-import Navbar from '../../components/Navbar/Navbar';
-import { db } from '../../firebase/Firebase';
-import { updateDoc, doc, getDoc } from 'firebase/firestore';
+import { useParams, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { UserAuth } from "../../context/AuthContext";
+import Navbar from "../../components/Navbar/Navbar";
+import { db } from "../../firebase/Firebase";
+import { updateDoc, doc, getDoc } from "firebase/firestore";
 
 const NoteEdit = () => {
   const { noteId } = useParams();
@@ -12,11 +12,11 @@ const NoteEdit = () => {
   const [isLoading, setisLoading] = useState(true);
   const [formData, setFormData] = useState({
     title: "",
-    text: ""
+    text: "",
   });
 
   const getNoteToUpdate = async () => {
-    const noteToUpdateRef = doc(db, 'users', user.uid, 'notes', noteId);
+    const noteToUpdateRef = doc(db, "users", user.uid, "notes", noteId);
     try {
       const docSnap = await getDoc(noteToUpdateRef);
       setFormData(docSnap.data());
@@ -33,7 +33,7 @@ const NoteEdit = () => {
 
   const handleUpdateNote = (e) => {
     e.preventDefault();
-    const noteToUpdateRef = doc(db, 'users', user.uid, 'notes', noteId);
+    const noteToUpdateRef = doc(db, "users", user.uid, "notes", noteId);
 
     const addNote = async () => {
       try {
@@ -45,7 +45,7 @@ const NoteEdit = () => {
     addNote();
     setFormData({
       title: "",
-      text: ""
+      text: "",
     });
     navigate("/notes");
   };
@@ -60,16 +60,11 @@ const NoteEdit = () => {
     }));
   };
 
-  const handleGoBack = () => {
-    navigate(-1)
-  }
-
-  if (isLoading && !formData) return <p>Loading</p>
+  if (isLoading && !formData) return <p>Loading</p>;
   return (
     <article>
       <Navbar />
       <article id="edit-note-container">
-
         <form className="note-form">
           <p className="field">
             <label className="label-standard" htmlFor="title">
@@ -93,7 +88,7 @@ const NoteEdit = () => {
               onChange={handleChange}
             />
           </p>
-          <button onClick={handleUpdateNote}>Submit</button>
+          <button className="note-form-button" onClick={handleUpdateNote}>Submit</button>
         </form>
       </article>
     </article>

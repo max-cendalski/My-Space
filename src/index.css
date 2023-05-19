@@ -242,25 +242,23 @@ code {
 
 .note-footer {
   display: flex;
-  align-items: center;
   margin-block-start: 1rem;
 }
 
 .note-pencil{
   cursor: pointer;
-  height: 2.2rem;
+  height: 2.1rem;
   margin-inline-start: 0;
 }
 
 .note-trash {
   cursor: pointer;
-  height: 2.6rem;
   margin-inline-end: 0;
 }
 
 .note-form {
   position: absolute;
-  background-color: white;;
+  background-color: white;
   top: 10%;
   width: 90%;
   right: 0;
@@ -274,7 +272,14 @@ code {
 }
 
 .note-form textarea {
-  height: 12rem;
+  width: 100%;
+  height: 14rem;
+  border-bottom: none;
+}
+.note-form-button {
+  outline: none;
+  position: absolute;
+  top:21rem;
 }
 .loading-notification {
   margin-block-start: 2rem;
@@ -307,7 +312,7 @@ code {
 
 #edit-note-container {
     background-image: url('../public/corkboard.jpg');
-      min-height: 100vh;
+    min-height: 100vh;
 }
 
 
@@ -320,6 +325,8 @@ code {
 }
 
 .edit-link {
+  display: flex;
+  align-items: center;
   margin-inline-start: 0;
   text-decoration: none;
   color: black;
@@ -337,6 +344,7 @@ code {
   padding-block-end: 1.375rem;
   border-block-end: 1px solid var(--lightPink);
 }
+
 .single-idea button {
   width: 100%;
   font-size: 1rem;
@@ -657,6 +665,7 @@ code {
   margin-block-start: 2rem;
   width: 100%;
 }
+
 .autocomplete-dropdown-container {
   position: absolute;
   background-color: white;
@@ -667,6 +676,7 @@ code {
     color: white;
     cursor: pointer;
 }
+
 #locations-fromDB-container {
   margin-block-start: 2rem;
   margin-block-end: 2rem;
@@ -815,7 +825,7 @@ code {
   font-weight: bold;
 }
 .field {
-  margin-block-end: 1rem;
+  margin-block-start: 0.5rem;
 }
 
 .hidden {
