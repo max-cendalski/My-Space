@@ -4,7 +4,7 @@ import { db } from "../../firebase/Firebase";
 import { UserAuth } from "../../context/AuthContext";
 import Navbar from "../../components/Navbar/Navbar";
 import NotesList from "../../components/Notes/NotesList";
-import AddNoteForm from "../../components/Notes/AddNoteForm";
+import AddNote from "../../components/Notes/AddNote";
 
 const Notes = () => {
   const { user } = UserAuth();
@@ -56,7 +56,7 @@ const Notes = () => {
     <>
       <Navbar />
       <article id="notes-list-container">
-        <AddNoteForm isVisible={isVisible} handleFormState={handleFormState} />
+        <AddNote isVisible={isVisible} handleFormState={handleFormState} />
         <NotesList
           isVisible={isVisible}
           notes={notes}

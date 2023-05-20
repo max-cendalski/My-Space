@@ -3,8 +3,9 @@ import { addDoc, collection } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { UserAuth } from "../../context/AuthContext";
 import { format } from "date-fns";
+import NotesForm from "../../components/Forms/NotesForm";
 
-const AddNoteForm = ({ isVisible, handleFormState }) => {
+const AddNote = ({ isVisible, handleFormState }) => {
   const { user } = UserAuth();
   const [formData, setFormData] = useState({
     title: "",
@@ -44,42 +45,15 @@ const AddNoteForm = ({ isVisible, handleFormState }) => {
 
   return (
     <article className={isVisible ? "hidden" : "notes-form-container"}>
-      <form className="note-form">
-        <p className="field">
-          <label className="label-standard" htmlFor="title">
-            Title
-          </label>
-          <input
-            type="text"
-            name="title"
-            value={formData.title}
-            onChange={handleChange}
-          />
-        </p>
-        <p className="field">
-          <label className="label-standard" htmlFor="text">
-            Text
-          </label>
-          <textarea
-            type="textarea"
-            name="text"
-            value={formData.text}
-            onChange={handleChange}
-          />
-        </p>
-      </form>
-      <footer className="notes-form-footer">
-        <button className="note-cancel-button" onClick={handleFormState}>Cancel</button>
-        <button
-          className="note-submit-button"
-          onClick={handleAddNote}
-          disabled={!canSave}
-        >
-          Submit
-        </button>
-      </footer>
+      <NotesForm
+        formData={formData}
+        handleChange={handleChange}
+        handleCancel={handleFormState}
+        handleSubmit={handleAddNote}
+        canSave={canSave}
+      />
     </article>
   );
 };
 
-export default AddNoteForm;
+export default AddNote;
