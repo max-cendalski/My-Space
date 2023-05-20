@@ -5,6 +5,8 @@ import Navbar from "../../components/Navbar/Navbar";
 import { db } from "../../firebase/Firebase";
 import { updateDoc, doc, getDoc } from "firebase/firestore";
 import NotesForm from "../../components/Forms/NotesForm";
+import NotesErrorMsg from "../../components/Modals/NotesErrorMsg";
+
 
 const NoteEdit = () => {
   const { noteId } = useParams();
@@ -15,6 +17,9 @@ const NoteEdit = () => {
     title: "",
     text: "",
   });
+  const [errorMsg, setErrorMsg] = useState(false);
+  const canSave = [...Object.values(formData)].every(Boolean);
+
 
   const getNoteToUpdate = async () => {
     const noteToUpdateRef = doc(db, "users", user.uid, "notes", noteId);
@@ -33,7 +38,13 @@ const NoteEdit = () => {
   }, []);
 
   const handleUpdateNote = (e) => {
-    e.preventDefault();
+     if (!canSave) {
+       setErrorMsg(true);
+       setTimeout(() => {
+         setErrorMsg(false);
+       }, 3000);
+       return;
+     }
     const noteToUpdateRef = doc(db, "users", user.uid, "notes", noteId);
 
     const addNote = async () => {
@@ -52,6 +63,7 @@ const NoteEdit = () => {
   };
 
   const handleChange = (e) => {
+    setErrorMsg(false)
     const name = e.target.name;
     const value = e.target.value;
 
@@ -65,19 +77,19 @@ const NoteEdit = () => {
     navigate(-1);
   };
 
-  const canSave = [...Object.values(formData)].every(Boolean);
   if (isLoading && !formData) return <p>Loading</p>;
   return (
-    <article>
+    <>
       <Navbar />
-      <NotesForm  formData= {formData}
-                  handleChange={handleChange}
-                  handleCancel={handleCancelEdit}
-                  handleSubmit={handleUpdateNote}
-                  canSave = {canSave}
+      <NotesForm
+        formData={formData}
+        handleChange={handleChange}
+        handleCancel={handleCancelEdit}
+        handleSubmit={handleUpdateNote}
+        canSave={canSave}
       />
-
-    </article>
+      {errorMsg && <NotesErrorMsg />}
+    </>
   );
 };
 

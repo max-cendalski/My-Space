@@ -54,7 +54,7 @@ const AddNote = ({ isVisible, handleFormState }) => {
   };
 
   return (
-    <article className={isVisible ? "hidden" : "notes-form-container"}>
+    <article className={isVisible ? "hidden" : ""}>
       <NotesForm
         formData={formData}
         handleChange={handleChange}

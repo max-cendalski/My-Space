@@ -376,7 +376,7 @@ code {
     background-color: var(--red);
     color: white;
     box-shadow: 3px 4px 4px 4px rgb(0, 0, 0, 0.4);
-    top: 2rem;
+    top: 3rem;
     left:0;
     right: 0;
     width: 70%;
