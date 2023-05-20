@@ -4,6 +4,7 @@ import { UserAuth } from "../../context/AuthContext";
 import Navbar from "../../components/Navbar/Navbar";
 import { db } from "../../firebase/Firebase";
 import { updateDoc, doc, getDoc } from "firebase/firestore";
+import NotesForm from "../../components/Forms/NotesForm";
 
 const NoteEdit = () => {
   const { noteId } = useParams();
@@ -61,7 +62,6 @@ const NoteEdit = () => {
   };
 
   const handleCancelEdit = () => {
-
     navigate(-1);
   };
 
@@ -70,44 +70,13 @@ const NoteEdit = () => {
   return (
     <article>
       <Navbar />
-      <article className="notes-form-container">
-        <form className="note-form">
-          <p className="field">
-            <label className="label-standard" htmlFor="title">
-              Title
-            </label>
-            <input
-              type="text"
-              name="title"
-              value={formData.title}
-              onChange={handleChange}
-            />
-          </p>
-          <p className="field">
-            <label className="label-standard" htmlFor="text">
-              Text
-            </label>
-            <textarea
-              type="textarea"
-              name="text"
-              value={formData.text}
-              onChange={handleChange}
-            />
-          </p>
-        </form>
-        <footer className="notes-form-footer">
-          <button className="note-cancel-button" onClick={handleCancelEdit}>
-            Cancel
-          </button>
-          <button
-            className="note-submit-button"
-            onClick={handleUpdateNote}
-            disabled={!canSave}
-          >
-            Submit
-          </button>
-        </footer>
-      </article>
+      <NotesForm  formData= {formData}
+                  handleChange={handleChange}
+                  handleCancel={handleCancelEdit}
+                  handleSubmit={handleUpdateNote}
+                  canSave = {canSave}
+      />
+
     </article>
   );
 };

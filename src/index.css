@@ -367,6 +367,19 @@ code {
   color: black;
 }
 
+  .notes-error-msg-container {
+    position: absolute;
+    top: 6rem;
+    width: 80%;
+  }
+
+
+
+
+
+
+
+
 /* IDEAS */
 
 #ideas-page-container  {
