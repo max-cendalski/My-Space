@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { UserAuth } from "../../context/AuthContext";
 import { format } from "date-fns";
 import NotesForm from "../../components/Forms/NotesForm";
+import NotesErrorMsg from "../Modals/NotesErrorMsg";
 
 const AddNote = ({ isVisible, handleFormState }) => {
   const { user } = UserAuth();
@@ -12,10 +13,18 @@ const AddNote = ({ isVisible, handleFormState }) => {
     text: "",
     date: "",
   });
+  const [errorMsg, setErrorMsg] = useState(false);
 
   const canSave = [...Object.values(formData)].every(Boolean);
 
   const handleAddNote = (e) => {
+    if (!canSave) {
+      setErrorMsg(true);
+      setTimeout(()=> {
+        setErrorMsg(false)
+      },3000)
+      return;
+    }
     const addNote = async () => {
       try {
         await addDoc(collection(db, "users", user.uid, "notes"), formData);
@@ -33,6 +42,7 @@ const AddNote = ({ isVisible, handleFormState }) => {
   };
 
   const handleChange = (e) => {
+    setErrorMsg(false)
     const name = e.target.name;
     const value = e.target.value;
 
@@ -52,6 +62,7 @@ const AddNote = ({ isVisible, handleFormState }) => {
         handleSubmit={handleAddNote}
         canSave={canSave}
       />
+      {errorMsg && <NotesErrorMsg />}
     </article>
   );
 };

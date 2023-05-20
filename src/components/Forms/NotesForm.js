@@ -1,4 +1,6 @@
+
 const NotesForm = ({formData, handleChange,handleCancel,handleSubmit,canSave}) => {
+
 
   return (
     <article className="notes-form-container">
@@ -33,7 +35,6 @@ const NotesForm = ({formData, handleChange,handleCancel,handleSubmit,canSave}) =
         <button
           className="note-submit-button"
           onClick={handleSubmit}
-          disabled={!canSave}
         >
           Submit
         </button>
