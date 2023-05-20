@@ -7,7 +7,6 @@ import { updateDoc, doc, getDoc } from "firebase/firestore";
 import NotesForm from "../../components/Forms/NotesForm";
 import NotesErrorMsg from "../../components/Modals/NotesErrorMsg";
 
-
 const NoteEdit = () => {
   const { noteId } = useParams();
   const navigate = useNavigate();
@@ -19,7 +18,6 @@ const NoteEdit = () => {
   });
   const [errorMsg, setErrorMsg] = useState(false);
   const canSave = [...Object.values(formData)].every(Boolean);
-
 
   const getNoteToUpdate = async () => {
     const noteToUpdateRef = doc(db, "users", user.uid, "notes", noteId);
@@ -38,13 +36,13 @@ const NoteEdit = () => {
   }, []);
 
   const handleUpdateNote = (e) => {
-     if (!canSave) {
-       setErrorMsg(true);
-       setTimeout(() => {
-         setErrorMsg(false);
-       }, 3000);
-       return;
-     }
+    if (!canSave) {
+      setErrorMsg(true);
+      setTimeout(() => {
+        setErrorMsg(false);
+      }, 3000);
+      return;
+    }
     const noteToUpdateRef = doc(db, "users", user.uid, "notes", noteId);
 
     const addNote = async () => {
@@ -63,9 +61,8 @@ const NoteEdit = () => {
   };
 
   const handleChange = (e) => {
-    setErrorMsg(false)
-    const name = e.target.name;
-    const value = e.target.value;
+    setErrorMsg(false);
+    const {name, value} = e.target;
 
     setFormData((prevData) => ({
       ...prevData,

@@ -278,10 +278,15 @@ code {
   border: 1px solid var(--lightPink);
 }
 
+.note-form input:focus,
+.note-form textarea:focus {
+  border: 2px solid var(--lightPink);
+  outline: none;
+}
+
 .note-form textarea {
   width: 100%;
   height: 14rem;
-  border-bottom: none;
 }
 
 .loading-notification {
@@ -316,17 +321,17 @@ code {
 }
 
 .note-cancel-button {
-      width: 30%;
-      font-size: 1rem;
-      margin-inline-start: 0;
-      color: white;
-      box-shadow: 3px 4px 4px 4px rgb(0, 0, 0, 0.4);
-      background-color: var(--red);
-      padding-block: 0.375rem;
-      padding-inline: 0;
-      border-radius: 5px;
-      border: none;
-      cursor: pointer;
+  width: 30%;
+  font-size: 1rem;
+  margin-inline-start: 0;
+  color: white;
+  box-shadow: 3px 4px 4px 4px rgb(0, 0, 0, 0.4);
+  background-color: var(--red);
+  padding-block: 0.375rem;
+  padding-inline: 0;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
 }
 .note-cancel-button:active {
   transform: scale(110%);
@@ -348,8 +353,6 @@ code {
     background-image: url('../public/corkboard.jpg');
     min-height: 100vh;
 }
-
-
 
 .single-note-footer {
   display: flex;
