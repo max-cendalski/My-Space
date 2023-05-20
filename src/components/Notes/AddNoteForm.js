@@ -69,7 +69,7 @@ const AddNoteForm = ({ isVisible, handleFormState }) => {
         </p>
       </form>
       <footer className="notes-form-footer">
-        <button className="note-cancel-button">Cancel</button>
+        <button className="note-cancel-button" onClick={handleFormState}>Cancel</button>
         <button
           className="note-submit-button"
           onClick={handleAddNote}

@@ -60,6 +60,11 @@ const NoteEdit = () => {
     }));
   };
 
+  const handleCancelEdit = () => {
+
+    navigate(-1);
+  };
+
   const canSave = [...Object.values(formData)].every(Boolean);
   if (isLoading && !formData) return <p>Loading</p>;
   return (
@@ -91,7 +96,9 @@ const NoteEdit = () => {
           </p>
         </form>
         <footer className="notes-form-footer">
-          <button className="note-cancel-button">Cancel</button>
+          <button className="note-cancel-button" onClick={handleCancelEdit}>
+            Cancel
+          </button>
           <button
             className="note-submit-button"
             onClick={handleUpdateNote}
