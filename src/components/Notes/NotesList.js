@@ -17,7 +17,7 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
   }
 
   return (
-    <article className="notes-page-container">
+    <article className="notes-list-container">
       {notes.map((note) => (
         <section
           className={`single-note-container ${

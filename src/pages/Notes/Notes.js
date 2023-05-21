@@ -55,7 +55,7 @@ const Notes = () => {
   return (
     <>
       <Navbar />
-      <article id="notes-list-container">
+      <article id="notes-page-container">
         <AddNote isVisible={isVisible} handleFormState={handleFormState} />
         <NotesList
           isVisible={isVisible}
