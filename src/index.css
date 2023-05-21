@@ -205,7 +205,7 @@ code {
 }
 
 .notes-text-small{
-  margin-block-start: 0.5rem;
+  margin-block: 0.5rem;
   font-size: 1.1rem;
   font-family: 'kalam-regular';
   white-space: pre-line;
