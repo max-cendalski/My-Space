@@ -3,10 +3,10 @@
 const NotesErrorMsg = () => {
 
   return (
-   <article className="notes-error-msg-container">
-    <p>Title and Text can't be empty</p>
-   </article>
-  )
+    <article className="notes-error-msg-container">
+      <p>Please fill in both fields.</p>
+    </article>
+  );
 
 }
 
