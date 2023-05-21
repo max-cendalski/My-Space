@@ -302,18 +302,20 @@ code {
   top: 27rem;
 }
 
-.note-submit-button {
+.note-button {
   width: 30%;
   font-size: 1rem;
-  margin-inline-end: 0;
   color: white;
-  box-shadow: 3px 4px 4px 4px rgb(0, 0, 0, 0.4);
-  background-color: var(--darkGreen);
   padding-block: 0.375rem;
   padding-inline: 0;
   border-radius: 5px;
   border: none;
-  cursor: pointer;
+  box-shadow: 3px 4px 4px 4px rgb(0, 0, 0, 0.4);
+}
+
+.note-submit-button {
+  margin-inline-end: 0;
+  background-color: var(--darkGreen);
 }
 
 .note-submit-button:active {
@@ -321,17 +323,8 @@ code {
 }
 
 .note-cancel-button {
-  width: 30%;
-  font-size: 1rem;
   margin-inline-start: 0;
-  color: white;
-  box-shadow: 3px 4px 4px 4px rgb(0, 0, 0, 0.4);
   background-color: var(--red);
-  padding-block: 0.375rem;
-  padding-inline: 0;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
 }
 .note-cancel-button:active {
   transform: scale(110%);
