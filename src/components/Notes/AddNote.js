@@ -43,8 +43,7 @@ const AddNote = ({ isVisible, handleFormState }) => {
 
   const handleChange = (e) => {
     setErrorMsg(false)
-    const name = e.target.name;
-    const value = e.target.value;
+    const {name, value} = e.target
 
     setFormData((prevData) => ({
       ...prevData,
