@@ -8,7 +8,7 @@ import AddNote from "../../components/Notes/AddNote";
 
 const Notes = () => {
   const { user } = UserAuth();
-  const [notes, setNotes] = useState([]);
+  const [notes, setNotes] = useState([])
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const Notes = () => {
       } catch (err) {
         console.error("ERROR:", err);
       }
-    },300);
+    }, 200);
   };
 
   const handleFormState = () => {
@@ -61,6 +61,7 @@ const Notes = () => {
           isVisible={isVisible}
           notes={notes}
           deleteNote={handleDeleteNote}
+          setIsVisible={setIsVisible}
         />
         {isVisible ? (
           <button onClick={handleFormState} className="notes-add-button">
