@@ -167,6 +167,7 @@ code {
 
 /*NOTES */
 #notes-page-container {
+  position: relative;
   background-image: url('../public/corkboard.jpg');
   min-height: 100vh;
   max-height: 300vh;
@@ -232,7 +233,7 @@ code {
   top: 5.8rem;
   right:10%;
   padding: 0.2rem;
-  background-color: rgb(224, 224, 224)
+  background-color: white;
 }
 
 .note-to-be-removed {
@@ -381,6 +382,9 @@ code {
   }
 
 
+.blur {
+  filter: blur(2px) brightness(0.75);
+}
 
 
 

@@ -17,55 +17,56 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
   }
 
   return (
-    <article className="notes-list-container">
-      {notes.map((note) => (
-        <section
-          className={`single-note-container ${
-            note.toBeRemoved ? `note-to-be-removed` : ""
-          } `}
-          key={note.id}
-          onClick={() => {
-            setSelectedNote(note);
-          }}
-        >
-          <section>
-            <img className="notes-pin" alt="pin" src={PinL} height="20px" />
-            <h4 className="note-header-list">
-              {note.title.substr(0, 10) + "..."}
-            </h4>
-            <p className="notes-text-small">
-              {note.text.substr(0, 20) + "..."}
-            </p>
+    <>
+      <article className={`notes-list-container ${selectedNote ? "blur" : ""}`}>
+        {notes.map((note) => (
+          <section
+            className={`single-note-container ${
+              note.toBeRemoved ? `note-to-be-removed` : ""
+            } `}
+            key={note.id}
+            onClick={() => {
+              setSelectedNote(note);
+            }}
+          >
+            <section>
+              <img className="notes-pin" alt="pin" src={PinL} height="20px" />
+              <h4 className="note-header-list">
+                {note.title.substr(0, 10) + "..."}
+              </h4>
+              <p className="notes-text-small">
+                {note.text.substr(0, 20) + "..."}
+              </p>
+            </section>
           </section>
-          {selectedNote && note.id === selectedNote.id && (
+        ))}
+      </article>
+      {selectedNote && (
+        <article className="selected-note">
+          <img
+          className="note-close"
+          src={Close}
+          alt="x"
+          onClick={handleCloseButton}
+        />
+          <h4 className="note-header-list">{selectedNote.title}</h4>
+          <p className="notes-text-small">{selectedNote.text}</p>
+          <p className="date-paragraph">Created: {selectedNote.date}</p>
+          <footer className="note-footer">
+            <Link className="edit-link" to={`/notes/edit/${selectedNote.id}`}>
+              <img className="note-pencil" src={Pencil} alt="pencil-icon" />
+            </Link>
             <img
-              className="note-close"
-              src={Close}
-              alt="x"
-              onClick={handleCloseButton}
+              className="note-trash"
+              src={TrashL}
+              alt="trash-icon"
+              onClick={() => deleteNote(selectedNote.id)}
             />
-          )}
-          {selectedNote && note.id === selectedNote.id && (
-            <article className="selected-note">
-              <h4 className="note-header-list">{note.title}</h4>
-              <p className="notes-text-small">{note.text}</p>
-              <p className="date-paragraph">Created: {note.date}</p>
-              <footer className="note-footer">
-                <Link className="edit-link" to={`/notes/edit/${note.id}`}>
-                  <img className="note-pencil" src={Pencil} alt="pencil-icon" />
-                </Link>
-                <img
-                  className="note-trash"
-                  src={TrashL}
-                  alt="trash-icon"
-                  onClick={() => deleteNote(note.id)}
-                />
-              </footer>
-            </article>
-          )}
-        </section>
-      ))}
-    </article>
+          </footer>
+        </article>
+      )}
+
+    </>
   );
 };
 
