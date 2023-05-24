@@ -7,7 +7,6 @@ export const Calendar = () => {
     <article id="calendar-container">
       <Navbar />
       <article className='calendar-header-container'>
-        <GoBack />
         <h1>Tasks</h1>
       </article>
     </article>
