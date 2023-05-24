@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "../../Navbar/Navbar";
 import GoBack from "../../GoBack/GoBack";
 import ShipsComputerArea from "./computerArea";
