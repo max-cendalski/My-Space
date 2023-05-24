@@ -1,5 +1,4 @@
 import Navbar from "../../components/Navbar/Navbar";
-import GoBack from "../../components/GoBack/GoBack";
 import { useState, useEffect } from "react";
 import { db } from "../../firebase/Firebase";
 import { doc, setDoc, getDoc } from "firebase/firestore";
@@ -189,7 +188,6 @@ const RPS = () => {
   return (
     <>
       <Navbar />
-      <GoBack />
 
       <article id="rps-game-container">
         <header id="games-header">

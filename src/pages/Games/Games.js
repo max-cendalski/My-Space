@@ -1,5 +1,4 @@
 import Navbar from "../../components/Navbar/Navbar";
-import GoBack from "../../components/GoBack/GoBack";
 import { NavLink } from "react-router-dom";
 
 const Games = () => {

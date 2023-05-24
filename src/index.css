@@ -393,7 +393,12 @@ code {
   backdrop-filter: blur(2px);
 }
 
+/* CALENDAR */
 
+#calendar-container {
+  display: flex;
+  flex-direction: column;
+}
 
 /* IDEAS */
 
