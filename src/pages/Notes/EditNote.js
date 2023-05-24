@@ -1,9 +1,11 @@
-import { useParams, useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import { UserAuth } from '../../context/AuthContext';
-import Navbar from '../../components/Navbar/Navbar';
-import { db } from '../../firebase/Firebase';
-import { updateDoc, doc, getDoc } from 'firebase/firestore';
+import { useParams, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { UserAuth } from "../../context/AuthContext";
+import Navbar from "../../components/Navbar/Navbar";
+import { db } from "../../firebase/Firebase";
+import { updateDoc, doc, getDoc } from "firebase/firestore";
+import NotesForm from "../../components/Forms/NotesForm";
+import NotesErrorMsg from "../../components/Modals/NotesErrorMsg";
 
 const NoteEdit = () => {
   const { noteId } = useParams();
@@ -12,11 +14,13 @@ const NoteEdit = () => {
   const [isLoading, setisLoading] = useState(true);
   const [formData, setFormData] = useState({
     title: "",
-    text: ""
+    text: "",
   });
+  const [errorMsg, setErrorMsg] = useState(false);
+  const canSave = [...Object.values(formData)].every(Boolean);
 
   const getNoteToUpdate = async () => {
-    const noteToUpdateRef = doc(db, 'users', user.uid, 'notes', noteId);
+    const noteToUpdateRef = doc(db, "users", user.uid, "notes", noteId);
     try {
       const docSnap = await getDoc(noteToUpdateRef);
       setFormData(docSnap.data());
@@ -32,8 +36,14 @@ const NoteEdit = () => {
   }, []);
 
   const handleUpdateNote = (e) => {
-    e.preventDefault();
-    const noteToUpdateRef = doc(db, 'users', user.uid, 'notes', noteId);
+    if (!canSave) {
+      setErrorMsg(true);
+      setTimeout(() => {
+        setErrorMsg(false);
+      }, 3000);
+      return;
+    }
+    const noteToUpdateRef = doc(db, "users", user.uid, "notes", noteId);
 
     const addNote = async () => {
       try {
@@ -45,14 +55,14 @@ const NoteEdit = () => {
     addNote();
     setFormData({
       title: "",
-      text: ""
+      text: "",
     });
     navigate("/notes");
   };
 
   const handleChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
+    setErrorMsg(false);
+    const {name, value} = e.target;
 
     setFormData((prevData) => ({
       ...prevData,
@@ -60,48 +70,23 @@ const NoteEdit = () => {
     }));
   };
 
-  const handleGoBack = () => {
-    navigate(-1)
-  }
+  const handleCancelEdit = () => {
+    navigate(-1);
+  };
 
-  if (isLoading && !formData) return <p>Loading</p>
+  if (isLoading && !formData) return <p>Loading</p>;
   return (
-    <article>
+    <>
       <Navbar />
-
-      <article id="edit-note-container">
-        <section className="sticky-section"></section>
-        <i
-          onClick={handleGoBack}
-          className="back-arrow fa-solid fa-arrow-left fa-xl"
-        ></i>
-        <form className="note-form">
-          <p className="field">
-            <label className="label-standard" htmlFor="title">
-              Title
-            </label>
-            <input
-              type="text"
-              name="title"
-              value={formData.title}
-              onChange={handleChange}
-            />
-          </p>
-          <p className="field">
-            <label className="label-standard" htmlFor="text">
-              Text
-            </label>
-            <textarea
-              type="textarea"
-              name="text"
-              value={formData.text}
-              onChange={handleChange}
-            />
-          </p>
-          <button onClick={handleUpdateNote}>Submit</button>
-        </form>
-      </article>
-    </article>
+      <NotesForm
+        formData={formData}
+        handleChange={handleChange}
+        handleCancel={handleCancelEdit}
+        handleSubmit={handleUpdateNote}
+        canSave={canSave}
+      />
+      {errorMsg && <NotesErrorMsg />}
+    </>
   );
 };
 

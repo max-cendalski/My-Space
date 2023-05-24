@@ -4,22 +4,12 @@ import { db } from "../../firebase/Firebase";
 import { UserAuth } from "../../context/AuthContext";
 import Navbar from "../../components/Navbar/Navbar";
 import NotesList from "../../components/Notes/NotesList";
-import AddNoteForm from "../../components/Notes/AddNoteForm";
-import GoBack from "../../components/GoBack/GoBack";
+import AddNote from "../../components/Notes/AddNote";
 
 const Notes = () => {
   const { user } = UserAuth();
-  const [notes, setNotes] = useState([]);
+  const [notes, setNotes] = useState([])
   const [isVisible, setIsVisible] = useState(true);
-
-  /*   const getNotes = async () => {
-    try {
-      const notesData = await getDocs(collection(db, `users/${user.uid}`, 'notes'));
-      setNotes(notesData.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    } catch (err) {
-      console.error("ERROR", err);
-    }
-  }; */
 
   useEffect(() => {
     const unsub = onSnapshot(
@@ -36,20 +26,26 @@ const Notes = () => {
       }
     );
 
-     return () => {
+    return () => {
       unsub();
     };
     // eslint-disable-next-line
   }, []);
 
-  const handleDeleteNote = async (id) => {
-    try {
-      const noteRef = doc(db, "users", user.uid, "notes", id);
-      await deleteDoc(noteRef);
-      setNotes(notes.filter((item) => item.id !== id));
-    } catch (err) {
-      console.error("ERROR:", err);
-    }
+  const handleDeleteNote = (id) => {
+    const index = notes.findIndex((item) => item.id === id);
+    const newNotes = [...notes];
+    newNotes[index] = { ...newNotes[index], toBeRemoved: true };
+    setNotes(newNotes);
+    setTimeout(async () => {
+      try {
+        const noteRef = doc(db, "users", user.uid, "notes", id);
+        await deleteDoc(noteRef);
+        setNotes(notes.filter((item) => item.id !== id));
+      } catch (err) {
+        console.error("ERROR:", err);
+      }
+    }, 200);
   };
 
   const handleFormState = () => {
@@ -59,19 +55,19 @@ const Notes = () => {
   return (
     <>
       <Navbar />
-      <section className="sticky-section">
-      <GoBack />
-        <button onClick={handleFormState} className="plus-button">
-          <i className="fa-solid fa-plus fa-2xl"></i>
-        </button>
-      </section>
       <article id="notes-page-container">
-        <AddNoteForm isVisible={isVisible} handleFormState={handleFormState} />
+        <AddNote isVisible={isVisible} handleFormState={handleFormState} />
         <NotesList
           isVisible={isVisible}
           notes={notes}
           deleteNote={handleDeleteNote}
+          setIsVisible={setIsVisible}
         />
+        {isVisible ? (
+          <button onClick={handleFormState} className="notes-add-button">
+            <i className="fa-solid fa-plus fa-2xl"></i>
+          </button>
+        ) : null}
       </article>
     </>
   );

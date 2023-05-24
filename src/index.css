@@ -1,4 +1,16 @@
 /* For now using My Space 2 color palette */
+@font-face {
+  font-family: 'indie-flower';
+  src: url('../public/Fonts/Indie_Flower/IndieFlower-Regular.ttf')
+}
+@font-face {
+  font-family: 'kalam-regular';
+  src: url('../public/Fonts/Kalam/Kalam-Regular.ttf')
+}
+@font-face {
+  font-family: 'kalam-light';
+  src: url('../public/Fonts/Kalam/Kalam-Light.ttf')
+}
 
 body {
   margin: 0;
@@ -7,6 +19,15 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+input,
+textarea,
+button,
+select,
+a,
+i,
+section {
+  -webkit-tap-highlight-color: transparent;
 }
 
 code {
@@ -61,7 +82,7 @@ code {
 }
 
 .sticky-section {
-  width: 95%;
+  width: 100%;
   position: sticky;
   background-color: white;
   padding: 0.5rem;
@@ -97,9 +118,7 @@ code {
   margin: 0.5rem;
 }
 
-#notes-page-container {
-  width: 90%;
-}
+
 
 /*HOMEPAGE TIME-LOCATION CONTAINER*/
 #time-location-container {
@@ -146,12 +165,108 @@ code {
 
 
 
+/*NOTES */
+#notes-page-container {
+  background-image: url('../public/corkboard.jpg');
+  min-height: 100vh;
+  max-height: 300vh;
+}
 
+.notes-form-container {
+  position: relative;
+  min-height: 100vh;
+  background-image: url('../public/corkboard.jpg');
+}
 
-/*NOTE FORM */
+.notes-list-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding-block-start: 1rem;
+  width: 100%;
+}
+
+.single-note-container {
+  width: 25%;
+  height: 9rem;
+  margin: 1rem 1rem;
+  background-color: white;
+  cursor: pointer;
+  overflow: hidden;
+  padding-inline-start: 0.3rem;
+  padding-inline-end: 0.3rem;
+  box-shadow:3px 4px 4px 4px rgb(0,0,0,0.4);
+}
+
+.notes-pin{
+  margin-inline-start: 45%;
+}
+
+.note-header-list {
+  font-family: 'kalam-regular';
+}
+
+.notes-text-small{
+  margin-block: 0.5rem;
+  font-size: 1.1rem;
+  font-family: 'kalam-regular';
+  white-space: pre-line;
+}
+
+.selected-note {
+  position: fixed;
+  top: 8rem;
+  left: 0;
+  right: 0;
+  width: 80%;
+  max-height: 70%;
+  z-index: 9;
+  overflow-y:scroll;
+  padding: 1rem;
+  background-color: white;
+  box-shadow: 10px 10px 10px 5px rgb(0, 0, 0, 0.7);
+  font-size: 2rem;
+  cursor:auto;
+}
+
+.note-close {
+  position:fixed;
+  top: 5.8rem;
+  right:10%;
+  padding: 0.2rem;
+  background-color: white;
+}
+
+.note-to-be-removed {
+  animation: move-left 300ms forwards;
+}
+
+@keyframes move-left {
+  100% {
+    transform: translate(-600%);
+  }
+}
+
+.note-footer {
+  display: flex;
+  margin-block-start: 1rem;
+}
+
+.note-pencil{
+  cursor: pointer;
+  height: 2.1rem;
+  margin-inline-start: 0;
+}
+
+.note-trash {
+  cursor: pointer;
+  margin-inline-end: 0;
+}
+
 .note-form {
   position: absolute;
-  background-color: white;;
+  background-color: white;
+  box-shadow: 3px 4px 4px 4px rgb(0, 0, 0, 0.4);
+  border-radius: 3px;
   top: 10%;
   width: 90%;
   right: 0;
@@ -164,24 +279,56 @@ code {
   border: 1px solid var(--lightPink);
 }
 
-.note-form textarea {
-  height: 12rem;
+.note-form input:focus,
+.note-form textarea:focus {
+  border: 2px solid var(--lightPink);
+  outline: none;
 }
+
+.note-form textarea {
+  width: 100%;
+  height: 14rem;
+}
+
 .loading-notification {
   margin-block-start: 2rem;
   text-align: center;
 }
 
-.note-form button {
-  width: 100%;
+.notes-form-footer {
+  position: absolute;
+  display: flex;
+  left:5%;
+  width: 90%;
+  top: 27rem;
+}
+
+.note-button {
+  width: 30%;
   font-size: 1rem;
   color: white;
-  background-color: var(--darkGreen);
   padding-block: 0.375rem;
   padding-inline: 0;
   border-radius: 5px;
   border: none;
-  cursor: pointer;
+  box-shadow: 3px 4px 4px 4px rgb(0, 0, 0, 0.4);
+}
+
+.note-submit-button {
+  margin-inline-end: 0;
+  background-color: var(--darkGreen);
+}
+
+.note-submit-button:active {
+  transform: scale(110%);
+}
+
+.note-cancel-button {
+  margin-inline-start: 0;
+  background-color: var(--red);
+}
+.note-cancel-button:active {
+  transform: scale(110%);
 }
 
 .delete-button {
@@ -197,15 +344,10 @@ code {
 }
 
 #edit-note-container {
-  width: 90%;
+    background-image: url('../public/corkboard.jpg');
+    min-height: 100vh;
 }
 
-
-.single-note-container {
-  width: 100%;
-  margin-block: 1rem;
-  border-block-end: 1px solid var(--lightPink);
-}
 .single-note-footer {
   display: flex;
   justify-content: space-between;
@@ -213,16 +355,45 @@ code {
   margin-block: 0.675rem;
 }
 
-.text {
-  margin-block-start: 0.375rem;
-  word-spacing: 2px;
-  line-height: 1.3;
-}
-
 .edit-link {
+  display: flex;
+  align-items: center;
+  margin-inline-start: 0;
   text-decoration: none;
   color: black;
 }
+
+.notes-error-msg-container {
+  font-size: 1rem;
+  padding: 0.3rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  position: absolute;
+  background-color: var(--red);
+  color: white;
+  box-shadow: 3px 4px 4px 4px rgb(0, 0, 0, 0.4);
+  top: 3rem;
+  left:0;
+  right: 0;
+  width: 70%;
+  border-radius: 3px;
+}
+
+.overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.2);
+  z-index: 2;
+  backdrop-filter: blur(2px);
+}
+
+
 
 /* IDEAS */
 
@@ -236,6 +407,7 @@ code {
   padding-block-end: 1.375rem;
   border-block-end: 1px solid var(--lightPink);
 }
+
 .single-idea button {
   width: 100%;
   font-size: 1rem;
@@ -556,6 +728,7 @@ code {
   margin-block-start: 2rem;
   width: 100%;
 }
+
 .autocomplete-dropdown-container {
   position: absolute;
   background-color: white;
@@ -566,6 +739,7 @@ code {
     color: white;
     cursor: pointer;
 }
+
 #locations-fromDB-container {
   margin-block-start: 2rem;
   margin-block-end: 2rem;
@@ -696,10 +870,13 @@ code {
 }
 
 
-.plus-button {
-  width:50px;
-  height: 50px;
-  margin-inline-end: 0;
+.notes-add-button {
+  position: fixed;
+  margin-inline-end: 1rem;
+  bottom: 5%;
+  right: 5%;
+  width:60px;
+  height: 60px;
   background-color: var(--darkGreen);
   border-radius: 50%;
   border: none;
@@ -711,7 +888,7 @@ code {
   font-weight: bold;
 }
 .field {
-  margin-block-end: 1rem;
+  margin-block-start: 0.5rem;
 }
 
 .hidden {
