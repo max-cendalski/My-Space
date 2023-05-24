@@ -1,17 +1,16 @@
-import Navbar from "../../components/Navbar/Navbar";
+import React from "react";
+//import Navbar from "../../components/Navbar/Navbar";
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
 
-export const Calendar = () => {
-  return (
-    <>
-      <Navbar />
+export default class Calendar extends React.Component {
+  render() {
+    return (
+      <FullCalendar
+        plugins={[dayGridPlugin]}
+        initialView="dayGridMonth"
 
-      <article id="calendar-container">
-        <article className="calendar-header-container">
-          <h1>Task</h1>
-        </article>
-      </article>
-    </>
-  );
-};
-
-export default Calendar;
+      />
+    );
+  }
+}
