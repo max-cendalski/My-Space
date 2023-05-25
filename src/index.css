@@ -746,21 +746,15 @@ code {
     cursor: pointer;
 }
 
-#locations-fromDB-container {
-  margin-block-start: 2rem;
-  margin-block-end: 2rem;
-}
 
 .single-location {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  width: 90%;
+  margin-block-start: 1rem;
   border: 1px solid rgb(193, 190, 190);
   height: 2.5rem;
-  margin-block-end: 1rem;
   transition: 0.2s linear;
-  padding: 0.5rem;
   overflow: hidden;
   border-radius: 5px;
 }
@@ -768,13 +762,10 @@ code {
 .detail-location {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
-  width: 90%;
+  margin-block-start: 1rem;
   border: 1px solid rgb(193, 190, 190);
-  height: 23rem;
+  height: 29rem;
   transition: 0.3s linear;
-  margin-block-end: 1rem;
-  padding: 0.5rem;
   overflow: hidden;
   border-radius: 5px;
 }
@@ -784,19 +775,16 @@ code {
   font-size: 1rem;
   font-weight: 500;
   margin-inline-start: 0.3rem;
-}
-.detail-location-data {
-  width: 100%;
-  margin-block-end: 0.8rem;
+  margin-block-start: 0.5rem;
 }
 
-.detail-location-data * {
-  margin: 0.5rem;
+.detail-location-data {
+  padding-inline-start: 0.3rem;
+  justify-content: baseline;
 }
 
 .down-arrow-button {
-  margin-inline-end: 0.3rem;
-  height: 1.4rem;
+  margin-inline-start: 2rem;
   color: var(--darkGreen);
   background-color: white;
   border: none;
@@ -805,12 +793,13 @@ code {
 }
 
 .searched-locations {
-  width: 90%;
+  width: 95%;
   display: flex;
   align-items: baseline;
+  justify-content: space-between;
   padding: 0.5rem;
   border: 1px solid rgb(222, 222,222);
-  margin-block-start: 0.5rem;
+  margin-block-start: 2rem;
 }
 
 .temperature-section {
@@ -822,7 +811,6 @@ code {
   width: 35px;
   height: 35px;
   background-color: var(--darkGreen);
-  margin-inline-end: 0.5rem;
   border-radius: 50%;
   border: none;
   color: white;
@@ -833,9 +821,9 @@ code {
   font-size: 1rem;
   color: white;
   background-color: var(--darkGreen);
+  margin-block-start: 1rem;
   padding-block: 0.375rem;
-  margin-inline: 0.3rem;
-  border-radius: 5px;
+  border-radius: 3px;
   border: none;
   cursor: pointer;
 }
