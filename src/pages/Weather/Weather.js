@@ -1,5 +1,4 @@
 import Navbar from "../../components/Navbar/Navbar";
-import GoBack from "../../components/GoBack/GoBack";
 import LocationSearch from "../../components/PlaceSearch/PlaceSearch";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import {
@@ -201,10 +200,9 @@ const Weather = () => {
   };
 
   return (
-    <article>
+    <>
       <Navbar />
       <article id="weather-page-container">
-        <GoBack />
         <LocationSearch
           address={address}
           handleChange={handleChange}
@@ -289,7 +287,7 @@ const Weather = () => {
           You already have this location in your database!
         </h3>
       </article>
-    </article>
+    </>
   );
 };
 
