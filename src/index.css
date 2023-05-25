@@ -20,6 +20,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+
 input,
 textarea,
 button,
@@ -29,6 +31,7 @@ i,
 section {
   -webkit-tap-highlight-color: transparent;
 }
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -179,16 +182,16 @@ code {
 }
 
 .notes-list-container {
+  justify-content: center;
   display: flex;
   flex-wrap: wrap;
-  padding-block-start: 1rem;
   width: 100%;
 }
 
 .single-note-container {
   width: 25%;
   height: 9rem;
-  margin: 1rem 1rem;
+  margin: 0.5rem;
   background-color: white;
   cursor: pointer;
   overflow: hidden;
@@ -206,7 +209,6 @@ code {
 }
 
 .notes-text-small{
-  margin-block: 0.5rem;
   font-size: 1.1rem;
   font-family: 'kalam-regular';
   white-space: pre-line;
@@ -396,15 +398,14 @@ code {
 /* CALENDAR */
 
 #calendar-container {
-  display: flex;
-  flex-direction: column;
+
 }
 
 /* IDEAS */
 
 #ideas-page-container  {
+  margin: 1rem auto;
   width: 90%;
-  margin-block-start: 0.8rem;
 }
 
 .single-idea {
