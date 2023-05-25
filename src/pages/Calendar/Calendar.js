@@ -1,17 +1,15 @@
 import React from "react";
 import Navbar from "../../components/Navbar/Navbar";
-import FullCalendar from "@fullcalendar/react";
-import dayGridPlugin from "@fullcalendar/daygrid";
+import CalendarComponent from "../../components/Games/Calendar/fullcalendar";
 
-const Calendar =() => {
 
-    return (
-      <>
-        <Navbar />
-        <FullCalendar plugins={[dayGridPlugin]} initialView="dayGridMonth" />
-      </>
-    );
+const CalendarHomePage = () => {
+  return (
+    <>
+      <Navbar />
+      <CalendarComponent />
+    </>
+  );
+};
 
-}
-
-export default Calendar;
+export default CalendarHomePage;
