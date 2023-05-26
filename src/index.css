@@ -74,6 +74,7 @@ code {
 .feature-button {
   width: 90%;
   height: 4rem;
+  margin:0 auto;
   background-color: var(--darkGreen);
   text-align: center;
   font-size: 2rem;
@@ -450,6 +451,7 @@ code {
   text-indent: 10px;
   transition: 0.3s linear;
 }
+
 
 .idea-homepage-hidden {
   display: flex;
