@@ -87,7 +87,7 @@ const Home = () => {
 
   const handleIdeaHomepageArrowButton = () => {
     idea.extend = !idea.extend;
-
+    setIdea(idea);
     const updateIdea = async () => {
       try {
         const extendRef = doc(
@@ -104,7 +104,7 @@ const Home = () => {
         console.error("SOMETHING WENT WRONG:", err);
       }
     };
-    setIdea(idea);
+
     updateIdea();
   };
 

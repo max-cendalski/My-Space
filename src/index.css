@@ -127,6 +127,7 @@ code {
 /*HOMEPAGE TIME-LOCATION CONTAINER*/
 #time-location-container {
   width: 90%;
+  margin: 0 auto;
   display: flex;
 }
 
@@ -172,12 +173,14 @@ code {
 /*NOTES */
 #notes-page-container {
   background-image: url('../public/corkboard.jpg');
+  width: 100%;
   min-height: 100vh;
   max-height: 300vh;
 }
 
 .notes-form-container {
   position: relative;
+  width: 100%;
   min-height: 100vh;
   background-image: url('../public/corkboard.jpg');
 }
@@ -186,6 +189,7 @@ code {
   justify-content: center;
   display: flex;
   flex-wrap: wrap;
+  padding-block-start: 2rem;
   width: 100%;
 }
 
@@ -217,10 +221,9 @@ code {
 
 .selected-note {
   position: fixed;
-  top: 8rem;
-  left: 0;
-  right: 0;
-  width: 80%;
+  top: 7rem;
+  left: 2rem;
+  right: 2rem;
   max-height: 70%;
   z-index: 9;
   overflow-y:scroll;
@@ -233,8 +236,8 @@ code {
 
 .note-close {
   position:fixed;
-  top: 5.8rem;
-  right:10%;
+  top:5rem;
+  right: 2rem;
   padding: 0.2rem;
   background-color: white;
 }
