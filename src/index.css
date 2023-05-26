@@ -210,6 +210,7 @@ code {
 }
 
 .note-header-list {
+  margin: 1rem auto;
   font-family: 'kalam-regular';
 }
 
@@ -252,10 +253,6 @@ code {
   }
 }
 
-.note-footer {
-  display: flex;
-  margin-block-start: 1rem;
-}
 
 .note-pencil{
   cursor: pointer;
@@ -354,11 +351,11 @@ code {
     min-height: 100vh;
 }
 
-.single-note-footer {
+.note-footer {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-block: 0.675rem;
+  margin-block: 0.8rem;
 }
 
 .edit-link {
