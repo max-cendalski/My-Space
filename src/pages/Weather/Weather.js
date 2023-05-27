@@ -1,5 +1,4 @@
 import Navbar from "../../components/Navbar/Navbar";
-import GoBack from "../../components/GoBack/GoBack";
 import LocationSearch from "../../components/PlaceSearch/PlaceSearch";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import {
@@ -201,95 +200,96 @@ const Weather = () => {
   };
 
   return (
-    <article>
+    <>
       <Navbar />
       <article id="weather-page-container">
-        <GoBack />
         <LocationSearch
           address={address}
           handleChange={handleChange}
           handleSelect={handleSelect}
         />
-      </article>
-      {isLoading && (
-        <p className="loading-notification">Loading data from database ...</p>
-      )}
 
-      <article id="locations-fromDB-container">
-        {!isLoading &&
-          locationsFromDB.map((location, index) => (
-            <section
-              className={
-                location.extend === true ? "detail-location" : "single-location"
-              }
-              id={location.id}
-              key={location.id}
-            >
-              <p className="location-header">
-                {location.city} - {location.temp}&deg;F
-              </p>
-              <button
-                className="down-arrow-button"
-                onClick={() => handleDBLocationArrowClick(location)}
+        {isLoading && (
+          <p className="loading-notification">Loading data from database ...</p>
+        )}
+
+        <article id="locations-fromDB-container">
+          {!isLoading &&
+            locationsFromDB.map((location, index) => (
+              <section
+                className={
+                  location.extend === true
+                    ? "detail-location"
+                    : "single-location"
+                }
+                id={location.id}
+                key={location.id}
               >
-                {location.extend === true ? (
-                  <i className="fa-solid fa-angle-up fa-xl"></i>
-                ) : (
-                  <i className="fa-solid fa-angle-down fa-xl"></i>
-                )}
-              </button>
-              <section className="detail-location-data">
-                <p>Feels like {location.tempFeelsLike}&deg;F</p>
-                <p>
-                  Clouds: <em>{location.cloudsDescription}</em>
+                <p className="location-header">
+                  {location.city} - {location.temp}&deg;F
                 </p>
-                <p>Sunrise: {location.sunrise}</p>
-                <p>Sunset: {location.sunset}</p>
-                <p>UV index: {location.uvi}</p>
-                <p>Humidity: {location.humidity} %</p>
-                <p>Pressure: {location.pressure} hPa</p>
-                <p>Wind Speed: {location.windSpeed} m/s</p>
                 <button
-                  className="delete-button"
-                  onClick={() => handleDeleteLocation(location)}
+                  className="down-arrow-button"
+                  onClick={() => handleDBLocationArrowClick(location)}
                 >
-                  Delete
+                  {location.extend === true ? (
+                    <i className="fa-solid fa-angle-up fa-xl"></i>
+                  ) : (
+                    <i className="fa-solid fa-angle-down fa-xl"></i>
+                  )}
+                </button>
+                <section className="detail-location-data">
+                  <p>Feels like {location.tempFeelsLike}&deg;F</p>
+                  <p>
+                    Clouds: <em>{location.cloudsDescription}</em>
+                  </p>
+                  <p>Sunrise: {location.sunrise}</p>
+                  <p>Sunset: {location.sunset}</p>
+                  <p>UV index: {location.uvi}</p>
+                  <p>Humidity: {location.humidity} %</p>
+                  <p>Pressure: {location.pressure} hPa</p>
+                  <p>Wind Speed: {location.windSpeed} m/s</p>
+                  <button
+                    className="delete-button"
+                    onClick={() => handleDeleteLocation(location)}
+                  >
+                    Delete
+                  </button>
+                </section>
+                <button
+                  className="add-location-to-homepage"
+                  onClick={() => handleAddLocationToHomepage(location)}
+                >
+                  Add Location to Homepage
                 </button>
               </section>
-              <button
-                className="add-location-to-homepage"
-                onClick={() => handleAddLocationToHomepage(location)}
-              >
-                Add Location to Homepage
-              </button>
-            </section>
-          ))}
-      </article>
+            ))}
+          <article>
+            {searchedLocations &&
+              searchedLocations.map((location, index) => (
+                <section
+                  className="searched-locations"
+                  onClick={() => handleAddLocationToDB(location)}
+                  key={location.city}
+                >
+                  <section className="temperature-section">
+                    {location.city} : {location.temp}&deg;F
+                  </section>
+                  <button className="add-location-button">
+                    <i className="fa-solid fa-plus fa-2xl"></i>
+                  </button>
+                </section>
+              ))}
+          </article>
+        </article>
 
-      <article>
-        {searchedLocations &&
-          searchedLocations.map((location, index) => (
-            <section
-              className="searched-locations"
-              onClick={() => handleAddLocationToDB(location)}
-              key={location.city}
-            >
-              <section className="temperature-section">
-                {location.city} : {location.temp}&deg;F
-              </section>
-              <button className="add-location-button">
-                <i className="fa-solid fa-plus fa-2xl"></i>
-              </button>
-            </section>
-          ))}
+        <article className={modal}>
+          <h3 className="modal-info">
+            You already have this location in your database!
+          </h3>
+        </article>
       </article>
-
-      <article className={modal}>
-        <h3 className="modal-info">
-          You already have this location in your database!
-        </h3>
-      </article>
-    </article>
+    </>
   );
 };
 

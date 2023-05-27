@@ -1,17 +1,15 @@
+import React from 'react';
 import Navbar from '../../components/Navbar/Navbar';
-import GoBack from '../../components/GoBack/GoBack';
+import CalendarComponent from '../../components/Calendar/fullcalendar';
 
-export const Calendar = () => {
 
+const CalendarHomePage = () => {
   return (
-    <article id="calendar-container">
+    <>
       <Navbar />
-      <article className='calendar-header-container'>
-        <GoBack />
-        <h1>Tasks</h1>
-      </article>
-    </article>
+      <CalendarComponent />
+    </>
   );
-}
+};
 
-export default Calendar;
+export default CalendarHomePage;

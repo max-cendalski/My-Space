@@ -1,5 +1,4 @@
 import Navbar from "../../components/Navbar/Navbar";
-import GoBack from "../../components/GoBack/GoBack";
 import {
   getDocs,
   getDoc,
@@ -116,10 +115,9 @@ const Ideas = () => {
   };
 
   return (
-    <article>
+    <>
       <Navbar />
       <article id="ideas-page-container">
-        <GoBack />
         <h1 id="ideas-header">Three ideas to think about</h1>
         {generateIdeaButtonStatus && (
           <button
@@ -144,7 +142,7 @@ const Ideas = () => {
             </section>
           ))}
       </article>
-    </article>
+    </>
   );
 };
 

@@ -88,7 +88,6 @@ const Home = () => {
   const handleIdeaHomepageArrowButton = () => {
     idea.extend = !idea.extend;
     setIdea(idea);
-
     const updateIdea = async () => {
       try {
         const extendRef = doc(
@@ -105,6 +104,7 @@ const Home = () => {
         console.error("SOMETHING WENT WRONG:", err);
       }
     };
+
     updateIdea();
   };
 
@@ -141,7 +141,7 @@ const Home = () => {
               <i className="fa-solid fa-angle-down fa-2xl"></i>
             )}
           </button>
-          <q>{idea.text}</q>
+          <q className="idea-homepage-quote">{idea.text}</q>
         </section>
       )}
       <NavLink className="feature-button" to="/notes">
