@@ -164,19 +164,3 @@ const Home = () => {
 };
 
 export default Home;
-
-/*      {idea && (
-        <section className="idea-homepage-visible">
-          <button
-            className="down-arrow-button"
-            onClick={() => handleIdeaHomepageArrowButton(idea)}
-          >
-            {idea.extend === true ? (
-              <i className="fa-solid fa-angle-up fa-2xl"></i>
-            ) : (
-              <i className="fa-solid fa-angle-down fa-2xl"></i>
-            )}
-          </button>
-          <q>{idea.text}</q>
-        </section>
-      )} */
