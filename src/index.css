@@ -438,7 +438,7 @@ code {
 .idea-homepage-visible {
   display: flex;
   flex-direction: column;
-  margin: 0.5rem auto;
+  margin: 0 auto;
   width: 90%;
   color: var(--red);
   font-style: italic;
