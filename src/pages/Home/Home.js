@@ -46,6 +46,7 @@ const Home = () => {
                 city: docSnap.data().city,
                 temp: data.current.temp,
                 clouds: data.current.weather[0].description,
+                img: data.current.weather[0].icon
               });
             });
         } else {
@@ -121,6 +122,9 @@ const Home = () => {
             <h4>{homepageWeather.city}</h4>
             <h2>{homepageWeather.temp}&deg;</h2>
             <p>{homepageWeather.clouds}</p>
+            <img
+          src={`https://openweathermap.org/img/wn/${homepageWeather.img}@2x.png`}
+        ></img>
           </section>
         }
       </article>
