@@ -123,7 +123,7 @@ const Home = () => {
             <h2>{homepageWeather.temp}&deg;</h2>
             <p>{homepageWeather.clouds}</p>
             <img
-          src={`https://openweathermap.org/img/wn/${homepageWeather.img}@2x.png`}
+          src={`https://openweathermap.org/img/wn/${homepageWeather.img}@2x.png`} alt='weather icon'
         ></img>
           </section>
         }
