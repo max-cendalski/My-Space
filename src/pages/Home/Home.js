@@ -45,7 +45,7 @@ const Home = () => {
               setHomepageWeather({
                 city: docSnap.data().city,
                 temp: data.current.temp,
-                clouds: data.current.weather[0].description,
+                description: data.current.weather[0].description,
                 img: data.current.weather[0].icon
               });
             });
@@ -116,17 +116,17 @@ const Home = () => {
        
         {homepageWeather &&
           <section className="weather-homepage">
-            <h4>{homepageWeather.city}</h4>
-            <h2>{homepageWeather.temp}&deg;</h2>
-            <p>{homepageWeather.clouds}</p>
-            <img
-          src={`https://openweathermap.org/img/wn/${homepageWeather.img}@2x.png`} alt='weather icon'
+            <p>{homepageWeather.city}</p>
+            <p>{homepageWeather.temp}&deg;</p>
+            <p>{homepageWeather.description}</p>
+            <img className="weather-image"
+          src={`https://openweathermap.org/img/wn/${homepageWeather.img}@4x.png`} alt='weather icon'
         ></img>
           </section>
         }
         <section className="time-homepage">
-        <h2>{currentTime}</h2>
-        <h3>{currentDay}</h3>
+        <p>{currentDay}</p>
+        <p>{currentTime}</p>
       </section>
       </article>
 

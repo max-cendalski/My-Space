@@ -123,23 +123,48 @@ code {
 
 
 /*HOMEPAGE TIME-LOCATION CONTAINER*/
+
 #time-location-homepage-container {
   display: flex;
   width: 90%;
-  margin: 0 auto;
+  margin: auto;
+}
+
+.weather-homepage {
+  width: 50%;
+  gap: 0.4rem;
+  display: flex;
+  flex-direction: column;
+}
+.weather-homepage p:nth-child(1),
+.weather-homepage p:nth-child(2),
+.weather-homepage p:nth-child(3) {
+  margin-block: 0;
+}
+
+.weather-homepage p:nth-child(2) {
+  font-size: 1.5rem;
+}
+
+.weather-image {
+  width: 7rem;
+  height: 7rem;
 }
 
 .time-homepage {
   width: 50%;
   display: flex;
   flex-direction: column;
+  gap: 0.4rem;
 }
 
+.time-homepage p:nth-child(1) {
+  margin-block: 0;
+}
 
-.weather-homepage {
-  width: 50%;
-  display: flex;
-  flex-direction: column;
+.time-homepage p:nth-child(2) {
+  margin-block-start:0;
+  font-size: 1.5rem;
 }
 
 
