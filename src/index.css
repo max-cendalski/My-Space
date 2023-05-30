@@ -158,12 +158,12 @@ code {
   gap: 0.4rem;
 }
 
-.time-homepage p:nth-child(1) {
+.time-homepage p:nth-child(1),
+.time-homepage p:nth-child(2) {
   margin-block: 0;
 }
 
 .time-homepage p:nth-child(2) {
-  margin-block-start:0;
   font-size: 1.5rem;
 }
 
