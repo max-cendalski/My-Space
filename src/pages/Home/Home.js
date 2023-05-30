@@ -112,13 +112,10 @@ const Home = () => {
   return (
     <article id="home-container">
       <Navbar />
-      <article id="time-location-container">
-        <section className="time-container">
-          <h4>{currentDay}</h4>
-          <h2>{currentTime}</h2>
-        </section>
+      <article id="time-location-homepage-container">
+       
         {homepageWeather &&
-          <section className="location-homepage-container">
+          <section className="weather-homepage">
             <h4>{homepageWeather.city}</h4>
             <h2>{homepageWeather.temp}&deg;</h2>
             <p>{homepageWeather.clouds}</p>
@@ -127,6 +124,10 @@ const Home = () => {
         ></img>
           </section>
         }
+        <section className="time-homepage">
+        <h2>{currentTime}</h2>
+        <h3>{currentDay}</h3>
+      </section>
       </article>
 
       {idea && (
