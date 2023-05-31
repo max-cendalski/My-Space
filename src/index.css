@@ -61,7 +61,7 @@ code {
 #home-container {
   display: flex;
   flex-direction: column;
-  gap: calc(2rem);
+  gap: 1.5rem
 }
 
 #signin-page-container {
@@ -131,10 +131,11 @@ code {
 }
 
 .weather-homepage {
-  width: 50%;
+  width: 60%;
   gap: 0.4rem;
   display: flex;
   flex-direction: column;
+   align-items: flex-end;
 }
 .weather-homepage p:nth-child(1),
 .weather-homepage p:nth-child(2),
@@ -152,12 +153,12 @@ code {
 }
 
 .time-homepage {
-  width: 50%;
+  width: 40%;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 0.4rem;
 }
+
 
 .time-homepage p:nth-child(1),
 .time-homepage p:nth-child(2) {

@@ -119,26 +119,24 @@ const Home = () => {
     <article id="home-container">
       <Navbar />
       <article id="time-location-homepage-container">
-       
-        {homepageWeather &&
-          <section className="weather-homepage">
-            <p>{homepageWeather.city}</p>
-            <p>{homepageWeather.temp}&deg;</p>
-            <p>{homepageWeather.description}</p>
-            <img className="weather-image"
-          src={`https://openweathermap.org/img/wn/${homepageWeather.img}@4x.png`} alt='weather icon'
-        ></img>
-          </section>
-        }
         <section className="time-homepage">
         <p>{currentDay}</p>
      
         <Clock value={value}
-        size={120}
+        size={130}
         />
       
-        
       </section>
+      {homepageWeather &&
+        <section className="weather-homepage">
+          <p>{homepageWeather.city}</p>
+          <p>{homepageWeather.temp}&deg;</p>
+          <p>{homepageWeather.description}</p>
+          <img className="weather-image"
+        src={`https://openweathermap.org/img/wn/${homepageWeather.img}@4x.png`} alt='weather icon'
+      ></img>
+        </section>
+      }
       </article>
 
       {idea && (
