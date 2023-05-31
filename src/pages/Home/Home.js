@@ -134,7 +134,7 @@ const Home = () => {
         <p>{currentDay}</p>
      
         <Clock value={value}
-        minuteHandLength={80}
+        size={120}
         />
       
         
