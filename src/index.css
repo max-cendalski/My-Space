@@ -156,19 +156,13 @@ code {
   width: 40%;
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 1rem;
 }
 
 
-.time-homepage p:nth-child(1),
-.time-homepage p:nth-child(2) {
+.time-homepage p:nth-child(1){
   margin-block: 0;
 }
-
-.time-homepage p:nth-child(2) {
-  font-size: 1.5rem;
-}
-
 
 
 

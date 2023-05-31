@@ -19,9 +19,11 @@ const Home = () => {
 
   useEffect(() => {
     const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
-    //setCurrentDay(format(new Date(), "E, MMMM dd"));
+    setCurrentDay(format(new Date(), "E, MMMM dd"));
     //setCurrentTime(format(new Date(), "pp"));
+    const interval = setInterval(() => setValue(new Date()), 1000);
 
+  
 
     
 
@@ -84,11 +86,10 @@ const Home = () => {
     if (user.uid) {
       fetchIdea();
     }
-    const interval = setInterval(() => setValue(new Date()), 1000);
-
-     return () => {
+    return () => {
       clearInterval(interval);
     };
+  
     // eslint-disable-next-line
   }, []);
 
@@ -123,6 +124,7 @@ const Home = () => {
         <p>{currentDay}</p>
      
         <Clock value={value}
+        renderNumbers={true}
         size={130}
         />
       
