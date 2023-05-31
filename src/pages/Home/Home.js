@@ -5,6 +5,8 @@ import { getDoc, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import Navbar from "../../components/Navbar/Navbar";
 import { format } from "date-fns";
+import Clock from 'react-clock'
+import 'react-clock/dist/Clock.css';
 
 const Home = () => {
   const [idea, setIdea] = useState(null);
@@ -12,15 +14,16 @@ const Home = () => {
   const [currentTime, setCurrentTime] = useState("");
   const [currentDay, setCurrentDay] = useState("");
   const [homepageWeather, setHomepageWeather] = useState(null);
+  
+  const [value, setValue] = useState(new Date());
 
   useEffect(() => {
     const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
-    setCurrentDay(format(new Date(), "E, MMMM dd"));
-    setCurrentTime(format(new Date(), "pp"));
+    //setCurrentDay(format(new Date(), "E, MMMM dd"));
+    //setCurrentTime(format(new Date(), "pp"));
 
-    const timeInterval = setInterval(() => {
-      setCurrentTime(format(new Date(), "pp"));
-    }, 1000);
+
+    
 
     (async () => {
       try {
@@ -55,6 +58,7 @@ const Home = () => {
       } catch (err) {
         console.log("SOMETHING WENT WRONG", err);
       }
+     
     })();
 
     const fetchIdea = async () => {
@@ -80,8 +84,10 @@ const Home = () => {
     if (user.uid) {
       fetchIdea();
     }
-    return () => {
-      clearInterval(timeInterval);
+    const interval = setInterval(() => setValue(new Date()), 1000);
+
+     return () => {
+      clearInterval(interval);
     };
     // eslint-disable-next-line
   }, []);
@@ -126,7 +132,12 @@ const Home = () => {
         }
         <section className="time-homepage">
         <p>{currentDay}</p>
-        <p>{currentTime}</p>
+     
+        <Clock value={value}
+        minuteHandLength={80}
+        />
+      
+        
       </section>
       </article>
 
