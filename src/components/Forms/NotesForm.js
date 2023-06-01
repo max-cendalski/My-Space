@@ -1,5 +1,5 @@
 
-const NotesForm = ({formData, handleChange,handleCancel,handleSubmit,canSave}) => {
+const NotesForm = ({ formData, handleChange, handleCancel, handleSubmit, canSave }) => {
 
 
   return (
@@ -20,13 +20,13 @@ const NotesForm = ({formData, handleChange,handleCancel,handleSubmit,canSave}) =
           <label className="label-standard" htmlFor="text">
             Text
           </label>
-          <textarea
-            type="textarea"
-            name="text"
-            value={formData.text}
-            onChange={handleChange}
-          />
         </p>
+        <textarea
+          type="textarea"
+          name="text"
+          value={formData.text}
+          onChange={handleChange}
+        />
       </form>
       <footer className="notes-form-footer">
         <button className="note-button note-cancel-button" onClick={handleCancel}>
