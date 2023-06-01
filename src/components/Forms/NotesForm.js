@@ -29,11 +29,11 @@ const NotesForm = ({ formData, handleChange, handleCancel, handleSubmit, canSave
         />
       </form>
       <footer className="notes-form-footer">
-        <button className="note-button note-cancel-button" onClick={handleCancel}>
+        <button className="note-form-button note-cancel-button" onClick={handleCancel}>
           Cancel
         </button>
         <button
-          className="note-button note-submit-button"
+          className="note-form-button note-submit-button"
           onClick={handleSubmit}
         >
           Submit
