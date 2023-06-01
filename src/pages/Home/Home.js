@@ -11,7 +11,6 @@ import 'react-clock/dist/Clock.css';
 const Home = () => {
   const [idea, setIdea] = useState(null);
   const { user } = UserAuth();
-  const [currentTime, setCurrentTime] = useState("");
   const [currentDay, setCurrentDay] = useState("");
   const [homepageWeather, setHomepageWeather] = useState(null);
   
@@ -20,7 +19,6 @@ const Home = () => {
   useEffect(() => {
     const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
     setCurrentDay(format(new Date(), "E, MMMM dd"));
-    //setCurrentTime(format(new Date(), "pp"));
     const interval = setInterval(() => setValue(new Date()), 1000);
 
   
