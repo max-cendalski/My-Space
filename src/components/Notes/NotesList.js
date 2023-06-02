@@ -41,8 +41,8 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
                 {note.text.substr(0, 20) + "..."}
               </p>
             </section>
-              {selectedNote && note.id === selectedNote.id && (
-                <article className="selected-note">
+              {selectedNote && note.id === selectedNote.id ? (
+                <dialog open>
                   <img
                     className="note-close"
                     src={Close}
@@ -67,12 +67,12 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
                       onClick={() => deleteNote(note.id)}
                     />
                   </footer>
-                </article>
-              )}
+                </dialog>
+              ) : <dialog></dialog>}
           </section>
         ))}
       </article>
-      <article className={`${selectedNote ? "overlay" : "hidden"}`}></article>
+     <article className={`${selectedNote ? "overlay" : "hidden"}`}></article>
     </>
   );
 };

@@ -212,7 +212,7 @@ code {
   white-space: pre-line;
 }
 
-.selected-note {
+/* .selected-note {
   position: fixed;
   top: 7rem;
   left: 2rem;
@@ -225,12 +225,31 @@ code {
   box-shadow: 10px 10px 10px 5px rgb(0, 0, 0, 0.7);
   font-size: 2rem;
   cursor: auto;
+} */
+dialog {
+  opacity: 0;
+  scale: 0;
+  display: block;
+  transition: all 0.25s;
 }
+
+dialog[open] {
+  position: fixed;
+  border: none;
+  top: 7rem;
+  opacity: 1;
+  scale:1;
+  width: 80%;
+  z-index: 11;
+  backdrop-filter: blur(2px);
+  max-height: 85%;
+}
+
 
 .note-close {
   position: fixed;
-  top: 5rem;
-  right: 2rem;
+  top:-2rem;
+right: 0;
   padding: 0.2rem;
   background-color: white;
 }
@@ -270,8 +289,9 @@ code {
 }
 
 .field {
-  margin-block-end: 0.3rem;
+  margin-block-end: 0.2rem;
 }
+
 
 .note-form input,
 textarea {
@@ -385,8 +405,6 @@ textarea {
   width: 100%;
   height: 100%;
   top: 0;
-  left: 0;
-  right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.2);
   z-index: 2;
