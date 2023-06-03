@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
 import PinL from "../../icons/PinL.png";
 import TrashL from "../../icons/trashL.png";
@@ -6,7 +6,15 @@ import Close from "../../icons/closeS.png";
 import Pencil from "../../icons/pencilS.png";
 
 const NotesList = ({ isVisible, notes, deleteNote }) => {
-  const [selectedNote, setSelectedNote] = useState(null);
+  const [selectedNote, setSelectedNote] = useState(null); 
+  const [searchedNotes, setSearchedNotes] = useState(notes)
+
+
+  useEffect(()=> {
+    setSearchedNotes(notes)
+    console.log('notes',notes)
+  },[notes])
+
   const handleCloseButton = (e) => {
     e.stopPropagation();
     setSelectedNote(null);
@@ -14,15 +22,36 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
   if (!isVisible) {
     return null;
   }
+
   const handleSelected = (e) => {
     e.stopPropagation();
     setSelectedNote(null);
   };
 
+
+    const handleNoteSearch = (e) => {
+      const searchQuery = e.target.value.toLowerCase();
+
+      setSearchedNotes(
+        notes.filter(note =>
+          note.title.toLowerCase().includes(searchQuery)
+        )
+      );
+    };
+  
+
   return (
     <>
+      <section className="notes-search-section">
+        <input
+        type="search" 
+        placeholder="search notes"
+        className="notes-search-input"
+        onChange={handleNoteSearch}
+        ></input>
+      </section>
       <article className="notes-list-container">
-        {notes.map((note) => (
+        {searchedNotes.map((note) => (
           <section
             className={`single-note-container ${note.toBeRemoved ? `note-to-be-removed` : ""
               } `}
@@ -48,7 +77,7 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
                     <dialog open>
                     
                     <img
-                      className="note-close"
+                      className="note-close-button"
                       src={Close}
                       alt="x"
                       onClick={handleCloseButton}
