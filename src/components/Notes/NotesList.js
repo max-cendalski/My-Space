@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import PinL from "../../icons/PinL.png";
 import TrashL from "../../icons/trashL.png";
@@ -6,13 +6,12 @@ import Close from "../../icons/closeS.png";
 import Pencil from "../../icons/pencilS.png";
 
 const NotesList = ({ isVisible, notes, deleteNote }) => {
-  const [selectedNote, setSelectedNote] = useState(null); 
+  const [selectedNote, setSelectedNote] = useState(null);
   const [searchedNotes, setSearchedNotes] = useState(notes)
 
-
-  useEffect(()=> {
+  useEffect(() => {
     setSearchedNotes(notes)
-  },[notes])
+  }, [notes])
 
   const handleCloseButton = (e) => {
     e.stopPropagation();
@@ -27,29 +26,27 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
     setSelectedNote(null);
   };
 
+  const handleNoteSearch = (e) => {
+    const searchQuery = e.target.value.toLowerCase();
 
-    const handleNoteSearch = (e) => {
-      const searchQuery = e.target.value.toLowerCase();
-
-      setSearchedNotes(
-        notes.filter(note =>
-          note.title.toLowerCase().includes(searchQuery)
-        )
-      );
-    };
-  
+    setSearchedNotes(
+      notes.filter(note =>
+        note.title.toLowerCase().includes(searchQuery)
+      )
+    );
+  };
 
   return (
     <>
-      <section className="notes-search-section">
-        <input
-        type="search" 
-        placeholder="search notes"
-        className="notes-search-input"
-        onChange={handleNoteSearch}
-        ></input>
-      </section>
       <article className="notes-list-container">
+        <section className="notes-search-section">
+          <input
+            type="search"
+            placeholder="search notes"
+            className="notes-search-input"
+            onChange={handleNoteSearch}
+          ></input>
+        </section>
         {searchedNotes.map((note) => (
           <section
             className={`single-note-container ${note.toBeRemoved ? `note-to-be-removed` : ""
@@ -71,37 +68,34 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
             <article>
               <article id="notes-dialog-container">
                 {selectedNote && note.id === selectedNote.id ? (
-
-                
-                    <dialog open>
-                    
+                  <dialog open>
                     <img
                       className="note-close-button"
                       src={Close}
                       alt="x"
                       onClick={handleCloseButton}
                     />
-                      <h4 className="note-header-list">{note.title}</h4>
-                      <p className="notes-text-small">{note.text}</p>
-                      <p className="date-paragraph">Created: {note.date}</p>
-                      <footer onClick={handleSelected} className="note-footer">
-                        <Link className="edit-link" to={`/notes/edit/${note.id}`}>
-                          <img
-                            className="note-pencil"
-                            src={Pencil}
-                            alt="pencil-icon"
-                          />
-                        </Link>
+                    <h4 className="note-header-list">{note.title}</h4>
+                    <p className="notes-text-small">{note.text}</p>
+                    <p className="date-paragraph">Created: {note.date}</p>
+                    <footer onClick={handleSelected} className="note-footer">
+                      <Link className="edit-link" to={`/notes/edit/${note.id}`}>
                         <img
-                          className="note-trash"
-                          src={TrashL}
-                          alt="trash-icon"
-                          onClick={() => deleteNote(note.id)}
+                          className="note-pencil"
+                          src={Pencil}
+                          alt="pencil-icon"
                         />
-                      </footer>
+                      </Link>
+                      <img
+                        className="note-trash"
+                        src={TrashL}
+                        alt="trash-icon"
+                        onClick={() => deleteNote(note.id)}
+                      />
+                    </footer>
 
-                    </dialog>
-                 
+                  </dialog>
+
                 ) : <dialog></dialog>}
 
 
@@ -111,7 +105,7 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
           </section>
         ))}
       </article>
-     <article  onClick={handleCloseButton} className={`${selectedNote ? "overlay" : "hidden"}`}></article>
+      <article onClick={handleCloseButton} className={`${selectedNote ? "overlay" : "hidden"}`}></article>
     </>
   );
 };
