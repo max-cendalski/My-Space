@@ -178,7 +178,7 @@ code {
 .notes-list-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
-  gap: 1rem; 
+  gap: 1.2rem; 
   margin: 0 auto;
   max-width: 90%;
   justify-content: center;
@@ -191,7 +191,7 @@ code {
 
 .notes-search-input {
   font-size: 1rem;
-  width: 66%;
+  width: 65%;
 }
 
 .notes-search-input:focus {
@@ -239,7 +239,7 @@ dialog {
 dialog[open] {
   position: fixed;
   border: none;
-  top: 6rem;
+  top: 7rem;
   opacity: 1;
   scale:1;
   width: 80%;
