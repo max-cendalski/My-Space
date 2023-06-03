@@ -165,22 +165,19 @@ code {
 /*NOTES */
 #notes-page-container {
   background-image: url('../public/corkboard.jpg');
-  width: 100%;
   min-height: 100vh;
   max-height: 300vh;
 }
+
 .notes-form-container {
+  background-image: url('../public/corkboard.jpg');
   position: relative;
-  width: 100%;
   min-height: 100vh;
 }
 
 .notes-list-container {
   display: grid;
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(25%, 1fr)
-  );
+  grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
   gap: 1rem; 
   margin: 0 auto;
   max-width: 90%;
@@ -194,8 +191,9 @@ code {
 
 .notes-search-input {
   font-size: 1rem;
-  width: 65%;
+  width: 66%;
 }
+
 .notes-search-input:focus {
   border:2px solid var(--darkGreen);
   outline: none;
@@ -212,59 +210,6 @@ code {
   box-shadow: 3px 4px 4px 4px rgb(0, 0, 0, 0.4);
   border-radius: 2px;
 }
-
-/* #notes-page-container {
-  background-image: url('../public/corkboard.jpg');
-  width: 100%;
-  min-height: 100vh;
-  max-height: 300vh;
-}
-
-.notes-form-container {
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-  background-image: url('../public/corkboard.jpg');
-}
-
-.notes-list-container {
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  width: 100%;
-  padding: 7%;
-  border: 1px solid salmon;
-}
-
-.notes-search-section {
-  width: 100%;
-  margin-block: 2rem;
-}
-
-.notes-search-input {
-  font-size: 1rem;
-  width: 60%;
-}
-
-.notes-search-input:focus {
-  border:2px solid var(--darkGreen);
-  outline: none;
-  border-radius: 2px;
-}
-
-.single-note-container {
-  width: 26%;
-  height: 9rem;
-  margin: 0.5rem;
-  margin-left: 0;
-  background-color: white;
-  cursor: pointer;
-  overflow: hidden;
-  padding-inline-start: 0.3rem;
-  padding-inline-end: 0.3rem;
-  box-shadow: 3px 4px 4px 4px rgb(0, 0, 0, 0.4);
-  border-radius: 2px;
-} */
 
 .notes-pin {
   margin-inline-start: 45%;
