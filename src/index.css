@@ -169,6 +169,56 @@ code {
   min-height: 100vh;
   max-height: 300vh;
 }
+.notes-form-container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.notes-list-container {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(25%, 1fr)
+  );
+  gap: 1rem; 
+  margin: 0 auto;
+  max-width: 90%;
+  justify-content: center;
+}
+
+.notes-search-section {
+  margin-block:1.5rem;
+  grid-column: 1/-1
+}
+
+.notes-search-input {
+  font-size: 1rem;
+  width: 65%;
+}
+.notes-search-input:focus {
+  border:2px solid var(--darkGreen);
+  outline: none;
+  border-radius: 2px;
+}
+
+.single-note-container {
+  height: 9rem;
+  background-color: white;
+  cursor: pointer;
+  overflow: hidden;
+  padding-inline-start: 0.3rem;
+  padding-inline-end: 0.3rem;
+  box-shadow: 3px 4px 4px 4px rgb(0, 0, 0, 0.4);
+  border-radius: 2px;
+}
+
+/* #notes-page-container {
+  background-image: url('../public/corkboard.jpg');
+  width: 100%;
+  min-height: 100vh;
+  max-height: 300vh;
+}
 
 .notes-form-container {
   position: relative;
@@ -179,16 +229,16 @@ code {
 
 .notes-list-container {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
   width: 100%;
+  padding: 7%;
+  border: 1px solid salmon;
 }
 
 .notes-search-section {
-  justify-content: center;
   width: 100%;
   margin-block: 2rem;
-  margin-inline-start: 2rem;
 }
 
 .notes-search-input {
@@ -203,9 +253,10 @@ code {
 }
 
 .single-note-container {
-  width: 25%;
+  width: 26%;
   height: 9rem;
   margin: 0.5rem;
+  margin-left: 0;
   background-color: white;
   cursor: pointer;
   overflow: hidden;
@@ -213,7 +264,7 @@ code {
   padding-inline-end: 0.3rem;
   box-shadow: 3px 4px 4px 4px rgb(0, 0, 0, 0.4);
   border-radius: 2px;
-}
+} */
 
 .notes-pin {
   margin-inline-start: 45%;
@@ -221,7 +272,7 @@ code {
 }
 
 .note-header-list {
-  margin-block: 1rem 0.5rem;
+  margin-block: 0.5rem 0.3rem;
   font-family: 'kalam-regular';
 }
 
@@ -262,7 +313,6 @@ dialog[open] {
   z-index: 9;
   right: 0;
   padding: 0.2rem;
-  background-color: white;
 }
 
 .note-to-be-removed {
@@ -900,6 +950,7 @@ textarea {
   font-size: 0.675rem;
   padding-block: 0.375rem;
   margin-inline-start: 0;
+  margin-block: 1rem;
   font-weight: 500;
 }
 
