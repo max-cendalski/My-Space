@@ -12,7 +12,6 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
 
   useEffect(()=> {
     setSearchedNotes(notes)
-    console.log('notes',notes)
   },[notes])
 
   const handleCloseButton = (e) => {
