@@ -195,6 +195,7 @@ code {
   padding-inline-start: 0.3rem;
   padding-inline-end: 0.3rem;
   box-shadow: 3px 4px 4px 4px rgb(0, 0, 0, 0.4);
+  border-radius: 2px;
 }
 
 .notes-pin {
@@ -202,7 +203,7 @@ code {
 }
 
 .note-header-list {
-  margin: 1rem auto;
+  margin-block: 1rem 0.5rem;
   font-family: 'kalam-regular';
 }
 
@@ -210,6 +211,7 @@ code {
   font-size: 1.1rem;
   font-family: 'kalam-regular';
   white-space: pre-line;
+  margin-block: 0;
 }
 
 /* .selected-note {
@@ -219,13 +221,14 @@ code {
   right: 2rem;
   max-height: 70%;
   z-index: 9;
-  overflow-y: scroll;
+  
   padding: 1rem;
   background-color: white;
   box-shadow: 10px 10px 10px 5px rgb(0, 0, 0, 0.7);
   font-size: 2rem;
   cursor: auto;
 } */
+
 dialog {
   opacity: 0;
   scale: 0;
@@ -236,20 +239,24 @@ dialog {
 dialog[open] {
   position: fixed;
   border: none;
-  top: 7rem;
+  top: 6rem;
   opacity: 1;
   scale:1;
   width: 80%;
-  z-index: 11;
-  backdrop-filter: blur(2px);
-  max-height: 85%;
+  overflow-y: auto;
+  z-index: 9;
+  padding: 1rem;
+  font-size: 2rem;
+  box-shadow: 10px 10px 10px 5px rgb(0, 0, 0, 0.7);
+  max-height: 80%;
+  border-radius: 2px;
 }
-
 
 .note-close {
   position: fixed;
-  top:-2rem;
-right: 0;
+  top: 0;
+  z-index: 9;
+  right: 0;
   padding: 0.2rem;
   background-color: white;
 }

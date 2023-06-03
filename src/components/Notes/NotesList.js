@@ -24,9 +24,8 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
       <article className="notes-list-container">
         {notes.map((note) => (
           <section
-            className={`single-note-container ${
-              note.toBeRemoved ? `note-to-be-removed` : ""
-            } `}
+            className={`single-note-container ${note.toBeRemoved ? `note-to-be-removed` : ""
+              } `}
             key={note.id}
             onClick={() => {
               setSelectedNote(note);
@@ -41,38 +40,50 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
                 {note.text.substr(0, 20) + "..."}
               </p>
             </section>
-              {selectedNote && note.id === selectedNote.id ? (
-                <dialog open>
-                  <img
-                    className="note-close"
-                    src={Close}
-                    alt="x"
-                    onClick={handleCloseButton}
-                  />
-                  <h4 className="note-header-list">{note.title}</h4>
-                  <p className="notes-text-small">{note.text}</p>
-                  <p className="date-paragraph">Created: {note.date}</p>
-                  <footer onClick={handleSelected} className="note-footer">
-                    <Link className="edit-link" to={`/notes/edit/${note.id}`}>
-                      <img
-                        className="note-pencil"
-                        src={Pencil}
-                        alt="pencil-icon"
-                      />
-                    </Link>
+            <article>
+              <article id="notes-dialog-container">
+                {selectedNote && note.id === selectedNote.id ? (
+
+                
+                    <dialog open>
+                    
                     <img
-                      className="note-trash"
-                      src={TrashL}
-                      alt="trash-icon"
-                      onClick={() => deleteNote(note.id)}
+                      className="note-close"
+                      src={Close}
+                      alt="x"
+                      onClick={handleCloseButton}
                     />
-                  </footer>
-                </dialog>
-              ) : <dialog></dialog>}
+                      <h4 className="note-header-list">{note.title}</h4>
+                      <p className="notes-text-small">{note.text}</p>
+                      <p className="date-paragraph">Created: {note.date}</p>
+                      <footer onClick={handleSelected} className="note-footer">
+                        <Link className="edit-link" to={`/notes/edit/${note.id}`}>
+                          <img
+                            className="note-pencil"
+                            src={Pencil}
+                            alt="pencil-icon"
+                          />
+                        </Link>
+                        <img
+                          className="note-trash"
+                          src={TrashL}
+                          alt="trash-icon"
+                          onClick={() => deleteNote(note.id)}
+                        />
+                      </footer>
+
+                    </dialog>
+                 
+                ) : <dialog></dialog>}
+
+
+              </article>
+
+            </article>
           </section>
         ))}
       </article>
-     <article className={`${selectedNote ? "overlay" : "hidden"}`}></article>
+     <article  onClick={handleCloseButton} className={`${selectedNote ? "overlay" : "hidden"}`}></article>
     </>
   );
 };
