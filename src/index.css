@@ -190,7 +190,7 @@ code {
 }
 
 .notes-search-input {
-  box-shadow: 10px 10px 10px 5px rgb(0, 0, 0, 0.4);
+  box-shadow: 3px 4px 4px 4px rgb(0, 0, 0, 0.4);
   border-radius: 2px;
   outline:none;
   font-size: 1.1rem;
@@ -904,6 +904,7 @@ textarea {
 
 
 .notes-add-button {
+  box-shadow: 3px 4px 4px 4px rgb(0, 0, 0, 0.4);
   position: fixed;
   bottom: 5%;
   right: 5%;

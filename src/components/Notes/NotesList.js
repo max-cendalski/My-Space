@@ -49,7 +49,7 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
         </section>
         {searchedNotes.map((note) => (
           <section
-            className={`single-note-container ${note.toBeRemoved ? `note-to-be-removed` : ""
+            className={`single-note-container ${note.toBeRemoved ? "note-to-be-removed" : ""
               } `}
             key={note.id}
             onClick={() => {
@@ -72,7 +72,7 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
                     <img
                       className="note-close-button"
                       src={Close}
-                      alt="x"
+                      alt="x-icon"
                       onClick={handleCloseButton}
                     />
                     <h4 className="note-header-list">{note.title}</h4>
@@ -95,12 +95,8 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
                     </footer>
 
                   </dialog>
-
                 ) : <dialog></dialog>}
-
-
               </article>
-
             </article>
           </section>
         ))}
@@ -108,6 +104,6 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
       <article onClick={handleCloseButton} className={`${selectedNote ? "overlay" : "hidden"}`}></article>
     </>
   );
-};
+}
 
 export default NotesList;
