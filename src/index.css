@@ -190,7 +190,10 @@ code {
 }
 
 .notes-search-input {
-  font-size: 1rem;
+  box-shadow: 10px 10px 10px 5px rgb(0, 0, 0, 0.4);
+  border-radius: 2px;
+  outline:none;
+  font-size: 1.1rem;
   width: 65%;
 }
 
