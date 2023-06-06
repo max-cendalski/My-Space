@@ -3,6 +3,9 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 
 
 const CalendarComponent = () => {
+  const handleDateClick = (arg) => { // bind with an arrow function
+    alert(arg.dateStr);
+  }
   return (
     <FullCalendar
       plugins={[dayGridPlugin]}
@@ -12,6 +15,7 @@ const CalendarComponent = () => {
         center: "title",
         right: "dayGridMonth",
       }}
+      dateClick={handleDateClick}
     />
   );
 };
