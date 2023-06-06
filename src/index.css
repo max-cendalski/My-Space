@@ -213,18 +213,31 @@ code {
   box-shadow: 3px 4px 4px 4px rgb(0, 0, 0, 0.4);
   border-radius: 2px;
 }
+.single-note-text-small {
+  font-size: 0.8rem;
+  font-family: 'kalam-regular';
+  white-space: pre-line;
+  margin-block: 0;
+}
+
+.single-note-header-list {
+  margin-block: 0.5rem 0.3rem;
+  font-family: 'kalam-regular';
+}
 
 .notes-pin {
   margin-inline-start: 45%;
   margin-block-start: 0.5rem;
 }
 
-.note-header-list {
+
+.dialog-note-header-list {
+  font-size: 1.8rem;
   margin-block: 0.5rem 0.3rem;
   font-family: 'kalam-regular';
 }
 
-.notes-text-small {
+.dialog-note-text-small {
   font-size: 1.1rem;
   font-family: 'kalam-regular';
   white-space: pre-line;

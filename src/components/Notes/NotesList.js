@@ -58,11 +58,11 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
           >
             <section>
               <img className="notes-pin" alt="pin" src={PinL} height="20px" />
-              <h4 className="note-header-list">
+              <h4 className="single-note-header-list">
                 {note.title.substr(0, 10) + "..."}
               </h4>
-              <p className="notes-text-small">
-                {note.text.substr(0, 20) + "..."}
+              <p className="single-note-text-small">
+                {note.text.substr(0, 30) + "..."}
               </p>
             </section>
             <article>
@@ -75,8 +75,8 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
                       alt="x-icon"
                       onClick={handleCloseButton}
                     />
-                    <h4 className="note-header-list">{note.title}</h4>
-                    <p className="notes-text-small">{note.text}</p>
+                    <h4 className="dialog-note-header-list">{note.title}</h4>
+                    <p className="dialog-note-text-small">{note.text}</p>
                     <p className="date-paragraph">Created: {note.date}</p>
                     <footer onClick={handleSelected} className="note-footer">
                       <Link className="edit-link" to={`/notes/edit/${note.id}`}>
