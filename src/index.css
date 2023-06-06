@@ -285,7 +285,6 @@ dialog[open] {
   }
 }
 
-
 .note-pencil {
   cursor: pointer;
   height: 2.1rem;
@@ -435,6 +434,26 @@ textarea {
 /* CALENDAR */
 
 #calendar-container {}
+
+.fc {
+  margin: 0.1rem;
+}
+
+.fc .fc-button-primary {
+  background-color: var(--darkGreen)
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* IDEAS */
 
