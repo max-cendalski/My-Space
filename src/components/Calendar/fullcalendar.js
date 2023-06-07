@@ -15,42 +15,44 @@ export default class CalendarComponent extends React.Component {
 
   render() {
     return (
-      <div className='demo-app'>
-        {this.renderSidebar()}
-        <div className='demo-app-main'>
-          <FullCalendar
-            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-            headerToolbar={{
-              left: 'prev,next today',
-              center: 'title',
-              right: 'dayGridMonth,timeGridDay'
-            }}
-            initialView='dayGridMonth'
-            editable={true}
-            selectable={true}
-            selectMirror={true}
-            dayMaxEvents={true}
-            weekends={this.state.weekendsVisible}
-            initialEvents={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
-            select={this.handleDateSelect}
-            eventContent={renderEventContent} // custom render function
-            eventClick={this.handleEventClick}
-            eventsSet={this.handleEvents} // called after events are initialized/added/changed/removed
+     
+        <article className='calendar-container'>
+          {this.renderSidebar()}
+          <div className='demo-app-main'>
+            <FullCalendar
+              plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+              headerToolbar={{
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridDay'
+              }}
+              initialView='dayGridMonth'
+              editable={true}
+              selectable={true}
+              selectMirror={true}
+              dayMaxEvents={true}
+              weekends={this.state.weekendsVisible}
+              initialEvents={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
+              select={this.handleDateSelect}
+              eventContent={renderEventContent} // custom render function
+              eventClick={this.handleEventClick}
+              eventsSet={this.handleEvents} // called after events are initialized/added/changed/removed
             /* you can update a remote database when these fire:
             eventAdd={function(){}}
             eventChange={function(){}}
             eventRemove={function(){}}
             */
-          />
-        </div>
-      </div>
+            />
+          </div>
+        </article>
+    
     )
   }
 
   renderSidebar() {
     return (
       <div className='demo-app-sidebar'>
-    
+
         <div className='demo-app-sidebar-section'>
           <label>
             <input
@@ -61,7 +63,7 @@ export default class CalendarComponent extends React.Component {
             toggle weekends
           </label>
         </div>
-   
+
       </div>
     )
   }
