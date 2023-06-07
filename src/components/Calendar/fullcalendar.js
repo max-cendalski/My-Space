@@ -23,7 +23,7 @@ export default class CalendarComponent extends React.Component {
             headerToolbar={{
               left: 'prev,next today',
               center: 'title',
-              right: 'dayGridMonth,timeGridWeek,timeGridDay'
+              right: 'dayGridMonth,timeGridDay'
             }}
             initialView='dayGridMonth'
             editable={true}
@@ -70,9 +70,7 @@ export default class CalendarComponent extends React.Component {
         </div>
         <div className='demo-app-sidebar-section'>
           <h2>All Events ({this.state.currentEvents.length})</h2>
-          <ul>
-            {this.state.currentEvents.map(renderSidebarEvent)}
-          </ul>
+          
         </div>
       </div>
     )
