@@ -1,5 +1,5 @@
 import React from 'react'
-import { formatDate } from '@fullcalendar/core'
+//import { formatDate } from '@fullcalendar/core'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
@@ -68,10 +68,7 @@ export default class CalendarComponent extends React.Component {
             toggle weekends
           </label>
         </div>
-        <div className='demo-app-sidebar-section'>
-          <h2>All Events ({this.state.currentEvents.length})</h2>
-          
-        </div>
+   
       </div>
     )
   }
@@ -122,11 +119,3 @@ function renderEventContent(eventInfo) {
   )
 }
 
-function renderSidebarEvent(event) {
-  return (
-    <li key={event.id}>
-      <b>{formatDate(event.start, {year: 'numeric', month: 'short', day: 'numeric'})}</b>
-      <i>{event.title}</i>
-    </li>
-  )
-}
