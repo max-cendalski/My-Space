@@ -47,7 +47,7 @@ const Home = () => {
             .then((data) => {
               setHomepageWeather({
                 city: docSnap.data().city,
-                temp: data.current.temp,
+                temp: Math.round(data.current.temp),
                 description: data.current.weather[0].description,
                 img: data.current.weather[0].icon
               });
