@@ -452,7 +452,14 @@ textarea {
   color:#4FE0B5;
 }
 
+.fc-direction-ltr .fc-toolbar > * > :not(:first-child) {
+  margin-left: 0.75em;
 
+}
+
+.fc-direction-ltr .fc-toolbar{
+  padding: 0.2rem;
+}
 
 
 
