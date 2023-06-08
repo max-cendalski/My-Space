@@ -8,6 +8,7 @@ import { INITIAL_EVENTS, createEventId } from './event-utils';
 function CalendarComponent() {
   const [weekendsVisible, setWeekendsVisible] = useState(true);
   const [currentEvents, setCurrentEvents] = useState([]);
+  const [newTask, setNewTask] = useState(null)
 
   const handleWeekendsToggle = () => {
     setWeekendsVisible(!weekendsVisible);
@@ -20,14 +21,21 @@ function CalendarComponent() {
     calendarApi.unselect(); // clear date selection
 
     if (title) {
-      calendarApi.addEvent({
+      const newEvent= {
         id: createEventId(),
         title,
         start: selectInfo.startStr,
         end: selectInfo.endStr,
         allDay: selectInfo.allDay
-      });
+      };
+      calendarApi.addEvent(newEvent)
+      addEventToDatabase(newEvent)
     }
+  }
+
+  const addEventToDatabase = (event )=> {
+    console.log('event',event)
+    setNewTask(event)
   }
 
   const handleEventClick = (clickInfo) => {
