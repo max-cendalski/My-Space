@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "../../firebase/Firebase";
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -33,8 +35,16 @@ function CalendarComponent() {
     }
   }
 
+
   const addEventToDatabase = (event )=> {
-    console.log('event',event)
+    const addNote = async () => {
+      try {
+        await addDoc(collection(db, "users", user.uid, "calendar"), event);
+      } catch (e) {
+        console.error("Error adding document:", e);
+      }
+    };
+    addNote();
     setNewTask(event)
   }
 
