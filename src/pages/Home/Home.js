@@ -74,10 +74,10 @@ const Home = () => {
         if (docSnap.exists()) {
           setIdea(docSnap.data());
         } else {
-          console.log("No such document!");
+          console.log("No idea added to homepage!");
         }
       } catch (err) {
-        console.error("SOMETHING WENT WRONG:", err);
+        console.error("Something went wrong:", err);
       }
     };
 

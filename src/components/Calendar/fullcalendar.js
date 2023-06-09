@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { addDoc,doc,collection, onSnapshot ,deleteDoc} from "firebase/firestore";
+import { addDoc,doc,collection, onSnapshot ,deleteDoc, updateDoc} from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -46,7 +46,7 @@ function CalendarComponent() {
     return () => {
       unsub();
     };
-    // eslint-disable-next-line
+  // eslint-disable-next-line
   }, []);
   
 
@@ -58,6 +58,7 @@ function CalendarComponent() {
   const handleWeekendsToggle = () => {
     setWeekendsVisible(!weekendsVisible);
   }
+
   const handleDateSelect = async (selectInfo) => {
     let title = prompt('Please enter a new title for your event');
     let calendarApi = selectInfo.view.calendar;
@@ -72,13 +73,12 @@ function CalendarComponent() {
         allDay: selectInfo.allDay
       };
       
-      const id =  addEventToDatabase(newEvent);
+      const id =  await addEventToDatabase(newEvent);
       newEvent.id = id;
       calendarApi.addEvent(newEvent);
     }
   }
   
-
   const addEventToDatabase = (event )=> {
     const addEvent = async () => {
       try {
@@ -101,6 +101,17 @@ function CalendarComponent() {
         }
       })()
       clickInfo.event.remove();
+    }
+  }
+  const handleEventDrop = async (info) => {
+    const event = info.event;
+    try {
+      await updateDoc(doc(db, "users", user.uid, "calendarEvents", event.id), {
+        start: event.start.toISOString(),
+        end: event.end?.toISOString()
+      });
+    } catch (e) {
+      console.error("Error updating document:", e);
     }
   }
 
@@ -131,6 +142,7 @@ function CalendarComponent() {
           dayMaxEvents={true}
           weekends={weekendsVisible}
           initialEvents={currentEvents} 
+          eventDrop={handleEventDrop}
           select={handleDateSelect}
           eventContent={renderEventContent} 
           eventClick={handleEventClick}
