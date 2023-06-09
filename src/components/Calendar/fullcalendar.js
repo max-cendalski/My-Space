@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { setDoc,doc,collection, onSnapshot ,deleteDoc} from "firebase/firestore";
+import { addDoc,doc,collection, onSnapshot ,deleteDoc} from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
-import { INITIAL_EVENTS, createEventId } from './event-utils';
+//import {  createEventId } from './event-utils';
 import { UserAuth } from "../../context/AuthContext";
 
 function CalendarComponent() {
@@ -58,32 +58,31 @@ function CalendarComponent() {
   const handleWeekendsToggle = () => {
     setWeekendsVisible(!weekendsVisible);
   }
-
-  const handleDateSelect = (selectInfo) => {
+  const handleDateSelect = async (selectInfo) => {
     let title = prompt('Please enter a new title for your event');
     let calendarApi = selectInfo.view.calendar;
-
+  
     calendarApi.unselect(); // clear date selection
-
+  
     if (title) {
-      const newEvent= {
-        id: createEventId(),
+      let newEvent = {
         title,
         start: selectInfo.startStr,
         end: selectInfo.endStr,
         allDay: selectInfo.allDay
       };
-      calendarApi.addEvent(newEvent)
-      addEventToDatabase(newEvent)
+      
+      const id =  addEventToDatabase(newEvent);
+      newEvent.id = id;
+      calendarApi.addEvent(newEvent);
     }
   }
-
+  
 
   const addEventToDatabase = (event )=> {
-    console.log('eventid',event.id)
     const addEvent = async () => {
       try {
-        await setDoc(doc(db, "users", user.uid, "calendarEvents", event.id), event);
+        await addDoc(collection(db, "users", user.uid, "calendarEvents"), event);
       } catch (e) {
         console.error("Error adding document:", e);
       }
@@ -106,6 +105,7 @@ function CalendarComponent() {
   }
 
   const handleEvents = (events) => {
+    console.log('eventsss',events)
     setCurrentEvents(events);
   }
 
