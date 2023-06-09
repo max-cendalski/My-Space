@@ -253,14 +253,14 @@ code {
   margin-block: 0;
 }
 
-dialog {
+.notes-list-container dialog {
   opacity: 0;
   scale: 0;
   display: block;
   transition: all 0.25s;
 }
 
-dialog[open] {
+.notes-list-container dialog[open] {
   position: fixed;
   border: none;
   top: 7rem;
