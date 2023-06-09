@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { setDoc,doc } from "firebase/firestore";
+import { setDoc,doc,collection, onSnapshot } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -13,10 +13,32 @@ function CalendarComponent() {
   const [weekendsVisible, setWeekendsVisible] = useState(true);
   const [currentEvents, setCurrentEvents] = useState([]);
   const [newTask, setNewTask] = useState(null)
+  
+
+  useEffect(() => {
+    const unsub = onSnapshot(
+      collection(db, `users/${user.uid}`, "calendarEvents"),
+      (snapShot) => {
+        let eventList = [];
+        snapShot.docs.forEach((doc) => {
+          eventList.push({ id: doc.id, ...doc.data() });
+        });
+        setCurrentEvents(eventList);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+
+    return () => {
+      unsub();
+    };
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(()=> {
-    console.log('newTask',newTask)
-  },[newTask])
+    console.log('currentEvents',currentEvents)
+  },[currentEvents])
 
 
   const handleWeekendsToggle = () => {
