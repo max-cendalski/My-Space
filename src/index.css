@@ -449,7 +449,6 @@ textarea {
 
 .fc-prev-button { /*need to be fixed*/
   background-color: #942607;
-  color:#4FE0B5;
 }
 
 .fc-direction-ltr .fc-toolbar > * > :not(:first-child) {
@@ -469,6 +468,9 @@ textarea {
   background-color: var(--darkGreen);
 }
 
+.fc-h-event .fc-event-main {
+  background-color: var(--lightPink)
+}
 
 
 
