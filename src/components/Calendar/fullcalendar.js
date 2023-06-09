@@ -1,4 +1,4 @@
-import React, { useState,useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { setDoc,doc,collection, onSnapshot ,deleteDoc} from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import FullCalendar from '@fullcalendar/react';
@@ -24,17 +24,16 @@ function CalendarComponent() {
         
         if (calendarRef.current) {
           const calendarApi = calendarRef.current.getApi();
-          calendarApi.removeAllEvents(); // remove all events
+          calendarApi.removeAllEvents(); 
         }
   
         snapShot.docs.forEach((doc) => {
           const event = { id: doc.id, ...doc.data() };
           eventList.push(event);
   
-          // Check that the FullCalendar instance is ready before calling methods on it
           if (calendarRef.current) {
             const calendarApi = calendarRef.current.getApi();
-            calendarApi.addEvent(event); // add the event to the calendar
+            calendarApi.addEvent(event); 
           }
         });
         setCurrentEvents(eventList);
