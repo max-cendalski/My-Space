@@ -138,17 +138,23 @@ code {
   align-items: flex-end;
 }
 
+.weather-homepage-temp-image-section {
+  display: flex;
+  align-items: center;
+}
+.weather-homepage p:nth-child(4),
 .weather-homepage p:not(:nth-child(n+4)) {
   margin-block: 0;
 }
 
 .weather-homepage p:nth-child(2) {
-  font-size: 2rem;
+  font-size: 3rem;
 }
 
+
 .weather-image {
-  width: 7rem;
-  height: 7rem;
+  width: 5rem;
+  height: 5rem;
 }
 
 .time-homepage {
@@ -156,6 +162,7 @@ code {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+
 }
 
 .time-homepage p:nth-child(1) {
@@ -447,9 +454,6 @@ textarea {
   font-size: 1rem;
 }
 
-.fc-prev-button { /*need to be fixed*/
-  background-color: #942607;
-}
 
 .fc-direction-ltr .fc-toolbar > * > :not(:first-child) {
   margin-left: 0.75em;

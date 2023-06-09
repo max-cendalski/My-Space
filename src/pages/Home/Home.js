@@ -49,7 +49,8 @@ const Home = () => {
                 city: docSnap.data().city,
                 temp: Math.round(data.current.temp),
                 description: data.current.weather[0].description,
-                img: data.current.weather[0].icon
+                img: data.current.weather[0].icon,
+                humidity: data.current.humidity
               });
             });
         } else {
@@ -120,21 +121,23 @@ const Home = () => {
       <article id="time-location-homepage-container">
         <section className="time-homepage">
         <p>{currentDay}</p>
-     
         <Clock value={value}
         renderNumbers={true}
-        size={130}
+        size={120}
         />
       
       </section>
       {homepageWeather &&
         <section className="weather-homepage">
           <p>{homepageWeather.city}</p>
-          <p>{homepageWeather.temp}&deg;</p>
-          <p>{homepageWeather.description}</p>
+          <section className="weather-homepage-temp-image-section">
           <img className="weather-image"
-        src={`https://openweathermap.org/img/wn/${homepageWeather.img}@4x.png`} alt='weather icon'
-      ></img>
+          src={`https://openweathermap.org/img/wn/${homepageWeather.img}@4x.png`} alt='weather icon'
+        ></img>
+        <p>{homepageWeather.temp}&deg;</p>
+          </section>
+          <p>{homepageWeather.description}</p>
+          <p>Humidity: {homepageWeather.humidity} %</p>
         </section>
       }
       </article>

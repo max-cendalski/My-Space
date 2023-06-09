@@ -215,7 +215,7 @@ const Weather = () => {
 
         <article id="locations-fromDB-container">
           {!isLoading &&
-            locationsFromDB.map((location, index) => (
+            locationsFromDB.map(location => (
               <section
                 className={
                   location.extend === true
