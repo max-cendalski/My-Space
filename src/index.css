@@ -468,10 +468,10 @@ textarea {
   background-color: var(--darkGreen);
 }
 
-.fc-h-event .fc-event-main {
-  background-color: var(--lightPink)
+.fc-direction-ltr .fc-daygrid-event.fc-event-end, .fc-direction-rtl .fc-daygrid-event.fc-event-start  {
+  background-color: var(--lightPink);
+  border: 2px solid var(--lightPink);
 }
-
 
 
 
