@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { addDoc, collection } from "firebase/firestore";
+import { setDoc,doc } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { INITIAL_EVENTS, createEventId } from './event-utils';
+import { UserAuth } from "../../context/AuthContext";
 
 function CalendarComponent() {
+  const { user } = UserAuth();
   const [weekendsVisible, setWeekendsVisible] = useState(true);
   const [currentEvents, setCurrentEvents] = useState([]);
   const [newTask, setNewTask] = useState(null)
+
+  useEffect(()=> {
+    console.log('newTask',newTask)
+  },[newTask])
+
 
   const handleWeekendsToggle = () => {
     setWeekendsVisible(!weekendsVisible);
@@ -37,9 +44,10 @@ function CalendarComponent() {
 
 
   const addEventToDatabase = (event )=> {
+    console.log('eventid',event.id)
     const addNote = async () => {
       try {
-        await addDoc(collection(db, "users", user.uid, "calendar"), event);
+        await setDoc(doc(db, "users", user.uid, "calendarEvents", event.id), event);
       } catch (e) {
         console.error("Error adding document:", e);
       }
