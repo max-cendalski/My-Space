@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { setDoc,doc,collection, onSnapshot } from "firebase/firestore";
+import React, { useState,useRef, useEffect } from 'react';
+import { setDoc,doc,collection, onSnapshot ,deleteDoc} from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -12,7 +12,8 @@ function CalendarComponent() {
   const { user } = UserAuth();
   const [weekendsVisible, setWeekendsVisible] = useState(true);
   const [currentEvents, setCurrentEvents] = useState([]);
-  const [newTask, setNewTask] = useState(null)
+  const calendarRef = React.useRef(null);
+
   
 
   useEffect(() => {
@@ -20,8 +21,21 @@ function CalendarComponent() {
       collection(db, `users/${user.uid}`, "calendarEvents"),
       (snapShot) => {
         let eventList = [];
+        
+        if (calendarRef.current) {
+          const calendarApi = calendarRef.current.getApi();
+          calendarApi.removeAllEvents(); // remove all events
+        }
+  
         snapShot.docs.forEach((doc) => {
-          eventList.push({ id: doc.id, ...doc.data() });
+          const event = { id: doc.id, ...doc.data() };
+          eventList.push(event);
+  
+          // Check that the FullCalendar instance is ready before calling methods on it
+          if (calendarRef.current) {
+            const calendarApi = calendarRef.current.getApi();
+            calendarApi.addEvent(event); // add the event to the calendar
+          }
         });
         setCurrentEvents(eventList);
       },
@@ -29,15 +43,16 @@ function CalendarComponent() {
         console.log(err);
       }
     );
-
+  
     return () => {
       unsub();
     };
     // eslint-disable-next-line
   }, []);
+  
 
   useEffect(()=> {
-    console.log('currentEvents',currentEvents)
+    console.log('cur',currentEvents)
   },[currentEvents])
 
 
@@ -67,19 +82,26 @@ function CalendarComponent() {
 
   const addEventToDatabase = (event )=> {
     console.log('eventid',event.id)
-    const addNote = async () => {
+    const addEvent = async () => {
       try {
         await setDoc(doc(db, "users", user.uid, "calendarEvents", event.id), event);
       } catch (e) {
         console.error("Error adding document:", e);
       }
     };
-    addNote();
-    setNewTask(event)
+    addEvent();
   }
 
   const handleEventClick = (clickInfo) => {
     if (window.confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
+      (async function deleteEventFromDB  () {
+        try {
+          const eventRef = doc(db, "users", user.uid, "calendarEvents", clickInfo.event.id);
+          await deleteDoc(eventRef);
+        } catch (err) {
+          console.error("ERROR:", err);
+        }
+      })()
       clickInfo.event.remove();
     }
   }
@@ -96,6 +118,7 @@ function CalendarComponent() {
       />
       <div className='demo-app-main'>
         <FullCalendar
+        ref={calendarRef}
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           headerToolbar={{
             left: 'prev,next today',
@@ -108,7 +131,7 @@ function CalendarComponent() {
           selectMirror={true}
           dayMaxEvents={true}
           weekends={weekendsVisible}
-          initialEvents={INITIAL_EVENTS} 
+          initialEvents={currentEvents} 
           select={handleDateSelect}
           eventContent={renderEventContent} 
           eventClick={handleEventClick}
