@@ -481,12 +481,25 @@ textarea {
 }
 
 
+.dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5); /* semi-transparent background */
+  z-index: 9999;
+}
 
-
-
-
-
-
+.dialog-content {
+  background: white;
+  padding: 1em;
+  max-width: 500px;
+  z-index: 10000;
+}
 
 
 

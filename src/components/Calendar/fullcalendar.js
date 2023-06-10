@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { addDoc,doc,collection, onSnapshot ,deleteDoc, updateDoc} from "firebase/firestore";
+import { addDoc, doc, collection, onSnapshot, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -13,25 +13,30 @@ function CalendarComponent() {
   const [currentEvents, setCurrentEvents] = useState([]);
   const calendarRef = React.useRef(null);
 
-  
+
+  const [isDialogOpen, setDialogOpen] = useState(false);
+  const [selectedDateInfo, setSelectedDateInfo] = useState(null);
+
+
+
   useEffect(() => {
     const unsub = onSnapshot(
       collection(db, `users/${user.uid}`, "calendarEvents"),
       (snapShot) => {
         let eventList = [];
-        
+
         if (calendarRef.current) {
           const calendarApi = calendarRef.current.getApi();
-          calendarApi.removeAllEvents(); 
+          calendarApi.removeAllEvents();
         }
-  
+
         snapShot.docs.forEach((doc) => {
           const event = { id: doc.id, ...doc.data() };
           eventList.push(event);
-  
+
           if (calendarRef.current) {
             const calendarApi = calendarRef.current.getApi();
-            calendarApi.addEvent(event); 
+            calendarApi.addEvent(event);
           }
         });
         setCurrentEvents(eventList);
@@ -40,39 +45,42 @@ function CalendarComponent() {
         console.log(err);
       }
     );
-  
+
     return () => {
       unsub();
     };
-  // eslint-disable-next-line
+    // eslint-disable-next-line
   }, []);
-  
+
 
   const handleWeekendsToggle = () => {
     setWeekendsVisible(!weekendsVisible);
   }
 
   const handleDateSelect = async (selectInfo) => {
-    let title = prompt('Please enter a new title for your event');
     let calendarApi = selectInfo.view.calendar;
-  
     calendarApi.unselect(); // clear date selection
-  
-    if (title) {
-      let newEvent = {
-        title,
-        start: selectInfo.startStr,
-        end: selectInfo.endStr,
-        allDay: selectInfo.allDay
-      };
-      
-      const id =  addEventToDatabase(newEvent);
-      newEvent.id = id;
-      calendarApi.addEvent(newEvent);
-    }
+    setSelectedDateInfo(selectInfo); // save the selectInfo into state
+    setDialogOpen(true); // open the dialog
   }
-  
-  const addEventToDatabase = (event )=> {
+  const handleDialogSubmit = async (title) => {
+    let newEvent = {
+      title,
+      start: selectedDateInfo.startStr,
+      end: selectedDateInfo.endStr,
+      allDay: selectedDateInfo.allDay
+    };
+
+    const id = addEventToDatabase(newEvent);
+    newEvent.id = id;
+    const calendarApi = calendarRef.current.getApi();
+    calendarApi.addEvent(newEvent);
+
+    setDialogOpen(false); // close the dialog
+  }
+
+
+  const addEventToDatabase = (event) => {
     const addEvent = async () => {
       try {
         await addDoc(collection(db, "users", user.uid, "calendarEvents"), event);
@@ -85,7 +93,7 @@ function CalendarComponent() {
 
   const handleEventClick = (clickInfo) => {
     if (window.confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-      (async function deleteEventFromDB  () {
+      (async function deleteEventFromDB() {
         try {
           const eventRef = doc(db, "users", user.uid, "calendarEvents", clickInfo.event.id);
           await deleteDoc(eventRef);
@@ -112,17 +120,29 @@ function CalendarComponent() {
   const handleEvents = (events) => {
     setCurrentEvents(events);
   }
+  const MyDialog = ({ isOpen, onClose, children }) => {
+    if (!isOpen) return null;
+
+    return (
+      <div className="dialog">
+        <div className="dialog-content">
+          {children}
+          <button onClick={onClose}>Close</button>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <article className='calendar-container'>
-      <Sidebar 
-        weekendsVisible={weekendsVisible} 
+      <Sidebar
+        weekendsVisible={weekendsVisible}
         onToggle={handleWeekendsToggle}
       />
       <article className='demo-app-main'>
         <FullCalendar
-        ref={calendarRef}
-        longPressDelay={500} // sets the delay for press and hold
+          ref={calendarRef}
+          longPressDelay={500} // sets the delay for press and hold
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           headerToolbar={{
             left: 'prev,next today',
@@ -135,14 +155,26 @@ function CalendarComponent() {
           selectMirror={true}
           dayMaxEvents={true}
           weekends={weekendsVisible}
-          initialEvents={currentEvents} 
+          initialEvents={currentEvents}
           eventDrop={handleEventDrop}
           select={handleDateSelect}
-          eventContent={renderEventContent} 
+          eventContent={renderEventContent}
           eventClick={handleEventClick}
-          eventsSet={handleEvents} 
+          eventsSet={handleEvents}
         />
       </article>
+      <MyDialog isOpen={isDialogOpen} onClose={() => setDialogOpen(false)}>
+        <h1>Please add a new event</h1>
+        <form onSubmit={event => {
+          event.preventDefault();
+          handleDialogSubmit(event.target.elements.title.value);
+        }}>
+          <label>
+            <input type="text" name="title" />
+          </label>
+          <button type="submit">Create event</button>
+        </form>
+      </MyDialog>
 
     </article>
   );
