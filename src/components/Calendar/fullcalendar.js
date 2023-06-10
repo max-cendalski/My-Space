@@ -59,10 +59,11 @@ function CalendarComponent() {
 
   const handleDateSelect = async (selectInfo) => {
     let calendarApi = selectInfo.view.calendar;
-    calendarApi.unselect(); // clear date selection
-    setSelectedDateInfo(selectInfo); // save the selectInfo into state
-    setDialogOpen(true); // open the dialog
+    calendarApi.unselect();
+    setSelectedDateInfo(selectInfo);
+    setDialogOpen(true);
   }
+  
   const handleDialogSubmit = async (title) => {
     let newEvent = {
       title,
@@ -76,7 +77,7 @@ function CalendarComponent() {
     const calendarApi = calendarRef.current.getApi();
     calendarApi.addEvent(newEvent);
 
-    setDialogOpen(false); // close the dialog
+    setDialogOpen(false);
   }
 
 
@@ -124,12 +125,12 @@ function CalendarComponent() {
     if (!isOpen) return null;
 
     return (
-      <div className="dialog">
-        <div className="dialog-content">
+      <article className="dialog-calendar">
+        <section className="dialog-calendar-content">
           {children}
           <button onClick={onClose}>Close</button>
-        </div>
-      </div>
+        </section>
+      </article>
     );
   };
 
@@ -139,6 +140,20 @@ function CalendarComponent() {
         weekendsVisible={weekendsVisible}
         onToggle={handleWeekendsToggle}
       />
+      <MyDialog isOpen={isDialogOpen} onClose={() => setDialogOpen(false)}>
+      <article>
+        <h1>Add new event</h1>
+        <form  onSubmit={event => {
+          event.preventDefault();
+          handleDialogSubmit(event.target.elements.title.value);
+        }}>
+          <label>
+            <input type="text" name="title" />
+          </label>
+          <button type="submit">Create event</button>
+        </form>
+        </article>
+      </MyDialog>
       <article className='demo-app-main'>
         <FullCalendar
           ref={calendarRef}
@@ -163,18 +178,7 @@ function CalendarComponent() {
           eventsSet={handleEvents}
         />
       </article>
-      <MyDialog isOpen={isDialogOpen} onClose={() => setDialogOpen(false)}>
-        <h1>Please add a new event</h1>
-        <form onSubmit={event => {
-          event.preventDefault();
-          handleDialogSubmit(event.target.elements.title.value);
-        }}>
-          <label>
-            <input type="text" name="title" />
-          </label>
-          <button type="submit">Create event</button>
-        </form>
-      </MyDialog>
+
 
     </article>
   );

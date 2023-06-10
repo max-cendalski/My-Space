@@ -481,7 +481,7 @@ textarea {
 }
 
 
-.dialog {
+.dialog-calendar {
   position: fixed;
   top: 0;
   left: 0;
@@ -491,20 +491,21 @@ textarea {
   justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.5); /* semi-transparent background */
-  z-index: 9999;
+  z-index: 12;
 }
 
-.dialog-content {
+.dialog-calendar-content {
+  margin-top: -10rem;
   background: white;
   padding: 1em;
   max-width: 500px;
-  z-index: 10000;
+  border-radius: 3px;
 }
 
 
-
-
-
+.calendar-dialog-form {
+  background-color: #4FE0B5;
+}
 
 
 
