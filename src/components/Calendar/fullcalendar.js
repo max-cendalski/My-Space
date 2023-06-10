@@ -63,7 +63,7 @@ function CalendarComponent() {
     setSelectedDateInfo(selectInfo);
     setDialogOpen(true);
   }
-  
+
   const handleDialogSubmit = async (title) => {
     let newEvent = {
       title,
@@ -123,12 +123,11 @@ function CalendarComponent() {
   }
   const MyDialog = ({ isOpen, onClose, children }) => {
     if (!isOpen) return null;
-
     return (
       <article className="dialog-calendar">
         <section className="dialog-calendar-content">
           {children}
-          <button onClick={onClose}>Close</button>
+          <button className="calendar-close-dialog-button" onClick={onClose}>Close</button>
         </section>
       </article>
     );
@@ -141,18 +140,16 @@ function CalendarComponent() {
         onToggle={handleWeekendsToggle}
       />
       <MyDialog isOpen={isDialogOpen} onClose={() => setDialogOpen(false)}>
-      <article>
-        <h1>Add new event</h1>
-        <form  onSubmit={event => {
+        <h3>Add new event</h3>
+        <form className='calendar-add-event-form' onSubmit={event => {
           event.preventDefault();
           handleDialogSubmit(event.target.elements.title.value);
         }}>
-          <label>
+          <p>
             <input type="text" name="title" />
-          </label>
-          <button type="submit">Create event</button>
+            <button className="calendar-create-event-button" type="submit">Create event</button>
+          </p>
         </form>
-        </article>
       </MyDialog>
       <article className='demo-app-main'>
         <FullCalendar

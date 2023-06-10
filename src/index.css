@@ -495,17 +495,57 @@ textarea {
 }
 
 .dialog-calendar-content {
-  margin-top: -10rem;
+  margin-top: -14rem;
   background: white;
   padding: 1em;
+  width: 20rem;
   max-width: 500px;
   border-radius: 3px;
+  background-color: var(--lightPink);
+  color: white;
+}
+
+.calendar-add-event-form input, 
+.calendar-add-event-form button {
+  box-sizing: border-box;
+    height: 2rem; 
+    vertical-align: middle;
+}
+
+.calendar-add-event-form input {
+  width: 12rem;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+}
+
+.calendar-add-event-form button {
+  border: none;
+  color: white;
+  background-color: var(--darkGreen);
+  font-size: 1rem;
+  cursor: pointer;
+}
+.calendar-add-event-form button:hover {
+  transform: scale(1.1);
+}
+
+.calendar-close-dialog-button {
+  background-color: var(--red);
+  border-radius: 2px;
+  border: none;
+  color: white;
+  margin-block-start: 0.5rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.calendar-close-dialog-button:hover {
+  transform: scale(1.1);
 }
 
 
-.calendar-dialog-form {
-  background-color: #4FE0B5;
-}
 
 
 
