@@ -48,11 +48,6 @@ function CalendarComponent() {
   }, []);
   
 
-  useEffect(()=> {
-    console.log('cur',currentEvents)
-  },[currentEvents])
-
-
   const handleWeekendsToggle = () => {
     setWeekendsVisible(!weekendsVisible);
   }
@@ -126,7 +121,6 @@ function CalendarComponent() {
       <div className='demo-app-main'>
         <FullCalendar
         ref={calendarRef}
-        longPressDelay={500} // sets the delay for press and hold
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           headerToolbar={{
             left: 'prev,next today',
