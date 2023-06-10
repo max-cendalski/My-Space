@@ -52,6 +52,13 @@ function CalendarComponent() {
     // eslint-disable-next-line
   }, []);
 
+  useEffect(() => {
+    if (isDialogOpen) {
+      document.getElementsByTagName('input')[1].focus();
+    }
+  }, [isDialogOpen]);
+  
+
 
   const handleWeekendsToggle = () => {
     setWeekendsVisible(!weekendsVisible);
@@ -120,7 +127,8 @@ function CalendarComponent() {
 
   const handleEvents = (events) => {
     setCurrentEvents(events);
-  }
+  } 
+
   const MyDialog = ({ isOpen, onClose, children }) => {
     if (!isOpen) return null;
     return (

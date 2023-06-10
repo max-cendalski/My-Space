@@ -526,6 +526,7 @@ textarea {
   color: white;
   background-color: var(--darkGreen);
   font-size: 1rem;
+  outline: none;
   cursor: pointer;
 }
 .calendar-add-event-form button:hover {
@@ -541,6 +542,7 @@ textarea {
   padding: 0.5rem;
   font-size: 1rem;
   cursor: pointer;
+  outline: none;
 }
 
 .calendar-close-dialog-button:hover {
