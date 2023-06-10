@@ -66,7 +66,7 @@ function CalendarComponent() {
         allDay: selectInfo.allDay
       };
       
-      const id =  await addEventToDatabase(newEvent);
+      const id =  addEventToDatabase(newEvent);
       newEvent.id = id;
       calendarApi.addEvent(newEvent);
     }
@@ -96,6 +96,7 @@ function CalendarComponent() {
       clickInfo.event.remove();
     }
   }
+
   const handleEventDrop = async (info) => {
     const event = info.event;
     try {
@@ -118,9 +119,10 @@ function CalendarComponent() {
         weekendsVisible={weekendsVisible} 
         onToggle={handleWeekendsToggle}
       />
-      <div className='demo-app-main'>
+      <article className='demo-app-main'>
         <FullCalendar
         ref={calendarRef}
+        longPressDelay={500} // sets the delay for press and hold
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           headerToolbar={{
             left: 'prev,next today',
@@ -140,7 +142,8 @@ function CalendarComponent() {
           eventClick={handleEventClick}
           eventsSet={handleEvents} 
         />
-      </div>
+      </article>
+
     </article>
   );
 }
@@ -172,6 +175,7 @@ function renderEventContent(eventInfo) {
 }
 
 export default CalendarComponent;
+
 
 
 

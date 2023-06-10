@@ -142,6 +142,7 @@ code {
   display: flex;
   align-items: center;
 }
+
 .weather-homepage p:nth-child(4),
 .weather-homepage p:not(:nth-child(n+4)) {
   margin-block: 0;
@@ -449,33 +450,50 @@ textarea {
   font-size: 14px;
 
 }
+
 .fc .fc-toolbar-title {
   margin: 0;
   font-size: 1rem;
 }
 
 
-.fc-direction-ltr .fc-toolbar > * > :not(:first-child) {
+.fc-direction-ltr .fc-toolbar>*> :not(:first-child) {
   margin-left: 0.75em;
   background-color: var(--darkGreen)
 }
 
-.fc-direction-ltr .fc-toolbar{
+.fc-direction-ltr .fc-toolbar {
   padding: 0.2rem;
 }
 
-.fc-direction-ltr .fc-button-group > .fc-button:not(:last-child) {
+.fc-direction-ltr .fc-button-group>.fc-button:not(:last-child) {
   background-color: var(--darkGreen);
 }
 
-.fc-direction-ltr .fc-button-group > .fc-button:not(:first-child) {
+.fc-direction-ltr .fc-button-group>.fc-button:not(:first-child) {
   background-color: var(--darkGreen);
 }
 
-.fc-direction-ltr .fc-daygrid-event.fc-event-end, .fc-direction-rtl .fc-daygrid-event.fc-event-start  {
+.fc-direction-ltr .fc-daygrid-event.fc-event-end,
+.fc-direction-rtl .fc-daygrid-event.fc-event-start {
   background-color: var(--lightPink);
   border: 2px solid var(--lightPink);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
