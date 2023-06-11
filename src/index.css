@@ -41,8 +41,8 @@ code {
 }
 
 :root {
-  --darkGreen: #18946F;
-  --green: #4FE0B5;
+  --darkGreen: rgb(24, 148, 111);
+  --green: rgb(79, 224, 181);
   --lightGreen: #BAFDE9;
   --red: #942607;
   --lightPink: #DEA697;
@@ -561,12 +561,11 @@ textarea {
 }
 
 .dialog-section dialog[open] {
-  color: red;
-  background-color: bisque;
+  
 }
 
 dialog::backdrop {
-  background: rgba(51, 78, 60, 0.7);
+  background: rgba(9, 14, 13, 0.7);
 }
 
 @keyframes changing-opacity-open {

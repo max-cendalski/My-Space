@@ -14,6 +14,7 @@ function CalendarComponent() {
   const [currentEvents, setCurrentEvents] = useState([]);
   const calendarRef = React.useRef(null);
 
+  const [clickInfoState, setClickInfoState] = useState(null);
   const [calDialogDel, setCalDialogDel] = useState(false)
 
 
@@ -102,22 +103,32 @@ function CalendarComponent() {
     addEvent();
   }
 
-  const handleEventClick = (clickInfo) => {
-    console.log('clickInfo',clickInfo.event.title)
-    setCalDialogDel(true)
-    // if (window.confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
 
-    //   (async function deleteEventFromDB() {
-    //     try {
-    //       const eventRef = doc(db, "users", user.uid, "calendarEvents", clickInfo.event.id);
-    //       await deleteDoc(eventRef);
-    //     } catch (err) {
-    //       console.error("ERROR:", err);
-    //     }
-    //   })()
-    //   clickInfo.event.remove();
-    // }
+  const handleEventClick = (clickInfo) => {
+    setClickInfoState(clickInfo);
+    setCalDialogDel(true);
   }
+
+  const confirmRemoveEvent = () => {
+    clickInfoState.event.remove();
+    setCalDialogDel(false);
+  }
+  // const handleEventClick = (clickInfo) => {
+  //   setEventToRemove(() => clickInfo.event.remove);
+  //   setCalDialogDel(true)
+  //   if (window.confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
+
+  //     // (async function deleteEventFromDB() {
+  //     //   try {
+  //     //     const eventRef = doc(db, "users", user.uid, "calendarEvents", clickInfo.event.id);
+  //     //     await deleteDoc(eventRef);
+  //     //   } catch (err) {
+  //     //     console.error("ERROR:", err);
+  //     //   }
+  //     // })()
+  //     clickInfo.event.remove();
+  //   }
+  // }
 
   const handleEventDrop = async (info) => {
     const event = info.event;
@@ -157,7 +168,9 @@ function CalendarComponent() {
         <CalDialogDel
           showDialog={calDialogDel}
           onClose={() => setCalDialogDel(false)}
-          content="whatever"
+          onConfirm={confirmRemoveEvent}
+          content="Are you sure you want to delete that event?"
+         
         />
       </section>
       <MyDialog isOpen={isDialogOpen} onClose={() => setDialogOpen(false)}>
