@@ -113,6 +113,7 @@ function CalendarComponent() {
     clickInfoState.event.remove();
     setCalDialogDel(false);
   }
+  
   // const handleEventClick = (clickInfo) => {
   //   setEventToRemove(() => clickInfo.event.remove);
   //   setCalDialogDel(true)
