@@ -61,7 +61,7 @@ function CalendarComponent() {
       document.getElementsByTagName('input')[1].focus();
     }
   }, [isDialogOpen]);
-  
+
 
 
   const handleWeekendsToggle = () => {
@@ -105,6 +105,14 @@ function CalendarComponent() {
 
 
   const handleEventClick = (clickInfo) => {
+    (async function deleteEventFromDB() {
+      try {
+        const eventRef = doc(db, "users", user.uid, "calendarEvents", clickInfo.event.id);
+        await deleteDoc(eventRef);
+      } catch (err) {
+        console.error("ERROR:", err);
+      }
+    })()
     setClickInfoState(clickInfo);
     setCalDialogDel(true);
   }
@@ -113,7 +121,7 @@ function CalendarComponent() {
     clickInfoState.event.remove();
     setCalDialogDel(false);
   }
-  
+
   // const handleEventClick = (clickInfo) => {
   //   setEventToRemove(() => clickInfo.event.remove);
   //   setCalDialogDel(true)
@@ -145,7 +153,7 @@ function CalendarComponent() {
 
   const handleEvents = (events) => {
     setCurrentEvents(events);
-  } 
+  }
 
   const MyDialog = ({ isOpen, onClose, children }) => {
     if (!isOpen) return null;
@@ -171,7 +179,7 @@ function CalendarComponent() {
           onClose={() => setCalDialogDel(false)}
           onConfirm={confirmRemoveEvent}
           content="Are you sure you want to delete that event?"
-         
+
         />
       </section>
       <MyDialog isOpen={isDialogOpen} onClose={() => setDialogOpen(false)}>
