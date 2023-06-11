@@ -6,12 +6,15 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { UserAuth } from "../../context/AuthContext";
+import CalDialogDel from '../utils/CalDialogDel';
 
 function CalendarComponent() {
   const { user } = UserAuth();
   const [weekendsVisible, setWeekendsVisible] = useState(true);
   const [currentEvents, setCurrentEvents] = useState([]);
   const calendarRef = React.useRef(null);
+
+  const [calDialogDel, setCalDialogDel] = useState(false)
 
 
   const [isDialogOpen, setDialogOpen] = useState(false);
@@ -147,6 +150,14 @@ function CalendarComponent() {
         weekendsVisible={weekendsVisible}
         onToggle={handleWeekendsToggle}
       />
+      <section className="dialog-section">
+        <button onClick={() => setCalDialogDel(true)}>Open Dialog One</button>
+        <CalDialogDel
+          showDialog={calDialogDel}
+          onClose={() => setCalDialogDel(false)}
+          contentOne="Dialog Window Del"
+        />
+      </section>
       <MyDialog isOpen={isDialogOpen} onClose={() => setDialogOpen(false)}>
         <h3>Add new event</h3>
         <form className='calendar-add-event-form' onSubmit={event => {

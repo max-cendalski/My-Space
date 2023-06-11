@@ -13,7 +13,7 @@ const Home = () => {
   const { user } = UserAuth();
   const [currentDay, setCurrentDay] = useState("");
   const [homepageWeather, setHomepageWeather] = useState(null);
-  
+
   const [value, setValue] = useState(new Date());
 
   useEffect(() => {
@@ -21,9 +21,9 @@ const Home = () => {
     setCurrentDay(format(new Date(), "E, MMMM dd"));
     const interval = setInterval(() => setValue(new Date()), 1000);
 
-  
 
-    
+
+
 
     (async () => {
       try {
@@ -37,10 +37,8 @@ const Home = () => {
         const docSnap = await getDoc(locationHomeRef);
         if (docSnap.exists()) {
           fetch(
-            `https://api.openweathermap.org/data/3.0/onecall?lat=${
-              docSnap.data().coordinates.lat
-            }&lon=${
-              docSnap.data().coordinates.lng
+            `https://api.openweathermap.org/data/3.0/onecall?lat=${docSnap.data().coordinates.lat
+            }&lon=${docSnap.data().coordinates.lng
             }&units=imperial&exclude=minutely,hourly,daily,alerts&appid=${weatherApiKey}`
           )
             .then((res) => res.json())
@@ -59,7 +57,7 @@ const Home = () => {
       } catch (err) {
         console.log("SOMETHING WENT WRONG", err);
       }
-     
+
     })();
 
     const fetchIdea = async () => {
@@ -88,7 +86,7 @@ const Home = () => {
     return () => {
       clearInterval(interval);
     };
-  
+
     // eslint-disable-next-line
   }, []);
 
@@ -120,26 +118,26 @@ const Home = () => {
       <Navbar />
       <article id="time-location-homepage-container">
         <section className="time-homepage">
-        <p>{currentDay}</p>
-        <Clock value={value}
-        renderNumbers={true}
-        size={120}
-        />
-      
-      </section>
-      {homepageWeather &&
-        <section className="weather-homepage">
-          <p>{homepageWeather.city}</p>
-          <section className="weather-homepage-temp-image-section">
-          <img className="weather-image"
-          src={`https://openweathermap.org/img/wn/${homepageWeather.img}@4x.png`} alt='weather icon'
-        ></img>
-        <p>{homepageWeather.temp}&deg;</p>
-          </section>
-          <p>{homepageWeather.description}</p>
-          <p>Humidity: {homepageWeather.humidity} %</p>
+          <p>{currentDay}</p>
+          <Clock value={value}
+            renderNumbers={true}
+            size={120}
+          />
+
         </section>
-      }
+        {homepageWeather &&
+          <section className="weather-homepage">
+            <p>{homepageWeather.city}</p>
+            <section className="weather-homepage-temp-image-section">
+              <img className="weather-image"
+                src={`https://openweathermap.org/img/wn/${homepageWeather.img}@4x.png`} alt='weather icon'
+              ></img>
+              <p>{homepageWeather.temp}&deg;</p>
+            </section>
+            <p>{homepageWeather.description}</p>
+            <p>Humidity: {homepageWeather.humidity} %</p>
+          </section>
+        }
       </article>
 
       {idea && (
