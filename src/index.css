@@ -552,6 +552,32 @@ textarea {
 
 
 
+.dialog-section dialog {
+  background-color: white;
+  border: 1px solid black;
+  width: 50%;
+  margin: auto;
+  animation: changing-opacity-open 0.5s forwards;
+}
+
+.dialog-section dialog[open] {
+  color: red;
+  background-color: bisque;
+}
+
+dialog::backdrop {
+  background: rgba(51, 78, 60, 0.7);
+}
+
+@keyframes changing-opacity-open {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 
 
 

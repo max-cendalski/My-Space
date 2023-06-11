@@ -103,17 +103,20 @@ function CalendarComponent() {
   }
 
   const handleEventClick = (clickInfo) => {
-    if (window.confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-      (async function deleteEventFromDB() {
-        try {
-          const eventRef = doc(db, "users", user.uid, "calendarEvents", clickInfo.event.id);
-          await deleteDoc(eventRef);
-        } catch (err) {
-          console.error("ERROR:", err);
-        }
-      })()
-      clickInfo.event.remove();
-    }
+    console.log('clickInfo',clickInfo.event.title)
+    setCalDialogDel(true)
+    // if (window.confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
+
+    //   (async function deleteEventFromDB() {
+    //     try {
+    //       const eventRef = doc(db, "users", user.uid, "calendarEvents", clickInfo.event.id);
+    //       await deleteDoc(eventRef);
+    //     } catch (err) {
+    //       console.error("ERROR:", err);
+    //     }
+    //   })()
+    //   clickInfo.event.remove();
+    // }
   }
 
   const handleEventDrop = async (info) => {
@@ -151,11 +154,10 @@ function CalendarComponent() {
         onToggle={handleWeekendsToggle}
       />
       <section className="dialog-section">
-        <button onClick={() => setCalDialogDel(true)}>Open Dialog One</button>
         <CalDialogDel
           showDialog={calDialogDel}
           onClose={() => setCalDialogDel(false)}
-          contentOne="Dialog Window Del"
+          content="whatever"
         />
       </section>
       <MyDialog isOpen={isDialogOpen} onClose={() => setDialogOpen(false)}>

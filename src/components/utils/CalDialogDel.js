@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 
-const CalDialogDel = ({ showDialogDel, onClose, contentOne }) => {
+const CalDialogDel = ({ showDialog, onClose, content }) => {
   const dialogRef = useRef(null);
 
   // useEffect(() => {
@@ -14,15 +14,15 @@ const CalDialogDel = ({ showDialogDel, onClose, contentOne }) => {
   // }, [showDialog]);
 
   useEffect(() => {
-    showDialogDel
+    showDialog
       ? dialogRef.current.showModal()
       : dialogRef.current.open && dialogRef.current.close();
-  }, [showDialogDel]);
+  }, [showDialog]);
 
   return (
     <dialog ref={dialogRef}>
       <article>
-        <p>{contentOne}</p>
+        <p>{content}</p>
         <button onClick={onClose}>Close Dialog</button>
       </article>
     </dialog>
