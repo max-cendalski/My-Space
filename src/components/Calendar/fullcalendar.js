@@ -105,6 +105,11 @@ function CalendarComponent() {
 
 
   const handleEventClick = (clickInfo) => {
+    setClickInfoState(clickInfo);
+    setCalDialogDel(true);
+  }
+
+  const confirmRemoveEvent = (clickInfo) => {
     (async function deleteEventFromDB() {
       try {
         const eventRef = doc(db, "users", user.uid, "calendarEvents", clickInfo.event.id);
@@ -113,11 +118,6 @@ function CalendarComponent() {
         console.error("ERROR:", err);
       }
     })()
-    setClickInfoState(clickInfo);
-    setCalDialogDel(true);
-  }
-
-  const confirmRemoveEvent = () => {
     clickInfoState.event.remove();
     setCalDialogDel(false);
   }
@@ -173,7 +173,6 @@ function CalendarComponent() {
         weekendsVisible={weekendsVisible}
         onToggle={handleWeekendsToggle}
       />
-      <section className="dialog-section">
         <CalDialogDel
           showDialog={calDialogDel}
           onClose={() => setCalDialogDel(false)}
@@ -181,7 +180,6 @@ function CalendarComponent() {
           content="Are you sure you want to delete that event?"
 
         />
-      </section>
       <MyDialog isOpen={isDialogOpen} onClose={() => setDialogOpen(false)}>
         <h3>Add new event</h3>
         <form className='calendar-add-event-form' onSubmit={event => {

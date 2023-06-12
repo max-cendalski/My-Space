@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 
-const CalDialogDel = ({ showDialog, onClose, content,onConfirm }) => {
+const CalDialogDel = ({ showDialog, onClose, content, onConfirm }) => {
   const dialogRef = useRef(null);
 
   // useEffect(() => {
@@ -26,13 +26,16 @@ const CalDialogDel = ({ showDialog, onClose, content,onConfirm }) => {
   }
 
   return (
-    <dialog ref={dialogRef}>
-      <article>
+    <article className="dialog-delete-event">
+      <dialog ref={dialogRef}>
         <p>{content}</p>
-        <button onClick={handleConfirm}>Confirm</button>
-        <button onClick={onClose}>Close Dialog</button>
-      </article>
-    </dialog>
+        <footer className="dialog-delete-event-footer">
+          <button onClick={onClose}>Close</button>
+          <button onClick={handleConfirm}>Delete </button>
+        </footer>
+
+      </dialog>
+    </article>
   );
 };
 
