@@ -486,12 +486,11 @@ textarea {
 }
 
 
-.calendar-dialog-section dialog[open] {
+dialog[open] {
   background-color: white;
   border: 1px solid black;
-  width: 50%;
   margin: auto;
-  animation: changing-opacity-open 0.5s forwards;
+  animation: changing-opacity-open 0.3s forwards;
 }
 
 
