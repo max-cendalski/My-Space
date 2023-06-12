@@ -480,82 +480,13 @@ textarea {
   border: 2px solid var(--lightPink);
 }
 
-.fc-direction-ltr .fc-daygrid-event.fc-event-end, .fc-direction-rtl .fc-daygrid-event.fc-event-start {
+.fc-direction-ltr .fc-daygrid-event.fc-event-end,
+.fc-direction-rtl .fc-daygrid-event.fc-event-start {
   color: white;
 }
 
-.dialog-calendar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 12;
-}
 
-.dialog-calendar-content dialog[open] {
-  margin-top: -14rem;
-  background: white;
-  padding: 1em;
-  width: 20rem;
-  max-width: 500px;
-  border-radius: 3px;
-  background-color: var(--lightPink);
-  color: white;
-}
-
-.calendar-add-event-form input, 
-.calendar-add-event-form button {
-  box-sizing: border-box;
-    height: 2rem; 
-    vertical-align: middle;
-    border-radius: 2px;
-    
-}
-
-.calendar-add-event-form input {
-  width: 12rem;
-  border: none;
-  outline: none;
-  font-size: 1rem;
-}
-
-.calendar-add-event-form button {
-  border: none;
-  color: white;
-  background-color: var(--darkGreen);
-  font-size: 1rem;
-  outline: none;
-  cursor: pointer;
-}
-.calendar-add-event-form button:hover {
-  transform: scale(1.1);
-}
-
-.calendar-close-dialog-button {
-  background-color: var(--red);
-  border-radius: 2px;
-  border: none;
-  color: white;
-  margin-block-start: 0.5rem;
-  padding: 0.5rem;
-  font-size: 1rem;
-  cursor: pointer;
-  outline: none;
-}
-
-.calendar-close-dialog-button:hover {
-  transform: scale(1.1);
-}
-
-
-
-
-.dialog-section dialog {
+.calendar-dialog-section dialog[open] {
   background-color: white;
   border: 1px solid black;
   width: 50%;
@@ -564,15 +495,47 @@ textarea {
 }
 
 
+.calendar-add-event-form p {
+  display: flex;
+  align-items: center;
+} 
+
+.calendar-add-event-form input,
+.calendar-add-event-form button {
+  box-sizing: border-box;
+  padding: 0.4rem 0.5rem;
+  height: 1.8rem;
+}
 
 
+.calendar-add-event-form input {
+  width: 12rem;
+  border-radius: 2px 0 0 2px;
+  border: 1px solid var(--lightPink);
+  outline: none;
+}
 
+.calendar-add-event-button {
+  box-sizing: border-box;
+  border-radius: 0 2px 2px 0;
+  border: none;
+  color: white;
+  background-color: var(--darkGreen);
+  cursor: pointer;
+}
 
+.calendar-add-event-button:hover {
+  transform: scale(1.05);
+}
+
+.calendar-add-event-form footer:nth-child(1) {
+  padding: 0.6rem
+}
 
 
 /*working*/
-.dialog-delete-event{
-  display:flex;
+.dialog-delete-event {
+  display: flex;
   flex-direction: column;
   width: 20rem;
   border: none;
@@ -582,9 +545,10 @@ textarea {
 .dialog-delete-event-footer {
   display: flex;
   justify-content: flex-end;
-  gap:1rem;
-  padding:0.5rem;
+  gap: 1rem;
+  padding: 0.5rem;
 }
+
 .dialog-delete-event-footer button:nth-child(1) {
   padding: 0.4rem 0.8rem;
   cursor: pointer;
@@ -597,7 +561,6 @@ textarea {
   border: none;
   border-radius: 3px;
   cursor: pointer;
-
 }
 
 dialog::backdrop {
@@ -608,6 +571,7 @@ dialog::backdrop {
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }

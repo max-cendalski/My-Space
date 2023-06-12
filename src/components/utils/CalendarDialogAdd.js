@@ -13,25 +13,30 @@ const CalDialogCreate = ({ showDialog, onClose, onSubmit }) => {
 
 
   return (
-    <article className="dialog-delete-event">
+    <article id="calendar-dialog-section">
       <dialog ref={dialogRef}>
         <h3>Add new event</h3>
         <form className='calendar-add-event-form'
           onSubmit={event => {
             event.preventDefault();
-            if (event.target.elements.title.value) {
-              onSubmit(event.target.elements.title.value)
+            let data = event.target.title.value
+            if (data) {
+              onSubmit(data)
               inputRef.current.value = ''
             }
           }}>
           <p>
             <input type="text" name="title" ref={inputRef} />
-            <button onClick={() => {
-              onClose();
-              inputRef.current.value = '';  // clear the input
-            }} className="calendar-close-dialog-button">Close</button>
-            <button className="calendar-create-event-button" type="submit">Create event</button>
+            <button className="calendar-add-event-button" type="submit">Create event</button>
           </p>
+          <footer>
+          <button
+            className="calendar-close-dialog-button"
+            onClick={() => {
+              onClose();
+              inputRef.current.value = '';
+            }} >Close</button>
+        </footer>
         </form>
       </dialog>
     </article>
