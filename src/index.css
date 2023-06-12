@@ -493,11 +493,11 @@ textarea {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(0, 0, 0, 0.5); /* semi-transparent background */
+  background: rgba(0, 0, 0, 0.5);
   z-index: 12;
 }
 
-.dialog-calendar-content {
+.dialog-calendar-content dialog[open] {
   margin-top: -14rem;
   background: white;
   padding: 1em;
@@ -563,13 +563,22 @@ textarea {
   animation: changing-opacity-open 0.5s forwards;
 }
 
-.dialog-delete-event dialog[open]{
+
+
+
+
+
+
+
+/*working*/
+.dialog-delete-event{
   display:flex;
   flex-direction: column;
   width: 20rem;
   border: none;
   border-radius: 3px;
 }
+
 .dialog-delete-event-footer {
   display: flex;
   justify-content: flex-end;

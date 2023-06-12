@@ -1,18 +1,8 @@
 import React, { useEffect, useRef } from "react";
 
+
 const CalDialogDel = ({ showDialog, onClose, content, onConfirm }) => {
   const dialogRef = useRef(null);
-
-  // useEffect(() => {
-  //   if (showDialog) {
-  //     dialogRef.current.showModal();
-  //   } else {
-  //     if (dialogRef.current.open) {
-  //       dialogRef.current.close();
-  //     }
-  //   }
-  // }, [showDialog]);
-
 
   useEffect(() => {
     showDialog
@@ -40,3 +30,15 @@ const CalDialogDel = ({ showDialog, onClose, content, onConfirm }) => {
 };
 
 export default CalDialogDel
+
+
+
+  // useEffect(() => {
+  //   if (showDialog) {
+  //     dialogRef.current.showModal();
+  //   } else {
+  //     if (dialogRef.current.open) {
+  //       dialogRef.current.close();
+  //     }
+  //   }
+  // }, [showDialog]);

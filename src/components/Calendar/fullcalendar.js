@@ -6,8 +6,8 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { UserAuth } from "../../context/AuthContext";
-import CalDialogDel from '../utils/CalDialogDel';
-import CalDialogCreate from '../utils/CalDialogCreate';
+import CalDialogDel from '../utils/CalendarDialogDel';
+import CalDialogCreate from '../utils/CalendarDialogAdd';
 
 function CalendarComponent() {
   const { user } = UserAuth();
@@ -19,8 +19,6 @@ function CalendarComponent() {
   const[showDialogDeleteEvent , setShowDialogDeleteEvent] = useState(false)
   const[showDialogAddEvent , setShowDialogAddEvent] = useState(false)
 
-
-  const [isDialogOpen, setDialogOpen] = useState(false);
   const [selectedDateInfo, setSelectedDateInfo] = useState(null);
 
 
@@ -58,25 +56,25 @@ function CalendarComponent() {
     // eslint-disable-next-line
   }, []);
 
-  // useEffect(() => {
-  //   if (isDialogOpen) {
-  //     document.getElementsByTagName('input')[1].focus();
-  //   }
-  // }, [isDialogOpen]);
+  useEffect(() => {
+    if (showDialogAddEvent) {
+      document.getElementsByTagName('input')[1].focus();
+    }
+  }, [showDialogAddEvent]);
 
 
   const handleWeekendsToggle = () => {
     setWeekendsVisible(!weekendsVisible);
   }
 
-  const handleDateSelect = async (selectInfo) => {
+  const handleDateSelect = (selectInfo) => { 
     let calendarApi = selectInfo.view.calendar;
     calendarApi.unselect();
     setSelectedDateInfo(selectInfo);
-    setDialogOpen(true);
+    setShowDialogAddEvent(true)
   }
 
-  const handleDialogSubmit = async (title) => {
+  const handleDialogSubmit = (title) => { //Add new event
     let newEvent = {
       title,
       start: selectedDateInfo.startStr,
@@ -88,12 +86,11 @@ function CalendarComponent() {
     newEvent.id = id;
     const calendarApi = calendarRef.current.getApi();
     calendarApi.addEvent(newEvent);
-
-    setDialogOpen(false);
+    setSelectedDateInfo(null);
+   setShowDialogAddEvent(false)
   }
 
-
-  const addEventToDatabase = (event) => {
+  const addEventToDatabase = (event) => { //add new event to DB function
     const addEvent = async () => {
       try {
         await addDoc(collection(db, "users", user.uid, "calendarEvents"), event);
@@ -104,14 +101,12 @@ function CalendarComponent() {
     addEvent();
   }
 
-
-  const handleEventClick = (clickInfo) => {
-
+  const handleEventClick = (clickInfo) => { //Existed event click
     setClickInfoState(clickInfo);
     setShowDialogDeleteEvent(true)
   }
 
-  const confirmRemoveEvent = () => {
+  const confirmRemoveEvent = () => { 
     (async function deleteEventFromDB() {
       try {
         const eventRef = doc(db, "users", user.uid, "calendarEvents", clickInfoState.event.id);
@@ -124,7 +119,6 @@ function CalendarComponent() {
     setShowDialogDeleteEvent(true)
     
   }
-
 
   const handleEventDrop = async (info) => {
     const event = info.event;
@@ -158,7 +152,7 @@ function CalendarComponent() {
       <CalDialogCreate
       showDialog={showDialogAddEvent}
       onClose={() => setShowDialogAddEvent(false)}
-        onSubmit={handleDialogSubmit}
+      onSubmit={handleDialogSubmit}
       />
       <article className='demo-app-main'>
         <FullCalendar
