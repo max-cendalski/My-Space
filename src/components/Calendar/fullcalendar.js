@@ -16,8 +16,8 @@ function CalendarComponent() {
   const calendarRef = React.useRef(null);
 
   const [clickInfoState, setClickInfoState] = useState(null);
-  const[showDialogDeleteEvent , setShowDialogDeleteEvent] = useState(false)
-  const[showDialogAddEvent , setShowDialogAddEvent] = useState(false)
+  const [showDialogDeleteEvent, setShowDialogDeleteEvent] = useState(false)
+  const [showDialogAddEvent, setShowDialogAddEvent] = useState(false)
 
   const [selectedDateInfo, setSelectedDateInfo] = useState(null);
 
@@ -67,7 +67,7 @@ function CalendarComponent() {
     setWeekendsVisible(!weekendsVisible);
   }
 
-  const handleDateSelect = (selectInfo) => { 
+  const handleDateSelect = (selectInfo) => {
     let calendarApi = selectInfo.view.calendar;
     calendarApi.unselect();
     setSelectedDateInfo(selectInfo);
@@ -87,7 +87,7 @@ function CalendarComponent() {
     const calendarApi = calendarRef.current.getApi();
     calendarApi.addEvent(newEvent);
     setSelectedDateInfo(null);
-   setShowDialogAddEvent(false)
+    setShowDialogAddEvent(false)
   }
 
   const addEventToDatabase = (event) => { //add new event to DB function
@@ -106,7 +106,7 @@ function CalendarComponent() {
     setShowDialogDeleteEvent(true)
   }
 
-  const confirmRemoveEvent = () => { 
+  const confirmRemoveEvent = () => {
     (async function deleteEventFromDB() {
       try {
         const eventRef = doc(db, "users", user.uid, "calendarEvents", clickInfoState.event.id);
@@ -117,7 +117,6 @@ function CalendarComponent() {
     })()
     clickInfoState.event.remove();
     setShowDialogDeleteEvent(true)
-    
   }
 
   const handleEventDrop = async (info) => {
@@ -150,9 +149,9 @@ function CalendarComponent() {
         content="Are you sure you want to delete that event?"
       />
       <CalDialogCreate
-      showDialog={showDialogAddEvent}
-      onClose={() => setShowDialogAddEvent(false)}
-      onSubmit={handleDialogSubmit}
+        showDialog={showDialogAddEvent}
+        onClose={() => setShowDialogAddEvent(false)}
+        onSubmit={handleDialogSubmit}
       />
       <article className='demo-app-main'>
         <FullCalendar

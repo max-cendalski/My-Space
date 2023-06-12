@@ -40,24 +40,3 @@ const CalDialogCreate = ({ showDialog, onClose, onSubmit }) => {
 
 export default CalDialogCreate;
 
-    // const CalDialogCreate = ({ isOpen, onClose, onSubmit }) => {
-    //     if (!isOpen) return null;
-    //     return (
-    //         <article className="dialog-calendar">
-    //             <h3>Add new event</h3>
-    //             <form className='calendar-add-event-form' onSubmit={event => {
-    //                 event.preventDefault();
-    //                 onSubmit(event.target.elements.title.value);
-    //             }}>
-    //                 <p>
-    //                     <input type="text" name="title" />
-    //                     <button className="calendar-create-event-button" type="submit">Create event</button>
-    //                 </p>
-    //             </form>
-
-    //         </article>
-    //     );
-    // };
-
-    // export default CalDialogCreate;
-
