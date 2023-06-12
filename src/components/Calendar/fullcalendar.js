@@ -7,6 +7,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { UserAuth } from "../../context/AuthContext";
 import CalDialogDel from '../utils/CalDialogDel';
+import CalDialogCreate from '../utils/CalDialogCreate';
 
 function CalendarComponent() {
   const { user } = UserAuth();
@@ -56,12 +57,11 @@ function CalendarComponent() {
     // eslint-disable-next-line
   }, []);
 
-  useEffect(() => {
-    if (isDialogOpen) {
-      document.getElementsByTagName('input')[1].focus();
-    }
-  }, [isDialogOpen]);
-
+    // useEffect(() => {
+    //   if (isDialogOpen) {
+    //     document.getElementsByTagName('input')[1].focus();
+    //   }
+    // }, [isDialogOpen]);
 
 
   const handleWeekendsToggle = () => {
@@ -123,22 +123,6 @@ function CalendarComponent() {
     setCalDialogDel(false);
   }
 
-  // const handleEventClick = (clickInfo) => {
-  //   setEventToRemove(() => clickInfo.event.remove);
-  //   setCalDialogDel(true)
-  //   if (window.confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-
-  //     // (async function deleteEventFromDB() {
-  //     //   try {
-  //     //     const eventRef = doc(db, "users", user.uid, "calendarEvents", clickInfo.event.id);
-  //     //     await deleteDoc(eventRef);
-  //     //   } catch (err) {
-  //     //     console.error("ERROR:", err);
-  //     //   }
-  //     // })()
-  //     clickInfo.event.remove();
-  //   }
-  // }
 
   const handleEventDrop = async (info) => {
     const event = info.event;
@@ -156,17 +140,17 @@ function CalendarComponent() {
     setCurrentEvents(events);
   }
 
-  const MyDialog = ({ isOpen, onClose, children }) => {
-    if (!isOpen) return null;
-    return (
-      <article className="dialog-calendar">
-        <section className="dialog-calendar-content">
-          {children}
-          <button className="calendar-close-dialog-button" onClick={onClose}>Close</button>
-        </section>
-      </article>
-    );
-  };
+      // const MyDialog = ({ isOpen, onClose, children }) => {
+      //   if (!isOpen) return null;
+      //   return (
+      //     <article className="dialog-calendar">
+      //       <section className="dialog-calendar-content">
+      //         {children}
+      //         <button className="calendar-close-dialog-button" onClick={onClose}>Close</button>
+      //       </section>
+      //     </article>
+      //   );
+      // };
 
   return (
     <article className='calendar-container'>
@@ -181,18 +165,8 @@ function CalendarComponent() {
         content="Are you sure you want to delete that event?"
 
       />
-      <MyDialog isOpen={isDialogOpen} onClose={() => setDialogOpen(false)}>
-        <h3>Add new event</h3>
-        <form className='calendar-add-event-form' onSubmit={event => {
-          event.preventDefault();
-          handleDialogSubmit(event.target.elements.title.value);
-        }}>
-          <p>
-            <input type="text" name="title" />
-            <button className="calendar-create-event-button" type="submit">Create event</button>
-          </p>
-        </form>
-      </MyDialog>
+  
+    
       <article className='demo-app-main'>
         <FullCalendar
           ref={calendarRef}
@@ -260,3 +234,7 @@ export default CalendarComponent;
 
 
 
+// <CalDialogCreate
+// onClose={setDialogOpen(false)}
+// onSubmit={handleDialogSubmit}
+// 
