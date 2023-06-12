@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 
 
-const CalDialogCreate = ({ showDialog, onClose, onSubmit }) => {
+const CalendarDialogCreate = ({ showDialog, onClose, onSubmit }) => {
   const dialogRef = useRef(null);
   const inputRef = useRef(null)
 
@@ -13,7 +13,7 @@ const CalDialogCreate = ({ showDialog, onClose, onSubmit }) => {
 
 
   return (
-    <article id="calendar-dialog-section">
+    <article id="dialog-add-event-container">
       <dialog ref={dialogRef}>
         <h3>Add new event</h3>
         <form className='calendar-add-event-form'
@@ -27,7 +27,7 @@ const CalDialogCreate = ({ showDialog, onClose, onSubmit }) => {
           }}>
           <p>
             <input type="text" name="title" ref={inputRef} />
-            <button className="calendar-add-event-button" type="submit">Create event</button>
+            <button className="calendar-add-event-form-button" type="submit">Create event</button>
           </p>
           <footer>
           <button
@@ -43,5 +43,5 @@ const CalDialogCreate = ({ showDialog, onClose, onSubmit }) => {
   );
 };
 
-export default CalDialogCreate;
+export default CalendarDialogCreate;
 

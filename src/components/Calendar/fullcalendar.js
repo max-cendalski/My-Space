@@ -6,8 +6,8 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { UserAuth } from "../../context/AuthContext";
-import CalDialogDel from '../utils/CalendarDialogDel';
-import CalDialogCreate from '../utils/CalendarDialogAdd';
+import CalendarDialogDel from '../utils/CalendarDialogDel';
+import CalendarDialogCreate from '../utils/CalendarDialogAdd';
 
 function CalendarComponent() {
   const { user } = UserAuth();
@@ -119,7 +119,7 @@ function CalendarComponent() {
     setShowDialogDeleteEvent(true)
   }
 
-  const handleEventDrop = async (info) => {
+  const handleEventDrop = async (info) => { //Drag and drop function
     const event = info.event;
     try {
       await updateDoc(doc(db, "users", user.uid, "calendarEvents", event.id), {
@@ -142,13 +142,13 @@ function CalendarComponent() {
         weekendsVisible={weekendsVisible}
         onToggle={handleWeekendsToggle}
       />
-      <CalDialogDel
+      <CalendarDialogDel
         showDialog={showDialogDeleteEvent}
         onClose={() => setShowDialogDeleteEvent(false)}
         onConfirm={confirmRemoveEvent}
         content="Are you sure you want to delete that event?"
       />
-      <CalDialogCreate
+      <CalendarDialogCreate
         showDialog={showDialogAddEvent}
         onClose={() => setShowDialogAddEvent(false)}
         onSubmit={handleDialogSubmit}

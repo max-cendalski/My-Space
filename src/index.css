@@ -414,20 +414,16 @@ textarea {
 }
 
 .notes-error-msg-container {
-  font-size: 1rem;
-  padding: 0.3rem 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  background-color: var(--red);
-  color: white;
+  font-size: 1.1rem;
+  text-align: center;
+  position: fixed;
   box-shadow: 3px 4px 4px 4px rgb(0, 0, 0, 0.4);
-  top: 3rem;
-  left: 0;
-  right: 0;
-  width: 70%;
+  background-color: white;
+  top: 4rem;
+  width: 16rem;
   border-radius: 3px;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .overlay {
@@ -485,19 +481,23 @@ textarea {
   color: white;
 }
 
-
 dialog[open] {
   background-color: white;
   border: 1px solid black;
+  border-radius: 3px;
   margin: auto;
   animation: changing-opacity-open 0.3s forwards;
 }
 
+.calendar-close-dialog-button {
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+}
 
 .calendar-add-event-form p {
   display: flex;
   align-items: center;
-} 
+}
 
 .calendar-add-event-form input,
 .calendar-add-event-form button {
@@ -506,7 +506,6 @@ dialog[open] {
   height: 1.8rem;
 }
 
-
 .calendar-add-event-form input {
   width: 12rem;
   border-radius: 2px 0 0 2px;
@@ -514,7 +513,7 @@ dialog[open] {
   outline: none;
 }
 
-.calendar-add-event-button {
+.calendar-add-event-form-button {
   box-sizing: border-box;
   border-radius: 0 2px 2px 0;
   border: none;
@@ -523,23 +522,10 @@ dialog[open] {
   cursor: pointer;
 }
 
-.calendar-add-event-button:hover {
+.calendar-add-event-form-button:hover {
   transform: scale(1.05);
 }
 
-.calendar-add-event-form footer:nth-child(1) {
-  padding: 0.6rem
-}
-
-
-/*working*/
-.dialog-delete-event {
-  display: flex;
-  flex-direction: column;
-  width: 20rem;
-  border: none;
-  border-radius: 3px;
-}
 
 .dialog-delete-event-footer {
   display: flex;
@@ -548,10 +534,6 @@ dialog[open] {
   padding: 0.5rem;
 }
 
-.dialog-delete-event-footer button:nth-child(1) {
-  padding: 0.4rem 0.8rem;
-  cursor: pointer;
-}
 
 .dialog-delete-event-footer button:nth-child(2) {
   padding: 0.4rem 0.8rem;

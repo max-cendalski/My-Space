@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 
 
-const CalDialogDel = ({ showDialog, onClose, content, onConfirm }) => {
+const CalendarDialogDel = ({ showDialog, onClose, content, onConfirm }) => {
   const dialogRef = useRef(null);
 
   useEffect(() => {
@@ -16,11 +16,11 @@ const CalDialogDel = ({ showDialog, onClose, content, onConfirm }) => {
   }
 
   return (
-    <article className="dialog-delete-event">
+    <article id="dialog-delete-event">
       <dialog ref={dialogRef}>
         <p>{content}</p>
         <footer className="dialog-delete-event-footer">
-          <button onClick={onClose}>Close</button>
+          <button className="calendar-close-dialog-button" onClick={onClose}>Close</button>
           <button onClick={handleConfirm}>Delete </button>
         </footer>
 
@@ -29,16 +29,6 @@ const CalDialogDel = ({ showDialog, onClose, content, onConfirm }) => {
   );
 };
 
-export default CalDialogDel
+export default CalendarDialogDel
 
 
-
-  // useEffect(() => {
-  //   if (showDialog) {
-  //     dialogRef.current.showModal();
-  //   } else {
-  //     if (dialogRef.current.open) {
-  //       dialogRef.current.close();
-  //     }
-  //   }
-  // }, [showDialog]);
