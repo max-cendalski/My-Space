@@ -4,16 +4,7 @@ import React, { useEffect, useRef } from "react";
 
 const CalDialogCreate = ({ showDialog, onClose, content, onConfirm }) => {
     const dialogRef = useRef(null);
-  
-    // useEffect(() => {
-    //   if (showDialog) {
-    //     dialogRef.current.showModal();
-    //   } else {
-    //     if (dialogRef.current.open) {
-    //       dialogRef.current.close();
-    //     }
-    //   }
-    // }, [showDialog]);
+
   
   
     useEffect(() => {
@@ -28,13 +19,9 @@ const CalDialogCreate = ({ showDialog, onClose, content, onConfirm }) => {
     }
   
     return (
-      <article className="dialog-delete-event">
+      <article>
         <dialog ref={dialogRef}>
-          <p>{content}</p>
-          <footer className="dialog-delete-event-footer">
-            <button onClick={onClose}>Close</button>
-            <button onClick={handleConfirm}>Delete </button>
-          </footer>
+            <h1>add</h1>
   
         </dialog>
       </article>

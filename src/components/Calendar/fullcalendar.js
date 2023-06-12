@@ -16,7 +16,8 @@ function CalendarComponent() {
   const calendarRef = React.useRef(null);
 
   const [clickInfoState, setClickInfoState] = useState(null);
-  const [calDialogDel, setCalDialogDel] = useState(false)
+  const[showDialogDeleteEvent , setShowDialogDeleteEvent] = useState(false)
+  const[showDialogAddEvent , setShowDialogAddEvent] = useState(false)
 
 
   const [isDialogOpen, setDialogOpen] = useState(false);
@@ -57,11 +58,11 @@ function CalendarComponent() {
     // eslint-disable-next-line
   }, []);
 
-    // useEffect(() => {
-    //   if (isDialogOpen) {
-    //     document.getElementsByTagName('input')[1].focus();
-    //   }
-    // }, [isDialogOpen]);
+  // useEffect(() => {
+  //   if (isDialogOpen) {
+  //     document.getElementsByTagName('input')[1].focus();
+  //   }
+  // }, [isDialogOpen]);
 
 
   const handleWeekendsToggle = () => {
@@ -107,7 +108,7 @@ function CalendarComponent() {
   const handleEventClick = (clickInfo) => {
 
     setClickInfoState(clickInfo);
-    setCalDialogDel(true);
+    setShowDialogDeleteEvent(true)
   }
 
   const confirmRemoveEvent = () => {
@@ -120,7 +121,8 @@ function CalendarComponent() {
       }
     })()
     clickInfoState.event.remove();
-    setCalDialogDel(false);
+    setShowDialogDeleteEvent(true)
+    
   }
 
 
@@ -140,17 +142,6 @@ function CalendarComponent() {
     setCurrentEvents(events);
   }
 
-      // const MyDialog = ({ isOpen, onClose, children }) => {
-      //   if (!isOpen) return null;
-      //   return (
-      //     <article className="dialog-calendar">
-      //       <section className="dialog-calendar-content">
-      //         {children}
-      //         <button className="calendar-close-dialog-button" onClick={onClose}>Close</button>
-      //       </section>
-      //     </article>
-      //   );
-      // };
 
   return (
     <article className='calendar-container'>
@@ -159,14 +150,16 @@ function CalendarComponent() {
         onToggle={handleWeekendsToggle}
       />
       <CalDialogDel
-        showDialog={calDialogDel}
-        onClose={() => setCalDialogDel(false)}
+        showDialog={showDialogDeleteEvent}
+        onClose={() => setShowDialogDeleteEvent(false)}
         onConfirm={confirmRemoveEvent}
         content="Are you sure you want to delete that event?"
-
       />
-  
-    
+      <CalDialogCreate
+      showDialog={showDialogAddEvent}
+      onClose={() => setShowDialogAddEvent(false)}
+        onSubmit={handleDialogSubmit}
+      />
       <article className='demo-app-main'>
         <FullCalendar
           ref={calendarRef}
@@ -190,6 +183,7 @@ function CalendarComponent() {
           eventClick={handleEventClick}
           eventsSet={handleEvents}
         />
+
       </article>
 
 
@@ -234,7 +228,3 @@ export default CalendarComponent;
 
 
 
-// <CalDialogCreate
-// onClose={setDialogOpen(false)}
-// onSubmit={handleDialogSubmit}
-// 
