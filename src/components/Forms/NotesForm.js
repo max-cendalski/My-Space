@@ -1,6 +1,6 @@
 
-const NotesForm = ({ formData, handleChange, handleCancel, handleSubmit, canSave }) => {
 
+const NotesForm = ({ formData, handleChange, handleCancel, handleSubmit,inputRef}) => {
 
   return (
     <article className="notes-form-container">
@@ -10,6 +10,7 @@ const NotesForm = ({ formData, handleChange, handleCancel, handleSubmit, canSave
             Title
           </label>
           <input
+            ref={inputRef}
             type="text"
             name="title"
             value={formData.title}
