@@ -19,7 +19,7 @@ const Notes = () => {
         snapShot.docs.forEach((doc) => {
           notesList.push({ id: doc.id, ...doc.data() });
         });
-        setNotes(notesList);
+        setNotes(notesList.sort((a, b) => a.title.localeCompare(b.title)));
       },
       (err) => {
         console.log(err);
