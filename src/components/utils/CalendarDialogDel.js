@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 
 
-const CalendarDialogDel = ({ showDialog, onClose, content, onConfirm }) => {
+const CalendarDialogDel = ({ showDialog, onClose, onConfirm }) => {
   const dialogRef = useRef(null);
 
   useEffect(() => {
