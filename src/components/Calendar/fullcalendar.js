@@ -146,7 +146,6 @@ function CalendarComponent() {
         showDialog={showDialogDeleteEvent}
         onClose={() => setShowDialogDeleteEvent(false)}
         onConfirm={confirmRemoveEvent}
-        content="Are you sure you want to delete that event?"
       />
       <CalendarDialogCreate
         showDialog={showDialogAddEvent}
@@ -156,7 +155,7 @@ function CalendarComponent() {
       <article className='demo-app-main'>
         <FullCalendar
           ref={calendarRef}
-          longPressDelay={500} // sets the delay for press and hold
+          longPressDelay={400} // sets the delay for press and hold
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           headerToolbar={{
             left: 'prev,next today',

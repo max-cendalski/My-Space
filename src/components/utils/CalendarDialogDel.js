@@ -18,12 +18,11 @@ const CalendarDialogDel = ({ showDialog, onClose, content, onConfirm }) => {
   return (
     <article id="dialog-delete-event">
       <dialog ref={dialogRef}>
-        <p>{content}</p>
+        <p>Are you sure you want to delete that event?</p>
         <footer className="dialog-delete-event-footer">
           <button className="calendar-close-dialog-button" onClick={onClose}>Close</button>
           <button onClick={handleConfirm}>Delete </button>
         </footer>
-
       </dialog>
     </article>
   );

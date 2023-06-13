@@ -444,7 +444,6 @@ textarea {
   min-height: 100%;
   font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
   font-size: 14px;
-
 }
 
 .fc .fc-toolbar-title {
@@ -482,10 +481,10 @@ textarea {
 }
 
 dialog[open] {
+  top: -20%;
   background-color: white;
   border: 1px solid black;
   border-radius: 3px;
-  margin: auto;
   animation: changing-opacity-open 0.3s forwards;
 }
 
@@ -526,14 +525,12 @@ dialog[open] {
   transform: scale(1.05);
 }
 
-
 .dialog-delete-event-footer {
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
   padding: 0.5rem;
 }
-
 
 .dialog-delete-event-footer button:nth-child(2) {
   padding: 0.4rem 0.8rem;

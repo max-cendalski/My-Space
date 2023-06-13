@@ -138,7 +138,7 @@ const Weather = () => {
       (item) => item !== location
     );
 
-     (async () => {
+    (async () => {
       try {
         await setDoc(
           doc(db, "users", user.uid, "weatherLocations", location.id),
@@ -163,7 +163,7 @@ const Weather = () => {
   };
 
   const handleDeleteLocation = (location) => {
-      (async () => {
+    (async () => {
       try {
         await deleteDoc(
           doc(db, "users", user.uid, "weatherLocations", location.id)
@@ -269,13 +269,15 @@ const Weather = () => {
               searchedLocations.map((location, index) => (
                 <section
                   className="searched-locations"
-                  onClick={() => handleAddLocationToDB(location)}
+
                   key={location.city}
                 >
                   <section className="temperature-section">
                     {location.city} : {location.temp}&deg;F
                   </section>
-                  <button className="add-location-button">
+                  <button
+                    className="add-location-button"
+                    onClick={() => handleAddLocationToDB(location)}>
                     <i className="fa-solid fa-plus fa-2xl"></i>
                   </button>
                 </section>

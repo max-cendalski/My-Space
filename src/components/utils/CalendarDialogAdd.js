@@ -27,16 +27,18 @@ const CalendarDialogCreate = ({ showDialog, onClose, onSubmit }) => {
           }}>
           <p>
             <input type="text" name="title" ref={inputRef} />
-            <button className="calendar-add-event-form-button" type="submit">Create event</button>
+            <button className="calendar-add-event-form-button"
+              type="submit"
+            >Create event</button>
           </p>
           <footer>
-          <button
-            className="calendar-close-dialog-button"
-            onClick={() => {
-              onClose();
-              inputRef.current.value = '';
-            }} >Close</button>
-        </footer>
+            <button
+              className="calendar-close-dialog-button"
+              onClick={() => {
+                onClose();
+                inputRef.current.value = '';
+              }} >Close</button>
+          </footer>
         </form>
       </dialog>
     </article>
