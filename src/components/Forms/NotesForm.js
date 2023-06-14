@@ -1,6 +1,6 @@
 
 
-const NotesForm = ({ formData, handleChange, handleCancel, handleSubmit,inputRef}) => {
+const NotesForm = ({ formData, handleChange, handleCancel, handleSubmit, inputRef }) => {
 
   return (
     <article className="notes-form-container">

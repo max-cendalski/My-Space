@@ -85,6 +85,7 @@ const Weather = () => {
       } finally {
         setLocationsFromDB(locationsFromDB);
       }
+      console.log('searchlocation,',searchedLocations)
     })();
   }, [searchedLocations, user.uid]);
 
@@ -225,19 +226,22 @@ const Weather = () => {
                 id={location.id}
                 key={location.id}
               >
-                <p className="location-header">
-                  {location.city} - {location.temp}&deg;F
-                </p>
-                <button
-                  className="down-arrow-button"
-                  onClick={() => handleDBLocationArrowClick(location)}
-                >
-                  {location.extend === true ? (
-                    <i className="fa-solid fa-angle-up fa-xl"></i>
-                  ) : (
-                    <i className="fa-solid fa-angle-down fa-xl"></i>
-                  )}
-                </button>
+                <header className="weather-detail-location-header">
+                  <p >
+                    {location.city} - {location.temp}&deg;F
+                  </p>
+                  <button
+                    className="down-arrow-button"
+                    onClick={() => handleDBLocationArrowClick(location)}
+                  >
+                    {location.extend === true ? (
+                      <i className="fa-solid fa-angle-up fa-xl"></i>
+                    ) : (
+                      <i className="fa-solid fa-angle-down fa-xl"></i>
+                    )}
+                  </button>
+                </header>
+
                 <section className="detail-location-data">
                   <p>Feels like {location.tempFeelsLike}&deg;F</p>
                   <p>

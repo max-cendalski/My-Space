@@ -904,8 +904,21 @@ dialog::backdrop {
 }
 
 #places-autocomplete-section {
-  margin-block-start: 2rem;
+  margin-block-start: 1rem;
   width: 100%;
+}
+
+#places-autocomplete-section input {
+  width: 60%;
+  height: 1.8rem;
+  font-size: 1rem;
+  padding-inline-start: 0.4rem;
+  box-sizing: border-box;
+}
+
+#places-autocomplete-section input:focus {
+  border: 2px solid var(--lightPink) !important;
+  outline: none;
 }
 
 .autocomplete-dropdown-container {
@@ -917,17 +930,18 @@ dialog::backdrop {
   background-color: var(--darkGreen);
   color: white;
   cursor: pointer;
-}
+  padding: 0.3rem;
+  box-shadow: 3px 4px 4px 4px rgb(0, 0, 0, 0.4);
 
+}
 
 .single-location {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
   margin-block-start: 1rem;
-  border: 1px solid rgb(193, 190, 190);
-  height: 2.5rem;
-  transition: 0.2s linear;
+  border: 1px solid rgb(133, 130, 130);
+  height: 3.4rem;
+  transition: 0.15s linear;
   overflow: hidden;
   border-radius: 5px;
 }
@@ -936,24 +950,25 @@ dialog::backdrop {
   display: flex;
   flex-wrap: wrap;
   margin-block-start: 1rem;
-  border: 1px solid rgb(193, 190, 190);
-  height: 29rem;
+  border: 1px solid var(--lightPink);
+  height: 28rem;
   transition: 0.3s linear;
   overflow: hidden;
   border-radius: 5px;
 }
 
-.location-header {
-  width: 80%;
+.weather-detail-location-header {
+  box-sizing: border-box;
+  display: flex;
+  align-items: baseline;
+  width: 100%;
   font-size: 1rem;
   font-weight: 500;
-  margin-inline-start: 0.3rem;
-  margin-block-start: 0.5rem;
+  padding-inline-start: 0.4rem;
 }
 
 .detail-location-data {
-  padding-inline-start: 0.3rem;
-
+  padding-inline-start: 0.4rem;
 }
 
 .down-arrow-button {
@@ -962,7 +977,6 @@ dialog::backdrop {
   color: var(--darkGreen);
   background-color: white;
   border: none;
-  border-radius: 3px;
   cursor: pointer;
 }
 
@@ -971,7 +985,7 @@ dialog::backdrop {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  padding: 0.5rem;
+  padding: 0.4rem;
   border: 1px solid rgb(222, 222, 222);
   margin-block-start: 2rem;
 }
