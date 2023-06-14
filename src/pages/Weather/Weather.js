@@ -34,18 +34,7 @@ const Weather = () => {
           locationsFromDB.push({ id: doc.id, ...doc.data() });
         });
 
-        locationsFromDB.sort((a, b) => {
-          const cityA = a.city.toUpperCase();
-          const cityB = b.city.toUpperCase();
-          if (cityA < cityB) {
-            return -1;
-          }
-          if (cityA > cityB) {
-            return 1;
-          } else {
-            return 0;
-          }
-        });
+        locationsFromDB.sort((a, b) => a.city.toUpperCase().localeCompare(b.city.toUpperCase()));
         for (const location of locationsFromDB) {
           urls.push(
             `https://api.openweathermap.org/data/3.0/onecall?lat=${location.coordinates.lat}&lon=${location.coordinates.lng}&units=imperial&exclude=minutely,hourly,daily&appid=${weatherApiKey}`
@@ -85,7 +74,6 @@ const Weather = () => {
       } finally {
         setLocationsFromDB(locationsFromDB);
       }
-      console.log('searchlocation,',searchedLocations)
     })();
   }, [searchedLocations, user.uid]);
 
