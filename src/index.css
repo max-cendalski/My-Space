@@ -1046,6 +1046,16 @@ dialog::backdrop {
 
 /*TIC TAC TOE*/
 
+
+.ttt-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: sans-serif;
+  text-align: center;
+  background-color: antiquewhite;
+}
+
 .ttt-game-area-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

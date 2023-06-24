@@ -96,7 +96,7 @@ function Square({ value, onClick }) {
   );
 }
 
-export default function App() {
+export default function TttComponent() {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [isXNext, setIsXNext] = useState(true);
 
@@ -116,7 +116,7 @@ export default function App() {
   }
 
   return (
-    <div className="App">
+    <article className="ttt-container">
       <h1>Hello CodeSandbox</h1>
       <button onClick={() => setSquares(Array(9).fill(null))}>RESET</button>
       <article className="ttt-game-area-container">
@@ -128,6 +128,6 @@ export default function App() {
           />
         ))}
       </article>
-    </div>
+    </article>
   );
 }
