@@ -19,14 +19,11 @@ export default function TttComponent() {
 
     const handleSquareClick = (index) => {
         const newSquares = squares.slice();
-        newSquares[index].value = "X"
-
+        newSquares[index].value = userSign
         setSquares(newSquares);
     }
 
-    useEffect(()=> {
-        console.log('userSign',userSign)
-    },[userSign])
+
 
     return (
         <>
