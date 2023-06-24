@@ -1062,6 +1062,12 @@ dialog::backdrop {
   grid-gap: 2px;
 }
 
+.value-choose-section button {
+  padding-inline: 1rem;
+  margin-inline: 3rem;
+  margin-block-end: 2rem;
+}
+
 .ttt-square {
   display: flex;
   justify-content: center;

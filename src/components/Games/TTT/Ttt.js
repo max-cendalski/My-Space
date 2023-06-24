@@ -9,27 +9,24 @@ export default function TttComponent() {
         index: i,
         clicked: false,
         value: ""
-      })))           
-    //const [isXNext, setIsXNext] = useState(true);
+    })))
+    const [userSign, setUserSign] = useState("")
+
 
     useEffect(() => {
         console.log('squares', squares)
     })
 
-    function handleClick(index) {
-        // if (squares[index] !== null) {
-        //     return;
-        // }
-        console.log('index',index)
-        const newSquares = squares.slice(); // Copy the array
-        newSquares[index].value = "X"// = isXNext ? "X" : "O"; // Fill the clicked square with 'X' or 'O'
+    const handleSquareClick = (index) => {
+        const newSquares = squares.slice();
+        newSquares[index].value = "X"
 
-        // Update the squares state
         setSquares(newSquares);
-
-        // Switch the player
-        //setIsXNext(!isXNext);
     }
+
+    useEffect(()=> {
+        console.log('userSign',userSign)
+    },[userSign])
 
     return (
         <>
@@ -39,13 +36,18 @@ export default function TttComponent() {
                     index: i,
                     clicked: false,
                     value: ""
-                  })))}>RESET</button>
+                })))}>RESET</button>
+                <section className="value-choose-section">
+                    <h3>Choose your sign </h3>
+                    <button value="X" onClick={(e)=> setUserSign(e.target.value)}>X</button>
+                    <button value="O" onClick={(e)=> setUserSign(e.target.value)}>O</button>
+                </section>
                 <article className="ttt-game-area-container">
                     {squares.map(item => (
                         <Square
                             key={item.index}
                             value={item.value}
-                            onClick={() => handleClick(item.index)}
+                            onClick={() => handleSquareClick(item.index)}
                         />
                     ))}
 
