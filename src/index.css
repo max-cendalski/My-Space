@@ -944,6 +944,7 @@ dialog::backdrop {
   transition: 0.15s linear;
   overflow: hidden;
   border-radius: 5px;
+  color: white;
 }
 
 .detail-location {
@@ -951,8 +952,8 @@ dialog::backdrop {
   flex-wrap: wrap;
   margin-block-start: 1rem;
   border: 1px solid var(--lightPink);
-  height: 28rem;
-  transition: 0.3s linear;
+  height: 29rem;
+  transition: 0.4s ease-in-out;
   overflow: hidden;
   border-radius: 5px;
 }
@@ -965,6 +966,7 @@ dialog::backdrop {
   font-size: 1rem;
   font-weight: 500;
   padding-inline-start: 0.4rem;
+  color: black;
 }
 
 .detail-location-data {
@@ -1011,7 +1013,7 @@ dialog::backdrop {
   background-color: var(--darkGreen);
   margin-block-start: 1rem;
   padding-block: 0.375rem;
-  border-radius: 3px;
+  border-radius: 0 0 3px 3px;
   border: none;
   cursor: pointer;
 }
