@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { UserAuth } from "../../context/AuthContext";
@@ -14,15 +14,16 @@ const AddNote = ({ isVisible, handleFormState }) => {
     date: "",
   });
   const [errorMsg, setErrorMsg] = useState(false);
+  const inputRef = useRef(null);
 
   const canSave = [...Object.values(formData)].every(Boolean);
 
   const handleAddNote = (e) => {
     if (!canSave) {
       setErrorMsg(true);
-      setTimeout(()=> {
+      setTimeout(() => {
         setErrorMsg(false)
-      },3000)
+      }, 3000)
       return;
     }
     const addNote = async () => {
@@ -43,7 +44,7 @@ const AddNote = ({ isVisible, handleFormState }) => {
 
   const handleChange = (e) => {
     setErrorMsg(false)
-    const {name, value} = e.target
+    const { name, value } = e.target
 
     setFormData((prevData) => ({
       ...prevData,
@@ -52,9 +53,17 @@ const AddNote = ({ isVisible, handleFormState }) => {
     }));
   };
 
+  useEffect(() => {
+    if (!isVisible && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isVisible]);
+
+
   return (
     <article className={isVisible ? "hidden" : ""}>
       <NotesForm
+        inputRef={inputRef}
         formData={formData}
         handleChange={handleChange}
         handleCancel={handleFormState}

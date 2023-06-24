@@ -5,22 +5,25 @@ import { getDoc, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import Navbar from "../../components/Navbar/Navbar";
 import { format } from "date-fns";
+import Clock from 'react-clock'
+import 'react-clock/dist/Clock.css';
 
 const Home = () => {
   const [idea, setIdea] = useState(null);
   const { user } = UserAuth();
-  const [currentTime, setCurrentTime] = useState("");
   const [currentDay, setCurrentDay] = useState("");
   const [homepageWeather, setHomepageWeather] = useState(null);
+
+  const [value, setValue] = useState(new Date());
 
   useEffect(() => {
     const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
     setCurrentDay(format(new Date(), "E, MMMM dd"));
-    setCurrentTime(format(new Date(), "pp"));
+    const interval = setInterval(() => setValue(new Date()), 1000);
 
-    const timeInterval = setInterval(() => {
-      setCurrentTime(format(new Date(), "pp"));
-    }, 1000);
+
+
+
 
     (async () => {
       try {
@@ -34,18 +37,18 @@ const Home = () => {
         const docSnap = await getDoc(locationHomeRef);
         if (docSnap.exists()) {
           fetch(
-            `https://api.openweathermap.org/data/3.0/onecall?lat=${
-              docSnap.data().coordinates.lat
-            }&lon=${
-              docSnap.data().coordinates.lng
+            `https://api.openweathermap.org/data/3.0/onecall?lat=${docSnap.data().coordinates.lat
+            }&lon=${docSnap.data().coordinates.lng
             }&units=imperial&exclude=minutely,hourly,daily,alerts&appid=${weatherApiKey}`
           )
             .then((res) => res.json())
             .then((data) => {
               setHomepageWeather({
                 city: docSnap.data().city,
-                temp: data.current.temp,
-                clouds: data.current.weather[0].description,
+                temp: Math.round(data.current.temp),
+                description: data.current.weather[0].description,
+                img: data.current.weather[0].icon,
+                humidity: data.current.humidity
               });
             });
         } else {
@@ -54,6 +57,7 @@ const Home = () => {
       } catch (err) {
         console.log("SOMETHING WENT WRONG", err);
       }
+
     })();
 
     const fetchIdea = async () => {
@@ -69,10 +73,10 @@ const Home = () => {
         if (docSnap.exists()) {
           setIdea(docSnap.data());
         } else {
-          console.log("No such document!");
+          console.log("No idea added to homepage!");
         }
       } catch (err) {
-        console.error("SOMETHING WENT WRONG:", err);
+        console.error("Something went wrong:", err);
       }
     };
 
@@ -80,8 +84,9 @@ const Home = () => {
       fetchIdea();
     }
     return () => {
-      clearInterval(timeInterval);
+      clearInterval(interval);
     };
+
     // eslint-disable-next-line
   }, []);
 
@@ -111,16 +116,26 @@ const Home = () => {
   return (
     <article id="home-container">
       <Navbar />
-      <article id="time-location-container">
-        <section className="time-container">
-          <h4>{currentDay}</h4>
-          <h2>{currentTime}</h2>
+      <article id="time-location-homepage-container">
+        <section className="time-homepage">
+          <p>{currentDay}</p>
+          <Clock value={value}
+            renderNumbers={true}
+            size={120}
+          />
+
         </section>
         {homepageWeather &&
-          <section className="location-homepage-container">
-            <h4>{homepageWeather.city}</h4>
-            <h2>{homepageWeather.temp}&deg;</h2>
-            <p>{homepageWeather.clouds}</p>
+          <section className="weather-homepage">
+            <p>{homepageWeather.city}</p>
+            <section className="weather-homepage-temp-image-section">
+              <img className="weather-image"
+                src={`https://openweathermap.org/img/wn/${homepageWeather.img}@4x.png`} alt='weather icon'
+              ></img>
+              <p>{homepageWeather.temp}&deg;</p>
+            </section>
+            <p>{homepageWeather.description}</p>
+            <p>Humidity: {homepageWeather.humidity} %</p>
           </section>
         }
       </article>
@@ -164,19 +179,3 @@ const Home = () => {
 };
 
 export default Home;
-
-/*      {idea && (
-        <section className="idea-homepage-visible">
-          <button
-            className="down-arrow-button"
-            onClick={() => handleIdeaHomepageArrowButton(idea)}
-          >
-            {idea.extend === true ? (
-              <i className="fa-solid fa-angle-up fa-2xl"></i>
-            ) : (
-              <i className="fa-solid fa-angle-down fa-2xl"></i>
-            )}
-          </button>
-          <q>{idea.text}</q>
-        </section>
-      )} */

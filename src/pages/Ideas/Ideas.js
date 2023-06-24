@@ -51,7 +51,6 @@ const Ideas = () => {
   }, []);
 
   const handleGenerateIdeas = () => {
-    console.log("handlegenclicked");
     var numbers = [];
     var number = 0;
     for (var i = 0; i < 3; i++) {

@@ -34,18 +34,7 @@ const Weather = () => {
           locationsFromDB.push({ id: doc.id, ...doc.data() });
         });
 
-        locationsFromDB.sort((a, b) => {
-          const cityA = a.city.toUpperCase();
-          const cityB = b.city.toUpperCase();
-          if (cityA < cityB) {
-            return -1;
-          }
-          if (cityA > cityB) {
-            return 1;
-          } else {
-            return 0;
-          }
-        });
+        locationsFromDB.sort((a, b) => a.city.toUpperCase().localeCompare(b.city.toUpperCase()));
         for (const location of locationsFromDB) {
           urls.push(
             `https://api.openweathermap.org/data/3.0/onecall?lat=${location.coordinates.lat}&lon=${location.coordinates.lng}&units=imperial&exclude=minutely,hourly,daily&appid=${weatherApiKey}`
@@ -138,7 +127,7 @@ const Weather = () => {
       (item) => item !== location
     );
 
-     (async () => {
+    (async () => {
       try {
         await setDoc(
           doc(db, "users", user.uid, "weatherLocations", location.id),
@@ -163,7 +152,7 @@ const Weather = () => {
   };
 
   const handleDeleteLocation = (location) => {
-      (async () => {
+    (async () => {
       try {
         await deleteDoc(
           doc(db, "users", user.uid, "weatherLocations", location.id)
@@ -215,7 +204,7 @@ const Weather = () => {
 
         <article id="locations-fromDB-container">
           {!isLoading &&
-            locationsFromDB.map((location, index) => (
+            locationsFromDB.map(location => (
               <section
                 className={
                   location.extend === true
@@ -225,19 +214,22 @@ const Weather = () => {
                 id={location.id}
                 key={location.id}
               >
-                <p className="location-header">
-                  {location.city} - {location.temp}&deg;F
-                </p>
-                <button
-                  className="down-arrow-button"
-                  onClick={() => handleDBLocationArrowClick(location)}
-                >
-                  {location.extend === true ? (
-                    <i className="fa-solid fa-angle-up fa-xl"></i>
-                  ) : (
-                    <i className="fa-solid fa-angle-down fa-xl"></i>
-                  )}
-                </button>
+                <header className="weather-detail-location-header">
+                  <p >
+                    {location.city} - {location.temp}&deg;F
+                  </p>
+                  <button
+                    className="down-arrow-button"
+                    onClick={() => handleDBLocationArrowClick(location)}
+                  >
+                    {location.extend === true ? (
+                      <i className="fa-solid fa-angle-up fa-xl"></i>
+                    ) : (
+                      <i className="fa-solid fa-angle-down fa-xl"></i>
+                    )}
+                  </button>
+                </header>
+
                 <section className="detail-location-data">
                   <p>Feels like {location.tempFeelsLike}&deg;F</p>
                   <p>
@@ -269,13 +261,15 @@ const Weather = () => {
               searchedLocations.map((location, index) => (
                 <section
                   className="searched-locations"
-                  onClick={() => handleAddLocationToDB(location)}
+
                   key={location.city}
                 >
                   <section className="temperature-section">
                     {location.city} : {location.temp}&deg;F
                   </section>
-                  <button className="add-location-button">
+                  <button
+                    className="add-location-button"
+                    onClick={() => handleAddLocationToDB(location)}>
                     <i className="fa-solid fa-plus fa-2xl"></i>
                   </button>
                 </section>

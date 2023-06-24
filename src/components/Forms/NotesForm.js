@@ -1,6 +1,6 @@
 
-const NotesForm = ({formData, handleChange,handleCancel,handleSubmit,canSave}) => {
 
+const NotesForm = ({ formData, handleChange, handleCancel, handleSubmit, inputRef }) => {
 
   return (
     <article className="notes-form-container">
@@ -10,6 +10,7 @@ const NotesForm = ({formData, handleChange,handleCancel,handleSubmit,canSave}) =
             Title
           </label>
           <input
+            ref={inputRef}
             type="text"
             name="title"
             value={formData.title}
@@ -20,20 +21,20 @@ const NotesForm = ({formData, handleChange,handleCancel,handleSubmit,canSave}) =
           <label className="label-standard" htmlFor="text">
             Text
           </label>
-          <textarea
-            type="textarea"
-            name="text"
-            value={formData.text}
-            onChange={handleChange}
-          />
         </p>
+        <textarea
+          type="textarea"
+          name="text"
+          value={formData.text}
+          onChange={handleChange}
+        />
       </form>
       <footer className="notes-form-footer">
-        <button className="note-button note-cancel-button" onClick={handleCancel}>
+        <button className="note-form-button note-cancel-button" onClick={handleCancel}>
           Cancel
         </button>
         <button
-          className="note-button note-submit-button"
+          className="note-form-button note-submit-button"
           onClick={handleSubmit}
         >
           Submit
