@@ -1044,6 +1044,88 @@ dialog::backdrop {
   width: 95%;
 }
 
+/*TIC TAC TOE*/
+
+.ttt-game-area-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  width: 380px;
+  height: 380px;
+  background-color: #9e8d73;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  grid-gap: 2px;
+}
+
+.ttt-square {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5deb3;
+}
+
+.filled {
+  pointer-events: none;
+}
+
+.circle-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.circle {
+  fill: none;
+  stroke: #f5deb3;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: drawCircle 0.5s linear forwards;
+}
+
+@keyframes drawCircle {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.x-svg {
+  height: 100%;
+  width: 100%;
+}
+
+.x-line1,
+.x-line2 {
+  stroke: #f5deb3;
+  stroke-width: 3;
+  stroke-dasharray: 50;
+  stroke-dashoffset: 50;
+}
+
+.x-line1 {
+  animation: drawX 0.3s linear forwards;
+}
+
+.x-line2 {
+  animation: drawX 0.3s linear forwards 0.4s;
+}
+
+@keyframes drawX {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
 /* ------------------*/
 .date-paragraph {
   font-style: italic;
