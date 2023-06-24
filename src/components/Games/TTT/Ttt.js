@@ -1,12 +1,16 @@
 import Navbar from "../../Navbar/Navbar";
 import Square from "./Square";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 
 
 export default function TttComponent() {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [isXNext, setIsXNext] = useState(true);
+
+  useEffect(()=> {
+    console.log('square',squares)
+  })
 
   function handleClick(index) {
     if (squares[index] !== null) {

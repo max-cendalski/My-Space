@@ -439,6 +439,7 @@ textarea {
 
 /* CALENDAR */
 
+
 #calendar-container {
   display: flex;
   min-height: 100%;
@@ -1034,18 +1035,12 @@ dialog::backdrop {
 }
 
 
-/*CALENDAR */
 
-#calendar-container {
-  width: 100%;
-}
 
-.calendar-header-container {
-  width: 95%;
-}
+
+
 
 /*TIC TAC TOE*/
-
 
 .ttt-container {
   display: flex;
