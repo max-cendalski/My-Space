@@ -1,3 +1,4 @@
+import Navbar from "../../Navbar/Navbar";
 import Square from "./Square";
 import { useState } from "react";
 
@@ -23,8 +24,9 @@ export default function TttComponent() {
   }
 
   return (
-    <article className="ttt-container">
-      <h1>Hello CodeSandbox</h1>
+    <>
+      <Navbar />
+      <article className="ttt-container">
       <button onClick={() => setSquares(Array(9).fill(null))}>RESET</button>
       <article className="ttt-game-area-container">
         {squares.map((value, index) => (
@@ -34,7 +36,10 @@ export default function TttComponent() {
             onClick={() => handleClick(index)}
           />
         ))}
+      
       </article>
-    </article>
+  
+      </article>
+    </>
   );
 }
