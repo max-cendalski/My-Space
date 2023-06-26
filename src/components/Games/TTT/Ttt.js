@@ -14,14 +14,20 @@ export default function TttComponent() {
 
 
     useEffect(() => {
-        console.log('squares', squares)
-    })
+        var randomSquares = squares.slice()
+        console.log('rand',randomSquares)
+        
+    },[squares])
 
     const handleSquareClick = (index) => {
+        if (userSign === "") return
         const newSquares = squares.slice();
         newSquares[index].value = userSign
-        setSquares(newSquares);
 
+        //newSquares[index + 1].value = userSign === "X" ? "O" : "X"
+        
+
+        setSquares(newSquares);
     }
 
 
