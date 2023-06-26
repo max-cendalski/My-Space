@@ -11,10 +11,14 @@ export default function TttComponent() {
         value: ""
     })))
     const [userSettings, setUserSettings] = useState({
-        sign: "",
-        gameMode: ""
+        sign: "X",
+        gameMode: "easy"
     })
 
+
+    useEffect(()=> {
+        console.log('userSettings',userSettings)
+    },[userSettings])
 
     const handleSquareClick = (index) => {
         if (userSettings.sign === "") return;
@@ -36,9 +40,12 @@ export default function TttComponent() {
         }, 800);
     }
 
-    const handleSettingsChange = (e) => {
-        setUserSettings((prevState)=> ({
-            ...prevState, [e.target.name]: e.target.value
+    const handleSettingsChange = ({ target }) => {
+        let valu = squares.some(item => item.value !=="")
+        console.log('value',valu)
+     
+        setUserSettings((prevState) => ({
+            ...prevState, [target.name]: target.value
         }))
     }
 
@@ -56,11 +63,11 @@ export default function TttComponent() {
                     setUserSettings({ sign: "X", gameMode: "easy" })
                 }}>RESET</button>
                 <section className="sign-lvl-choose-section">
-                    <select className="ttt-select-container" value={userSettings.sign} name="sign" onChange={handleSettingsChange}>
-                        <option  value="X">Your sign:  X</option>
-                        <option  value="O">Your sign:  O</option>
+                    <select className="ttt-select-container" value={userSettings.sign} name="sign" onChange={handleSettingsChange} disabled={ squares.some(item => item.value !=="")}>
+                        <option value="X">Your sign:  X</option>
+                        <option value="O">Your sign:  O</option>
                     </select>
-                    <select className="ttt-select-container" value={userSettings.gameMode} name="gameMode" onChange={handleSettingsChange}>
+                    <select className="ttt-select-container" value={userSettings.gameMode} name="gameMode" onChange={handleSettingsChange} disabled={ squares.some(item => item.value !=="")}>
                         <option value="easy">Difficult Level: Easy</option>
                         <option value="hard">Difficult Level: Hard</option>
                     </select>

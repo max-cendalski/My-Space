@@ -1063,12 +1063,14 @@ dialog::backdrop {
 }
 
 .sign-lvl-choose-section {
+  display: flex;
+  justify-content: space-between;
   width: 380px;
   margin-block: 2rem;
 }
 
 .ttt-select-container {
-  margin-inline-end:4rem ;
+  
 }
 
 .ttt-square {
