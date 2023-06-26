@@ -31,7 +31,7 @@ export default function TttComponent() {
                 newSquares[squareTochange].value = userSign === "X" ? "O" : "X";
                 setSquares(newSquares);
             }
-        }, 600); 
+        }, 800); 
     }
     
 
@@ -50,9 +50,14 @@ export default function TttComponent() {
                     setUserSign("")
                 }}>RESET</button>
                 <section className="value-choose-section">
-                    <h3>Choose your sign </h3>
-                    <button value="X" disabled={userSign} onClick={(e) => setUserSign(e.target.value)}>X</button>
-                    <button value="O" disabled={userSign} onClick={(e) => setUserSign(e.target.value)}>O</button>
+                    <select>
+                        <option>Your sign is X</option>
+                        <option>Your sign is O</option>
+                    </select>
+                    <select>
+                    <option>Your sign is X</option>
+                    <option>Your sign is O</option>
+                </select>
                 </section>
                 <article className="ttt-game-area-container">
                     {squares.map(item => (

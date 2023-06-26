@@ -1062,7 +1062,7 @@ dialog::backdrop {
   grid-gap: 2px;
 }
 
-.value-choose-section button {
+.value-choose-section {
   padding-inline: 1rem;
   margin-inline: 3rem;
   margin-block-end: 2rem;
