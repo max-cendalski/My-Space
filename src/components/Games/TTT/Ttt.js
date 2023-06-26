@@ -40,7 +40,7 @@ export default function TttComponent() {
         }, 800);
     }
 
-    const handleSettingsChange = ({ target }) => {
+    const handleUserSettingsChange = ({ target }) => {
         let valu = squares.some(item => item.value !=="")
         console.log('value',valu)
      
@@ -60,14 +60,13 @@ export default function TttComponent() {
                         value: ""
                     }))
                     setSquares(newSquares)
-                    setUserSettings({ sign: "X", gameMode: "easy" })
                 }}>RESET</button>
                 <section className="sign-lvl-choose-section">
-                    <select className="ttt-select-container" value={userSettings.sign} name="sign" onChange={handleSettingsChange} disabled={ squares.some(item => item.value !=="")}>
+                    <select className="ttt-select-container" value={userSettings.sign} name="sign" onChange={handleUserSettingsChange} disabled={ squares.some(item => item.value !=="")}>
                         <option value="X">Your sign:  X</option>
                         <option value="O">Your sign:  O</option>
                     </select>
-                    <select className="ttt-select-container" value={userSettings.gameMode} name="gameMode" onChange={handleSettingsChange} disabled={ squares.some(item => item.value !=="")}>
+                    <select className="ttt-select-container" value={userSettings.gameMode} name="gameMode" onChange={handleUserSettingsChange} disabled={ squares.some(item => item.value !=="")}>
                         <option value="easy">Difficult Level: Easy</option>
                         <option value="hard">Difficult Level: Hard</option>
                     </select>
@@ -83,7 +82,7 @@ export default function TttComponent() {
 
                 </article>
 
-            </article >
+            </article>
         </>
     );
 }
