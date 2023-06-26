@@ -13,22 +13,27 @@ export default function TttComponent() {
     const [userSign, setUserSign] = useState("")
 
 
-    useEffect(() => {
-        var randomSquares = squares.slice()
-        console.log('rand',randomSquares)
-        
-    },[squares])
 
     const handleSquareClick = (index) => {
-        if (userSign === "") return
-        const newSquares = squares.slice();
-        newSquares[index].value = userSign
-
-        //newSquares[index + 1].value = userSign === "X" ? "O" : "X"
-        
-
+        if (userSign === "") return;
+    
+        var newSquares = squares.slice();
+        newSquares[index].value = userSign;
+    
         setSquares(newSquares);
+    
+        setTimeout(() => {
+            var squaresNotClicked = squares.filter(item => item.value === "");
+    
+            if (squaresNotClicked.length > 0) {
+                var squareTochange = squaresNotClicked[Math.floor(Math.random() * squaresNotClicked.length)].index;
+                newSquares = squares.slice();
+                newSquares[squareTochange].value = userSign === "X" ? "O" : "X";
+                setSquares(newSquares);
+            }
+        }, 600); 
     }
+    
 
 
     return (
