@@ -10,31 +10,37 @@ export default function TttComponent() {
         clicked: false,
         value: ""
     })))
-    const [userSign, setUserSign] = useState("")
-
+    const [userSettings, setUserSettings] = useState({
+        sign: "",
+        gameMode: ""
+    })
 
 
     const handleSquareClick = (index) => {
-        if (userSign === "") return;
-    
+        if (userSettings.sign === "") return;
+
         var newSquares = squares.slice();
-        newSquares[index].value = userSign;
-    
+        newSquares[index].value = userSettings.sign
+
         setSquares(newSquares);
-    
+
         setTimeout(() => {
             var squaresNotClicked = squares.filter(item => item.value === "");
-    
+
             if (squaresNotClicked.length > 0) {
                 var squareTochange = squaresNotClicked[Math.floor(Math.random() * squaresNotClicked.length)].index;
                 newSquares = squares.slice();
-                newSquares[squareTochange].value = userSign === "X" ? "O" : "X";
+                newSquares[squareTochange].value = userSettings.sign === "X" ? "O" : "X";
                 setSquares(newSquares);
             }
-        }, 800); 
+        }, 800);
     }
-    
 
+    const handleSettingsChange = (e) => {
+        setUserSettings((prevState)=> ({
+            ...prevState, [e.target.name]: e.target.value
+        }))
+    }
 
     return (
         <>
@@ -47,17 +53,17 @@ export default function TttComponent() {
                         value: ""
                     }))
                     setSquares(newSquares)
-                    setUserSign("")
+                    setUserSettings({ sign: "X", gameMode: "easy" })
                 }}>RESET</button>
-                <section className="value-choose-section">
-                    <select>
-                        <option>Your sign is X</option>
-                        <option>Your sign is O</option>
+                <section className="sign-lvl-choose-section">
+                    <select className="ttt-select-container" value={userSettings.sign} name="sign" onChange={handleSettingsChange}>
+                        <option  value="X">Your sign:  X</option>
+                        <option  value="O">Your sign:  O</option>
                     </select>
-                    <select>
-                    <option>Your sign is X</option>
-                    <option>Your sign is O</option>
-                </select>
+                    <select className="ttt-select-container" value={userSettings.gameMode} name="gameMode" onChange={handleSettingsChange}>
+                        <option value="easy">Difficult Level: Easy</option>
+                        <option value="hard">Difficult Level: Hard</option>
+                    </select>
                 </section>
                 <article className="ttt-game-area-container">
                     {squares.map(item => (

@@ -1062,10 +1062,13 @@ dialog::backdrop {
   grid-gap: 2px;
 }
 
-.value-choose-section {
-  padding-inline: 1rem;
-  margin-inline: 3rem;
-  margin-block-end: 2rem;
+.sign-lvl-choose-section {
+  width: 380px;
+  margin-block: 2rem;
+}
+
+.ttt-select-container {
+  margin-inline-end:4rem ;
 }
 
 .ttt-square {
