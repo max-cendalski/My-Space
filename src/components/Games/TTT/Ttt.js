@@ -14,7 +14,10 @@ export default function TttComponent() {
         sign: "X",
         gameMode: "easy"
     })
+    const [winner, setWinner] = useState(null)
+    const [isAiTurn, setIsAiTurn] = useState(false)
     const isGameStarted = game.some(item => item.value !== "");
+
 
 
     const checkPosition = (positions) => {
@@ -22,7 +25,6 @@ export default function TttComponent() {
     }
 
     const checkGameProgress = () => {
-        var player = userSettings.sign
         const winningPositions = [
             [0, 1, 2],
             [3, 4, 5],
@@ -35,33 +37,37 @@ export default function TttComponent() {
         ];
 
         for (let position of winningPositions) {
-            if (checkPosition(position, player)) {
-                console.log(`Found X sequence at indices ${position}`);
-                break;
+            if (checkPosition(position)) {
+                setWinner("You Won!")
+                return true
             }
         }
+        return false
     }
 
 
-
     const handleSquareClick = (index) => {
-        if (userSettings.sign === "") return;
+        if (userSettings.sign === "" || winner !== null || isAiTurn) return;
 
         var newGame = game.slice();
-        newGame[index].value = userSettings.sign
+        newGame[index].value = userSettings.sign;
 
         setSquares(newGame);
-        checkGameProgress()
+        if (checkGameProgress()) {
+            return;
+        }
+        setIsAiTurn(true)
         setTimeout(() => {
             var squaresNotClicked = game.filter(item => item.value === "");
 
             if (squaresNotClicked.length > 0) {
-                var squareTochange = squaresNotClicked[Math.floor(Math.random() * squaresNotClicked.length)].index;
+                var squareToChange = squaresNotClicked[Math.floor(Math.random() * squaresNotClicked.length)].index;
                 newGame = game.slice();
-                newGame[squareTochange].value = userSettings.sign === "X" ? "O" : "X";
+                newGame[squareToChange].value = userSettings.sign === "X" ? "O" : "X";
                 setSquares(newGame);
             }
-        }, 800);
+            setIsAiTurn(false)
+        }, 300);
     }
 
     const handleUserSettingsChange = ({ target }) => {
@@ -81,7 +87,9 @@ export default function TttComponent() {
                         value: ""
                     }))
                     setSquares(newSquares)
+                    setWinner(null)
                 }}>RESET</button>
+
                 <section className="sign-lvl-choose-section">
                     <select className="ttt-select-container" value={userSettings.sign} name="sign" onChange={handleUserSettingsChange} disabled={isGameStarted}>
                         <option value="X">Your sign:  X</option>
@@ -102,6 +110,7 @@ export default function TttComponent() {
                     ))}
 
                 </article>
+                {winner && <h1>{winner}</h1>}
 
             </article>
         </>
