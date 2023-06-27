@@ -33,54 +33,27 @@ export default function TttComponent() {
             [0, 4, 8],
             [2, 4, 6]
         ];
-    
+
         for (let position of winningPositions) {
             if (checkPosition(position, player)) {
+                setWinningSequence(position)
                 return "You Won!"
             }
             else if (checkPosition(position, computer)) {
+                setWinningSequence(position)
                 return "Computer Won!";
             }
         }
         return null;
     }
-    
 
     const checkPosition = (positions, player) => {
         return positions.every((index) => game[index].value === player)
     }
 
-    // const checkGameProgress = () => {
-    //     const player = userSettings.sign
-    //     const computer = userSettings.sign === "X" ? "O" : "X";
-
-    //     const winningPositions = [
-    //         [0, 1, 2],
-    //         [3, 4, 5],
-    //         [6, 7, 8],
-    //         [0, 3, 6],
-    //         [1, 4, 7],
-    //         [2, 5, 8],
-    //         [0, 4, 8],
-    //         [2, 4, 6]
-    //     ];
-
-    //     for (let position of winningPositions) {
-    //         if (checkPosition(position, player)) {
-    //             setWinner("You Won!")
-    //             return position
-    //         }
-    //         else if (checkPosition(position, computer)) {
-    //             setWinner("Computer Won!");
-    //             return position;
-    //         }
-    //     }
-    //     return false
-    // }
-
     const handleSquareClick = (index) => {
         if (userSettings.sign === "" || winner !== null || isAiTurn) return;
-    
+
         var newGame = game.slice();
         newGame[index].value = userSettings.sign;
         const win = checkWinner();
@@ -89,7 +62,7 @@ export default function TttComponent() {
             return;
         }
         setIsAiTurn(true)
-    
+
         setTimeout(() => {
             var squaresNotClicked = game.filter(item => item.value === "");
             if (squaresNotClicked.length > 0) {
@@ -97,7 +70,7 @@ export default function TttComponent() {
                 newGame = game.slice();
                 newGame[squareToChange].value = userSettings.sign === "X" ? "O" : "X";
                 const win = checkWinner();
-                if (win) { 
+                if (win) {
                     setIsAiTurn(false)
                     setWinner(win);
                     return;
@@ -126,7 +99,7 @@ export default function TttComponent() {
                     }))
                     setGameSquares(newSquares)
                     setWinner(null)
-                    setWinningSequence(null)               
+                    setWinningSequence(null)
                 }}>RESET</button>
 
                 <section className="sign-lvl-choose-section">
