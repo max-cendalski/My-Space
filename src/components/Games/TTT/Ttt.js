@@ -86,7 +86,16 @@ export default function TttComponent() {
             ...prevState, [target.name]: target.value
         }))
     }
-
+    function getWinningLineClassName(winningSequence) {
+        if (JSON.stringify(winningSequence) === JSON.stringify([0, 1, 2])) return 'line-horizontal-top';
+        if (JSON.stringify(winningSequence) === JSON.stringify([3, 4, 5])) return 'line-horizontal-middle';
+        if (JSON.stringify(winningSequence) === JSON.stringify([6, 7, 8])) return 'line-horizontal-bottom';
+        if (JSON.stringify(winningSequence) === JSON.stringify([0, 3, 6])) return 'line-vertical-left';
+        if (JSON.stringify(winningSequence) === JSON.stringify([1, 4, 7])) return 'line-vertical-middle';
+        if (JSON.stringify(winningSequence) === JSON.stringify([2, 5, 8])) return 'line-vertical-right';
+        if (JSON.stringify(winningSequence) === JSON.stringify([0, 4, 8])) return 'line-diagonal-left';
+        if (JSON.stringify(winningSequence) === JSON.stringify([2, 4, 6])) return 'line-diagonal-right';
+    }
     return (
         <>
             <Navbar />
@@ -119,6 +128,7 @@ export default function TttComponent() {
                             value={item.value}
                             onClick={() => handleSquareClick(item.index)}
                             className={winningSequence && winningSequence.includes(i) ? 'winning' : ''}
+                            winningLine={winningSequence ? getWinningLineClassName(winningSequence) : ''}
                         />
                     ))}
 

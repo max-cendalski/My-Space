@@ -1070,7 +1070,19 @@ dialog::backdrop {
   margin-block: 2rem;
 }
 
-.ttt-select-container {}
+.line-horizontal-top::after,
+.line-horizontal-middle::after {
+  content: "";
+  position: absolute;
+  /* Adjust the below properties based on the position of the line. */
+  top: 50%;
+  /* Adjust this for horizontal lines. */
+  left: 0;
+  width: 100%;
+  border-top: 3px solid black;
+  /* Use border-left for vertical lines. */
+}
+
 
 .ttt-square {
   display: flex;
@@ -1083,11 +1095,86 @@ dialog::backdrop {
   pointer-events: none;
 }
 
-.winning {
+/* .winning {
   transform: scale(101%);
   background-color: #942607;
   box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.5);
+  
+} */
+.line-horizontal-top::after,
+.line-horizontal-middle::after,
+.line-horizontal-bottom::after {
+  content: "";
+  position: absolute;
+  left: 10;
+  width: 92%;
+  border-top: 2px solid black;
 }
+
+.line-horizontal-top::after {
+  left: 5%;
+  top: 21%;
+}
+
+.line-horizontal-middle::after {
+  left: 5%;
+  top: 34%;
+}
+
+.line-horizontal-bottom::after {
+  left: 5%;
+  top: 49%;
+}
+
+.line-vertical-left::after,
+.line-vertical-middle::after,
+.line-vertical-right::after {
+  content: "";
+  position: absolute;
+  top: 10%;
+  height: 80%;
+  border-left: 2px solid black;
+}
+
+.line-vertical-left::after {
+  top: 15%;
+  left: 19%;
+  height: 40%;
+}
+
+.line-vertical-middle::after {
+  top: 15%;
+  left: 50%;
+  height: 40%;
+}
+
+.line-vertical-right::after {
+  top: 15%;
+  left: 80%;
+  height: 40%;
+}
+
+.line-diagonal-left::after,
+.line-diagonal-right::after {
+  content: "";
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  height: 80%;
+  border: 2px solid transparent;
+}
+
+.line-diagonal-left::after {
+  border-top: none;
+  border-right: none;
+}
+
+.line-diagonal-right::after {
+  border-bottom: none;
+  border-left: none;
+}
+
 
 .circle-svg {
   width: 100%;
