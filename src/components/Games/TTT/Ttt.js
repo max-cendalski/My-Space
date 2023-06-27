@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 
 
 export default function TttComponent() {
-    const [game, setSquares] = useState(Array.from({ length: 9 }, (_, i) => ({
+    const [game, setGameSquares] = useState(Array.from({ length: 9 }, (_, i) => ({
         index: i,
         clicked: false,
         value: ""
@@ -64,7 +64,7 @@ export default function TttComponent() {
             setWinningSequence(winningPosition);
             return;
         }
-        setSquares(newGame);
+        setGameSquares(newGame);
         if (checkGameProgress()) {
             return;
         }
@@ -76,10 +76,10 @@ export default function TttComponent() {
                 var squareToChange = squaresNotClicked[Math.floor(Math.random() * squaresNotClicked.length)].index;
                 newGame = game.slice();
                 newGame[squareToChange].value = userSettings.sign === "X" ? "O" : "X";
-                setSquares(newGame);
+                setGameSquares(newGame);
             }
             setIsAiTurn(false)
-        },500);
+        }, 500);
     }
 
     const handleUserSettingsChange = ({ target }) => {
@@ -98,7 +98,7 @@ export default function TttComponent() {
                         clicked: false,
                         value: ""
                     }))
-                    setSquares(newSquares)
+                    setGameSquares(newSquares)
                     setWinner(null)
                     setWinningSequence(null)
                 }}>RESET</button>
@@ -114,7 +114,7 @@ export default function TttComponent() {
                     </select>
                 </section>
                 <article className="ttt-game-area-container">
-                    {game.map((item,i) => (
+                    {game.map((item, i) => (
                         <Square
                             key={item.index}
                             value={item.value}
