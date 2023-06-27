@@ -1,7 +1,7 @@
-export default function Square({ value, onClick }) {
+export default function Square({ value, onClick,className }) {
     return (
       <section
-        className={`ttt-square ${value ? "filled" : ""}`}
+        className={`ttt-square ${value ? "filled" : ""} ${className}`}
         onClick={onClick}
       >
         {value === "O" && (

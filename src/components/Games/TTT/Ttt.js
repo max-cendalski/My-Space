@@ -17,6 +17,8 @@ export default function TttComponent() {
     const [winner, setWinner] = useState(null)
     const [isAiTurn, setIsAiTurn] = useState(false)
     const isGameStarted = game.some(item => item.value !== "");
+    const [winningSequence, setWinningSequence] = useState(null);
+
 
 
 
@@ -25,6 +27,7 @@ export default function TttComponent() {
     }
 
     const checkGameProgress = () => {
+        const player = userSettings.sign
         const winningPositions = [
             [0, 1, 2],
             [3, 4, 5],
@@ -37,9 +40,9 @@ export default function TttComponent() {
         ];
 
         for (let position of winningPositions) {
-            if (checkPosition(position)) {
+            if (checkPosition(position, player)) {
                 setWinner("You Won!")
-                return true
+                return position
             }
         }
         return false
@@ -51,7 +54,11 @@ export default function TttComponent() {
 
         var newGame = game.slice();
         newGame[index].value = userSettings.sign;
-
+        const winningPosition = checkGameProgress();
+        if (winningPosition) {
+            setWinningSequence(winningPosition);
+            return;
+        }
         setSquares(newGame);
         if (checkGameProgress()) {
             return;
@@ -67,7 +74,7 @@ export default function TttComponent() {
                 setSquares(newGame);
             }
             setIsAiTurn(false)
-        }, 300);
+        },500);
     }
 
     const handleUserSettingsChange = ({ target }) => {
@@ -88,6 +95,7 @@ export default function TttComponent() {
                     }))
                     setSquares(newSquares)
                     setWinner(null)
+                    setWinningSequence(null)
                 }}>RESET</button>
 
                 <section className="sign-lvl-choose-section">
@@ -101,11 +109,12 @@ export default function TttComponent() {
                     </select>
                 </section>
                 <article className="ttt-game-area-container">
-                    {game.map(item => (
+                    {game.map((item, i) => (
                         <Square
                             key={item.index}
                             value={item.value}
                             onClick={() => handleSquareClick(item.index)}
+                            className={winningSequence && winningSequence.includes(i) ? 'winning': ''}
                         />
                     ))}
 
