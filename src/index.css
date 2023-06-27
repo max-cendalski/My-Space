@@ -1049,6 +1049,7 @@ dialog::backdrop {
   font-family: sans-serif;
   text-align: center;
   background-color: antiquewhite;
+  min-height: 100vh;
 }
 
 .ttt-game-area-container {
