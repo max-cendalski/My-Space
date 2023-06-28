@@ -1095,12 +1095,6 @@ dialog::backdrop {
   pointer-events: none;
 }
 
-/* .winning {
-  transform: scale(101%);
-  background-color: #942607;
-  box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.5);
-  
-} */
 .line-horizontal-top::after,
 .line-horizontal-middle::after,
 .line-horizontal-bottom::after {
@@ -1108,7 +1102,7 @@ dialog::backdrop {
   position: absolute;
   left: 10;
   width: 92%;
-  border-top: 2px solid black;
+  border-top: 4px solid var(--red);
 }
 
 .line-horizontal-top::after {
@@ -1133,7 +1127,7 @@ dialog::backdrop {
   position: absolute;
   top: 10%;
   height: 80%;
-  border-left: 2px solid black;
+  border-left: 4px solid var(--red);
 }
 
 .line-vertical-left::after {

@@ -127,7 +127,6 @@ export default function TttComponent() {
                             key={item.index}
                             value={item.value}
                             onClick={() => handleSquareClick(item.index)}
-                            className={winningSequence && winningSequence.includes(i) ? 'winning' : ''}
                             winningLine={winningSequence ? getWinningLineClassName(winningSequence) : ''}
                         />
                     ))}
