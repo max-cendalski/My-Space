@@ -63,6 +63,10 @@ export default function TttComponent() {
     const handleSquareClick = (index) => {
         if (userSettings.sign === "" || winner !== null || isAiTurn) return;
 
+        if (userSettings.gameMode==="hard") {
+            console.log('whee')
+            return; 
+        }
         var newGame = game.slice();
         newGame[index].value = userSettings.sign;
         const win = checkWinner();
@@ -95,6 +99,7 @@ export default function TttComponent() {
             ...prevState, [target.name]: target.value
         }))
     }
+
     function getWinningLineClassName(winningSequence) {
         if (JSON.stringify(winningSequence) === JSON.stringify([0, 1, 2])) return 'line-horizontal-top';
         if (JSON.stringify(winningSequence) === JSON.stringify([3, 4, 5])) return 'line-horizontal-middle';
@@ -105,6 +110,7 @@ export default function TttComponent() {
         if (JSON.stringify(winningSequence) === JSON.stringify([0, 4, 8])) return 'line-diagonal-left';
         if (JSON.stringify(winningSequence) === JSON.stringify([2, 4, 6])) return 'line-diagonal-right';
     }
+    
     return (
         <>
             <Navbar />
