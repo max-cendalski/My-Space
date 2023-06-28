@@ -19,6 +19,15 @@ export default function TttComponent() {
     const isGameStarted = game.some(item => item.value !== "");
     const [winningSequence, setWinningSequence] = useState(null);
 
+    useEffect(() => {
+        if (userSettings.gameMode === "hard") {
+            var newGame = game.slice()
+            newGame[4] = {index: 4, clicked: true,value:userSettings.sign === "X" ? "O" : "X" }
+            console.log('new',newGame)
+            setGameSquares(newGame)
+        }
+       
+    }, [userSettings.gameMode])
 
     const checkWinner = () => {
         const player = userSettings.sign
@@ -109,6 +118,10 @@ export default function TttComponent() {
                     setGameSquares(newSquares)
                     setWinner(null)
                     setWinningSequence(null)
+                    setUserSettings({
+                        sign: "X",
+                        gameMode: "easy"
+                    })
                 }}>RESET</button>
 
                 <section className="sign-lvl-choose-section">
