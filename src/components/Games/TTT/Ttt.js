@@ -19,29 +19,28 @@ export default function TttComponent() {
     const isGameStarted = game.some(item => item.value !== "");
     const [winningSequence, setWinningSequence] = useState(null);
 
+    const winningPositions = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+    ];
     useEffect(() => {
         if (userSettings.gameMode === "hard") {
             var newGame = game.slice()
-            newGame[4] = {index: 4, clicked: true,value:userSettings.sign === "X" ? "O" : "X" }
-            console.log('new',newGame)
+            newGame[4] = { index: 4, clicked: true, value: userSettings.sign === "X" ? "O" : "X" }
             setGameSquares(newGame)
         }
-       
+
     }, [userSettings.gameMode])
 
     const checkWinner = () => {
         const player = userSettings.sign
         const computer = userSettings.sign === "X" ? "O" : "X";
-        const winningPositions = [
-            [0, 1, 2],
-            [3, 4, 5],
-            [6, 7, 8],
-            [0, 3, 6],
-            [1, 4, 7],
-            [2, 5, 8],
-            [0, 4, 8],
-            [2, 4, 6]
-        ];
 
         for (let position of winningPositions) {
             if (checkPosition(position, player)) {
@@ -62,36 +61,76 @@ export default function TttComponent() {
 
     const handleSquareClick = (index) => {
         if (userSettings.sign === "" || winner !== null || isAiTurn) return;
-
-        if (userSettings.gameMode==="hard") {
-            console.log('whee')
-            return; 
-        }
-        var newGame = game.slice();
-        newGame[index].value = userSettings.sign;
-        const win = checkWinner();
-        if (win) {
-            setWinner(win);
-            return;
-        }
-        setIsAiTurn(true)
-
-        setTimeout(() => {
-            var squaresNotClicked = game.filter(item => item.value === "");
-            if (squaresNotClicked.length > 0) {
-                var squareToChange = squaresNotClicked[Math.floor(Math.random() * squaresNotClicked.length)].index;
-                newGame = game.slice();
-                newGame[squareToChange].value = userSettings.sign === "X" ? "O" : "X";
-                const win = checkWinner();
-                if (win) {
-                    setIsAiTurn(false)
-                    setWinner(win);
-                    return;
-                }
-                setGameSquares(newGame);
+        if (userSettings.gameMode === "hard") {
+            let newGame = game.slice()
+            newGame[index].value = userSettings.sign
+            console.log('new', newGame)
+            const win = checkWinner();
+            if (win) {
+                setWinner(win);
+                return;
             }
-            setIsAiTurn(false)
-        }, 500);
+            //setGameSquares(newGame)
+            setIsAiTurn(true)
+            setTimeout(() => {
+                var squaresNotClicked = game.filter(item => item.value === "");
+                if (squaresNotClicked.length > 0 && squaresNotClicked.length > 6) {
+
+                    var squareToClick = squaresNotClicked[0].index
+
+                    let newGame = game.slice();
+                    console.log('newGameatSquClick', newGame[squareToClick])
+                    newGame[squareToClick].value = userSettings.sign === "X" ? "O" : "X";
+                    const win = checkWinner();
+                    if (win) {
+                        setIsAiTurn(false)
+                        setWinner(win);
+                        return;
+                    }
+                    setGameSquares(newGame);
+                } else {
+                    console.log('whweeeeee')
+                }
+                setIsAiTurn(false)
+            }, 500);
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+        // var newGame = game.slice();
+        // newGame[index].value = userSettings.sign;
+        // const win = checkWinner();
+        // if (win) {
+        //     setWinner(win);
+        //     return;
+        // }
+        // setIsAiTurn(true)
+
+        // setTimeout(() => {
+        //     var squaresNotClicked = game.filter(item => item.value === "");
+        //     if (squaresNotClicked.length > 0) {
+        //         var squareToChange = squaresNotClicked[Math.floor(Math.random() * squaresNotClicked.length)].index;
+        //         newGame = game.slice();
+        //         newGame[squareToChange].value = userSettings.sign === "X" ? "O" : "X";
+        //         const win = checkWinner();
+        //         if (win) {
+        //             setIsAiTurn(false)
+        //             setWinner(win);
+        //             return;
+        //         }
+        //         setGameSquares(newGame);
+        //     }
+        //     setIsAiTurn(false)
+        // }, 500);
     }
 
     const handleUserSettingsChange = ({ target }) => {
@@ -110,7 +149,7 @@ export default function TttComponent() {
         if (JSON.stringify(winningSequence) === JSON.stringify([0, 4, 8])) return 'line-diagonal-left';
         if (JSON.stringify(winningSequence) === JSON.stringify([2, 4, 6])) return 'line-diagonal-right';
     }
-    
+
     return (
         <>
             <Navbar />
