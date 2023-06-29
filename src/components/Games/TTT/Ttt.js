@@ -35,7 +35,7 @@ export default function TttComponent() {
             newGame[4] = { index: 4, clicked: true, value: userSettings.sign === "X" ? "O" : "X" }
             setGameSquares(newGame)
         }
-        //esl-no-lint
+        //eslint-disable-next-line
     }, [userSettings.gameMode])
 
     const checkWinner = () => {
@@ -72,57 +72,101 @@ export default function TttComponent() {
             setIsAiTurn(true)
             setTimeout(() => {
                 var squaresNotClicked = game.filter(item => item.value === "");
-                if (squaresNotClicked.length > 0 && squaresNotClicked.length > 6) {
-                   
-                    var squareToClick = squaresNotClicked[Math.floor(Math.random() * squaresNotClicked.length)].index
+                if (squaresNotClicked.length > 0 && squaresNotClicked.length > 7) {
 
-                    let newGame = game.slice();
-
+                    let squareToClick = squaresNotClicked[Math.floor(Math.random() * squaresNotClicked.length)].index
+                    const newGame = game.slice();
                     newGame[squareToClick].value = userSettings.sign === "X" ? "O" : "X";
+                    setGameSquares(newGame);
+                } else {
+                    let computerSign = userSettings.sign === "X" ? "O" : "X"
+
+                    let computerClickedSquares = game.filter(item => item.value === computerSign).map(item => item.index);
+                    let userClickedSquares = game.filter(item => item.value === userSettings.sign).map(item => item.index);
+
+                    let aiMove = -1;  // Initialize AI move index
+
+                    for (let i = 0; i < winningPositions.length; i++) {
+                        let userMatch = 0;
+                        let emptyIndex = -1;
+
+                        for (let j = 0; j < winningPositions[i].length; j++) {
+                            if (userClickedSquares.includes(winningPositions[i][j])) {
+                                userMatch++;
+                            } else if (!computerClickedSquares.includes(winningPositions[i][j])) {
+                                emptyIndex = winningPositions[i][j];
+                            }
+                        }
+                        if (userMatch === 2 && emptyIndex !== -1) {
+                            aiMove = emptyIndex;
+                            break;
+                        }
+                    }
+
+                    if (aiMove === -1) {
+                        for (let i = 0; i < winningPositions.length; i++) {
+                            let computerMatch = 0;
+                            let emptyIndices = [];
+
+                            for (let j = 0; j < winningPositions[i].length; j++) {
+                                if (computerClickedSquares.includes(winningPositions[i][j])) {
+                                    computerMatch++;
+                                } else if (!userClickedSquares.includes(winningPositions[i][j])) {
+                                    emptyIndices.push(winningPositions[i][j]);
+                                }
+                            }
+                            if (computerMatch === 1 && emptyIndices.length === 2) {
+                                aiMove = emptyIndices[Math.floor(Math.random() * emptyIndices.length)];
+                                break;
+                            }
+                        }
+                    }
+
+                    for (let i = 0; i < winningPositions.length; i++) { //check if computer can win
+                        let computerMatch = 0;
+                        let emptyIndex = -1;
+
+                        for (let j = 0; j < winningPositions[i].length; j++) {
+                            if (computerClickedSquares.includes(winningPositions[i][j])) {
+                                computerMatch++;
+                            } else if (!userClickedSquares.includes(winningPositions[i][j])) {
+                                emptyIndex = winningPositions[i][j];
+                            }
+                        }
+                        if (computerMatch === 2 && emptyIndex !== -1) { //Two computers clicks and third position is empty. Computer wins
+                            aiMove = emptyIndex;
+                            break;
+                        }
+                    }
+                
+                    if (aiMove === -1) { // Random
+                        let emptySquares = game.filter(item => item.value === "").map(item => item.index);
+                        if (emptySquares.length > 0) {
+                            aiMove = emptySquares[Math.floor(Math.random() * emptySquares.length)];
+                        }
+                    }
+
+
+                    if (aiMove !== -1) { // update state
+                        let newGame = [...game];
+                        newGame[aiMove].value = computerSign;
+                        newGame[aiMove].clicked = true;
+                        setGameSquares(newGame);
+                    }
                     const win = checkWinner();
                     if (win) {
                         setIsAiTurn(false)
                         setWinner(win);
                         return;
                     }
-                    setGameSquares(newGame);
-                } else {
-                    console.log('game second phase', game)
-                    console.log('userSe',userSettings.sign)
-                    let computerSign = userSettings.sign === "X" ? "O" : "X"
-                    let computerClickedSquares  = game.filter(item=> item.value === computerSign && item.value !=="")
-                    let userClickedSquares = game.filter(item=> item.value === userSettings.sign && item.value !=="")
-                    
-                    console.log('userClicked',userClickedSquares)
-                    console.log('computerClicked', computerClickedSquares)
-
-
-
-
-
-
-
-
-
-
-
 
                 }
+
+
                 setIsAiTurn(false)
             }, 500);
 
-
-
         }
-
-
-
-
-
-
-
-
-
         // var newGame = game.slice();
         // newGame[index].value = userSettings.sign;
         // const win = checkWinner();
