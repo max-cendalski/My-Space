@@ -35,7 +35,7 @@ export default function TttComponent() {
             newGame[4] = { index: 4, clicked: true, value: userSettings.sign === "X" ? "O" : "X" }
             setGameSquares(newGame)
         }
-
+        //esl-no-lint
     }, [userSettings.gameMode])
 
     const checkWinner = () => {
@@ -64,22 +64,20 @@ export default function TttComponent() {
         if (userSettings.gameMode === "hard") {
             let newGame = game.slice()
             newGame[index].value = userSettings.sign
-            console.log('new', newGame)
             const win = checkWinner();
             if (win) {
                 setWinner(win);
                 return;
             }
-            //setGameSquares(newGame)
             setIsAiTurn(true)
             setTimeout(() => {
                 var squaresNotClicked = game.filter(item => item.value === "");
                 if (squaresNotClicked.length > 0 && squaresNotClicked.length > 6) {
-
-                    var squareToClick = squaresNotClicked[0].index
+                   
+                    var squareToClick = squaresNotClicked[Math.floor(Math.random() * squaresNotClicked.length)].index
 
                     let newGame = game.slice();
-                    console.log('newGameatSquClick', newGame[squareToClick])
+
                     newGame[squareToClick].value = userSettings.sign === "X" ? "O" : "X";
                     const win = checkWinner();
                     if (win) {
@@ -89,7 +87,26 @@ export default function TttComponent() {
                     }
                     setGameSquares(newGame);
                 } else {
-                    console.log('whweeeeee')
+                    console.log('game second phase', game)
+                    console.log('userSe',userSettings.sign)
+                    let computerSign = userSettings.sign === "X" ? "O" : "X"
+                    let computerClickedSquares  = game.filter(item=> item.value === computerSign && item.value !=="")
+                    let userClickedSquares = game.filter(item=> item.value === userSettings.sign && item.value !=="")
+                    
+                    console.log('userClicked',userClickedSquares)
+                    console.log('computerClicked', computerClickedSquares)
+
+
+
+
+
+
+
+
+
+
+
+
                 }
                 setIsAiTurn(false)
             }, 500);
