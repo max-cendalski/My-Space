@@ -1083,6 +1083,11 @@ dialog::backdrop {
   /* Use border-left for vertical lines. */
 }
 
+.reset-ttt {
+  margin-block-start: 2rem;
+  padding-block: 0.5rem;
+  padding-inline: 2rem;
+}
 
 .ttt-square {
   display: flex;

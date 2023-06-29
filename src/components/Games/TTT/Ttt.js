@@ -89,7 +89,6 @@ export default function TttComponent() {
 
                     let aiMove = -1;  // Initialize AI move index
 
-                    
                     for (let i = 0; i < winningPositions.length; i++) {
                         let userMatch = 0;
                         let emptyIndex = -1;
@@ -107,7 +106,7 @@ export default function TttComponent() {
                         }
                     }
 
-
+                    
                     if (aiMove === -1) {
                         for (let i = 0; i < winningPositions.length; i++) {
                             let computerMatch = 0;
@@ -221,20 +220,7 @@ export default function TttComponent() {
         <>
             <Navbar />
             <article className="ttt-container">
-                <button onClick={() => {
-                    const newSquares = Array.from({ length: 9 }, (_, i) => ({
-                        index: i,
-                        clicked: false,
-                        value: ""
-                    }))
-                    setGameSquares(newSquares)
-                    setWinner(null)
-                    setWinningSequence(null)
-                    setUserSettings({
-                        sign: "X",
-                        gameMode: "easy"
-                    })
-                }}>RESET</button>
+              
 
                 <section className="sign-lvl-choose-section">
                     <select className="ttt-select-container" value={userSettings.sign} name="sign" onChange={handleUserSettingsChange} disabled={isGameStarted}>
@@ -257,6 +243,20 @@ export default function TttComponent() {
                     ))}
 
                 </article>
+                <button className="reset-ttt" onClick={() => {
+                    const newSquares = Array.from({ length: 9 }, (_, i) => ({
+                        index: i,
+                        clicked: false,
+                        value: ""
+                    }))
+                    setGameSquares(newSquares)
+                    setWinner(null)
+                    setWinningSequence(null)
+                    setUserSettings({
+                        sign: "X",
+                        gameMode: "easy"
+                    })
+                }}>RESET</button>
                 {winner && <h1>{winner}</h1>}
 
             </article>
