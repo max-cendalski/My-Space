@@ -1152,26 +1152,24 @@ dialog::backdrop {
   left: 80%;
   height: 40%;
 }
-
 .line-diagonal-left::after,
 .line-diagonal-right::after {
   content: "";
   position: absolute;
-  top: 10%;
-  left: 10%;
-  width: 80%;
-  height: 80%;
-  border: 2px solid transparent;
+  width: 130%; 
+  border-top: 4px solid var(--red);
 }
 
 .line-diagonal-left::after {
-  border-top: none;
-  border-right: none;
+  left: -15%;
+  top: 32%;
+  transform: rotate(45deg);
 }
 
 .line-diagonal-right::after {
-  border-bottom: none;
-  border-left: none;
+  right: -15%;
+  top: 32%;
+  transform: rotate(-45deg); 
 }
 
 
