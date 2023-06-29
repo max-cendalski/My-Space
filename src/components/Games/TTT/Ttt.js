@@ -62,7 +62,6 @@ export default function TttComponent() {
     const handleSquareClick = (index) => {
         if (userSettings.sign === "" || winner !== null || isAiTurn) return;
         if (userSettings.gameMode === "hard") {
-            console.log('game', game)
             let newGame = game.slice()
             newGame[index].value = userSettings.sign
             const win = checkWinner();
@@ -80,7 +79,7 @@ export default function TttComponent() {
                     newGame[squareToClick].value = userSettings.sign === "X" ? "O" : "X";
                     setGameSquares(newGame);
                 } else {
-                    if (game.filter(item => item.value === "").length === 1){
+                    if (game.filter(item => item.value === "").length === 1) {
                         setWinner("Even!")
                     }
                     let computerSign = userSettings.sign === "X" ? "O" : "X"
@@ -90,6 +89,7 @@ export default function TttComponent() {
 
                     let aiMove = -1;  // Initialize AI move index
 
+                    
                     for (let i = 0; i < winningPositions.length; i++) {
                         let userMatch = 0;
                         let emptyIndex = -1;
@@ -106,6 +106,7 @@ export default function TttComponent() {
                             break;
                         }
                     }
+
 
                     if (aiMove === -1) {
                         for (let i = 0; i < winningPositions.length; i++) {
@@ -143,6 +144,7 @@ export default function TttComponent() {
                         }
                     }
 
+
                     if (aiMove === -1) { // Random
                         let emptySquares = game.filter(item => item.value === "").map(item => item.index);
                         if (emptySquares.length > 0) {
@@ -165,37 +167,37 @@ export default function TttComponent() {
                     }
 
                 }
-
-
                 setIsAiTurn(false)
             }, 500);
 
-        }
-        // var newGame = game.slice();
-        // newGame[index].value = userSettings.sign;
-        // const win = checkWinner();
-        // if (win) {
-        //     setWinner(win);
-        //     return;
-        // }
-        // setIsAiTurn(true)
+        } else {
+            var newGame = game.slice();
+            newGame[index].value = userSettings.sign;
+            const win = checkWinner();
+            if (win) {
+                setWinner(win);
+                return;
+            }
+            setIsAiTurn(true)
 
-        // setTimeout(() => {
-        //     var squaresNotClicked = game.filter(item => item.value === "");
-        //     if (squaresNotClicked.length > 0) {
-        //         var squareToChange = squaresNotClicked[Math.floor(Math.random() * squaresNotClicked.length)].index;
-        //         newGame = game.slice();
-        //         newGame[squareToChange].value = userSettings.sign === "X" ? "O" : "X";
-        //         const win = checkWinner();
-        //         if (win) {
-        //             setIsAiTurn(false)
-        //             setWinner(win);
-        //             return;
-        //         }
-        //         setGameSquares(newGame);
-        //     }
-        //     setIsAiTurn(false)
-        // }, 500);
+            setTimeout(() => {
+                var squaresNotClicked = game.filter(item => item.value === "");
+                if (squaresNotClicked.length > 0) {
+                    var squareToChange = squaresNotClicked[Math.floor(Math.random() * squaresNotClicked.length)].index;
+                    newGame = game.slice();
+                    newGame[squareToChange].value = userSettings.sign === "X" ? "O" : "X";
+                    const win = checkWinner();
+                    if (win) {
+                        setIsAiTurn(false)
+                        setWinner(win);
+                        return;
+                    }
+                    setGameSquares(newGame);
+                }
+                setIsAiTurn(false)
+            }, 500);
+        }
+
     }
 
     const handleUserSettingsChange = ({ target }) => {
