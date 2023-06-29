@@ -1105,24 +1105,23 @@ dialog::backdrop {
 .line-horizontal-bottom::after {
   content: "";
   position: absolute;
-  left: 10;
   width: 92%;
   border-top: 4px solid var(--red);
 }
 
 .line-horizontal-top::after {
-  left: 5%;
-  top: 21%;
+  left: 4%;
+  top: 19%;
 }
 
 .line-horizontal-middle::after {
-  left: 5%;
-  top: 34%;
+  left: 4%;
+  top: 32%;
 }
 
 .line-horizontal-bottom::after {
-  left: 5%;
-  top: 49%;
+  left: 4%;
+  top: 46%;
 }
 
 .line-vertical-left::after,
@@ -1130,28 +1129,23 @@ dialog::backdrop {
 .line-vertical-right::after {
   content: "";
   position: absolute;
-  top: 10%;
-  height: 80%;
+  top: 12%;
+  height: 41%;
   border-left: 4px solid var(--red);
 }
 
 .line-vertical-left::after {
-  top: 15%;
   left: 19%;
-  height: 40%;
 }
 
 .line-vertical-middle::after {
-  top: 15%;
   left: 50%;
-  height: 40%;
 }
 
 .line-vertical-right::after {
-  top: 15%;
   left: 80%;
-  height: 40%;
 }
+
 .line-diagonal-left::after,
 .line-diagonal-right::after {
   content: "";
