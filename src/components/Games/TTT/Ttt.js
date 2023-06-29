@@ -62,6 +62,7 @@ export default function TttComponent() {
     const handleSquareClick = (index) => {
         if (userSettings.sign === "" || winner !== null || isAiTurn) return;
         if (userSettings.gameMode === "hard") {
+            console.log('game', game)
             let newGame = game.slice()
             newGame[index].value = userSettings.sign
             const win = checkWinner();
@@ -79,6 +80,9 @@ export default function TttComponent() {
                     newGame[squareToClick].value = userSettings.sign === "X" ? "O" : "X";
                     setGameSquares(newGame);
                 } else {
+                    if (game.filter(item => item.value === "").length === 1){
+                        setWinner("Even!")
+                    }
                     let computerSign = userSettings.sign === "X" ? "O" : "X"
 
                     let computerClickedSquares = game.filter(item => item.value === computerSign).map(item => item.index);
@@ -133,12 +137,12 @@ export default function TttComponent() {
                                 emptyIndex = winningPositions[i][j];
                             }
                         }
-                        if (computerMatch === 2 && emptyIndex !== -1) { //Two computers clicks and third position is empty. Computer wins
+                        if (computerMatch === 2 && emptyIndex !== -1) { //Two computer clicks and third position is empty. Computer wins
                             aiMove = emptyIndex;
                             break;
                         }
                     }
-                
+
                     if (aiMove === -1) { // Random
                         let emptySquares = game.filter(item => item.value === "").map(item => item.index);
                         if (emptySquares.length > 0) {
