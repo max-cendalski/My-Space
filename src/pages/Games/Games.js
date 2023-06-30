@@ -12,6 +12,9 @@ const Games = () => {
       <NavLink className="game-link-button" to="/games/Ships/ships">
         SHIPS
       </NavLink>
+      <NavLink className="game-link-button" to="/games/TTT/Ttt">
+      Tic Tac Toe
+    </NavLink>
     </article>
   );
 };

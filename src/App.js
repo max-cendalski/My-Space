@@ -13,6 +13,7 @@ import Ideas from './pages/Ideas/Ideas';
 import Games from './pages/Games/Games';
 import RPS from './components/Games/rps';
 import ShipsGame from './components/Games/Ships/ships';
+import TttComponent from './components/Games/TTT/Ttt';
 
 
 function App() {
@@ -35,6 +36,8 @@ function App() {
           <Route  index element={<Games />} />
           <Route path="/games/rps" element={<RPS />} />
           <Route path="/games/Ships/ships" element={<ShipsGame />} />
+          <Route path="/games/TTT/Ttt" element={<TttComponent />} />
+          
         </Route>
 
         <Route path="/ideas" element={<Ideas />} />

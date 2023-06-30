@@ -439,6 +439,7 @@ textarea {
 
 /* CALENDAR */
 
+
 #calendar-container {
   display: flex;
   min-height: 100%;
@@ -1034,15 +1035,203 @@ dialog::backdrop {
 }
 
 
-/*CALENDAR */
 
-#calendar-container {
+
+
+
+
+/*TIC TAC TOE*/
+
+.ttt-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: sans-serif;
+  text-align: center;
+  background-color: antiquewhite;
+  min-height: 100vh;
+}
+
+.ttt-game-area-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  width: 380px;
+  height: 380px;
+  background-color: #9e8d73;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  grid-gap: 2px;
+}
+
+.sign-lvl-choose-section {
+  display: flex;
+  justify-content: space-between;
+  width: 380px;
+  margin-block: 2rem;
+}
+
+.line-horizontal-top::after,
+.line-horizontal-middle::after {
+  content: "";
+  position: absolute;
+  /* Adjust the below properties based on the position of the line. */
+  top: 50%;
+  /* Adjust this for horizontal lines. */
+  left: 0;
+  width: 100%;
+  border-top: 3px solid black;
+  /* Use border-left for vertical lines. */
+}
+
+.reset-ttt {
+  margin-block-start: 2rem;
+  padding-block: 0.5rem;
+  padding-inline: 2rem;
+}
+
+.ttt-square {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5deb3;
+}
+
+.filled {
+  pointer-events: none;
+}
+
+.line-horizontal-top::after,
+.line-horizontal-middle::after,
+.line-horizontal-bottom::after {
+  content: "";
+  position: absolute;
+  width: 92%;
+  border-top: 4px solid var(--red);
+}
+
+.line-horizontal-top::after {
+  left: 4%;
+  top: 19%;
+}
+
+.line-horizontal-middle::after {
+  left: 4%;
+  top: 32%;
+}
+
+.line-horizontal-bottom::after {
+  left: 4%;
+  top: 46%;
+}
+
+.line-vertical-left::after,
+.line-vertical-middle::after,
+.line-vertical-right::after {
+  content: "";
+  position: absolute;
+  top: 12%;
+  height: 41%;
+  border-left: 4px solid var(--red);
+}
+
+.line-vertical-left::after {
+  left: 19%;
+}
+
+.line-vertical-middle::after {
+  left: 50%;
+}
+
+.line-vertical-right::after {
+  left: 80%;
+}
+
+.line-diagonal-left::after,
+.line-diagonal-right::after {
+  content: "";
+  position: absolute;
+  width: 130%; 
+  border-top: 4px solid var(--red);
+}
+
+.line-diagonal-left::after {
+  left: -15%;
+  top: 32%;
+  transform: rotate(45deg);
+}
+
+.line-diagonal-right::after {
+  right: -15%;
+  top: 32%;
+  transform: rotate(-45deg); 
+}
+
+
+.circle-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.circle {
+  fill: none;
+  stroke: #f5deb3;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: drawCircle 0.5s linear forwards;
+}
+
+@keyframes drawCircle {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.x-svg {
+  height: 100%;
   width: 100%;
 }
 
-.calendar-header-container {
-  width: 95%;
+.x-line1,
+.x-line2 {
+  stroke: #f5deb3;
+  stroke-width: 3;
+  stroke-dasharray: 50;
+  stroke-dashoffset: 50;
 }
+
+.x-line1 {
+  animation: drawX 0.3s linear forwards;
+}
+
+.x-line2 {
+  animation: drawX 0.3s linear forwards 0.4s;
+}
+
+@keyframes drawX {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+
+.ttt-winner-banner {
+  position: absolute;
+  top: 20%;
+  font-size: 2rem;
+  color: white;
+  background-color: #9e8d73;
+  padding: 0.5rem 2rem;
+  border-radius: 3px;
+}
+
+
+
+
+
+
+
 
 /* ------------------*/
 .date-paragraph {
