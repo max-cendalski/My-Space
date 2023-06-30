@@ -7,7 +7,6 @@ import { useState, useEffect } from "react";
 export default function TttComponent() {
     const [game, setGameSquares] = useState(Array.from({ length: 9 }, (_, i) => ({
         index: i,
-        clicked: false,
         value: ""
     })))
     const [userSettings, setUserSettings] = useState({
@@ -170,7 +169,6 @@ export default function TttComponent() {
             }, 500);
 
         } else {
-            console.log('whe2')
             var newGame = game.slice();
             newGame[index].value = userSettings.sign;
             const win = checkWinner();
@@ -243,7 +241,6 @@ export default function TttComponent() {
 
                 </article>
                 <button className="reset-ttt" onClick={() => {
-                    console.log('button clicked')
                     const newSquares = Array.from({ length: 9 }, (_, i) => ({
                         index: i,
                         clicked: false,
