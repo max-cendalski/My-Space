@@ -59,7 +59,7 @@ export default function TttComponent() {
     }
 
     const handleSquareClick = (index) => {
-        if (winner !== null || isAiTurn) return;
+        if (winner || isAiTurn) return;
         if (userSettings.gameMode === "hard") {
             let newGame = game.slice()
             newGame[index].value = userSettings.sign
