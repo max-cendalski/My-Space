@@ -1216,7 +1216,15 @@ dialog::backdrop {
 }
 
 
-
+.ttt-winner-banner {
+  position: absolute;
+  top: 20%;
+  font-size: 2rem;
+  color: white;
+  background-color: #9e8d73;
+  padding: 0.5rem 2rem;
+  border-radius: 3px;
+}
 
 
 

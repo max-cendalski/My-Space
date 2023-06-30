@@ -243,7 +243,6 @@ export default function TttComponent() {
                 <button className="reset-ttt" onClick={() => {
                     const newSquares = Array.from({ length: 9 }, (_, i) => ({
                         index: i,
-                        clicked: false,
                         value: ""
                     }))
                     setGameSquares(newSquares)
@@ -254,7 +253,7 @@ export default function TttComponent() {
                     setWinner(null)
                     setWinningSequence(null)
                 }}>RESET GAME</button>
-                {winner && <h1>{winner}</h1>}
+                {winner && <h1 className="ttt-winner-banner">{winner}</h1>}
 
             </article>
         </>
