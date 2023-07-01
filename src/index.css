@@ -187,7 +187,7 @@ code {
   height: 4.5rem;
   background-color: white;
   border-radius: 50%;
-  transition: all 200ms linear;
+  transition: all 100ms linear;
 }
 
 .quick-access-element:hover {
@@ -204,6 +204,23 @@ code {
   transform: translate(0%, -10%);
   background-color: white;
 }
+
+.new-todo-input-homepage {
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+  border: none;
+  border-bottom: 1px solid var(--lightPink);
+  outline: none;
+}
+
+
+
+
+
+
+
+
 
 
 /*NOTES */

@@ -17,6 +17,7 @@ const Home = () => {
 
   const [isNewTodoActive, setIsNewTodoActive] = useState(false)
   const [newTodoClass, setNewTodoClass] = useState("hidden")
+  const [todoPencil, setTodoPencil] = useState("note-pencil")
 
   const [value, setValue] = useState(new Date());
 
@@ -95,6 +96,7 @@ const Home = () => {
       if (!e.target.closest('.quick-access-element')) {
         setIsNewTodoActive(false);
         setNewTodoClass("hidden")
+        setTodoPencil("note-pencil")
       }
     };
 
@@ -131,7 +133,12 @@ const Home = () => {
   const handleAddToDo = () => {
     console.log('whee')
     setIsNewTodoActive(true)
-    setNewTodoClass("new-todo-form-homepage")
+    setTodoPencil("hidden")
+    setTimeout(() => {
+      setNewTodoClass("new-todo-form-homepage")
+    }, 150)
+
+
   }
 
   return (
@@ -193,11 +200,16 @@ const Home = () => {
       <article className="quick-access-homepage">
         <section onClick={handleAddToDo} className={`quick-access-element ${isNewTodoActive ? "active" : ""}`}>
           <section className={newTodoClass}>
-            <input type="text" className={newTodoClass}></input>
+            <p><input type="text" className="new-todo-input-homepage" placeholder="write something"></input></p>
+            <img
+              className={`note-pencil`}
+              src={Pencil}
+              alt="pencil-icon"
+            />
 
           </section>
           <img
-            className="note-pencil"
+            className={todoPencil}
             src={Pencil}
             alt="pencil-icon"
           />
