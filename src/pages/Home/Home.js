@@ -15,16 +15,15 @@ const Home = () => {
   const [currentDay, setCurrentDay] = useState("");
   const [homepageWeather, setHomepageWeather] = useState(null);
 
+  const [isNewTodoActive, setIsNewTodoActive] = useState(false)
+  const [newTodoClass, setNewTodoClass] = useState("hidden")
+
   const [value, setValue] = useState(new Date());
 
   useEffect(() => {
     const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
     setCurrentDay(format(new Date(), "E, MMMM dd"));
     const interval = setInterval(() => setValue(new Date()), 1000);
-
-
-
-
 
     (async () => {
       try {
@@ -91,6 +90,21 @@ const Home = () => {
     // eslint-disable-next-line
   }, []);
 
+  useEffect(() => {
+    const handleClick = (e) => {
+      if (!e.target.closest('.quick-access-element')) {
+        setIsNewTodoActive(false);
+        setNewTodoClass("hidden")
+      }
+    };
+
+    document.addEventListener('click', handleClick);
+
+    return () => {
+      document.removeEventListener('click', handleClick);
+    };
+  }, []);
+
   const handleIdeaHomepageArrowButton = () => {
     idea.extend = !idea.extend;
     setIdea(idea);
@@ -113,6 +127,12 @@ const Home = () => {
 
     updateIdea();
   };
+
+  const handleAddToDo = () => {
+    console.log('whee')
+    setIsNewTodoActive(true)
+    setNewTodoClass("new-todo-form-homepage")
+  }
 
   return (
     <article id="home-container">
@@ -171,7 +191,11 @@ const Home = () => {
 
 
       <article className="quick-access-homepage">
-        <section className="quick-access-element">
+        <section onClick={handleAddToDo} className={`quick-access-element ${isNewTodoActive ? "active" : ""}`}>
+          <section className={newTodoClass}>
+            <input type="text" className={newTodoClass}></input>
+
+          </section>
           <img
             className="note-pencil"
             src={Pencil}

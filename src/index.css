@@ -187,11 +187,24 @@ code {
   height: 4.5rem;
   background-color: white;
   border-radius: 50%;
+  transition: all 200ms linear;
 }
 
 .quick-access-element:hover {
   background-color: rgb(232, 228, 228);
+  cursor: pointer;
 }
+
+.quick-access-element.active {
+  width: 90%;
+  height: 20rem;
+  border-radius: 3px;
+  border: 1px solid var(--lightPink);
+  top: 20%;
+  transform: translate(0%, -10%);
+  background-color: white;
+}
+
 
 /*NOTES */
 #notes-page-container {
