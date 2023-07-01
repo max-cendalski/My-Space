@@ -171,8 +171,26 @@ code {
 }
 
 .quick-access-homepage {
-  background-color: var(--lightGreen);
-  height: 5rem;
+  display: flex;
+  align-items:center;
+  width: 100%;
+  padding-inline: 5%;
+  background-color: var(--lightPink);
+  height: 6rem;
+}
+
+.quick-access-element {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.quick-access-element:hover {
+  background-color: rgb(232, 228, 228);
 }
 
 /*NOTES */

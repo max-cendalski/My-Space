@@ -7,6 +7,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import { format } from "date-fns";
 import Clock from 'react-clock'
 import 'react-clock/dist/Clock.css';
+import Pencil from "../../icons/pencilS.png";
 
 const Home = () => {
   const [idea, setIdea] = useState(null);
@@ -159,7 +160,25 @@ const Home = () => {
           <q className="idea-homepage-quote">{idea.text}</q>
         </section>
       )}
+
+
+
+
+
+
+
+
+
+
       <article className="quick-access-homepage">
+        <section className="quick-access-element">
+          <img
+            className="note-pencil"
+            src={Pencil}
+            alt="pencil-icon"
+          />
+        </section>
+
       </article>
       <NavLink className="feature-button" to="/notes">
         Notes
