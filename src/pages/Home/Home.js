@@ -121,7 +121,7 @@ const Home = () => {
           <p>{currentDay}</p>
           <Clock value={value}
             renderNumbers={true}
-            size={120}
+            size={110}
           />
 
         </section>
@@ -159,6 +159,8 @@ const Home = () => {
           <q className="idea-homepage-quote">{idea.text}</q>
         </section>
       )}
+      <article className="quick-access-homepage">
+      </article>
       <NavLink className="feature-button" to="/notes">
         Notes
       </NavLink>
