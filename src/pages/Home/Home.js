@@ -114,8 +114,9 @@ const Home = () => {
     return () => {
       document.removeEventListener('click', handleClick);
     };
-  }, [todoList]);
+  }, []);
 
+ 
   const handleIdeaHomepageArrowButton = () => {
     idea.extend = !idea.extend;
     setIdea(idea);
@@ -154,13 +155,10 @@ const Home = () => {
 
   const handleAddTodos = (e) => {
     e.preventDefault()
+    setIsNewTodoActive(false);
+    setNewTodoClass("hidden")
+    setTodoPencil("note-pencil")
     setTodoList([...todoList, ...Object.values(newTodos)]);
-    setNewTodos({
-      todo1: "",
-      todo2: "",
-      todo3: "",
-      todo4: ""
-    })
   }
 
 
@@ -213,20 +211,18 @@ const Home = () => {
 
 
 
-
-
-
       <article className="quick-access-homepage">
         <section onClick={handleExtendToDoForm} className={`quick-access-element ${isNewTodoActive ? "active" : ""}`}>
-          <form onSubmit={handleAddTodos}>
-            <section className={newTodoClass}>
+          <section className={newTodoClass}>
+            <form onSubmit={handleAddTodos}>
               <p><input onChange={handleTodoInputChange} type="text" name="todo1" value={newTodos.todo1} className="new-todo-input-homepage" placeholder="write something"></input></p>
               <p><input onChange={handleTodoInputChange} type="text" name="todo2" value={newTodos.todo2} className="new-todo-input-homepage" placeholder="write something"></input></p>
               <p><input onChange={handleTodoInputChange} type="text" name="todo3" value={newTodos.todo3} className="new-todo-input-homepage" placeholder="write something"></input></p>
               <p><input onChange={handleTodoInputChange} type="text" name="todo4" value={newTodos.todo4} className="new-todo-input-homepage" placeholder="write something"></input></p>
               <button >Submit</button>
-            </section>
-          </form>
+            </form>
+          </section>
+
           <img
             className={todoPencil}
             src={Pencil}
@@ -260,8 +256,8 @@ const Home = () => {
         Games
       </NavLink>
       <ul className="todo-list-homepage">
-        {todoList.map((item) =>
-          <li key={item}>{item.trim()}</li>
+        {todoList.map((item, index) =>
+          <li key={index}>{item.trim()}</li>
         )}
       </ul>
     </article>
