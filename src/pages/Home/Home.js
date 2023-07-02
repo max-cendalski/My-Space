@@ -20,9 +20,9 @@ const Home = () => {
   const [todoPencil, setTodoPencil] = useState("note-pencil")
   const [newTodos, setNewTodos] = useState({
     todo1: "",
-    todo2:"",
-    todo3:"",
-    todo4:""
+    todo2: "",
+    todo3: "",
+    todo4: ""
   })
 
   const [value, setValue] = useState(new Date());
@@ -144,13 +144,15 @@ const Home = () => {
     }, 150)
   }
 
+  const handleTodoInputChange = ({ target }) => {
+    console.log('new',newTodos)
+    setNewTodos({ ...newTodos, [target.name]: target.value })
+  }
+
   const handleAddTodos = () => {
     console.log('whee')
   }
-  const handleAddTodo = (e) => {
-    e.preventDefault()
-   
-  }
+
 
   return (
     <article id="home-container">
@@ -200,22 +202,14 @@ const Home = () => {
       )}
 
 
-
-
-
-
-
-
-
-
       <article className="quick-access-homepage">
         <section onClick={handleExtendToDoForm} className={`quick-access-element ${isNewTodoActive ? "active" : ""}`}>
           <form>
             <section className={newTodoClass}>
-              <p><input type="text" name="todo1" className="new-todo-input-homepage" placeholder="write something"></input></p>
-              <p><input type="text" name="todo2" className="new-todo-input-homepage" placeholder="write something"></input></p>
-              <p><input type="text" name="todo3" className="new-todo-input-homepage" placeholder="write something"></input></p>
-              <p><input type="text" name="todo3" className="new-todo-input-homepage" placeholder="write something"></input></p>
+              <p><input onChange={handleTodoInputChange} type="text" name="todo1" className="new-todo-input-homepage" placeholder="write something"></input></p>
+              <p><input onChange={handleTodoInputChange} type="text" name="todo2" className="new-todo-input-homepage" placeholder="write something"></input></p>
+              <p><input onChange={handleTodoInputChange} type="text" name="todo3" className="new-todo-input-homepage" placeholder="write something"></input></p>
+              <p><input onChange={handleTodoInputChange} type="text" name="todo4" className="new-todo-input-homepage" placeholder="write something"></input></p>
               <button onSubmit={handleAddTodos}>Submit</button>
             </section>
           </form>
