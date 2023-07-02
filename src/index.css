@@ -172,9 +172,9 @@ code {
 
 .quick-access-homepage {
   display: flex;
-  align-items:center;
+  align-items: center;
   width: 100%;
-  padding-inline: 5%;
+  margin: 0 auto;
   background-color: var(--lightPink);
   height: 6rem;
 }
@@ -188,6 +188,7 @@ code {
   background-color: white;
   border-radius: 50%;
   transition: all 100ms linear;
+  margin-inline-start: 5%;
 }
 
 .quick-access-element:hover {
@@ -196,25 +197,29 @@ code {
 }
 
 .quick-access-element.active {
-  width: 90%;
-  height: 20rem;
+  display: flex;
+  justify-content: flex-start;
+  width: 80%;
+  height: 14rem;
   border-radius: 3px;
   border: 1px solid var(--lightPink);
-  top: 20%;
-  transform: translate(0%, -10%);
+  transform: translate(-0%, -25%);
   background-color: white;
+  padding-inline: 5%;
 }
 
+
 .new-todo-input-homepage {
-  display: flex;
-  flex-direction: column;
   font-size: 1rem;
+  width: 100%;
   border: none;
   border-bottom: 1px solid var(--lightPink);
   outline: none;
 }
 
-
+.new-todo-input-homepage::placeholder {
+  color: rgb(178, 173, 173);
+}
 
 
 
@@ -1202,7 +1207,7 @@ dialog::backdrop {
 .line-diagonal-right::after {
   content: "";
   position: absolute;
-  width: 130%; 
+  width: 130%;
   border-top: 4px solid var(--red);
 }
 
@@ -1215,7 +1220,7 @@ dialog::backdrop {
 .line-diagonal-right::after {
   right: -15%;
   top: 32%;
-  transform: rotate(-45deg); 
+  transform: rotate(-45deg);
 }
 
 

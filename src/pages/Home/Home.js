@@ -18,6 +18,12 @@ const Home = () => {
   const [isNewTodoActive, setIsNewTodoActive] = useState(false)
   const [newTodoClass, setNewTodoClass] = useState("hidden")
   const [todoPencil, setTodoPencil] = useState("note-pencil")
+  const [newTodos, setNewTodos] = useState({
+    todo1: "",
+    todo2:"",
+    todo3:"",
+    todo4:""
+  })
 
   const [value, setValue] = useState(new Date());
 
@@ -130,15 +136,20 @@ const Home = () => {
     updateIdea();
   };
 
-  const handleAddToDo = () => {
-    console.log('whee')
+  const handleExtendToDoForm = () => {
     setIsNewTodoActive(true)
     setTodoPencil("hidden")
     setTimeout(() => {
       setNewTodoClass("new-todo-form-homepage")
     }, 150)
+  }
 
-
+  const handleAddTodos = () => {
+    console.log('whee')
+  }
+  const handleAddTodo = (e) => {
+    e.preventDefault()
+   
   }
 
   return (
@@ -198,16 +209,16 @@ const Home = () => {
 
 
       <article className="quick-access-homepage">
-        <section onClick={handleAddToDo} className={`quick-access-element ${isNewTodoActive ? "active" : ""}`}>
-          <section className={newTodoClass}>
-            <p><input type="text" className="new-todo-input-homepage" placeholder="write something"></input></p>
-            <img
-              className={`note-pencil`}
-              src={Pencil}
-              alt="pencil-icon"
-            />
-
-          </section>
+        <section onClick={handleExtendToDoForm} className={`quick-access-element ${isNewTodoActive ? "active" : ""}`}>
+          <form>
+            <section className={newTodoClass}>
+              <p><input type="text" name="todo1" className="new-todo-input-homepage" placeholder="write something"></input></p>
+              <p><input type="text" name="todo2" className="new-todo-input-homepage" placeholder="write something"></input></p>
+              <p><input type="text" name="todo3" className="new-todo-input-homepage" placeholder="write something"></input></p>
+              <p><input type="text" name="todo3" className="new-todo-input-homepage" placeholder="write something"></input></p>
+              <button onSubmit={handleAddTodos}>Submit</button>
+            </section>
+          </form>
           <img
             className={todoPencil}
             src={Pencil}
