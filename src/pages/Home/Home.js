@@ -25,6 +25,9 @@ const Home = () => {
     todo4: ""
   })
 
+  const [todoList, setTodoList] = useState([])
+
+
   const [value, setValue] = useState(new Date());
 
   useEffect(() => {
@@ -111,7 +114,7 @@ const Home = () => {
     return () => {
       document.removeEventListener('click', handleClick);
     };
-  }, []);
+  }, [todoList]);
 
   const handleIdeaHomepageArrowButton = () => {
     idea.extend = !idea.extend;
@@ -145,12 +148,19 @@ const Home = () => {
   }
 
   const handleTodoInputChange = ({ target }) => {
-    console.log('new',newTodos)
+    console.log('new', newTodos)
     setNewTodos({ ...newTodos, [target.name]: target.value })
   }
 
-  const handleAddTodos = () => {
-    console.log('whee')
+  const handleAddTodos = (e) => {
+    e.preventDefault()
+    setTodoList([...todoList, ...Object.values(newTodos)]);
+    setNewTodos({
+      todo1: "",
+      todo2: "",
+      todo3: "",
+      todo4: ""
+    })
   }
 
 
@@ -202,15 +212,19 @@ const Home = () => {
       )}
 
 
+
+
+
+
       <article className="quick-access-homepage">
         <section onClick={handleExtendToDoForm} className={`quick-access-element ${isNewTodoActive ? "active" : ""}`}>
-          <form>
+          <form onSubmit={handleAddTodos}>
             <section className={newTodoClass}>
-              <p><input onChange={handleTodoInputChange} type="text" name="todo1" className="new-todo-input-homepage" placeholder="write something"></input></p>
-              <p><input onChange={handleTodoInputChange} type="text" name="todo2" className="new-todo-input-homepage" placeholder="write something"></input></p>
-              <p><input onChange={handleTodoInputChange} type="text" name="todo3" className="new-todo-input-homepage" placeholder="write something"></input></p>
-              <p><input onChange={handleTodoInputChange} type="text" name="todo4" className="new-todo-input-homepage" placeholder="write something"></input></p>
-              <button onSubmit={handleAddTodos}>Submit</button>
+              <p><input onChange={handleTodoInputChange} type="text" name="todo1" value={newTodos.todo1} className="new-todo-input-homepage" placeholder="write something"></input></p>
+              <p><input onChange={handleTodoInputChange} type="text" name="todo2" value={newTodos.todo2} className="new-todo-input-homepage" placeholder="write something"></input></p>
+              <p><input onChange={handleTodoInputChange} type="text" name="todo3" value={newTodos.todo3} className="new-todo-input-homepage" placeholder="write something"></input></p>
+              <p><input onChange={handleTodoInputChange} type="text" name="todo4" value={newTodos.todo4} className="new-todo-input-homepage" placeholder="write something"></input></p>
+              <button >Submit</button>
             </section>
           </form>
           <img
@@ -219,6 +233,15 @@ const Home = () => {
             alt="pencil-icon"
           />
         </section>
+
+
+
+
+
+
+
+
+
 
       </article>
       <NavLink className="feature-button" to="/notes">
@@ -236,6 +259,11 @@ const Home = () => {
       <NavLink className="feature-button" to="/games">
         Games
       </NavLink>
+      <ul className="todo-list-homepage">
+        {todoList.map((item) =>
+          <li key={item}>{item.trim()}</li>
+        )}
+      </ul>
     </article>
   );
 };

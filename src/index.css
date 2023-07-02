@@ -211,7 +211,7 @@ code {
 
 .new-todo-input-homepage {
   font-size: 1rem;
-  width: 100%;
+  width: 20rem;
   border: none;
   border-bottom: 1px solid var(--lightPink);
   outline: none;
@@ -221,7 +221,10 @@ code {
   color: rgb(178, 173, 173);
 }
 
-
+.todo-list-homepage {
+  display: flex;
+  flex-direction: column;
+}
 
 
 
