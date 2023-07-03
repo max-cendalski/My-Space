@@ -16,7 +16,7 @@ const Home = () => {
   const [homepageWeather, setHomepageWeather] = useState(null);
 
   const [isNewTodoActive, setIsNewTodoActive] = useState(false)
-  const [newTodoFormClass, setNewTodoFormClass] = useState("hidden")
+  const [newTodoFormClass, setNewTodoFormClass] = useState("new-todo-form-homepage")
   const [todoPencil, setTodoPencil] = useState("note-pencil")
   const [newTodos, setNewTodos] = useState({
     todo1: "",
@@ -103,7 +103,7 @@ const Home = () => {
     const handleClick = (e) => {
       if (!e.target.closest('.quick-access-element')) {
         setIsNewTodoActive(false);
-        setNewTodoFormClass("hidden")
+        setNewTodoFormClass("new-todo-form-homepage")
         setTodoPencil("note-pencil")
       }
     };
@@ -142,7 +142,7 @@ const Home = () => {
   const handleExtendToDoForm = () => {
     setIsNewTodoActive(true)
     setTodoPencil("hidden")
-    setNewTodoFormClass("new-todo-form-class-homepage")
+    setNewTodoFormClass("new-todo-form-homepage")
   }
 
   const handleTodoInputChange = ({ target }) => {
@@ -153,7 +153,7 @@ const Home = () => {
     e.preventDefault()
     e.stopPropagation();
     setIsNewTodoActive(false);
-    setNewTodoFormClass("hidden")
+    setNewTodoFormClass("new-todo-form-homepage")
     setTodoPencil("note-pencil")
 
     // setTodoList([...todoList, ...Object.values(newTodos)]);
@@ -217,18 +217,15 @@ const Home = () => {
 
       <article className="quick-access-homepage">
         <section onClick={handleExtendToDoForm} className={`quick-access-element  ${isNewTodoActive ? "active" : ""}`}>
-
-          <form className={newTodoFormClass} onSubmit={handleAddTodos}>
+          <form className={`${newTodoFormClass} ${isNewTodoActive ? "active" : ""}`} onSubmit={handleAddTodos}>
             <p><input onChange={handleTodoInputChange} type="text" name="todo1" value={newTodos.todo1} className="new-todo-input-homepage" placeholder="write something" /></p>
             <p><input onChange={handleTodoInputChange} type="text" name="todo2" value={newTodos.todo2} className="new-todo-input-homepage" placeholder="write something" /></p>
             <p><input onChange={handleTodoInputChange} type="text" name="todo3" value={newTodos.todo3} className="new-todo-input-homepage" placeholder="write something" /></p>
             <p><input onChange={handleTodoInputChange} type="text" name="todo4" value={newTodos.todo4} className="new-todo-input-homepage" placeholder="write something" /></p>
             <button >Submit</button>
           </form>
-
-
           <img
-            className={todoPencil}
+            className={`todo-pencil ${isNewTodoActive ? "hidden" : ""}`}
             src={Pencil}
             alt="pencil-icon"
           />

@@ -180,6 +180,7 @@ code {
 }
 
 .quick-access-element {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -187,8 +188,9 @@ code {
   height: 4.5rem;
   background-color: white;
   border-radius: 50%;
-  transition: all 100ms linear;
+  transition: all 150ms ease-in;
   margin-inline-start: 5%;
+  overflow: hidden;
 }
 
 .quick-access-element:hover {
@@ -208,15 +210,28 @@ code {
   padding-inline: 5%;
 }
 
-/* .new-todo-form-homepage {
-  opacity: 0;
-  transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+.new-todo-form-homepage {
+  opacity: 0
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 .new-todo-form-homepage.active {
-  opacity: 1;
-} */
+  animation: fadeIn 300ms forwards;
 
+}
 
 .new-todo-input-homepage {
   font-size: 1rem;
@@ -238,7 +253,12 @@ code {
 
 
 
-
+.todo-pencil {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
 
 
