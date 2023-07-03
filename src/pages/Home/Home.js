@@ -218,10 +218,10 @@ const Home = () => {
       <article className="quick-access-homepage">
         <section onClick={handleExtendToDoForm} className={`quick-access-element  ${isNewTodoActive ? "active" : ""}`}>
           <form className={`${newTodoFormClass} ${isNewTodoActive ? "active" : ""}`} onSubmit={handleAddTodos}>
-            <p><input onChange={handleTodoInputChange} type="text" name="todo1" value={newTodos.todo1} className="new-todo-input-homepage" placeholder="write something" /></p>
-            <p><input onChange={handleTodoInputChange} type="text" name="todo2" value={newTodos.todo2} className="new-todo-input-homepage" placeholder="write something" /></p>
-            <p><input onChange={handleTodoInputChange} type="text" name="todo3" value={newTodos.todo3} className="new-todo-input-homepage" placeholder="write something" /></p>
-            <p><input onChange={handleTodoInputChange} type="text" name="todo4" value={newTodos.todo4} className="new-todo-input-homepage" placeholder="write something" /></p>
+            <p><input onChange={handleTodoInputChange} type="text" name="todo1" value={newTodos.todo1} className="new-todo-input-homepage" placeholder="add todo" /></p>
+            <p><input onChange={handleTodoInputChange} type="text" name="todo2" value={newTodos.todo2} className="new-todo-input-homepage" placeholder="add todo" /></p>
+            <p><input onChange={handleTodoInputChange} type="text" name="todo3" value={newTodos.todo3} className="new-todo-input-homepage" placeholder="add todo" /></p>
+            <p><input onChange={handleTodoInputChange} type="text" name="todo4" value={newTodos.todo4} className="new-todo-input-homepage" placeholder="add todo" /></p>
             <button >Submit</button>
           </form>
           <img

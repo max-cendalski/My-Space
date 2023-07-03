@@ -241,7 +241,6 @@ code {
   outline: none;
 }
 
-
 .new-todo-input-homepage::placeholder {
   color: rgb(178, 173, 173);
 }
