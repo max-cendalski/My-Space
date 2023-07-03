@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { getDoc, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import Navbar from "../../components/Navbar/Navbar";
@@ -10,6 +10,7 @@ import 'react-clock/dist/Clock.css';
 import Pencil from "../../icons/pencilS.png";
 
 const Home = () => {
+  const inputRef = useRef(null);
   const [idea, setIdea] = useState(null);
   const { user } = UserAuth();
   const [currentDay, setCurrentDay] = useState("");
@@ -105,6 +106,12 @@ const Home = () => {
         setIsNewTodoActive(false);
         setNewTodoFormClass("new-todo-form-homepage")
         setTodoPencil("note-pencil")
+        setNewTodos({
+          todo1: "",
+          todo2: "",
+          todo3: "",
+          todo4: ""
+        })
       }
     };
 
@@ -140,7 +147,12 @@ const Home = () => {
   };
 
   const handleExtendToDoForm = () => {
-    setIsNewTodoActive(true)
+    if (!isNewTodoActive) {
+      setIsNewTodoActive(true);
+
+      inputRef.current.focus();
+
+    };
     setTodoPencil("hidden")
     setNewTodoFormClass("new-todo-form-homepage")
   }
@@ -156,13 +168,13 @@ const Home = () => {
     setNewTodoFormClass("new-todo-form-homepage")
     setTodoPencil("note-pencil")
 
-    // setTodoList([...todoList, ...Object.values(newTodos)]);
-    // setNewTodos({
-    //   todo1: "",
-    //   todo2: "",
-    //   todo3: "",
-    //   todo4: ""
-    // })
+    setTodoList([...todoList, ...Object.values(newTodos)]);
+    setNewTodos({
+      todo1: "",
+      todo2: "",
+      todo3: "",
+      todo4: ""
+    })
   }
 
 
@@ -218,7 +230,7 @@ const Home = () => {
       <article className="quick-access-homepage">
         <section onClick={handleExtendToDoForm} className={`quick-access-element  ${isNewTodoActive ? "active" : ""}`}>
           <form className={`${newTodoFormClass} ${isNewTodoActive ? "active" : ""}`} onSubmit={handleAddTodos}>
-            <p><input onChange={handleTodoInputChange} type="text" name="todo1" value={newTodos.todo1} className="new-todo-input-homepage" placeholder="add todo" /></p>
+            <p><input ref={inputRef} onChange={handleTodoInputChange} type="text" name="todo1" value={newTodos.todo1} className="new-todo-input-homepage" placeholder="add todo" /></p>
             <p><input onChange={handleTodoInputChange} type="text" name="todo2" value={newTodos.todo2} className="new-todo-input-homepage" placeholder="add todo" /></p>
             <p><input onChange={handleTodoInputChange} type="text" name="todo3" value={newTodos.todo3} className="new-todo-input-homepage" placeholder="add todo" /></p>
             <p><input onChange={handleTodoInputChange} type="text" name="todo4" value={newTodos.todo4} className="new-todo-input-homepage" placeholder="add todo" /></p>
