@@ -24,9 +24,7 @@ const Home = () => {
     todo3: "",
     todo4: ""
   })
-
   const [todoList, setTodoList] = useState([])
-
 
   const [value, setValue] = useState(new Date());
 
@@ -101,8 +99,10 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
+
     const handleClick = (e) => {
-      if (!e.target.closest('.quick-access-element')) {
+      console.log('event target type:', e.target.type);
+      if (!e.target.closest('.quick-access-element') && e.target.type !== "SUBMIT") {
         setIsNewTodoActive(false);
         setNewTodoClass("hidden")
         setTodoPencil("note-pencil")
@@ -116,7 +116,7 @@ const Home = () => {
     };
   }, []);
 
- 
+
   const handleIdeaHomepageArrowButton = () => {
     idea.extend = !idea.extend;
     setIdea(idea);
@@ -143,22 +143,32 @@ const Home = () => {
   const handleExtendToDoForm = () => {
     setIsNewTodoActive(true)
     setTodoPencil("hidden")
-    setTimeout(() => {
-      setNewTodoClass("new-todo-form-homepage")
-    }, 150)
+    setNewTodoClass("new-todo-form-homepage")
+
   }
 
   const handleTodoInputChange = ({ target }) => {
-    console.log('new', newTodos)
     setNewTodos({ ...newTodos, [target.name]: target.value })
   }
 
   const handleAddTodos = (e) => {
     e.preventDefault()
+
     setIsNewTodoActive(false);
     setNewTodoClass("hidden")
     setTodoPencil("note-pencil")
-    setTodoList([...todoList, ...Object.values(newTodos)]);
+
+
+
+
+
+    // setTodoList([...todoList, ...Object.values(newTodos)]);
+    // setNewTodos({
+    //   todo1: "",
+    //   todo2: "",
+    //   todo3: "",
+    //   todo4: ""
+    // })
   }
 
 
@@ -212,16 +222,15 @@ const Home = () => {
 
 
       <article className="quick-access-homepage">
-        <section onClick={handleExtendToDoForm} className={`quick-access-element ${isNewTodoActive ? "active" : ""}`}>
-          <section className={newTodoClass}>
-            <form onSubmit={handleAddTodos}>
-              <p><input onChange={handleTodoInputChange} type="text" name="todo1" value={newTodos.todo1} className="new-todo-input-homepage" placeholder="write something"></input></p>
-              <p><input onChange={handleTodoInputChange} type="text" name="todo2" value={newTodos.todo2} className="new-todo-input-homepage" placeholder="write something"></input></p>
-              <p><input onChange={handleTodoInputChange} type="text" name="todo3" value={newTodos.todo3} className="new-todo-input-homepage" placeholder="write something"></input></p>
-              <p><input onChange={handleTodoInputChange} type="text" name="todo4" value={newTodos.todo4} className="new-todo-input-homepage" placeholder="write something"></input></p>
-              <button >Submit</button>
-            </form>
-          </section>
+        <section onClick={handleExtendToDoForm} className={`quick-access-element  ${isNewTodoActive ? "active" : ""}`}>
+          <form className={newTodoClass} onSubmit={handleAddTodos}>
+            <p><input onChange={handleTodoInputChange} type="text" name="todo1" value={newTodos.todo1} className="new-todo-input-homepage" placeholder="write something" /></p>
+            <p><input onChange={handleTodoInputChange} type="text" name="todo2" value={newTodos.todo2} className="new-todo-input-homepage" placeholder="write something" /></p>
+            <p><input onChange={handleTodoInputChange} type="text" name="todo3" value={newTodos.todo3} className="new-todo-input-homepage" placeholder="write something" /></p>
+            <p><input onChange={handleTodoInputChange} type="text" name="todo4" value={newTodos.todo4} className="new-todo-input-homepage" placeholder="write something" /></p>
+            <button >Submit</button>
+          </form>
+
 
           <img
             className={todoPencil}
@@ -229,16 +238,6 @@ const Home = () => {
             alt="pencil-icon"
           />
         </section>
-
-
-
-
-
-
-
-
-
-
       </article>
       <NavLink className="feature-button" to="/notes">
         Notes
