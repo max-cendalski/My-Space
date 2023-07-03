@@ -16,7 +16,7 @@ const Home = () => {
   const [homepageWeather, setHomepageWeather] = useState(null);
 
   const [isNewTodoActive, setIsNewTodoActive] = useState(false)
-  const [newTodoFormClass, setNewTodoFormClass] = useState("new-todo-form-homepage")
+  const [newTodoFormClass, setNewTodoFormClass] = useState("hidden")
   const [todoPencil, setTodoPencil] = useState("note-pencil")
   const [newTodos, setNewTodos] = useState({
     todo1: "",
@@ -101,8 +101,7 @@ const Home = () => {
   useEffect(() => {
 
     const handleClick = (e) => {
-      console.log('event target type:', e.target.type);
-      if (!e.target.closest('.quick-access-element') && e.target.type !== "SUBMIT") {
+      if (!e.target.closest('.quick-access-element')) {
         setIsNewTodoActive(false);
         setNewTodoFormClass("hidden")
         setTodoPencil("note-pencil")
@@ -143,7 +142,7 @@ const Home = () => {
   const handleExtendToDoForm = () => {
     setIsNewTodoActive(true)
     setTodoPencil("hidden")
-    setNewTodoFormClass("new-todo-form-homepage")
+    setNewTodoFormClass("new-todo-form-class-homepage")
   }
 
   const handleTodoInputChange = ({ target }) => {
@@ -218,16 +217,16 @@ const Home = () => {
 
       <article className="quick-access-homepage">
         <section onClick={handleExtendToDoForm} className={`quick-access-element  ${isNewTodoActive ? "active" : ""}`}>
-          <section className={`${newTodoFormClass} ${isNewTodoActive ? "visible" : ""}`}>
-            <form onSubmit={handleAddTodos}>
-              <p><input onChange={handleTodoInputChange} type="text" name="todo1" value={newTodos.todo1} className="new-todo-input-homepage" placeholder="write something" /></p>
-              <p><input onChange={handleTodoInputChange} type="text" name="todo2" value={newTodos.todo2} className="new-todo-input-homepage" placeholder="write something" /></p>
-              <p><input onChange={handleTodoInputChange} type="text" name="todo3" value={newTodos.todo3} className="new-todo-input-homepage" placeholder="write something" /></p>
-              <p><input onChange={handleTodoInputChange} type="text" name="todo4" value={newTodos.todo4} className="new-todo-input-homepage" placeholder="write something" /></p>
-              <button >Submit</button>
-            </form>
 
-          </section>
+          <form className={newTodoFormClass} onSubmit={handleAddTodos}>
+            <p><input onChange={handleTodoInputChange} type="text" name="todo1" value={newTodos.todo1} className="new-todo-input-homepage" placeholder="write something" /></p>
+            <p><input onChange={handleTodoInputChange} type="text" name="todo2" value={newTodos.todo2} className="new-todo-input-homepage" placeholder="write something" /></p>
+            <p><input onChange={handleTodoInputChange} type="text" name="todo3" value={newTodos.todo3} className="new-todo-input-homepage" placeholder="write something" /></p>
+            <p><input onChange={handleTodoInputChange} type="text" name="todo4" value={newTodos.todo4} className="new-todo-input-homepage" placeholder="write something" /></p>
+            <button >Submit</button>
+          </form>
+
+
           <img
             className={todoPencil}
             src={Pencil}
