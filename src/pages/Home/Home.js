@@ -153,9 +153,10 @@ const Home = () => {
   const handleTodoInputChange = (e, index) => {
     const { value } = e.target;
     setNewTodos(prevTodos => {
-      const updatedTodos = [...prevTodos];
+      const updatedTodos = [...prevTodos]
       updatedTodos[index] = { text: value, status: false };
-      return updatedTodos;
+
+      return updatedTodos
     });
   };
 
@@ -163,7 +164,7 @@ const Home = () => {
     e.preventDefault()
     setIsNewTodoActive(false);
     setNewTodoFormClass("new-todo-form-homepage")
-    setTodoList([...todoList, ...newTodos])
+    setTodoList([...todoList, ...newTodos.filter(item => item.text)])
     setNewTodos([
       { text: '', status: false },
       { text: '', status: false },
