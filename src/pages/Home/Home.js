@@ -18,7 +18,6 @@ const Home = () => {
 
   const [isNewTodoActive, setIsNewTodoActive] = useState(false)
   const [newTodoFormClass, setNewTodoFormClass] = useState("new-todo-form-homepage")
-  const [todoPencil, setTodoPencil] = useState("note-pencil")
   const [newTodos, setNewTodos] = useState({
     todo1: "",
     todo2: "",
@@ -100,12 +99,10 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-
     const handleClick = (e) => {
-      if (!e.target.closest('.quick-access-element')) {
+      if (!e.target.closest('.quick-access-element')) {  
         setIsNewTodoActive(false);
         setNewTodoFormClass("new-todo-form-homepage")
-        setTodoPencil("note-pencil")
         setNewTodos({
           todo1: "",
           todo2: "",
@@ -114,7 +111,6 @@ const Home = () => {
         })
       }
     };
-
     document.addEventListener('click', handleClick);
 
     return () => {
@@ -149,11 +145,8 @@ const Home = () => {
   const handleExtendToDoForm = () => {
     if (!isNewTodoActive) {
       setIsNewTodoActive(true);
-
       inputRef.current.focus();
-
     };
-    setTodoPencil("hidden")
     setNewTodoFormClass("new-todo-form-homepage")
   }
 
@@ -163,12 +156,9 @@ const Home = () => {
 
   const handleAddTodos = (e) => {
     e.preventDefault()
-    e.stopPropagation();
     setIsNewTodoActive(false);
     setNewTodoFormClass("new-todo-form-homepage")
-    setTodoPencil("note-pencil")
-
-    setTodoList([...todoList, ...Object.values(newTodos)]);
+    setTodoList([...todoList, ...Object.values(newTodos).filter(value => value.trim() !== '')]);
     setNewTodos({
       todo1: "",
       todo2: "",
@@ -229,12 +219,14 @@ const Home = () => {
 
       <article className="quick-access-homepage">
         <section onClick={handleExtendToDoForm} className={`quick-access-element  ${isNewTodoActive ? "active" : ""}`}>
+
           <form className={`${newTodoFormClass} ${isNewTodoActive ? "active" : ""}`} onSubmit={handleAddTodos}>
             <p><input ref={inputRef} onChange={handleTodoInputChange} type="text" name="todo1" value={newTodos.todo1} className="new-todo-input-homepage" placeholder="add todo" /></p>
-            <p><input onChange={handleTodoInputChange} type="text" name="todo2" value={newTodos.todo2} className="new-todo-input-homepage" placeholder="add todo" /></p>
-            <p><input onChange={handleTodoInputChange} type="text" name="todo3" value={newTodos.todo3} className="new-todo-input-homepage" placeholder="add todo" /></p>
-            <p><input onChange={handleTodoInputChange} type="text" name="todo4" value={newTodos.todo4} className="new-todo-input-homepage" placeholder="add todo" /></p>
+            <p><input onChange={handleTodoInputChange} type="text" name="todo2" value={newTodos.todo2} maxLength="30" className="new-todo-input-homepage" placeholder="add todo" /></p>
+            <p><input onChange={handleTodoInputChange} type="text" name="todo3" value={newTodos.todo3} maxLength="30" className="new-todo-input-homepage" placeholder="add todo" /></p>
+            <p><input onChange={handleTodoInputChange} type="text" name="todo4" value={newTodos.todo4} maxLength="30" className="new-todo-input-homepage" placeholder="add todo" /></p>
             <button >Submit</button>
+
           </form>
           <img
             className={`todo-pencil ${isNewTodoActive ? "hidden" : ""}`}
@@ -243,6 +235,9 @@ const Home = () => {
           />
         </section>
       </article>
+      <ul className="todo-list-homepage">
+        {todoList.map((item, index) => item && <li key={index}>{item.trim()}</li>)}
+      </ul>
       <NavLink className="feature-button" to="/notes">
         Notes
       </NavLink>
@@ -258,11 +253,7 @@ const Home = () => {
       <NavLink className="feature-button" to="/games">
         Games
       </NavLink>
-      <ul className="todo-list-homepage">
-        {todoList.map((item, index) =>
-          <li key={index}>{item.trim()}</li>
-        )}
-      </ul>
+
     </article>
   );
 };
