@@ -246,9 +246,20 @@ code {
 }
 
 .todo-list-homepage {
+  padding: 0.2rem 0.2rem;
   display: flex;
   flex-direction: column;
+  width: 4rem;
+  min-height: 4.5rem;
+  max-height: 4.5rem;
+  list-style:none;
+  overflow: hidden;
+  border: 1px solid black;
+  font-size: 0.5rem;
+
 }
+
+
 
 
 

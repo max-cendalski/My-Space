@@ -18,12 +18,12 @@ const Home = () => {
 
   const [isNewTodoActive, setIsNewTodoActive] = useState(false)
   const [newTodoFormClass, setNewTodoFormClass] = useState("new-todo-form-homepage")
-  const [newTodos, setNewTodos] = useState({
-    todo1: "",
-    todo2: "",
-    todo3: "",
-    todo4: ""
-  })
+  const [newTodos, setNewTodos] = useState([
+    { text: '', status: false },
+    { text: '', status: false },
+    { text: '', status: false },
+    { text: '', status: false },
+  ]);
   const [todoList, setTodoList] = useState([])
 
   const [value, setValue] = useState(new Date());
@@ -100,15 +100,15 @@ const Home = () => {
 
   useEffect(() => {
     const handleClick = (e) => {
-      if (!e.target.closest('.quick-access-element')) {  
+      if (!e.target.closest('.quick-access-element')) {
         setIsNewTodoActive(false);
         setNewTodoFormClass("new-todo-form-homepage")
-        setNewTodos({
-          todo1: "",
-          todo2: "",
-          todo3: "",
-          todo4: ""
-        })
+        setNewTodos([
+          { text: '', status: false },
+          { text: '', status: false },
+          { text: '', status: false },
+          { text: '', status: false },
+        ])
       }
     };
     document.addEventListener('click', handleClick);
@@ -145,26 +145,31 @@ const Home = () => {
   const handleExtendToDoForm = () => {
     if (!isNewTodoActive) {
       setIsNewTodoActive(true);
-      inputRef.current.focus();
+
     };
     setNewTodoFormClass("new-todo-form-homepage")
   }
 
-  const handleTodoInputChange = ({ target }) => {
-    setNewTodos({ ...newTodos, [target.name]: target.value })
-  }
+  const handleTodoInputChange = (e, index) => {
+    const { value } = e.target;
+    setNewTodos(prevTodos => {
+      const updatedTodos = [...prevTodos];
+      updatedTodos[index] = { text: value, status: false };
+      return updatedTodos;
+    });
+  };
 
   const handleAddTodos = (e) => {
     e.preventDefault()
     setIsNewTodoActive(false);
     setNewTodoFormClass("new-todo-form-homepage")
-    setTodoList([...todoList, ...Object.values(newTodos).filter(value => value.trim() !== '')]);
-    setNewTodos({
-      todo1: "",
-      todo2: "",
-      todo3: "",
-      todo4: ""
-    })
+    setTodoList([...todoList, ...newTodos])
+    setNewTodos([
+      { text: '', status: false },
+      { text: '', status: false },
+      { text: '', status: false },
+      { text: '', status: false },
+    ])
   }
 
 
@@ -221,10 +226,18 @@ const Home = () => {
         <section onClick={handleExtendToDoForm} className={`quick-access-element  ${isNewTodoActive ? "active" : ""}`}>
 
           <form className={`${newTodoFormClass} ${isNewTodoActive ? "active" : ""}`} onSubmit={handleAddTodos}>
-            <p><input ref={inputRef} onChange={handleTodoInputChange} type="text" name="todo1" value={newTodos.todo1} className="new-todo-input-homepage" placeholder="add todo" /></p>
-            <p><input onChange={handleTodoInputChange} type="text" name="todo2" value={newTodos.todo2} maxLength="30" className="new-todo-input-homepage" placeholder="add todo" /></p>
-            <p><input onChange={handleTodoInputChange} type="text" name="todo3" value={newTodos.todo3} maxLength="30" className="new-todo-input-homepage" placeholder="add todo" /></p>
-            <p><input onChange={handleTodoInputChange} type="text" name="todo4" value={newTodos.todo4} maxLength="30" className="new-todo-input-homepage" placeholder="add todo" /></p>
+            {newTodos.map((todo, index) => (
+              <p key={index}>
+                <input
+                  type="text"
+                  value={todo.text}
+                  maxLength="30"
+                  className="new-todo-input-homepage"
+                  placeholder="add todo"
+                  onChange={(e) => handleTodoInputChange(e, index)}
+                />
+              </p>
+            ))}
             <button >Submit</button>
 
           </form>
@@ -235,9 +248,17 @@ const Home = () => {
           />
         </section>
       </article>
-      <ul className="todo-list-homepage">
-        {todoList.map((item, index) => item && <li key={index}>{item.trim()}</li>)}
-      </ul>
+
+      {todoList.length > 0 &&
+        <ul className="todo-list-homepage">
+          {todoList.map((item, index) => (
+            <li key={index}>{item.text}</li>
+          ))}
+        </ul>
+      }
+
+
+
       <NavLink className="feature-button" to="/notes">
         Notes
       </NavLink>
