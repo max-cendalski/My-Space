@@ -195,7 +195,7 @@ const Home = () => {
           <p>{currentDay}</p>
           <Clock value={value}
             renderNumbers={true}
-            size={todoList.length > 0 ? 110 : 120}
+            size={todoList.length > 0 ? 100 : 120}
           />
           {todoList.length > 0 &&
             <ul onClick={(event) => {
@@ -273,7 +273,6 @@ const Home = () => {
 
       <article className="quick-access-homepage">
         <section onClick={handleExtendToDoForm} className={`quick-access-element  ${isNewTodoActive ? "active" : ""}`}>
-
           <form className={`${newTodoFormClass} ${isNewTodoActive ? "active" : ""}`} onSubmit={handleAddTodos}>
             {newTodos.map((todo, index) => (
               <p key={index}>
@@ -288,7 +287,6 @@ const Home = () => {
               </p>
             ))}
             <button >Submit</button>
-
           </form>
           <img
             className={`todo-pencil ${isNewTodoActive ? "hidden" : ""}`}
