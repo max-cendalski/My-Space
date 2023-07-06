@@ -284,7 +284,7 @@ const Home = () => {
                 />
               </p>
             ))}
-            <button >Submit</button>
+            <button className="add-todo-button">Submit</button>
           </form>
           <img
             className={`todo-pencil ${isNewTodoActive ? "hidden" : ""}`}

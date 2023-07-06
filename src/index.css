@@ -207,6 +207,7 @@ code {
   transform: translate(-0%, -25%);
   background-color: white;
   padding-inline: 5%;
+  box-shadow: 3px 4px 4px 4px rgb(0, 0, 0, 0.4);
 }
 
 .new-todo-form-homepage {
@@ -243,6 +244,17 @@ code {
   color: rgb(178, 173, 173);
 }
 
+.add-todo-button {
+  box-sizing: border-box;
+  border-radius: 0 2px 2px 0;
+  border: none;
+  color: white;
+  background-color: var(--darkGreen);
+  cursor: pointer;
+  padding: 0.4rem 0.5rem;
+  height: 1.8rem;;
+}
+
 .todo-list-homepage-small {
   position: fixed;
   width: 6.5rem;
@@ -251,7 +263,7 @@ code {
   overflow: auto;
   top: 12rem;
   border: 1px solid #d3d3d3;
-  box-shadow: 0px 4px 6px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.2);
   background-color: #f5f5f5;
   font-size: 1rem;
   margin-block: 0;
@@ -274,7 +286,7 @@ code {
   top: 8rem;
   width: 90%;
   height: 14rem;
-  box-shadow: 0px 4px 6px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.2);
   transform: translate(-0%, -25%);
   background-color: #f5f5f5;
   overflow: auto;
@@ -287,8 +299,6 @@ code {
   padding-inline: 1rem;
   font-size: 1rem;
 }
-
-
 
 .todo-pencil {
   position: absolute;
