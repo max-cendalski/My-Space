@@ -121,8 +121,11 @@ const Home = () => {
     };
 
   }, []);
+
   useEffect(() => {
-     setTodoList(todoList.filter(todo => todo.status !== true))
+    if (!isTodoListLarge) {
+      setTodoList(todoList.filter(todo => todo.status !== true))
+    }
   }, [isTodoListLarge])
 
 
@@ -208,7 +211,6 @@ const Home = () => {
                   style={{ textDecoration: todo.status ? "line-through" : "none" }}
                   key={index}
                   onClick={(e) => {
-                    console.log('todos', todoList)
                     if (isTodoListLarge) {
                       e.stopPropagation()
                       setTodoList((prev) =>
