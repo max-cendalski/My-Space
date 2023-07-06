@@ -25,6 +25,7 @@ const Home = () => {
     { text: '', status: false },
   ]);
   const [todoList, setTodoList] = useState([])
+  const [isTodoListLarge, setIsTodoListLarge] = useState(false)
 
   const [value, setValue] = useState(new Date());
 
@@ -172,7 +173,9 @@ const Home = () => {
       { text: '', status: false },
     ])
   }
-
+ const handleExtendTodoList = ()=> {
+  console.log('whee')
+ }
 
   return (
     <article id="home-container">
@@ -251,7 +254,7 @@ const Home = () => {
       </article>
 
       {todoList.length > 0 &&
-        <ul className="todo-list-homepage">
+        <ul onClick={handleExtendTodoList} className="todo-list-homepage-small">
           {todoList.map((item, index) => (
             <li key={index}>{item.text}</li>
           ))}

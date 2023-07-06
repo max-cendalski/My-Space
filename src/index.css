@@ -245,7 +245,7 @@ code {
   color: rgb(178, 173, 173);
 }
 
-.todo-list-homepage {
+.todo-list-homepage-small {
   display: flex;
   flex-direction: column;
   width: 4.5rem;
@@ -260,13 +260,15 @@ code {
   margin: 0 auto;
   padding: 0;
   border-radius: 5px;
+  cursor: pointer;
 }
 
-.todo-list-homepage li {
+.todo-list-homepage-small li {
   border-bottom: 1px solid #d3d3d3;
   padding-bottom: 0.3rem;
   font-size: 0.5rem;
 }
+
 
 
 .todo-pencil {
