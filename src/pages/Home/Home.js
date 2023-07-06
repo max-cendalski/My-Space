@@ -104,6 +104,7 @@ const Home = () => {
       if (!e.target.closest('.quick-access-element')) {
         setIsNewTodoActive(false);
         setNewTodoFormClass("new-todo-form-homepage")
+      
         setIsTodoListLarge(false)
         setNewTodos([
           { text: '', status: false },
@@ -120,6 +121,9 @@ const Home = () => {
     };
 
   }, []);
+  useEffect(() => {
+     setTodoList(todoList.filter(todo => todo.status !== true))
+  }, [isTodoListLarge])
 
 
   const handleIdeaHomepageArrowButton = () => {
@@ -157,7 +161,7 @@ const Home = () => {
     const { value } = e.target;
     setNewTodos(prevTodos => {
       const updatedTodos = [...prevTodos]
-      updatedTodos[index] = {id: Date.now(), text: value, status: false };
+      updatedTodos[index] = { id: Date.now(), text: value, status: false };
 
       return updatedTodos
     });
@@ -165,9 +169,9 @@ const Home = () => {
 
   const handleAddTodos = (e) => {
     e.preventDefault()
+    setTodoList([...todoList, ...newTodos.filter(item => item.text)])
     setIsNewTodoActive(false);
     setNewTodoFormClass("new-todo-form-homepage")
-    setTodoList([...todoList, ...newTodos.filter(item => item.text)])
     setNewTodos([
       { text: '', status: false },
       { text: '', status: false },
@@ -204,10 +208,9 @@ const Home = () => {
                   style={{ textDecoration: todo.status ? "line-through" : "none" }}
                   key={index}
                   onClick={(e) => {
-
+                    console.log('todos', todoList)
                     if (isTodoListLarge) {
                       e.stopPropagation()
-                      console.log('todoLis', todoList)
                       setTodoList((prev) =>
                         prev.map((item) =>
                           item.id === todo.id
