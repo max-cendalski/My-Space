@@ -157,7 +157,7 @@ const Home = () => {
     const { value } = e.target;
     setNewTodos(prevTodos => {
       const updatedTodos = [...prevTodos]
-      updatedTodos[index] = { text: value, status: false };
+      updatedTodos[index] = {id: Date.now(), text: value, status: false };
 
       return updatedTodos
     });
@@ -192,11 +192,11 @@ const Home = () => {
           />
           {todoList.length > 0 &&
             <ul onClick={(event) => {
-                if (!isTodoListLarge) {
-                  event.stopPropagation();
-                  handleExtendTodoList();
-                }
-              }} 
+              if (!isTodoListLarge) {
+                event.stopPropagation();
+                handleExtendTodoList();
+              }
+            }}
               className={isTodoListLarge ? 'todo-list-homepage-large' : 'todo-list-homepage-small'}
             >
               {todoList.map((todo, index) => (
@@ -204,9 +204,10 @@ const Home = () => {
                   style={{ textDecoration: todo.status ? "line-through" : "none" }}
                   key={index}
                   onClick={(e) => {
-                
+
                     if (isTodoListLarge) {
                       e.stopPropagation()
+                      console.log('todoLis', todoList)
                       setTodoList((prev) =>
                         prev.map((item) =>
                           item.id === todo.id
@@ -222,7 +223,7 @@ const Home = () => {
               ))}
             </ul>
           }
-          
+
 
 
 
