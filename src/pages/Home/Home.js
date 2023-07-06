@@ -104,6 +104,7 @@ const Home = () => {
       if (!e.target.closest('.quick-access-element')) {
         setIsNewTodoActive(false);
         setNewTodoFormClass("new-todo-form-homepage")
+        setIsTodoListLarge(false)
         setNewTodos([
           { text: '', status: false },
           { text: '', status: false },
@@ -113,12 +114,12 @@ const Home = () => {
       }
     };
     document.addEventListener('click', handleClick);
-    console.log('todoList', isTodoListLarge)
+
     return () => {
       document.removeEventListener('click', handleClick);
     };
 
-  }, [isTodoListLarge]);
+  }, []);
 
 
   const handleIdeaHomepageArrowButton = () => {
@@ -174,13 +175,10 @@ const Home = () => {
       { text: '', status: false },
     ])
   }
-  const handleExtendTodoList = (e) => {
-    console.log('todoList', isTodoListLarge)
-    setIsTodoListLarge(!isTodoListLarge)
+  const handleExtendTodoList = () => {
+    setIsTodoListLarge(true)
   }
-  const handleSingleTodoClick = (e) => {
 
-  }
 
   return (
     <article id="home-container">
@@ -193,12 +191,40 @@ const Home = () => {
             size={todoList.length > 0 ? 110 : 120}
           />
           {todoList.length > 0 &&
-            <ul onClick={handleExtendTodoList} className={isTodoListLarge ? 'todo-list-homepage-large' : 'todo-list-homepage-small'}>
-              {todoList.map((item, index) => (
-                <li onClick={handleSingleTodoClick} key={index}>{item.text}</li>
+            <ul onClick={(event) => {
+                if (!isTodoListLarge) {
+                  event.stopPropagation();
+                  handleExtendTodoList();
+                }
+              }} 
+              className={isTodoListLarge ? 'todo-list-homepage-large' : 'todo-list-homepage-small'}
+            >
+              {todoList.map((todo, index) => (
+                <li
+                  style={{ textDecoration: todo.status ? "line-through" : "none" }}
+                  key={index}
+                  onClick={(e) => {
+                
+                    if (isTodoListLarge) {
+                      e.stopPropagation()
+                      setTodoList((prev) =>
+                        prev.map((item) =>
+                          item.id === todo.id
+                            ? { ...item, status: !item.status }
+                            : item
+                        )
+                      )
+                    }
+                  }
+                  }>
+                  {todo.text}
+                </li>
               ))}
             </ul>
           }
+          
+
+
 
         </section>
 
