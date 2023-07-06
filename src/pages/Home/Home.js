@@ -104,7 +104,7 @@ const Home = () => {
       if (!e.target.closest('.quick-access-element')) {
         setIsNewTodoActive(false);
         setNewTodoFormClass("new-todo-form-homepage")
-      
+
         setIsTodoListLarge(false)
         setNewTodos([
           { text: '', status: false },
@@ -155,6 +155,7 @@ const Home = () => {
   const handleExtendToDoForm = () => {
     if (!isNewTodoActive) {
       setIsNewTodoActive(true);
+      setIsTodoListLarge(false)
 
     };
     setNewTodoFormClass("new-todo-form-homepage")
@@ -204,7 +205,7 @@ const Home = () => {
                 handleExtendTodoList();
               }
             }}
-              className={isTodoListLarge ? 'todo-list-homepage-large' : 'todo-list-homepage-small'}
+              className={`todo-list-homepage-small ${isTodoListLarge ? "active" : ""}`}
             >
               {todoList.map((todo, index) => (
                 <li
@@ -228,9 +229,6 @@ const Home = () => {
               ))}
             </ul>
           }
-
-
-
 
         </section>
 
