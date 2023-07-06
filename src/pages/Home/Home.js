@@ -173,9 +173,9 @@ const Home = () => {
       { text: '', status: false },
     ])
   }
- const handleExtendTodoList = ()=> {
-  console.log('whee')
- }
+  const handleExtendTodoList = () => {
+    console.log('whee')
+  }
 
   return (
     <article id="home-container">
@@ -185,10 +185,18 @@ const Home = () => {
           <p>{currentDay}</p>
           <Clock value={value}
             renderNumbers={true}
-            size={110}
+            size={todoList.length > 0 ? 110 : 120}
           />
+          {todoList.length > 0 &&
+            <ul onClick={handleExtendTodoList} className="todo-list-homepage-small">
+              {todoList.map((item, index) => (
+                <li key={index}>{item.text}</li>
+              ))}
+            </ul>
+          }
 
         </section>
+    
         {homepageWeather &&
           <section className="weather-homepage">
             <p>{homepageWeather.city}</p>
@@ -253,13 +261,7 @@ const Home = () => {
         </section>
       </article>
 
-      {todoList.length > 0 &&
-        <ul onClick={handleExtendTodoList} className="todo-list-homepage-small">
-          {todoList.map((item, index) => (
-            <li key={index}>{item.text}</li>
-          ))}
-        </ul>
-      }
+     
 
 
 
