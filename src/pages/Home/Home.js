@@ -1,18 +1,31 @@
 import { NavLink } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { getDoc, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import Navbar from "../../components/Navbar/Navbar";
 import { format } from "date-fns";
 import Clock from 'react-clock'
 import 'react-clock/dist/Clock.css';
+import Pencil from "../../icons/pencilS.png";
 
 const Home = () => {
+  const inputRef = useRef(null);
   const [idea, setIdea] = useState(null);
   const { user } = UserAuth();
   const [currentDay, setCurrentDay] = useState("");
   const [homepageWeather, setHomepageWeather] = useState(null);
+
+  const [isNewTodoActive, setIsNewTodoActive] = useState(false)
+  const [newTodoFormClass, setNewTodoFormClass] = useState("new-todo-form-homepage")
+  const [newTodos, setNewTodos] = useState([
+    { text: '', status: false },
+    { text: '', status: false },
+    { text: '', status: false },
+    { text: '', status: false },
+  ]);
+  const [todoList, setTodoList] = useState([])
+  const [isTodoListLarge, setIsTodoListLarge] = useState(false)
 
   const [value, setValue] = useState(new Date());
 
@@ -20,10 +33,6 @@ const Home = () => {
     const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
     setCurrentDay(format(new Date(), "E, MMMM dd"));
     const interval = setInterval(() => setValue(new Date()), 1000);
-
-
-
-
 
     (async () => {
       try {
@@ -90,6 +99,36 @@ const Home = () => {
     // eslint-disable-next-line
   }, []);
 
+  useEffect(() => {
+    const handleClick = (e) => {
+      if (!e.target.closest('.quick-access-element')) {
+        setIsNewTodoActive(false);
+        setNewTodoFormClass("new-todo-form-homepage")
+
+        setIsTodoListLarge(false)
+        setNewTodos([
+          { text: '', status: false },
+          { text: '', status: false },
+          { text: '', status: false },
+          { text: '', status: false },
+        ])
+      }
+    };
+    document.addEventListener('click', handleClick);
+
+    return () => {
+      document.removeEventListener('click', handleClick);
+    };
+
+  }, []);
+
+  useEffect(() => {
+    if (!isTodoListLarge) {
+      setTodoList(todoList.filter(todo => todo.status !== true))
+    }
+  }, [isTodoListLarge])
+
+
   const handleIdeaHomepageArrowButton = () => {
     idea.extend = !idea.extend;
     setIdea(idea);
@@ -113,6 +152,42 @@ const Home = () => {
     updateIdea();
   };
 
+  const handleExtendToDoForm = () => {
+    if (!isNewTodoActive) {
+      setIsNewTodoActive(true);
+      setIsTodoListLarge(false)
+
+    };
+    setNewTodoFormClass("new-todo-form-homepage")
+  }
+
+  const handleTodoInputChange = (e, index) => {
+    const { value } = e.target;
+    setNewTodos(prevTodos => {
+      const updatedTodos = [...prevTodos]
+      updatedTodos[index] = { id: Date.now(), text: value, status: false };
+
+      return updatedTodos
+    });
+  };
+
+  const handleAddTodos = (e) => {
+    e.preventDefault()
+    setTodoList([...todoList, ...newTodos.filter(item => item.text)])
+    setIsNewTodoActive(false);
+    setNewTodoFormClass("new-todo-form-homepage")
+    setNewTodos([
+      { text: '', status: false },
+      { text: '', status: false },
+      { text: '', status: false },
+      { text: '', status: false },
+    ])
+  }
+  const handleExtendTodoList = () => {
+    setIsTodoListLarge(true)
+  }
+
+
   return (
     <article id="home-container">
       <Navbar />
@@ -121,10 +196,42 @@ const Home = () => {
           <p>{currentDay}</p>
           <Clock value={value}
             renderNumbers={true}
-            size={120}
+            size={todoList.length > 0 ? 100 : 120}
           />
+          {todoList.length > 0 &&
+            <ul onClick={(event) => {
+              if (!isTodoListLarge) {
+                event.stopPropagation();
+                handleExtendTodoList();
+              }
+            }}
+              className={`todo-list-homepage-small ${isTodoListLarge ? "active" : ""}`}
+            >
+              {todoList.map((todo, index) => (
+                <li
+                  style={{ textDecoration: todo.status ? "line-through" : "none" }}
+                  key={index}
+                  onClick={(e) => {
+                    if (isTodoListLarge) {
+                      e.stopPropagation()
+                      setTodoList((prev) =>
+                        prev.map((item) =>
+                          item.id === todo.id
+                            ? { ...item, status: !item.status }
+                            : item
+                        )
+                      )
+                    }
+                  }
+                  }>
+                  {todo.text}
+                </li>
+              ))}
+            </ul>
+          }
 
         </section>
+
         {homepageWeather &&
           <section className="weather-homepage">
             <p>{homepageWeather.city}</p>
@@ -159,6 +266,38 @@ const Home = () => {
           <q className="idea-homepage-quote">{idea.text}</q>
         </section>
       )}
+
+
+
+      <article className="quick-access-homepage">
+        <section onClick={handleExtendToDoForm} className={`quick-access-element  ${isNewTodoActive ? "active" : ""}`}>
+          <form className={`${newTodoFormClass} ${isNewTodoActive ? "active" : ""}`} onSubmit={handleAddTodos}>
+            {newTodos.map((todo, index) => (
+              <p key={index}>
+                <input
+                  type="text"
+                  value={todo.text}
+                  maxLength="30"
+                  className="new-todo-input-homepage"
+                  placeholder="add todo"
+                  onChange={(e) => handleTodoInputChange(e, index)}
+                />
+              </p>
+            ))}
+            <button className="add-todo-button">Submit</button>
+          </form>
+          <img
+            className={`todo-pencil ${isNewTodoActive ? "hidden" : ""}`}
+            src={Pencil}
+            alt="pencil-icon"
+          />
+        </section>
+      </article>
+
+
+
+
+
       <NavLink className="feature-button" to="/notes">
         Notes
       </NavLink>
@@ -174,6 +313,7 @@ const Home = () => {
       <NavLink className="feature-button" to="/games">
         Games
       </NavLink>
+
     </article>
   );
 };
