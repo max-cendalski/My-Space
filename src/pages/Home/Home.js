@@ -106,7 +106,8 @@ const Home = () => {
       if (!e.target.closest('.quick-access-element')) {
         setIsNewTodoActive(false);
         setNewTodoFormClass("new-todo-form-homepage")
-        setIsMenuOpen(false);
+        setIsMenuOpen(false)
+        setIsTodoListLarge(false)
         setNewTodos([
           { text: '', status: false },
           { text: '', status: false },
