@@ -2,15 +2,14 @@ import { UserAuth } from '../../context/AuthContext'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import Home from '../../icons/eco-house.png'
-import { useState } from 'react'
-import { set } from 'date-fns'
+// import { useState } from 'react'
+// import { set } from 'date-fns'
 
-
-const Navbar = () => {
+const Navbar = ({handleUserIconClick, isMenuOpen}) => {
   const { user, logOut } = UserAuth()
   const navigate = useNavigate()
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+ 
 
   const handleSignOut = async () => {
     try {
@@ -23,23 +22,20 @@ const Navbar = () => {
   const goHome = () => {
     navigate("/")
   }
-  const handleUserIconClick = () => {
-    setIsMenuOpen(prevState => !prevState)
-  }
 
   return (
     <article >
       {
         (user) ?
           <article className="navbar-container">
-            <img src={Home} className='navbar-home-icon' onClick={goHome}></img>
+            <img src={Home} className='navbar-home-icon' onClick={goHome} alt="home-icon"></img>
             <button onClick={handleUserIconClick} className='user-icon'>
               A</button>
            
               <seciton className={isMenuOpen ? "navbar-dropdown-menu open" : "navbar-dropdown-menu"}>
                 <ul>
                   <li >Account</li>
-                  <li >Logout</li>
+                  <li onClick={handleSignOut} >Logout</li>
                 </ul>
               </seciton>
             

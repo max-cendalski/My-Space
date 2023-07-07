@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect} from "react";
 import { getDoc, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import Navbar from "../../components/Navbar/Navbar";
@@ -10,7 +10,7 @@ import 'react-clock/dist/Clock.css';
 import Pencil from "../../icons/pencilS.png";
 
 const Home = () => {
-  const inputRef = useRef(null);
+  //const inputRef = useRef(null);
   const [idea, setIdea] = useState(null);
   const { user } = UserAuth();
   const [currentDay, setCurrentDay] = useState("");
@@ -26,6 +26,8 @@ const Home = () => {
   ]);
   const [todoList, setTodoList] = useState([])
   const [isTodoListLarge, setIsTodoListLarge] = useState(false)
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const [value, setValue] = useState(new Date());
 
@@ -104,8 +106,7 @@ const Home = () => {
       if (!e.target.closest('.quick-access-element')) {
         setIsNewTodoActive(false);
         setNewTodoFormClass("new-todo-form-homepage")
-
-        setIsTodoListLarge(false)
+        setIsMenuOpen(false);
         setNewTodos([
           { text: '', status: false },
           { text: '', status: false },
@@ -126,6 +127,7 @@ const Home = () => {
     if (!isTodoListLarge) {
       setTodoList(todoList.filter(todo => todo.status !== true))
     }
+      // eslint-disable-next-line
   }, [isTodoListLarge])
 
 
@@ -187,10 +189,17 @@ const Home = () => {
     setIsTodoListLarge(true)
   }
 
+  const handleUserIconClick = (e) => {
+    e.stopPropagation()
+    setIsMenuOpen(prevState => !prevState)
+  }
+
 
   return (
     <article id="home-container">
-      <Navbar />
+      <Navbar handleUserIconClick={handleUserIconClick}
+              isMenuOpen={isMenuOpen}
+      />
       <article id="time-location-homepage-container">
         <section className="time-homepage">
           <p>{currentDay}</p>
