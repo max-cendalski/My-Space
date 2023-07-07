@@ -130,6 +130,15 @@ code {
   font-size: 2rem;
   border: none;
   margin-inline-end: 5%;
+  cursor: pointer;
+}
+
+.navbar-home-icon {
+  height: 2.5rem;
+  width: 2.5rem;
+  margin-inline-start: 5%;
+  color: white;
+  cursor: pointer;
 }
 
 .signin-link {

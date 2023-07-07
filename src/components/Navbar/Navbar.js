@@ -1,6 +1,7 @@
 import { UserAuth } from '../../context/AuthContext'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import Home from '../../icons/eco-house.png'
 
 
 const Navbar = () => {
@@ -27,10 +28,9 @@ const Navbar = () => {
       {
         (user) ?
         <article className="navbar-container">
-          <button onClick={goHome}>Home</button>
-          <button onClick={handleSignOut}>Logout</button>
+          <img src ={Home} className='navbar-home-icon' onClick={goHome}></img>
           <button onClick={handleUserIconClick} className='user-icon'>
-          {user.displayName.charAt(0)}</button>
+          A</button>
         </article>
         :
         <Link className="signin-link" to ="/login">SignIn</Link>
