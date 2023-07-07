@@ -18,14 +18,19 @@ const Navbar = () => {
   const goHome = () => {
     navigate("/")
   }
+  const handleUserIconClick = ()=> {
+    console.log('userv',user)
+  }
 
   return (
-    <article className="navbar-container">
+    <article >
       {
         (user) ?
-        <article>
+        <article className="navbar-container">
           <button onClick={goHome}>Home</button>
           <button onClick={handleSignOut}>Logout</button>
+          <button onClick={handleUserIconClick} className='user-icon'>
+          {user.displayName.charAt(0)}</button>
         </article>
         :
         <Link className="signin-link" to ="/login">SignIn</Link>
