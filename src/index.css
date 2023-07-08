@@ -83,7 +83,13 @@ code {
   height: 6rem;
   padding: 1rem;
   margin: 1rem;
+  box-shadow: 3px 4px 4px 4px rgb(0, 0, 0, 0.3);
   cursor: pointer;
+}
+
+.icon-homepage:hover {
+  background-color: rgb(232, 228, 228);
+  border: 1px solid var(--darkGreen);
 }
 
 .sticky-section {
