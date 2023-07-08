@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom'
 import { NavLink, useNavigate } from 'react-router-dom'
 import Home from '../../icons/eco-house.png'
 
-// import { useState } from 'react'
-// import { set } from 'date-fns'
 
 const Navbar = ({ handleUserIconClick, isMenuOpen }) => {
   const { user, logOut } = UserAuth()
@@ -36,10 +34,10 @@ const Navbar = ({ handleUserIconClick, isMenuOpen }) => {
             <seciton className={isMenuOpen ? "navbar-dropdown-menu open" : "navbar-dropdown-menu"}>
               <ul>
                 <li >
-                  <NavLink  to="/account">
+                  <NavLink to="/account">
                     Account
                   </NavLink>
-                  </li>
+                </li>
                 <li onClick={handleSignOut} >Logout</li>
               </ul>
             </seciton>
