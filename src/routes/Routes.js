@@ -1,17 +1,17 @@
 import {Route, Routes as Router} from 'react-router-dom';
-import Home from '../src/pages/Home/Home';
-import Layout from './components/Layout/Layout';
-import Notes from './pages/Notes/Notes';
-import CalendarHomePage from './pages/Calendar/Calendar'
-import Weather from './pages/Weather/Weather'
-import RequireAuth from './RequireAuth/RequireAuth';
-import Login from './pages/Login/Login';
-import EditNote from './pages/Notes/EditNote';
-import Ideas from './pages/Ideas/Ideas';
-import Games from './pages/Games/Games';
-import RPS from './components/Games/rps';
-import ShipsGame from './components/Games/Ships/ships';
-import TttComponent from './components/Games/TTT/Ttt';
+import Home from '../pages/Home/Home';
+import Layout from '../components/Layout/Layout';
+import Notes from '../pages/Notes/Notes';
+import CalendarHomePage from '../pages/Calendar/Calendar'
+import Weather from '../pages/Weather/Weather'
+import RequireAuth from '../RequireAuth/RequireAuth';
+import Login from '../pages/Login/Login';
+import EditNote from '../pages/Notes/EditNote';
+import Ideas from '../pages/Ideas/Ideas';
+import Games from '../pages/Games/Games';
+import RPS from '../components/Games/rps';
+import ShipsGame from '../components/Games/Ships/ships';
+import TttComponent from '../components/Games/TTT/Ttt';
 
 
 const Routes = () => {
