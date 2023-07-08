@@ -37,6 +37,7 @@ const Home = () => {
 
   const [value, setValue] = useState(new Date());
 
+
   useEffect(() => {
     const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
     setCurrentDay(format(new Date(), "E, MMMM dd"));
