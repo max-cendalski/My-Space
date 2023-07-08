@@ -323,7 +323,7 @@ code {
 }
 
 .todo-list-homepage-small {
-  position: fixed;
+  position: absolute;
   width: 6.5rem;
   height: 3rem;
   list-style: none;
