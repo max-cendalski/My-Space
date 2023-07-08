@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { getDoc, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import Navbar from "../../components/Navbar/Navbar";
@@ -8,6 +8,12 @@ import { format } from "date-fns";
 import Clock from 'react-clock'
 import 'react-clock/dist/Clock.css';
 import Pencil from "../../icons/pencilS.png";
+import NotesIcon from "../../icons/notes-icon.png";
+import CalendarIcon from "../../icons/calendar-icon.png";
+import QuoteIcon from "../../icons/quote-icon.png";
+import WeatherIcon from "../../icons/weather-icon.png";
+import GamesIcon from "../../icons/games-icon.png";
+
 
 const Home = () => {
   //const inputRef = useRef(null);
@@ -128,7 +134,7 @@ const Home = () => {
     if (!isTodoListLarge) {
       setTodoList(todoList.filter(todo => todo.status !== true))
     }
-      // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [isTodoListLarge])
 
 
@@ -199,7 +205,7 @@ const Home = () => {
   return (
     <article id="home-container">
       <Navbar handleUserIconClick={handleUserIconClick}
-              isMenuOpen={isMenuOpen}
+        isMenuOpen={isMenuOpen}
       />
       <article id="time-location-homepage-container">
         <section className="time-homepage">
@@ -307,22 +313,24 @@ const Home = () => {
 
 
 
+      <section id="icons-homepage-container">
+        <NavLink to="/notes">
+          <img src={NotesIcon} className="icon-homepage"></img>
+        </NavLink>
+        <NavLink to="/Calendar">
+          <img src={CalendarIcon} className="icon-homepage"></img>
+        </NavLink>
+        <NavLink to="/weather">
+          <img src={WeatherIcon} className="icon-homepage"></img>
+        </NavLink>
+        <NavLink to="/ideas">
+          <img src={QuoteIcon} className="icon-homepage"></img>
+        </NavLink>
+        <NavLink to="/games">
+          <img src={GamesIcon} className="icon-homepage"></img>
+        </NavLink>
+      </section>
 
-      <NavLink className="feature-button" to="/notes">
-        Notes
-      </NavLink>
-      <NavLink className="feature-button" to="/Calendar">
-        Calendar
-      </NavLink>
-      <NavLink className="feature-button" to="/weather">
-        Weather
-      </NavLink>
-      <NavLink className="feature-button" to="/ideas">
-        Ideas
-      </NavLink>
-      <NavLink className="feature-button" to="/games">
-        Games
-      </NavLink>
 
     </article>
   );

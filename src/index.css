@@ -69,18 +69,21 @@ code {
   margin-block-start: 1rem;
 }
 
-.feature-button {
+#icons-homepage-container {
   width: 90%;
-  height: 4rem;
-  margin: 0 auto;
-  background-color: var(--darkGreen);
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 500;
-  text-decoration: none;
-  color: white;
-  line-height: 3.2rem;
-  border-radius: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 3rem;
+}
+
+.icon-homepage {
+  padding: 1rem;
+  border: 1px solid var(--lightPink);
+  border-radius: 3px;
+  width: 6rem;
+  height: 6rem;
+  cursor: pointer;
 }
 
 .sticky-section {
@@ -1320,17 +1323,17 @@ dialog::backdrop {
 
 .line-horizontal-top::after {
   left: 4%;
-  top: 19%;
+  top: 21%;
 }
 
 .line-horizontal-middle::after {
   left: 4%;
-  top: 32%;
+  top: 35%;
 }
 
 .line-horizontal-bottom::after {
   left: 4%;
-  top: 46%;
+  top: 49%;
 }
 
 .line-vertical-left::after,
@@ -1338,7 +1341,7 @@ dialog::backdrop {
 .line-vertical-right::after {
   content: "";
   position: absolute;
-  top: 12%;
+  top: 15%;
   height: 41%;
   border-left: 4px solid var(--red);
 }
@@ -1365,13 +1368,13 @@ dialog::backdrop {
 
 .line-diagonal-left::after {
   left: -15%;
-  top: 32%;
+  top: 35%;
   transform: rotate(45deg);
 }
 
 .line-diagonal-right::after {
   right: -15%;
-  top: 32%;
+  top: 35%;
   transform: rotate(-45deg);
 }
 
