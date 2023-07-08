@@ -114,7 +114,6 @@ code {
 
 /*NAVBAR */
 
-
 .navbar-container {
   height: 3rem;
   border-block-end: 2px solid var(--red);
@@ -172,6 +171,10 @@ code {
   font-size: 1.2rem;
   cursor: pointer;
 }
+.navbar-dropdown-menu a {
+  text-decoration: none;
+  color: white;
+}
 
 .navbar-dropdown-menu li:hover {
   transform: scale(110%);
@@ -186,6 +189,14 @@ code {
   float: right;
   margin: 0.5rem;
 }
+
+/* ACCOUNT*/
+#account-container {
+  margin: 0 auto;
+  width: 90%;
+}
+
+
 
 
 
