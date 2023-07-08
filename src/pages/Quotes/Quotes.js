@@ -11,7 +11,7 @@ import { db } from "../../firebase/Firebase";
 import { useState, useEffect } from "react";
 import { UserAuth } from "../../context/AuthContext";
 
-const Ideas = () => {
+const Quotes = () => {
   const { user } = UserAuth();
   const [ideas, setIdeas] = useState([]);
   const [ideasToRender, setIdeasToRender] = useState([]);
@@ -145,4 +145,4 @@ const Ideas = () => {
   );
 };
 
-export default Ideas;
+export default Quotes;

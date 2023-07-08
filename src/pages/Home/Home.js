@@ -315,19 +315,19 @@ const Home = () => {
 
       <section id="icons-homepage-container">
         <NavLink to="/notes">
-          <img src={NotesIcon} className="icon-homepage"></img>
+          <img src={NotesIcon} alt="notes-icon" className="icon-homepage"></img>
         </NavLink>
         <NavLink to="/Calendar">
-          <img src={CalendarIcon} className="icon-homepage"></img>
+          <img src={CalendarIcon} alt="calendar-icon" className="icon-homepage"></img>
         </NavLink>
         <NavLink to="/weather">
-          <img src={WeatherIcon} className="icon-homepage"></img>
+          <img src={WeatherIcon} alt="weather-icon" className="icon-homepage"></img>
         </NavLink>
-        <NavLink to="/ideas">
-          <img src={QuoteIcon} className="icon-homepage"></img>
+        <NavLink to="/quotes">
+          <img src={QuoteIcon} alt="quote-icon" className="icon-homepage"></img>
         </NavLink>
         <NavLink to="/games">
-          <img src={GamesIcon} className="icon-homepage"></img>
+          <img src={GamesIcon} alt="games-icon" className="icon-homepage"></img>
         </NavLink>
       </section>
 

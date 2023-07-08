@@ -7,7 +7,7 @@ import Weather from '../pages/Weather/Weather'
 import RequireAuth from '../RequireAuth/RequireAuth';
 import Login from '../pages/Login/Login';
 import EditNote from '../pages/Notes/EditNote';
-import Ideas from '../pages/Ideas/Ideas';
+import Quotes from '../pages/Quotes/Quotes';
 import Games from '../pages/Games/Games';
 import RPS from '../components/Games/rps';
 import ShipsGame from '../components/Games/Ships/ships';
@@ -38,7 +38,7 @@ const Routes = () => {
             
           </Route>
   
-          <Route path="/ideas" element={<Ideas />} />
+          <Route path="/quotes" element={<Quotes />} />
           <Route path="/calendar" element={<CalendarHomePage />} />
           <Route path="/weather" element={<Weather />} />
         </Route>
