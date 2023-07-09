@@ -179,12 +179,7 @@ const Home = () => {
     // eslint-disable-next-line
   }, [isTodoListLarge]);
 
-  // useEffect(() => {
-  //   console.log('whee')
 
-  //   // eslint-disable-next-line
-  //   addTodos(todoList)
-  // }, [todoList])
 
   const handleIdeaHomepageArrowButton = () => {
     idea.extend = !idea.extend;
@@ -233,7 +228,7 @@ const Home = () => {
     let newTodoList = [...todoList, ...newTodos.filter(item => item.text)]
     setTodoList(newTodoList)
     setIsNewTodoActive(false);
-    addTodos(newTodoList)
+    addTodos(newTodos.filter(item => item.text))
     setNewTodoFormClass("new-todo-form-homepage")
     setNewTodos([
       { text: '', status: false },
@@ -242,6 +237,7 @@ const Home = () => {
       { text: '', status: false },
     ])
   }
+  
   const handleExtendTodoList = () => {
     setIsTodoListLarge(true)
   }
@@ -250,6 +246,7 @@ const Home = () => {
     e.stopPropagation()
     setIsMenuOpen(prevState => !prevState)
   }
+  
   async function addTodos(todos) {
     const todosCollection = collection(db, "users", user.uid, "todos");
 
