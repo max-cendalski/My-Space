@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
 import { useState, useEffect } from "react";
-import { getDoc, doc, collection, addDoc,deleteDoc,updateDoc } from "firebase/firestore";
+import { getDoc, doc, collection, onSnapshot,setDoc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import Navbar from "../../components/Navbar/Navbar";
 import { format } from "date-fns";
@@ -109,6 +109,27 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
+    const unsub = onSnapshot(
+      collection(db, `users/${user.uid}`, "todos"),
+      (snapShot) => {
+        let todoList = [];
+        snapShot.docs.forEach((doc) => {
+          todoList.push({ id: doc.id, ...doc.data() });
+        });
+        setTodoList(todoList.sort((a, b) => a.text.localeCompare(b.text)));
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+
+    return () => {
+      unsub();
+    };
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
     const handleClick = (e) => {
       if (!e.target.closest('.quick-access-element')) {
         setIsNewTodoActive(false);
@@ -133,21 +154,21 @@ const Home = () => {
 
   useEffect(() => {
     if (!isTodoListLarge) {
-  
+
       const updatedTodoList = todoList.filter(todo => todo.status !== true);
       const todosToBeRemoved = todoList.filter(todo => todo.status === true);
-  
+
       setTodoList(updatedTodoList);
-  
+
       const todosCollection = collection(db, "users", user.uid, "todos");
-  
+
       updatedTodoList.forEach(async (todo) => {
         if (todo.id && typeof todo.id === 'string') {
           const todoDoc = doc(todosCollection, todo.id);
           await updateDoc(todoDoc, { status: todo.status });
         }
       });
-  
+
       todosToBeRemoved.forEach(async (todo) => {
         if (todo.id && typeof todo.id === 'string') {
           const todoDoc = doc(todosCollection, todo.id);
@@ -157,7 +178,7 @@ const Home = () => {
     }
     // eslint-disable-next-line
   }, [isTodoListLarge]);
-  
+
   // useEffect(() => {
   //   console.log('whee')
 
@@ -233,9 +254,12 @@ const Home = () => {
     const todosCollection = collection(db, "users", user.uid, "todos");
 
     for (const todo of todos) {
-      await addDoc(todosCollection, todo);
+      const todoDocRef = doc(todosCollection);
+      todo.id = todoDocRef.id;
+      await setDoc(todoDocRef, todo);
     }
   }
+
 
 
   return (
