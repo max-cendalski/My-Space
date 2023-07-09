@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
 import { useState, useEffect } from "react";
-import { getDoc, doc, updateDoc } from "firebase/firestore";
+import { getDoc, doc, collection, addDoc,deleteDoc,updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import Navbar from "../../components/Navbar/Navbar";
 import { format } from "date-fns";
@@ -133,11 +133,37 @@ const Home = () => {
 
   useEffect(() => {
     if (!isTodoListLarge) {
-      setTodoList(todoList.filter(todo => todo.status !== true))
+  
+      const updatedTodoList = todoList.filter(todo => todo.status !== true);
+      const todosToBeRemoved = todoList.filter(todo => todo.status === true);
+  
+      setTodoList(updatedTodoList);
+  
+      const todosCollection = collection(db, "users", user.uid, "todos");
+  
+      updatedTodoList.forEach(async (todo) => {
+        if (todo.id && typeof todo.id === 'string') {
+          const todoDoc = doc(todosCollection, todo.id);
+          await updateDoc(todoDoc, { status: todo.status });
+        }
+      });
+  
+      todosToBeRemoved.forEach(async (todo) => {
+        if (todo.id && typeof todo.id === 'string') {
+          const todoDoc = doc(todosCollection, todo.id);
+          await deleteDoc(todoDoc);
+        }
+      });
     }
     // eslint-disable-next-line
-  }, [isTodoListLarge])
+  }, [isTodoListLarge]);
+  
+  // useEffect(() => {
+  //   console.log('whee')
 
+  //   // eslint-disable-next-line
+  //   addTodos(todoList)
+  // }, [todoList])
 
   const handleIdeaHomepageArrowButton = () => {
     idea.extend = !idea.extend;
@@ -183,8 +209,10 @@ const Home = () => {
 
   const handleAddTodos = (e) => {
     e.preventDefault()
-    setTodoList([...todoList, ...newTodos.filter(item => item.text)])
+    let newTodoList = [...todoList, ...newTodos.filter(item => item.text)]
+    setTodoList(newTodoList)
     setIsNewTodoActive(false);
+    addTodos(newTodoList)
     setNewTodoFormClass("new-todo-form-homepage")
     setNewTodos([
       { text: '', status: false },
@@ -200,6 +228,13 @@ const Home = () => {
   const handleUserIconClick = (e) => {
     e.stopPropagation()
     setIsMenuOpen(prevState => !prevState)
+  }
+  async function addTodos(todos) {
+    const todosCollection = collection(db, "users", user.uid, "todos");
+
+    for (const todo of todos) {
+      await addDoc(todosCollection, todo);
+    }
   }
 
 
