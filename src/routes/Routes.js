@@ -13,6 +13,7 @@ import Games from '../pages/Games/Games';
 import RPS from '../components/Games/rps';
 import ShipsGame from '../components/Games/Ships/ships';
 import TttComponent from '../components/Games/TTT/Ttt';
+import NotFound from '../pages/NotFound';
 
 
 
@@ -28,7 +29,7 @@ const Routes = () => {
       {/*protected routes*/}
       <Route element={<RequireAuth />}>
 
-        <Route path="/account" element = {<Account />}></Route>
+        <Route path="/account" element={<Account />}></Route>
         <Route path="/notes">
           <Route index element={<Notes />} />
           <Route path="edit/:noteId" element={<EditNote />} />
@@ -46,6 +47,7 @@ const Routes = () => {
         <Route path="/calendar" element={<CalendarHomePage />} />
         <Route path="/weather" element={<Weather />} />
       </Route>
+      <Route path="*" element={<NotFound />} />
     </Router>
   );
 }

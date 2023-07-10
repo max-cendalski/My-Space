@@ -1459,8 +1459,19 @@ dialog::backdrop {
 
 
 
+/*NotFound */
 
-
+#not-found-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.not-found-image {
+  margin-block: 2rem;
+  height: 8rem;
+  width: 8rem;
+}
 
 
 /* ------------------*/

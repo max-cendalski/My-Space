@@ -134,7 +134,6 @@ const Home = () => {
         }
       });
     }
-    // eslint-disable-next-line
   }, [isTodoListLarge]);
 
   useEffect(() => {
@@ -155,9 +154,9 @@ const Home = () => {
     return () => {
       unsub();
     };
-  }, [user.uid]); // Updated dependencies
+  }, [user.uid]); 
 
-  useEffect(() => {
+  useEffect(() => { // close todo window
     const handleClick = (e) => {
       if (!e.target.closest('.quick-access-element')) {
         setIsNewTodoActive(false);
@@ -177,7 +176,6 @@ const Home = () => {
     return () => {
       document.removeEventListener('click', handleClick);
     };
-
   }, []);
 
   
