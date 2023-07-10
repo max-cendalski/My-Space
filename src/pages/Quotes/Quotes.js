@@ -119,13 +119,13 @@ const Quotes = () => {
     <>
       <Navbar />
       <article id="ideas-page-container">
-        <h1 id="ideas-header">Three ideas to think about</h1>
+        <h1 id="ideas-header">Three Quotes for Inspiration</h1>
         {generateIdeaButtonStatus && (
           <button
             onClick={handleGenerateIdeas}
             className="generate-ideas-button"
           >
-            Generate 3 new ideas!
+            Generate Three New Quotes!
           </button>
         )}
         {ideasToRender &&
@@ -138,7 +138,7 @@ const Quotes = () => {
                 className="single-idea-button"
                 onClick={() => handleAddIdeaToHomepage(idea.id)}
               >
-                Add Idea to Homepage
+                Add This Quote to Your Homepage
               </button>
             </section>
           ))}
