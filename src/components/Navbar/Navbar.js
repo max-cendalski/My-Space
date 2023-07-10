@@ -49,14 +49,15 @@ const Navbar = () => {
         (user) ?
           <article className="navbar-container">
             <img src={Home} className='navbar-home-icon' onClick={goHome} alt="home-icon"></img>
-            <button
+            {user.uid && <button
               onClick={handleUserIconClick}
               onMouseEnter={() => setIsMenuOpen(true)}
               onMouseLeave={() => setIsMenuOpen(false)}
               className='user-icon'
             >
-              A
+              {user.displayName.charAt(0)}
             </button>
+            }
 
             <section className={isMenuOpen ? "navbar-dropdown-menu open" : "navbar-dropdown-menu"}>
               <ul>
