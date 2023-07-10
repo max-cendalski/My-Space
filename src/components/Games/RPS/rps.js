@@ -36,7 +36,9 @@ const RPS = () => {
         console.error("ERROR: ", err);
       }
     };
-    getData();
+    if (user.uid) {
+      getData()
+    }
     // eslint-disable-next-line
   }, [user.uid]);
 
