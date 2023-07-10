@@ -163,6 +163,7 @@ code {
   opacity: 0;
   transition: opacity 0.3s ease, visibility 0.3s;
   visibility: hidden;
+  z-index: 3;
 }
 
 .navbar-dropdown-menu ul {
@@ -185,6 +186,10 @@ code {
 
 .navbar-dropdown-menu li:hover {
   transform: scale(110%);
+}
+.navbar-dropdown-menu:hover {
+  opacity: 1;
+  visibility: visible;
 }
 
 .navbar-dropdown-menu.open {

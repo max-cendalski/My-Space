@@ -1,5 +1,5 @@
 import { UserAuth } from '../../context/AuthContext'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { NavLink, useNavigate } from 'react-router-dom'
 import Home from '../../icons/eco-house.png'
@@ -11,11 +11,25 @@ const Navbar = () => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
+
+  useEffect(() => {
+    const handleOutsideClick = () => {
+      if (isMenuOpen) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('click', handleOutsideClick);
+
+    return () => {
+      window.removeEventListener('click', handleOutsideClick);
+    };
+  }, [isMenuOpen]);
+
   const handleUserIconClick = (e) => {
-    e.stopPropagation()
-    setIsMenuOpen(prevState => !prevState)
-  }
-  
+    e.stopPropagation();
+    setIsMenuOpen(prevState => !prevState);
+  };
 
   const handleSignOut = async () => {
     try {
@@ -35,8 +49,14 @@ const Navbar = () => {
         (user) ?
           <article className="navbar-container">
             <img src={Home} className='navbar-home-icon' onClick={goHome} alt="home-icon"></img>
-            <button onClick={handleUserIconClick} className='user-icon'>
-              A</button>
+            <button
+              onClick={handleUserIconClick}
+              onMouseEnter={() => setIsMenuOpen(true)}
+              onMouseLeave={() => setIsMenuOpen(false)}
+              className='user-icon'
+            >
+              A
+            </button>
 
             <section className={isMenuOpen ? "navbar-dropdown-menu open" : "navbar-dropdown-menu"}>
               <ul>
