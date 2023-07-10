@@ -15,15 +15,12 @@ export default function Account() {
     })
 
     useEffect(() => {
-        async function getNotesRef() {
+        async function getCollections() {
             try {
                 const notesSnapshot = await getDocs(collection(db, "users", user.uid, "notes"))
                 const todosSnapshot = await getDocs(collection(db, "users", user.uid, "todos"))
                 const calendarSnapshot = await getDocs(collection(db, "users", user.uid, "calendarEvents"))
                 const weatherSnapshot = await getDocs(collection(db, "users", user.uid, "weatherLocations"))
-                const rpsRef = doc(db,"users",user.uid, "games","rps")
-                const  rpsSnap = await getDoc(rpsRef)
-                console.log('rps',rpsSnap)
                 setUserStats(prevState => ({
                     ...prevState,
                     notes: notesSnapshot.size,
@@ -34,10 +31,20 @@ export default function Account() {
             } catch (err) {
                 console.error('error', err)
             }
-
         }
-        getNotesRef()
-
+        async function getGameData() {
+            const rpsRef = doc(db,"users",user.uid, "games","rps")
+            const  rpsSnap = await getDoc(rpsRef)
+            if (rpsSnap.exists()) {
+                console.log(rpsSnap.data())
+                let total = rpsSnap.data().computer + rpsSnap.data().user
+                setUserStats(prevState => ({...prevState, games:total}))
+            } else {
+                console.log('No such document!')
+            }   
+        }
+        getCollections()
+        getGameData()
     }, [user.uid])
 
     return (
