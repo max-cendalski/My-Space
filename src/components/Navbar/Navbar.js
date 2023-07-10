@@ -31,7 +31,7 @@ const Navbar = ({ handleUserIconClick, isMenuOpen }) => {
             <button onClick={handleUserIconClick} className='user-icon'>
               A</button>
 
-            <seciton className={isMenuOpen ? "navbar-dropdown-menu open" : "navbar-dropdown-menu"}>
+            <section className={isMenuOpen ? "navbar-dropdown-menu open" : "navbar-dropdown-menu"}>
               <ul>
                 <li >
                   <NavLink to="/account">
@@ -40,7 +40,7 @@ const Navbar = ({ handleUserIconClick, isMenuOpen }) => {
                 </li>
                 <li onClick={handleSignOut} >Logout</li>
               </ul>
-            </seciton>
+            </section>
 
           </article>
           :

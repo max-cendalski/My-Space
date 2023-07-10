@@ -38,45 +38,48 @@ const Home = () => {
   const [value, setValue] = useState(new Date());
 
 
+
   useEffect(() => {
     const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
     setCurrentDay(format(new Date(), "E, MMMM dd"));
     const interval = setInterval(() => setValue(new Date()), 1000);
-
-    (async () => {
-      try {
-        const locationHomeRef = doc(
-          db,
-          "users",
-          user.uid,
-          "locationHome",
-          "locationHomepageID"
-        );
-        const docSnap = await getDoc(locationHomeRef);
-        if (docSnap.exists()) {
-          fetch(
-            `https://api.openweathermap.org/data/3.0/onecall?lat=${docSnap.data().coordinates.lat
-            }&lon=${docSnap.data().coordinates.lng
-            }&units=imperial&exclude=minutely,hourly,daily,alerts&appid=${weatherApiKey}`
-          )
-            .then((res) => res.json())
-            .then((data) => {
-              setHomepageWeather({
-                city: docSnap.data().city,
-                temp: Math.round(data.current.temp),
-                description: data.current.weather[0].description,
-                img: data.current.weather[0].icon,
-                humidity: data.current.humidity
+  
+    const fetchWetherData = async () => {
+        try {
+          const locationHomeRef = doc(
+            db,
+            "users",
+            user.uid,
+            "locationHome",
+            "locationHomepageID"
+          );
+          const docSnap = await getDoc(locationHomeRef);
+          if (docSnap.exists()) {
+            fetch(
+              `https://api.openweathermap.org/data/3.0/onecall?lat=${docSnap.data().coordinates.lat
+              }&lon=${docSnap.data().coordinates.lng
+              }&units=imperial&exclude=minutely,hourly,daily,alerts&appid=${weatherApiKey}`
+            )
+              .then((res) => res.json())
+              .then((data) => {
+                setHomepageWeather({
+                  city: docSnap.data().city,
+                  temp: Math.round(data.current.temp),
+                  description: data.current.weather[0].description,
+                  img: data.current.weather[0].icon,
+                  humidity: data.current.humidity
+                });
               });
-            });
-        } else {
-          console.log("NO SUCH DOCUMENT!");
+          } else {
+            console.log("NO SUCH DOCUMENT!");
+          }
+        } catch (err) {
+          console.log("SOMETHING WENT WRONG", err);
         }
-      } catch (err) {
-        console.log("SOMETHING WENT WRONG", err);
-      }
+  
+      };
+  
 
-    })();
 
     const fetchIdea = async () => {
       try {
@@ -100,13 +103,39 @@ const Home = () => {
 
     if (user.uid) {
       fetchIdea();
+      fetchWetherData()
     }
     return () => {
       clearInterval(interval);
     };
 
     // eslint-disable-next-line
-  }, []);
+  }, [user, isTodoListLarge]);
+  
+  useEffect(() => {
+    if (!isTodoListLarge && todoList.length > 0) {
+  
+      const updatedTodoList = todoList.filter(todo => todo.status !== true);
+      const todosToBeRemoved = todoList.filter(todo => todo.status === true);
+  
+      const todosCollection = collection(db, "users", user.uid, "todos");
+  
+      updatedTodoList.forEach(async (todo) => {
+        if (todo.id && typeof todo.id === 'string') {
+          const todoDoc = doc(todosCollection, todo.id);
+          await updateDoc(todoDoc, { status: todo.status });
+        }
+      });
+  
+      todosToBeRemoved.forEach(async (todo) => {
+        if (todo.id && typeof todo.id === 'string') {
+          const todoDoc = doc(todosCollection, todo.id);
+          await deleteDoc(todoDoc);
+        }
+      });
+    }
+    // eslint-disable-next-line
+  }, [isTodoListLarge]);
 
   useEffect(() => {
     const unsub = onSnapshot(
@@ -122,12 +151,11 @@ const Home = () => {
         console.log(err);
       }
     );
-
+  
     return () => {
       unsub();
     };
-    // eslint-disable-next-line
-  }, []);
+  }, [user.uid]); // Updated dependencies
 
   useEffect(() => {
     const handleClick = (e) => {
@@ -152,34 +180,7 @@ const Home = () => {
 
   }, []);
 
-  useEffect(() => {
-    if (!isTodoListLarge) {
-
-      const updatedTodoList = todoList.filter(todo => todo.status !== true);
-      const todosToBeRemoved = todoList.filter(todo => todo.status === true);
-
-      setTodoList(updatedTodoList);
-
-      const todosCollection = collection(db, "users", user.uid, "todos");
-
-      updatedTodoList.forEach(async (todo) => {
-        if (todo.id && typeof todo.id === 'string') {
-          const todoDoc = doc(todosCollection, todo.id);
-          await updateDoc(todoDoc, { status: todo.status });
-        }
-      });
-
-      todosToBeRemoved.forEach(async (todo) => {
-        if (todo.id && typeof todo.id === 'string') {
-          const todoDoc = doc(todosCollection, todo.id);
-          await deleteDoc(todoDoc);
-        }
-      });
-    }
-    // eslint-disable-next-line
-  }, [isTodoListLarge]);
-
-
+  
 
   const handleIdeaHomepageArrowButton = () => {
     idea.extend = !idea.extend;
@@ -204,6 +205,8 @@ const Home = () => {
     updateIdea();
   };
 
+
+
   const handleExtendToDoForm = () => {
     if (!isNewTodoActive) {
       setIsNewTodoActive(true);
@@ -222,6 +225,8 @@ const Home = () => {
       return updatedTodos
     });
   };
+
+
 
   const handleAddTodos = (e) => {
     e.preventDefault()

@@ -30,7 +30,7 @@ const Notes = () => {
       unsub();
     };
     // eslint-disable-next-line
-  }, []);
+  }, [user.uid]);
 
   const handleDeleteNote = (id) => {
     const index = notes.findIndex((item) => item.id === id);
