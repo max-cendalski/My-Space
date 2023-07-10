@@ -5,7 +5,7 @@ const Notfound = ()=> {
     return (
         <article id="not-found-container">
         
-            <img className="not-found-image" src={Icon404}></img>
+            <img className="not-found-image" src={Icon404} alt="not-found"></img>
             <h1>Oops page not found!</h1>
             <GoBack />
         </article>

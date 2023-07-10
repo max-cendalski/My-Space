@@ -108,8 +108,6 @@ const Home = () => {
     return () => {
       clearInterval(interval);
     };
-
-    // eslint-disable-next-line
   }, [user, isTodoListLarge]);
   
   useEffect(() => {
@@ -134,6 +132,7 @@ const Home = () => {
         }
       });
     }
+     // eslint-disable-next-line
   }, [isTodoListLarge]);
 
   useEffect(() => {
@@ -154,6 +153,7 @@ const Home = () => {
     return () => {
       unsub();
     };
+     // eslint-disable-next-line
   }, [user.uid]); 
 
   useEffect(() => { // close todo window

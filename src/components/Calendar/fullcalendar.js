@@ -73,7 +73,8 @@ function CalendarComponent() {
     setShowDialogAddEvent(true)
   }
 
-  const handleDialogSubmit = (title) => { //Add new event
+  const handleDialogSubmit = (e,title) => { //Add new event
+    e.stopPropagation()
     let newEvent = {
       title,
       start: selectedDateInfo.startStr,
@@ -154,7 +155,7 @@ function CalendarComponent() {
       <article className='demo-app-main'>
         <FullCalendar
           ref={calendarRef}
-          longPressDelay={400} // sets the delay for press and hold
+          longPressDelay={200} // sets the delay for press and hold
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           headerToolbar={{
             left: 'prev,next today',
