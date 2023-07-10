@@ -1,6 +1,6 @@
 import { Route, Routes as Router } from 'react-router-dom';
 import Home from '../pages/Home/Home';
-import Account from '../pages/Account';
+import Account from '../pages/Account/Account';
 import Layout from '../components/Layout/Layout';
 import Notes from '../pages/Notes/Notes';
 import CalendarHomePage from '../pages/Calendar/Calendar'

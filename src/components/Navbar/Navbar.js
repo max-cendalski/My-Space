@@ -1,14 +1,21 @@
 import { UserAuth } from '../../context/AuthContext'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { NavLink, useNavigate } from 'react-router-dom'
 import Home from '../../icons/eco-house.png'
 
 
-const Navbar = ({ handleUserIconClick, isMenuOpen }) => {
+const Navbar = () => {
   const { user, logOut } = UserAuth()
   const navigate = useNavigate()
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
+  const handleUserIconClick = (e) => {
+    e.stopPropagation()
+    setIsMenuOpen(prevState => !prevState)
+  }
+  
 
   const handleSignOut = async () => {
     try {

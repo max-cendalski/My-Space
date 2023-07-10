@@ -33,7 +33,7 @@ const Home = () => {
   const [todoList, setTodoList] = useState([])
   const [isTodoListLarge, setIsTodoListLarge] = useState(false)
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
 
   const [value, setValue] = useState(new Date());
 
@@ -161,7 +161,6 @@ const Home = () => {
       if (!e.target.closest('.quick-access-element')) {
         setIsNewTodoActive(false);
         setNewTodoFormClass("new-todo-form-homepage")
-        setIsMenuOpen(false)
         setIsTodoListLarge(false)
         setNewTodos([
           { text: '', status: false },
@@ -245,11 +244,7 @@ const Home = () => {
     setIsTodoListLarge(true)
   }
 
-  const handleUserIconClick = (e) => {
-    e.stopPropagation()
-    setIsMenuOpen(prevState => !prevState)
-  }
-  
+
   async function addTodos(todos) {
     const todosCollection = collection(db, "users", user.uid, "todos");
 
@@ -264,9 +259,7 @@ const Home = () => {
 
   return (
     <article id="home-container">
-      <Navbar handleUserIconClick={handleUserIconClick}
-        isMenuOpen={isMenuOpen}
-      />
+      <Navbar />
       <article id="time-location-homepage-container">
         <section className="time-homepage">
           <p>{currentDay}</p>
