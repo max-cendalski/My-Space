@@ -53,8 +53,7 @@ function CalendarComponent() {
     return () => {
       unsub();
     };
-    // eslint-disable-next-line
-  }, []);
+  }, [user.uid]);
 
   useEffect(() => {
     if (showDialogAddEvent) {

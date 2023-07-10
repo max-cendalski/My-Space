@@ -29,7 +29,7 @@ const Notes = () => {
     return () => {
       unsub();
     };
-    // eslint-disable-next-line
+   
   }, [user.uid]);
 
   const handleDeleteNote = (id) => {

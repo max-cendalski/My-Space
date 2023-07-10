@@ -46,9 +46,11 @@ const Quotes = () => {
         console.error("ERROR", err);
       }
     };
-    fetchIdeas();
-    // eslint-disable-next-line
-  }, []);
+    if (user.uid) {
+      fetchIdeas()
+    }
+
+  }, [user.uid]);
 
   const handleGenerateIdeas = () => {
     var numbers = [];
