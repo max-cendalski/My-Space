@@ -10,7 +10,7 @@ import Login from '../pages/Login/Login';
 import EditNote from '../pages/Notes/EditNote';
 import Quotes from '../pages/Quotes/Quotes';
 import Games from '../pages/Games/Games';
-import RPS from '../components/Games/rps';
+import RPS from '../components/Games/RPS/rps';
 import ShipsGame from '../components/Games/Ships/ships';
 import TttComponent from '../components/Games/TTT/Ttt';
 import NotFound from '../pages/NotFound';

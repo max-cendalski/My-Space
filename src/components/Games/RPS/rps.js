@@ -1,8 +1,8 @@
-import Navbar from "../../components/Navbar/Navbar";
+import Navbar from "../../Navbar/Navbar";
 import { useState, useEffect } from "react";
-import { db } from "../../firebase/Firebase";
+import { db } from "../../../firebase/Firebase";
 import { doc, setDoc, getDoc } from "firebase/firestore";
-import { UserAuth } from "../../context/AuthContext";
+import { UserAuth } from "../../../context/AuthContext";
 
 const RPS = () => {
   const { user } = UserAuth();
@@ -38,7 +38,7 @@ const RPS = () => {
     };
     getData();
     // eslint-disable-next-line
-  }, []);
+  }, [user.uid]);
 
   const handleStartNewGame = () => {
     setStartGameButton("hidden");
@@ -197,7 +197,7 @@ const RPS = () => {
           Win/loose ratio: {scores.userScore} / {scores.computerScore}
         </h2>
         <article className="rps-container">
-          <section className="players">USER</section>
+          {user.uid && <section className="players">{user.displayName.charAt(0)}</section>}
           <section className="players">
             <i className="fa-solid fa-robot fa-2xl"></i>
           </section>

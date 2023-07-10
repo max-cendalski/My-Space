@@ -941,7 +941,7 @@ dialog::backdrop {
   background-color: var(--red);
   text-align: center;
   color: white;
-  font-size: 1rem;
+  font-size: 3rem;
   font-weight: 700;
   border-radius: 150px;
   line-height: 4.5rem;
