@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
-import { useState, useEffect } from "react";
-import { getDoc, doc, collection, onSnapshot,setDoc, deleteDoc, updateDoc } from "firebase/firestore";
+import { useState, useEffect, useRef } from "react";
+import { getDoc, doc, collection, onSnapshot, setDoc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import Navbar from "../../components/Navbar/Navbar";
 import { format } from "date-fns";
@@ -16,7 +16,7 @@ import GamesIcon from "../../icons/games-icon.png";
 
 
 const Home = () => {
-  //const inputRef = useRef(null);
+  const firstInputRef = useRef(null);
   const [idea, setIdea] = useState(null);
   const { user } = UserAuth();
   const [currentDay, setCurrentDay] = useState("");
@@ -34,51 +34,49 @@ const Home = () => {
   const [isTodoListLarge, setIsTodoListLarge] = useState(false)
 
 
-
   const [value, setValue] = useState(new Date());
-
 
 
   useEffect(() => {
     const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
     setCurrentDay(format(new Date(), "E, MMMM dd"));
     const interval = setInterval(() => setValue(new Date()), 1000);
-  
+
     const fetchWetherData = async () => {
-        try {
-          const locationHomeRef = doc(
-            db,
-            "users",
-            user.uid,
-            "locationHome",
-            "locationHomepageID"
-          );
-          const docSnap = await getDoc(locationHomeRef);
-          if (docSnap.exists()) {
-            fetch(
-              `https://api.openweathermap.org/data/3.0/onecall?lat=${docSnap.data().coordinates.lat
-              }&lon=${docSnap.data().coordinates.lng
-              }&units=imperial&exclude=minutely,hourly,daily,alerts&appid=${weatherApiKey}`
-            )
-              .then((res) => res.json())
-              .then((data) => {
-                setHomepageWeather({
-                  city: docSnap.data().city,
-                  temp: Math.round(data.current.temp),
-                  description: data.current.weather[0].description,
-                  img: data.current.weather[0].icon,
-                  humidity: data.current.humidity
-                });
+      try {
+        const locationHomeRef = doc(
+          db,
+          "users",
+          user.uid,
+          "locationHome",
+          "locationHomepageID"
+        );
+        const docSnap = await getDoc(locationHomeRef);
+        if (docSnap.exists()) {
+          fetch(
+            `https://api.openweathermap.org/data/3.0/onecall?lat=${docSnap.data().coordinates.lat
+            }&lon=${docSnap.data().coordinates.lng
+            }&units=imperial&exclude=minutely,hourly,daily,alerts&appid=${weatherApiKey}`
+          )
+            .then((res) => res.json())
+            .then((data) => {
+              setHomepageWeather({
+                city: docSnap.data().city,
+                temp: Math.round(data.current.temp),
+                description: data.current.weather[0].description,
+                img: data.current.weather[0].icon,
+                humidity: data.current.humidity
               });
-          } else {
-            console.log("NO SUCH DOCUMENT!");
-          }
-        } catch (err) {
-          console.log("SOMETHING WENT WRONG", err);
+            });
+        } else {
+          console.log("NO SUCH DOCUMENT!");
         }
-  
-      };
-  
+      } catch (err) {
+        console.log("SOMETHING WENT WRONG", err);
+      }
+
+    };
+
 
 
     const fetchIdea = async () => {
@@ -109,22 +107,29 @@ const Home = () => {
       clearInterval(interval);
     };
   }, [user, isTodoListLarge]);
-  
+
+
+  useEffect(() => {
+    if (isNewTodoActive && firstInputRef.current) {
+      firstInputRef.current.focus();
+    }
+  }, [isNewTodoActive]);
+
   useEffect(() => {
     if (!isTodoListLarge && todoList.length > 0) {
-  
+
       const updatedTodoList = todoList.filter(todo => todo.status !== true);
       const todosToBeRemoved = todoList.filter(todo => todo.status === true);
-  
+
       const todosCollection = collection(db, "users", user.uid, "todos");
-  
+
       updatedTodoList.forEach(async (todo) => {
         if (todo.id && typeof todo.id === 'string') {
           const todoDoc = doc(todosCollection, todo.id);
           await updateDoc(todoDoc, { status: todo.status });
         }
       });
-  
+
       todosToBeRemoved.forEach(async (todo) => {
         if (todo.id && typeof todo.id === 'string') {
           const todoDoc = doc(todosCollection, todo.id);
@@ -132,7 +137,7 @@ const Home = () => {
         }
       });
     }
-     // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [isTodoListLarge]);
 
   useEffect(() => {
@@ -149,12 +154,12 @@ const Home = () => {
         console.log(err);
       }
     );
-  
+
     return () => {
       unsub();
     };
-     // eslint-disable-next-line
-  }, [user.uid]); 
+    // eslint-disable-next-line
+  }, [user.uid]);
 
   useEffect(() => { // close todo window
     const handleClick = (e) => {
@@ -177,7 +182,7 @@ const Home = () => {
     };
   }, []);
 
-  
+
 
   const handleIdeaHomepageArrowButton = () => {
     idea.extend = !idea.extend;
@@ -239,7 +244,7 @@ const Home = () => {
       { text: '', status: false },
     ])
   }
-  
+
   const handleExtendTodoList = () => {
     setIsTodoListLarge(true)
   }
@@ -337,7 +342,6 @@ const Home = () => {
       )}
 
 
-
       <article className="quick-access-homepage">
         <section onClick={handleExtendToDoForm} className={`quick-access-element  ${isNewTodoActive ? "active" : ""}`}>
           <form className={`${newTodoFormClass} ${isNewTodoActive ? "active" : ""}`} onSubmit={handleAddTodos}>
@@ -350,6 +354,7 @@ const Home = () => {
                   className="new-todo-input-homepage"
                   placeholder="add todo"
                   onChange={(e) => handleTodoInputChange(e, index)}
+                  ref={index === 0 ? firstInputRef : null} 
                 />
               </p>
             ))}
@@ -362,8 +367,6 @@ const Home = () => {
           />
         </section>
       </article>
-
-
 
 
       <section id="icons-homepage-container">

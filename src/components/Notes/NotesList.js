@@ -45,6 +45,7 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
             placeholder="search notes"
             className="notes-search-input"
             onChange={handleNoteSearch}
+            autoFocus
           ></input>
         </section>
         {searchedNotes.map((note) => (
