@@ -74,12 +74,40 @@ code {
 #signing-page-container {
   text-align: center;
   display: flex;
-  width: 16rem;
-  height: 12rem;
+  width: 18rem;
+  height: 16rem;
   flex-direction: column;
   margin: 6rem auto;
   background-color: white;;
+  font-size: 1.2rem;
 }
+
+.signing-section {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border: 1px solid black;
+  margin: 0 1rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.signing-section:hover {
+  background-color:  #f5f5f5;
+}
+
+.signing-section button {
+  border: none;
+  background-color:inherit;
+  margin-inline-start: 1rem;
+  font-size: 1.3rem;
+}
+
+.login-icon {
+  height: 3rem;
+  width: 3rem;
+}
+
 
 #icons-homepage-container {
   margin: 0 auto;

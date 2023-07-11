@@ -2,6 +2,7 @@
 import { useEffect } from 'react';
 import { UserAuth } from '../../context/AuthContext'
 import { useNavigate } from 'react-router-dom';
+import GoogleIcon from '../../icons/google-icon.png'
 
 
 const SignIn = () => {
@@ -27,7 +28,11 @@ const SignIn = () => {
     <article id="signing-page-wrapper">
       <article id="signing-page-container">
         <h1>Sign In With </h1>
-        <button onClick={handleGoogleSignIn}>Sign With Google</button>
+        <section className="signing-section">
+          <img className="login-icon" src={GoogleIcon}></img>
+          <button onClick={handleGoogleSignIn}>Google</button>
+        </section>
+
       </article>
     </article>
   )
