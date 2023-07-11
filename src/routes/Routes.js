@@ -23,12 +23,12 @@ const Routes = () => {
       <Route path="/" element={<Layout />} />
 
       {/*public routes*/}
-      <Route index element={<Home />} />
       <Route path="/login" element={<Login />} />
 
       {/*protected routes*/}
       <Route element={<RequireAuth />}>
 
+        <Route index element={<Home />} />
         <Route path="/account" element={<Account />}></Route>
         <Route path="/notes">
           <Route index element={<Notes />} />

@@ -5,27 +5,30 @@ import { useNavigate } from 'react-router-dom';
 
 
 const SignIn = () => {
-  const {googleSignIn, user} = UserAuth()
+  const { googleSignIn, user } = UserAuth()
   const navigate = useNavigate()
 
   const handleGoogleSignIn = async () => {
     try {
       await googleSignIn()
-    } catch(error) {
-      console.log('ERROR:',error)
+    } catch (error) {
+      console.log('ERROR:', error)
     }
   };
 
-  useEffect(()=> {
-    if (user !=null) {
+  useEffect(() => {
+    if (user != null) {
       navigate('/')
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[user])
+  }, [user])
 
   return (
-    <article id="signin-page-container">
-      <button onClick={handleGoogleSignIn}>Sign With Google</button>
+    <article id="signing-page-wrapper">
+      <article id="signing-page-container">
+        <h1>Sign In With </h1>
+        <button onClick={handleGoogleSignIn}>Sign With Google</button>
+      </article>
     </article>
   )
 }

@@ -74,6 +74,7 @@ const Home = () => {
       }
     };
 
+
     const fetchIdea = async () => {
       try {
         const ideaRef = doc(
@@ -94,14 +95,14 @@ const Home = () => {
       }
     };
 
-     //should be conditional statement
+    if (user.uid) {
       fetchIdea();
       fetchWetherData()
-    
+    }
     return () => {
       clearInterval(interval);
     };
-  }, [ isTodoListLarge]); // should have user dependency
+  }, [user, isTodoListLarge]);
 
 
   useEffect(() => {
@@ -154,7 +155,7 @@ const Home = () => {
       unsub();
     };
     // eslint-disable-next-line
-  }, []);// should have user dependency
+  }, [user.uid]);
 
   useEffect(() => { // close todo window
     const handleClick = (e) => {

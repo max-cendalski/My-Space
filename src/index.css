@@ -21,6 +21,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
 }
 
 
@@ -64,9 +65,20 @@ code {
   gap: 1.3rem
 }
 
-#signin-page-container {
+#signing-page-wrapper {
+  height: 100vh;
   display: flex;
-  margin-block-start: 1rem;
+  background-color: var(--lightGreen);
+}
+
+#signing-page-container {
+  text-align: center;
+  display: flex;
+  width: 16rem;
+  height: 12rem;
+  flex-direction: column;
+  margin: 6rem auto;
+  background-color: white;;
 }
 
 #icons-homepage-container {
