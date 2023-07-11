@@ -66,7 +66,7 @@ const Navbar = () => {
                     Account
                   </NavLink>
                 </li>
-                <li onClick={handleSignOut} >Logout</li>
+                <li onClick={handleSignOut}>Sign Out</li>
               </ul>
             </section>
 

@@ -3,6 +3,10 @@ import { useState, useEffect } from "react";
 import { db } from "../../../firebase/Firebase";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { UserAuth } from "../../../context/AuthContext";
+import RobotIcon from "../../../icons/robot-icon.png";
+import RockIcon from "../../../icons/rock-icon.png";
+import ScissorsIcon from "../../../icons/scissors-icon.png";
+import PaperIcon from "../../../icons/paper-icon.png";
 
 const RPS = () => {
   const { user } = UserAuth();
@@ -14,8 +18,8 @@ const RPS = () => {
     resultContainer: "hidden",
   });
   const [icons, setIcons] = useState({
-    userIcon: "",
-    computerIcon: "",
+    userIcon: null,
+    computerIcon: null,
   });
   const [scores, setScores] = useState({
     userScore: 0,
@@ -79,18 +83,18 @@ const RPS = () => {
     if (userChoice === computerChoice) {
       if (userChoice === 0) {
         setIcons({
-          userIcon: "fa-solid fa-gem",
-          computerIcon: "fa-solid fa-gem",
+          userIcon: {PaperIcon},
+          computerIcon: {PaperIcon},
         });
       } else if (userChoice === 1) {
         setIcons({
-          userIcon: "fa-solid fa-map",
-          computerIcon: "fa-solid fa-map",
+          userIcon: {PaperIcon},
+          computerIcon: {PaperIcon},
         });
       } else {
         setIcons({
-          userIcon: "fa-solid fa-scissors",
-          computerIcon: "fa-solid fa-scissors",
+          userIcon: {ScissorsIcon},
+          computerIcon: {ScissorsIcon},
         });
       }
       setGameState({
@@ -106,8 +110,8 @@ const RPS = () => {
           rpsChoiceSectionContainer: "hidden",
         });
         setIcons({
-          userIcon: "fa-solid fa-gem",
-          computerIcon: "fa-solid fa-map",
+          userIcon: {RockIcon},
+          computerIcon: {PaperIcon},
         });
         setScores({
           userScore: scores.userScore,
@@ -124,8 +128,8 @@ const RPS = () => {
           computerScore: scores.computerScore + 1,
         });
         setIcons({
-          userIcon: "fa-solid fa-map",
-          computerIcon: "fa-solid fa-scissors",
+          userIcon: {PaperIcon},
+          computerIcon: {ScissorsIcon},
         });
       } else if (userChoice === 2 && computerChoice === 0) {
         setGameState({
@@ -138,8 +142,8 @@ const RPS = () => {
           computerScore: scores.computerScore + 1,
         });
         setIcons({
-          userIcon: "fa-solid fa-scissors",
-          computerIcon: "fa-solid fa-gem",
+          userIcon: {ScissorsIcon},
+          computerIcon: {RockIcon},
         });
       } else if (userChoice === 0 && computerChoice === 2) {
         setGameState({
@@ -152,8 +156,8 @@ const RPS = () => {
           computerScore: scores.computerScore,
         });
         setIcons({
-          userIcon: "fa-solid fa-gem",
-          computerIcon: "fa-solid fa-scissors",
+          userIcon: {RockIcon},
+          computerIcon: {ScissorsIcon},
         });
       } else if (userChoice === 1 && computerChoice === 0) {
         setGameState({
@@ -166,8 +170,8 @@ const RPS = () => {
           computerScore: scores.computerScore,
         });
         setIcons({
-          userIcon: "fa-solid fa-map",
-          computerIcon: "fa-solid fa-gem",
+          userIcon: {PaperIcon},
+          computerIcon: {RockIcon},
         });
       } else if (userChoice === 2 && computerChoice === 1) {
         setGameState({
@@ -180,8 +184,8 @@ const RPS = () => {
           computerScore: scores.computerScore,
         });
         setIcons({
-          userIcon: "fa-solid fa-scissors",
-          computerIcon: "fa-solid fa-map",
+          userIcon: {ScissorsIcon},
+          computerIcon: {PaperIcon},
         });
       }
     }
@@ -200,27 +204,28 @@ const RPS = () => {
         </h2>
         <article className="rps-container">
           {user.uid && <section className="players">{user.displayName.charAt(0)}</section>}
-          <section className="players">
-            <i className="fa-solid fa-robot fa-2xl"></i>
+          <section>
+            <img className="players" src={RobotIcon} />
           </section>
         </article>
         <article className={gameState.rpsChoiceSectionContainer}>
-          <section onClick={handleChoiceClick} className="choice-section">
-            <i className="fa-solid fa-gem fa-2xl"></i>
+          <section onClick={handleChoiceClick} >
+            <img src={RockIcon} className="rps-element" />
           </section>
-          <section onClick={handleChoiceClick} className="choice-section">
-            <i className="fa-regular fa-map fa-2xl"></i>
+          <section onClick={handleChoiceClick} >
+            <img src={PaperIcon} className="rps-element"/>
           </section>
-          <section onClick={handleChoiceClick} className="choice-section">
-            <i className="fa-solid fa-scissors fa-2xl"></i>
+          <section onClick={handleChoiceClick} >
+            <img src={ScissorsIcon} className="rps-element" />
           </section>
         </article>
+
         <article className={gameState.resultContainer}>
           <section>
-            <i className={icons.userIcon}></i>
+            <img src={icons.userIcon} />
           </section>
           <section>
-            <i className={icons.computerIcon}></i>
+            <img src={icons.computerIcon} />
           </section>
         </article>
         <h1 className="game-result-header">{gameState.result}</h1>
