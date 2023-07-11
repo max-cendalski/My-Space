@@ -974,7 +974,7 @@ dialog::backdrop {
   margin-block-start: 3rem;
   display: flex;
   justify-content: center;
-  gap: 4rem;
+  gap: 8rem;
 }
 
 .start-game-button {
@@ -1022,6 +1022,12 @@ dialog::backdrop {
   margin: 2rem;
 }
 
+.choosen-element {
+  margin: 0 2rem;
+  width: 5rem;
+  height: 5rem;
+}
+
 .choice-section:hover {
   transform: scale(1.2);
 }
@@ -1031,22 +1037,13 @@ dialog::backdrop {
 }
 
 .result-article {
-  margin-block-start: 2rem;
-  margin-block-end: 1rem;
+  margin-block: 3rem;
   display: flex;
-  gap: 4rem;
   font-size: 3rem;
-}
-
-.result-article h1 {
-  font-size: 3rem;
-}
-
-.game-result {
-  margin: 1rem;
 }
 
 .game-result-header {
+  margin: 0;
   font-size: 2rem;
   color: var(--red);
 }

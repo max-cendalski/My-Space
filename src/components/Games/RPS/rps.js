@@ -109,9 +109,9 @@ const RPS = () => {
           resultContainer: "result-article",
           rpsChoiceSectionContainer: "hidden",
         });
-        setIcons({
-          userIcon: {RockIcon},
-          computerIcon: {PaperIcon},
+        setIcons({// changes needed
+          userIcon: RockIcon,
+          computerIcon: PaperIcon,
         });
         setScores({
           userScore: scores.userScore,
@@ -128,8 +128,8 @@ const RPS = () => {
           computerScore: scores.computerScore + 1,
         });
         setIcons({
-          userIcon: {PaperIcon},
-          computerIcon: {ScissorsIcon},
+          userIcon: PaperIcon,
+          computerIcon: ScissorsIcon,
         });
       } else if (userChoice === 2 && computerChoice === 0) {
         setGameState({
@@ -142,8 +142,8 @@ const RPS = () => {
           computerScore: scores.computerScore + 1,
         });
         setIcons({
-          userIcon: {ScissorsIcon},
-          computerIcon: {RockIcon},
+          userIcon: ScissorsIcon,
+          computerIcon:RockIcon
         });
       } else if (userChoice === 0 && computerChoice === 2) {
         setGameState({
@@ -156,8 +156,8 @@ const RPS = () => {
           computerScore: scores.computerScore,
         });
         setIcons({
-          userIcon: {RockIcon},
-          computerIcon: {ScissorsIcon},
+          userIcon: RockIcon,
+          computerIcon: ScissorsIcon,
         });
       } else if (userChoice === 1 && computerChoice === 0) {
         setGameState({
@@ -170,8 +170,8 @@ const RPS = () => {
           computerScore: scores.computerScore,
         });
         setIcons({
-          userIcon: {PaperIcon},
-          computerIcon: {RockIcon},
+          userIcon: PaperIcon,
+          computerIcon: RockIcon,
         });
       } else if (userChoice === 2 && computerChoice === 1) {
         setGameState({
@@ -184,8 +184,8 @@ const RPS = () => {
           computerScore: scores.computerScore,
         });
         setIcons({
-          userIcon: {ScissorsIcon},
-          computerIcon: {PaperIcon},
+          userIcon: ScissorsIcon,
+          computerIcon: PaperIcon,
         });
       }
     }
@@ -210,22 +210,22 @@ const RPS = () => {
         </article>
         <article className={gameState.rpsChoiceSectionContainer}>
           <section onClick={handleChoiceClick} >
-            <img src={RockIcon} className="rps-element" />
+            <img src={RockIcon} alt="rock" className="rps-element" />
           </section>
           <section onClick={handleChoiceClick} >
-            <img src={PaperIcon} className="rps-element"/>
+            <img src={PaperIcon} alt="paper" className="rps-element"/>
           </section>
           <section onClick={handleChoiceClick} >
-            <img src={ScissorsIcon} className="rps-element" />
+            <img src={ScissorsIcon} alt="scissors" className="rps-element" />
           </section>
         </article>
 
         <article className={gameState.resultContainer}>
           <section>
-            <img src={icons.userIcon} />
+            <img className="choosen-element" src={icons.userIcon} alt="user-choosen-icon" />
           </section>
           <section>
-            <img src={icons.computerIcon} />
+            <img className="choosen-element" src={icons.computerIcon} alt="computer-choosen-icon" />
           </section>
         </article>
         <h1 className="game-result-header">{gameState.result}</h1>
