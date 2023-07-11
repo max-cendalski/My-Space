@@ -205,7 +205,7 @@ const RPS = () => {
         <article className="rps-container">
           {user.uid && <section className="players">{user.displayName.charAt(0)}</section>}
           <section>
-            <img className="players" src={RobotIcon} />
+            <img className="players" src={RobotIcon} alt="robot-icon" />
           </section>
         </article>
         <article className={gameState.rpsChoiceSectionContainer}>
