@@ -75,11 +75,14 @@ code {
   text-align: center;
   display: flex;
   width: 18rem;
-  height: 16rem;
+  height: 18rem;
   flex-direction: column;
   margin: 6rem auto;
   background-color: white;;
   font-size: 1.2rem;
+  border-radius: 5px;
+  box-shadow: 3px 4px 4px 4px rgb(0, 0, 0, 0.3);
+
 }
 
 .signing-section {
@@ -87,7 +90,8 @@ code {
   justify-content: flex-start;
   align-items: center;
   border: 1px solid black;
-  margin: 0 1rem;
+  margin-inline: 1rem;
+  margin-block-end: 1rem;
   padding: 0.5rem 1rem;
   cursor: pointer;
 }

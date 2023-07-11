@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { UserAuth } from '../../context/AuthContext'
 import { useNavigate } from 'react-router-dom';
 import GoogleIcon from '../../icons/google-icon.png'
+import FacebookIcon from '../../icons/facebook.png'
 
 
 const SignIn = () => {
@@ -17,6 +18,10 @@ const SignIn = () => {
     }
   };
 
+  const handleFBSign = () => {
+    alert("Doesn't work")
+  }
+
   useEffect(() => {
     if (user != null) {
       navigate('/')
@@ -29,8 +34,12 @@ const SignIn = () => {
       <article id="signing-page-container">
         <h1>Sign In With </h1>
         <section className="signing-section">
-          <img className="login-icon" src={GoogleIcon}></img>
+          <img className="login-icon" src={GoogleIcon} alt="google"></img>
           <button onClick={handleGoogleSignIn}>Google</button>
+        </section>
+        <section className="signing-section">
+          <img className="login-icon" src={FacebookIcon} alt="facebook"></img>
+          <button onClick={handleFBSign}>Facebook</button>
         </section>
 
       </article>
