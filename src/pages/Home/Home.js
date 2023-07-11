@@ -33,9 +33,7 @@ const Home = () => {
   const [todoList, setTodoList] = useState([])
   const [isTodoListLarge, setIsTodoListLarge] = useState(false)
 
-
   const [value, setValue] = useState(new Date());
-
 
   useEffect(() => {
     const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
@@ -74,10 +72,7 @@ const Home = () => {
       } catch (err) {
         console.log("SOMETHING WENT WRONG", err);
       }
-
     };
-
-
 
     const fetchIdea = async () => {
       try {
@@ -99,14 +94,14 @@ const Home = () => {
       }
     };
 
-    if (user.uid) {
+     //should be conditional statement
       fetchIdea();
       fetchWetherData()
-    }
+    
     return () => {
       clearInterval(interval);
     };
-  }, [user, isTodoListLarge]);
+  }, [ isTodoListLarge]); // should have user dependency
 
 
   useEffect(() => {
@@ -159,7 +154,7 @@ const Home = () => {
       unsub();
     };
     // eslint-disable-next-line
-  }, [user.uid]);
+  }, []);// should have user dependency
 
   useEffect(() => { // close todo window
     const handleClick = (e) => {
