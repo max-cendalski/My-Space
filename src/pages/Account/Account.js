@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { collection, getDocs, getDoc, doc } from "firebase/firestore";
+import { collection, deleteDoc, getDocs, getDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { UserAuth } from "../../context/AuthContext";
 import Navbar from "../../components/Navbar/Navbar"
@@ -46,18 +46,27 @@ export default function Account() {
         }
         Promise.all([getGameData(), getCollections()]).then(() => setIsLoading(false));
     }, [user.uid])
-
-
+    
+    const handleRemoveCollection = () => {
+        const deleteCollectionDocuments = async (collectionName) => {
+            const collectionRef = collection(db, "test");
+            const querySnapshot = await getDocs(collectionRef);
+            querySnapshot.forEach((doc) => {
+                deleteDoc(doc.ref);
+            });
+        };
+        deleteCollectionDocuments("test")
+    }
 
     return (
         <>
-
             <article>
                 <Navbar />
                 {isLoading && (<p className="loading-notification">Loading...</p>)}
                 {!isLoading && (
                     <article id="account-container">
                         <h1>My Account</h1>
+                        <button onClick={handleRemoveCollection}> Remove test collection</button>
                         <section className="account-single-section">
                             <h2>Notes</h2>
                             {userStats.notes ? <p>You have penned down <span className="user-stats-number">{userStats.notes}</span> notes.</p> : <p>You don't have any notes</p>}
