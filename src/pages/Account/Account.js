@@ -46,10 +46,10 @@ export default function Account() {
         }
         Promise.all([getGameData(), getCollections()]).then(() => setIsLoading(false));
     }, [user.uid])
-    
+
     const handleRemoveCollection = () => {
         const deleteCollectionDocuments = async (collectionName) => {
-            const collectionRef = collection(db, "test");
+            const collectionRef = collection(db, collectionName);
             const querySnapshot = await getDocs(collectionRef);
             querySnapshot.forEach((doc) => {
                 deleteDoc(doc.ref);
