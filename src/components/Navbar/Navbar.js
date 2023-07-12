@@ -6,9 +6,8 @@ import Home from '../../icons/eco-house.png'
 
 
 const Navbar = () => {
-  const { user, logOut } = UserAuth()
   const navigate = useNavigate()
-
+  const { user, logOut } = UserAuth()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
 
@@ -47,12 +46,13 @@ const Navbar = () => {
     <article >
       {
         (user) ?
-          <article className="navbar-container">
+          <article className="navbar-container"
+            onMouseEnter={() => setIsMenuOpen(true)}
+            onMouseLeave={() => setIsMenuOpen(false)}
+          >
             <img src={Home} className='navbar-home-icon' onClick={goHome} alt="home-icon"></img>
             {user.uid && <button
               onClick={handleUserIconClick}
-              onMouseEnter={() => setIsMenuOpen(true)}
-              onMouseLeave={() => setIsMenuOpen(false)}
               className='user-icon'
             >
               {user.displayName.charAt(0)}
