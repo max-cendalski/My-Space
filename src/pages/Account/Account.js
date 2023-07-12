@@ -51,11 +51,11 @@ export default function Account() {
 
     return (
         <>
-            {isLoading ?
-                <p>Loading...</p>
-                :
-                <article>
-                    <Navbar />
+
+            <article>
+                <Navbar />
+                {isLoading && (<p className="loading-notification">Loading...</p>)}
+                {!isLoading && (
                     <article id="account-container">
                         <h1>My Account</h1>
                         <section className="account-single-section">
@@ -78,9 +78,11 @@ export default function Account() {
                             <h2>Games</h2>
                             {userStats.games ? <p>You've played <span className="user-stats-number">{userStats.games}</span> times in the RPS game.</p> : <p>You haven't played the RPS game yet.</p>}
                         </section>
+
                     </article>
-                </article>
-            }
+                )}
+            </article>
+
         </>
     )
 }
