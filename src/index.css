@@ -234,12 +234,12 @@ code {
 .navbar-dropdown-menu:hover {
   opacity: 1;
   visibility: visible;
-}
-
+} 
+/*NEED TO BE FIXED*/
 .navbar-dropdown-menu.open {
   opacity: 1;
   visibility: visible;
-}
+} 
 
 .signin-link {
   float: right;
