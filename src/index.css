@@ -35,6 +35,10 @@ section {
   -webkit-tap-highlight-color: transparent;
 }
 
+button {
+  cursor: pointer;
+}
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -243,15 +247,6 @@ code {
   margin: 0.5rem;
 }
 
-/* display: grid;
-grid-template-columns: repeat(3, 1fr);
-grid-template-rows: repeat(3, 1fr);
-width: 380px;
-height: 380px;
-background-color: #9e8d73;
-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-grid-gap: 2px; */
-
 /* ACCOUNT*/
 #account-container {
   position: relative;
@@ -295,7 +290,6 @@ grid-gap: 2px; */
   font-weight: 600;
   border: 1px solid var(--lightPink);
   padding: 0.3rem 0.5rem;
-  cursor: pointer;
   border-radius: 3px;
 }
 
@@ -310,7 +304,6 @@ grid-gap: 2px; */
   background-color: var(--red);
   border: none;
   border-radius: 3px;
-  cursor: pointer;
   margin-inline-start: 4rem;
   border: 1px solid var (--red)
 }
@@ -450,7 +443,6 @@ grid-gap: 2px; */
   border: none;
   color: white;
   background-color: var(--darkGreen);
-  cursor: pointer;
   padding: 0.4rem 0.5rem;
   height: 1.8rem;
   font-size: 1rem;
@@ -507,13 +499,6 @@ grid-gap: 2px; */
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
-
-
-
-
-
-
 
 
 
@@ -732,7 +717,6 @@ textarea {
   background-color: var(--red);
   color: white;
   border: none;
-  cursor: pointer;
   padding-block: 0.375rem;
   padding-inline: 0.625rem;
   border-radius: 5px;
@@ -837,7 +821,6 @@ dialog[open] {
 
 .calendar-close-dialog-button {
   padding: 0.4rem 0.8rem;
-  cursor: pointer;
 }
 
 .calendar-add-event-form p {
@@ -865,7 +848,6 @@ dialog[open] {
   border: none;
   color: white;
   background-color: var(--darkGreen);
-  cursor: pointer;
 }
 
 .calendar-add-event-form-button:hover {
@@ -885,7 +867,6 @@ dialog[open] {
   background-color: var(--red);
   border: none;
   border-radius: 3px;
-  cursor: pointer;
 }
 
 dialog::backdrop {
@@ -930,7 +911,6 @@ dialog::backdrop {
   padding-inline: 0.;
   border-radius: 5px;
   border: none;
-  cursor: pointer;
 }
 
 .generate-ideas-button {
@@ -940,7 +920,6 @@ dialog::backdrop {
   margin-block-end: 1.375rem;
   border-radius: 5px;
   border: none;
-  cursor: pointer;
   background-color: var(--darkGreen);
   color: white;
   font-size: 1.375rem;
@@ -1029,7 +1008,6 @@ dialog::backdrop {
 
 .start-game-button {
   width: 80%;
-  cursor: pointer;
   font-size: 1.2rem;
   padding: 0.325rem;
   margin-block-start: 3rem;
@@ -1359,7 +1337,6 @@ dialog::backdrop {
   padding-block: 0.375rem;
   border-radius: 0 0 3px 3px;
   border: none;
-  cursor: pointer;
 }
 
 .modal-visible {
@@ -1429,7 +1406,6 @@ dialog::backdrop {
 
 .reset-ttt {
   width: 24rem;
-  cursor: pointer;
   font-size: 1.2rem;
   padding: 0.325rem;
   margin-block-start: 3rem;
