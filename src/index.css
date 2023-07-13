@@ -987,15 +987,14 @@ dialog::backdrop {
   color: white;
   border: none;
   border-radius: 5px;
-  transition: transform 0.2s;
 }
 
 .start-game-button:hover {
-  transform: scale(1.05, 1.1)
+  transform: scale(1.01, 1.02)
 }
 
 .start-game-button:active {
-  transform: scale(1.1, 1.2)
+  transform: scale(1.06, 1.08)
 }
 
 .players {
@@ -1377,10 +1376,25 @@ dialog::backdrop {
   /* Use border-left for vertical lines. */
 }
 
+
 .reset-ttt {
-  margin-block-start: 2rem;
-  padding-block: 0.5rem;
-  padding-inline: 2rem;
+  width: 24rem;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0.325rem;
+  margin-block-start: 3rem;
+  background-color: var(--darkGreen);
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.reset-ttt:hover {
+  transform: scale(1.01, 1.02)
+}
+
+.reset-ttt:active {
+  transform: scale(1.06, 1.08)
 }
 
 .ttt-square {
