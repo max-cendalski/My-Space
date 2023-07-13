@@ -10,10 +10,9 @@ const Navbar = () => {
   const { user, logOut } = UserAuth()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-
   useEffect(() => {
-    const handleOutsideClick = () => {
-      if (isMenuOpen) {
+    const handleOutsideClick = (e) => {
+      if (!e.target.closest('.navbar-dropdown-menu')) {
         setIsMenuOpen(false);
       }
     };
@@ -23,10 +22,10 @@ const Navbar = () => {
     return () => {
       window.removeEventListener('click', handleOutsideClick);
     };
-  }, [isMenuOpen]);
+  }, []);
 
   const handleUserIconClick = (e) => {
-    e.stopPropagation();
+    e.stopPropagation()
     setIsMenuOpen(prevState => !prevState);
   };
 
@@ -43,24 +42,27 @@ const Navbar = () => {
   }
 
   return (
-    <article >
+    <>
       {
         (user) ?
-          <article className="navbar-container"
-            onMouseEnter={() => setIsMenuOpen(true)}
-            onMouseLeave={() => setIsMenuOpen(false)}
+          <article 
+          onMouseLeave={() => setIsMenuOpen(false)}
+          className="navbar-container"
           >
             <img src={Home} className='navbar-home-icon' onClick={goHome} alt="home-icon"></img>
-            {user.uid && <button
-              onClick={handleUserIconClick}
-              className='user-icon'
-            >
-              {user.displayName.charAt(0)}
-            </button>
+            {user.uid &&
+              <button
+                onMouseEnter={() => setIsMenuOpen(true)}
+                onClick={handleUserIconClick}
+                className='user-icon'
+              >
+                {user.displayName.charAt(0)}
+              </button>
             }
 
-            <section className={isMenuOpen ? "navbar-dropdown-menu open" : "navbar-dropdown-menu"}>
-              <ul>
+            <section className={isMenuOpen ? "navbar-dropdown-menu active" : "navbar-dropdown-menu"}>
+              <ul
+                >
                 <li >
                   <NavLink to="/account">
                     Account
@@ -69,12 +71,11 @@ const Navbar = () => {
                 <li onClick={handleSignOut}>Sign Out</li>
               </ul>
             </section>
-
           </article>
           :
           <Link className="signin-link" to="/login">SignIn</Link>
       }
-    </article>
+    </>
   )
 }
 

@@ -1,20 +1,22 @@
 import Navbar from "../../components/Navbar/Navbar";
 import { NavLink } from "react-router-dom";
+import RPSIcon from "../../icons/rps-icon.png";
+import ShipIcon from "../../icons/ships-icon.png";
+import TTTIcon from "../../icons/ttt-icon.png";
 
 const Games = () => {
   return (
-    <article>
+    <article id="icons-games-container">
       <Navbar />
-      <h1 id="games-header">Games</h1>
-      <NavLink className="game-link-button" to="/games/rps">
-        RPS
+      <NavLink to="/games/rps">
+        <img className="icon-homepage" src={RPSIcon}></img>
       </NavLink>
-      <NavLink className="game-link-button" to="/games/Ships/ships">
-        SHIPS
+      <NavLink to="/games/Ships/ships">
+        <img className="icon-homepage" src={ShipIcon}></img>
       </NavLink>
-      <NavLink className="game-link-button" to="/games/TTT/Ttt">
-      Tic Tac Toe
-    </NavLink>
+      <NavLink to="/games/TTT/Ttt">
+        <img className="icon-homepage" src={TTTIcon}></img>
+      </NavLink>
     </article>
   );
 };

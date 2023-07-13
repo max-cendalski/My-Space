@@ -83,18 +83,18 @@ const RPS = () => {
     if (userChoice === computerChoice) {
       if (userChoice === 0) {
         setIcons({
-          userIcon: {PaperIcon},
-          computerIcon: {PaperIcon},
+          userIcon: PaperIcon,
+          computerIcon: PaperIcon,
         });
       } else if (userChoice === 1) {
         setIcons({
-          userIcon: {PaperIcon},
-          computerIcon: {PaperIcon},
+          userIcon: PaperIcon,
+          computerIcon: PaperIcon,
         });
       } else {
         setIcons({
-          userIcon: {ScissorsIcon},
-          computerIcon: {ScissorsIcon},
+          userIcon: ScissorsIcon,
+          computerIcon: ScissorsIcon,
         });
       }
       setGameState({
