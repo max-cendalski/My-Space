@@ -15,6 +15,9 @@ export default function Account() {
     })
     const [isLoading, setIsLoading] = useState(true)
 
+
+    const [dialogStatus, setDialogStatus] = useState(false);
+
     useEffect(() => {
         async function getCollections() {
             try {
@@ -47,9 +50,22 @@ export default function Account() {
         Promise.all([getGameData(), getCollections()]).then(() => setIsLoading(false));
     }, [user.uid])
 
-    const handleDeleteClick =()=> {
-        console.log('whe')
-    }
+
+
+
+
+    const handleDeleteClick = () => {
+        setDialogStatus(true);
+    };
+
+    const handleConfirm = () => {
+        console.log("Account deleted");
+        setDialogStatus(false);
+    };
+
+    const handleClose = () => {
+        setDialogStatus(false);
+    };
     return (
         <>
             <article>
@@ -82,9 +98,22 @@ export default function Account() {
                             <h3>Delete Your Account</h3>
                             <p>Once you delete your account, you will permanently lose all saved data and this cannot be undone.</p>
                             <button onClick={handleDeleteClick} className="delete-account-button">Delete Account</button>
+                            {dialogStatus &&
+                                <section id="delete-account-dialog-wrapper">
+                                    <dialog open>
+                                        <h3>Delete Your Account</h3>
+                                        <p>Are you sure you want to delete your account? This process cannot be undone.</p>
+                                        <button onClick={handleClose} className="close-dialog-account">Cancel</button>
+                                        <button onClick={handleConfirm} className="confirm-delete-account-button">Confirm</button>
+                                    </dialog>
+                                </section>
+
+                            }
                         </section>
                     </article>
+
                 )}
+
             </article>
 
         </>

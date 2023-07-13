@@ -254,11 +254,26 @@ grid-gap: 2px; */
 
 /* ACCOUNT*/
 #account-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
   width: 90%;
 }
+
+#account-container dialog[open] {
+  position: absolute;
+  border: none;
+  top: 7rem;
+  opacity: 1;
+  scale: 1;
+  width: 80%;
+  font-size: 1rem;
+  box-shadow: 10px 10px 10px 5px rgb(0, 0, 0, 0.5);
+  border-radius: 2px;
+  border: 1px solid var(--red)
+}
+
 
 .account-single-section {
   border-bottom: 1px solid var(--darkGreen);
@@ -289,6 +304,21 @@ grid-gap: 2px; */
   background-color: #942607;
 }
 
+.confirm-delete-account-button {
+  padding: 0.4rem 0.8rem;
+  color: white;
+  background-color: var(--red);
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-inline-start: 4rem;
+  border: 1px solid var (--red)
+}
+
+.close-dialog-account {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid grey;
+}
 
 
 

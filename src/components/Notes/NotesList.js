@@ -67,7 +67,7 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
               </p>
             </section>
             <article>
-              <article id="notes-dialog-container">
+              <article>
                 {selectedNote && note.id === selectedNote.id ? (
                   <dialog open>
                     <img
