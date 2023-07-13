@@ -109,7 +109,7 @@ const RPS = () => {
           resultContainer: "result-article",
           rpsChoiceSectionContainer: "hidden",
         });
-        setIcons({// changes needed
+        setIcons({
           userIcon: RockIcon,
           computerIcon: PaperIcon,
         });

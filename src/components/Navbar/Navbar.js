@@ -45,9 +45,9 @@ const Navbar = () => {
     <>
       {
         (user) ?
-          <article 
-          onMouseLeave={() => setIsMenuOpen(false)}
-          className="navbar-container"
+          <article
+            onMouseLeave={() => setIsMenuOpen(false)}
+            className="navbar-container"
           >
             <img src={Home} className='navbar-home-icon' onClick={goHome} alt="home-icon"></img>
             {user.uid &&
@@ -62,7 +62,7 @@ const Navbar = () => {
 
             <section className={isMenuOpen ? "navbar-dropdown-menu active" : "navbar-dropdown-menu"}>
               <ul
-                >
+              >
                 <li >
                   <NavLink to="/account">
                     Account

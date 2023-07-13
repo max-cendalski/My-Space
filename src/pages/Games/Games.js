@@ -9,13 +9,13 @@ const Games = () => {
     <article id="icons-games-container">
       <Navbar />
       <NavLink to="/games/rps">
-        <img className="icon-homepage" src={RPSIcon}></img>
+        <img className="icon-homepage" src={RPSIcon} alt="rock-paper-scissors"></img>
       </NavLink>
       <NavLink to="/games/Ships/ships">
-        <img className="icon-homepage" src={ShipIcon}></img>
+        <img className="icon-homepage" src={ShipIcon} alt="ship"></img>
       </NavLink>
       <NavLink to="/games/TTT/Ttt">
-        <img className="icon-homepage" src={TTTIcon}></img>
+        <img className="icon-homepage" src={TTTIcon} alt="tic-tac-toe"></img>
       </NavLink>
     </article>
   );

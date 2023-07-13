@@ -47,17 +47,9 @@ export default function Account() {
         Promise.all([getGameData(), getCollections()]).then(() => setIsLoading(false));
     }, [user.uid])
 
-    const handleRemoveCollection = () => {
-        const deleteCollectionDocuments = async (collectionName) => {
-            const collectionRef = collection(db, collectionName);
-            const querySnapshot = await getDocs(collectionRef);
-            querySnapshot.forEach((doc) => {
-                deleteDoc(doc.ref);
-            });
-        };
-        deleteCollectionDocuments("test")
+    const handleDeleteClick =()=> {
+        console.log('whe')
     }
-
     return (
         <>
             <article>
@@ -66,7 +58,6 @@ export default function Account() {
                 {!isLoading && (
                     <article id="account-container">
                         <h1>My Account</h1>
-                        <button onClick={handleRemoveCollection}> Remove test collection</button>
                         <section className="account-single-section">
                             <h2>Notes</h2>
                             {userStats.notes ? <p>You have penned down <span className="user-stats-number">{userStats.notes}</span> notes.</p> : <p>You don't have any notes</p>}
@@ -87,7 +78,11 @@ export default function Account() {
                             <h2>Games</h2>
                             {userStats.games ? <p>You've played <span className="user-stats-number">{userStats.games}</span> times in the RPS game.</p> : <p>You haven't played the RPS game yet.</p>}
                         </section>
-
+                        <section id="delete-account-section">
+                            <h3>Delete Your Account</h3>
+                            <p>Once you delete your account, you will permanently lose all saved data and this cannot be undone.</p>
+                            <button onClick={handleDeleteClick} className="delete-account-button">Delete Account</button>
+                        </section>
                     </article>
                 )}
             </article>

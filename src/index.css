@@ -268,6 +268,26 @@ grid-gap: 2px; */
   font-weight: 700;
 }
 
+#delete-account-section {
+  margin-block-start: 2rem;
+  border: 1px solid var(--red);
+  padding: 1rem;
+}
+
+.delete-account-button {
+  color: var(--red);
+  background-color: white;
+  font-weight: 600;
+  border: 1px solid var(--lightPink);
+  padding: 0.3rem 0.5rem;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.delete-account-button:hover {
+  color: white;
+  background-color: #942607;
+}
 
 
 
