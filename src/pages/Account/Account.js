@@ -15,7 +15,6 @@ export default function Account() {
     })
     const [isLoading, setIsLoading] = useState(true)
 
-
     const [dialogStatus, setDialogStatus] = useState(false);
 
     useEffect(() => {
@@ -51,9 +50,6 @@ export default function Account() {
     }, [user.uid])
 
 
-
-
-
     const handleDeleteClick = () => {
         setDialogStatus(true);
     };
@@ -66,6 +62,7 @@ export default function Account() {
     const handleClose = () => {
         setDialogStatus(false);
     };
+    
     return (
         <>
             <Navbar />
