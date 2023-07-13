@@ -259,16 +259,28 @@ code {
 #account-container dialog[open] {
   position: absolute;
   border: none;
-  top: 7rem;
+  top: 8rem;
   opacity: 1;
   scale: 1;
   width: 80%;
   font-size: 1rem;
   box-shadow: 10px 10px 10px 5px rgb(0, 0, 0, 0.5);
   border-radius: 2px;
-  border: 1px solid var(--red)
+  z-index:6;
+  border: 1px solid var(--red);
+ 
 }
 
+#delete-account-dialog-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 5;
+  backdrop-filter: blur(2px)
+}
 
 .account-single-section {
   border-bottom: 1px solid var(--darkGreen);
@@ -304,7 +316,6 @@ code {
   background-color: var(--red);
   border: none;
   border-radius: 3px;
-  margin-inline-start: 4rem;
   border: 1px solid var (--red)
 }
 
