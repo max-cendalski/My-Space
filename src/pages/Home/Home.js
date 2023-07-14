@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
 import { useState, useEffect, useRef } from "react";
-import { getDoc, getDocs, doc, collection, onSnapshot, setDoc, deleteDoc, updateDoc } from "firebase/firestore";
+import { getDoc, doc, collection, onSnapshot, setDoc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import Navbar from "../../components/Navbar/Navbar";
 import { format } from "date-fns";
@@ -88,15 +88,10 @@ const Home = () => {
         if (docSnap.exists()) {
           setIdea(docSnap.data());
         } else {
-          try {
-            const querySnapshot = await getDocs(collection(db, "ideas"));
-            const docsArray = querySnapshot.docs
-            let randomIndex = Math.floor(Math.random() * 10)
-            setIdea(docsArray[randomIndex].data())
-          } catch (err) {
-            console.log("err", err);
-          }
+
+          setIdea("You know yourself mostly by your thoughts. Everyone else in the world knows you only by your actions.Remember this when you feel misunderstood. You have to do or say something for others to know how you feel.")
         }
+
       } catch (err) {
         console.error("Something went wrong:", err);
       }
