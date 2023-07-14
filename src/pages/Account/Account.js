@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { collection, deleteDoc, getDocs, getDoc, doc } from "firebase/firestore";
+import { collection, deleteDoc, getDocs, getDoc, doc, writeBatch} from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { UserAuth } from "../../context/AuthContext";
 import Navbar from "../../components/Navbar/Navbar"
@@ -50,19 +50,49 @@ export default function Account() {
     }, [user.uid])
 
 
-    const handleDeleteClick = () => {
+    const handleDeleteButtonClick = () => {
         setDialogStatus(true);
     };
 
-    const handleConfirm = () => {
+    const handleConfirmAccountDelete = () => {
         console.log("Account deleted");
+        setDialogStatus(false);
+        const deleteUser = async (userId) => {
+            const userRef = doc(db, 'users', userId)
+            const collectionsToDelete = ['calendarEvents', 'dateForIdeas', 'games', 'ideaToHome', 'ideas', 'locationHome', 'notes', 'todos', 'weatherLocations'];
+
+            for (const collectionName of collectionsToDelete) {
+                const collectionRef = collection(userRef, collectionName);
+                const docs = await getDocs(collectionRef);
+
+                if (docs.size > 0) {
+                    let batch = writeBatch(db);
+
+                    docs.forEach((doc) => {
+                        batch.delete(doc.ref); // Add each doc to delete batch
+                    });
+                    // Commit the batch
+                    await batch.commit();
+                }
+            }
+
+            await deleteDoc(userRef);
+
+            // delete user from Authentication
+            user.delete().then(function () {
+                console.log("User account and data deleted successfully");
+            }).catch(function (error) {
+                // An error happened.
+                console.log("An error occurred while deleting user account", error);
+            });
+        }
+        deleteUser(user.uid)
+    };
+
+    const handleCloseDialogWindow = () => {
         setDialogStatus(false);
     };
 
-    const handleClose = () => {
-        setDialogStatus(false);
-    };
-    
     return (
         <>
             <Navbar />
@@ -93,15 +123,15 @@ export default function Account() {
                     <section id="delete-account-section">
                         <h3>Delete Your Account</h3>
                         <p>Once you delete your account, you will permanently lose all saved data and this cannot be undone.</p>
-                        <button onClick={handleDeleteClick} className="delete-account-button">Delete Account</button>
+                        <button onClick={handleDeleteButtonClick} className="delete-account-button">Delete Account</button>
                         {dialogStatus &&
                             <section id="delete-account-dialog-wrapper">
                                 <dialog open>
                                     <h3>Delete Your Account</h3>
                                     <p>Are you sure you want to delete your account? This process cannot be undone.</p>
                                     <footer className="dialog-delete-event-footer">
-                                        <button onClick={handleClose} className="close-dialog-account">Cancel</button>
-                                        <button onClick={handleConfirm} className="confirm-delete-account-button">Confirm</button>
+                                        <button onClick={handleCloseDialogWindow} className="close-dialog-account">Cancel</button>
+                                        <button onClick={handleConfirmAccountDelete} className="confirm-delete-account-button">Confirm</button>
                                     </footer>
 
                                 </dialog>
