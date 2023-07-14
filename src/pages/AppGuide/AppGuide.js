@@ -5,7 +5,7 @@ const AppGuide = () => {
     return (
         <article>
             <Navbar />
-            <h1> App Guid</h1>
+            <h1> App Guide</h1>
         </article>
 
     )

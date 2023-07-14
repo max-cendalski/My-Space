@@ -72,11 +72,11 @@ const RPS = () => {
     var computerChoice = Math.floor(Math.random() * 3);
     var userChoice = 0;
     setStartGameButton("start-game-button");
-    if (e.target.className === "fa-solid fa-gem fa-2xl") {
+    if (e.target.alt === "rock") {
       userChoice = 0;
-    } else if (e.target.className === "fa-regular fa-map fa-2xl") {
+    } else if (e.target.alt === "paper") {
       userChoice = 1;
-    } else if (e.target.className === "fa-solid fa-scissors fa-2xl") {
+    } else if (e.target.alt === "scissors") {
       userChoice = 2;
     }
 
