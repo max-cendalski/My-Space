@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
 import { useState, useEffect, useRef } from "react";
-import { getDoc, doc, collection, onSnapshot, setDoc, deleteDoc, updateDoc } from "firebase/firestore";
+import { getDoc, getDocs, doc, collection, onSnapshot, setDoc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import Navbar from "../../components/Navbar/Navbar";
 import { format } from "date-fns";
@@ -88,7 +88,14 @@ const Home = () => {
         if (docSnap.exists()) {
           setIdea(docSnap.data());
         } else {
-          console.log("No idea added to homepage!");
+          try {
+            const querySnapshot = await getDocs(collection(db, "ideas"));
+            const docsArray = querySnapshot.docs
+            let randomIndex = Math.floor(Math.random() * 10)
+            setIdea(docsArray[randomIndex].data())
+          } catch (err) {
+            console.log("err", err);
+          }
         }
       } catch (err) {
         console.error("Something went wrong:", err);
@@ -350,7 +357,7 @@ const Home = () => {
                   className="new-todo-input-homepage"
                   placeholder="add todo"
                   onChange={(e) => handleTodoInputChange(e, index)}
-                  ref={index === 0 ? firstInputRef : null} 
+                  ref={index === 0 ? firstInputRef : null}
                 />
               </p>
             ))}

@@ -5,7 +5,7 @@ import { UserAuth } from "../../context/AuthContext";
 import Navbar from "../../components/Navbar/Navbar"
 
 export default function Account() {
-    const { user, logOut } = UserAuth()
+    const { user, logOut, googleReauthenticate } = UserAuth()
     const [userStats, setUserStats] = useState({
         notes: 0,
         todos: 0,
@@ -50,51 +50,59 @@ export default function Account() {
     }, [user.uid])
 
 
-    const handleDeleteButtonClick = () => {
+    const handleConfirmAccountDelete = () => {
         setDialogStatus(true);
     };
 
-    const handleConfirmAccountDelete = () => {
-        setDialogStatus(false);
-        const deleteUser = async (userId) => {
-            const userRef = doc(db, 'users', userId)
-            const collectionsToDelete = ['calendarEvents', 'dateForIdeas', 'games', 'ideaToHome', 'ideas', 'locationHome', 'notes', 'todos', 'weatherLocations'];
+    const handleDeleteButtonClick = async () => {
+        try {
+            await googleReauthenticate()
+            const deleteUser = async (userId) => {
+                const userRef = doc(db, 'users', userId)
+                const collectionsToDelete = ['calendarEvents', 'dateForIdeas', 'games', 'ideaToHome', 'ideas', 'locationHome', 'notes', 'todos', 'weatherLocations'];
 
-            for (const collectionName of collectionsToDelete) {
-                const collectionRef = collection(userRef, collectionName);
-                const docs = await getDocs(collectionRef);
+                for (const collectionName of collectionsToDelete) {
+                    const collectionRef = collection(userRef, collectionName);
+                    const docs = await getDocs(collectionRef);
 
-                if (docs.size > 0) {
-                    let batch = writeBatch(db);
+                    if (docs.size > 0) {
+                        let batch = writeBatch(db);
 
-                    docs.forEach((doc) => {
-                        batch.delete(doc.ref); // Add each doc to delete batch
-                    });
-                    // Commit the batch
-                    await batch.commit();
+                        docs.forEach((doc) => {
+                            batch.delete(doc.ref); // Add each doc to delete batch
+                        });
+                        // Commit the batch
+                        await batch.commit();
+                    }
+                }
+
+                await deleteDoc(userRef);
+
+                // delete user from Authentication
+                user.delete().then(function () {
+                    console.log("User account and data deleted successfully");
+                }).catch(function (error) {
+                    // An error happened.
+                    console.log("An error occurred while deleting user account", error);
+                });
+            }
+            deleteUser(user.uid)
+
+            async function LogoutUser() {
+                try {
+                    await logOut()
+                } catch (error) {
+                    console.log('ERROR: ', error)
                 }
             }
+            LogoutUser()
 
-            await deleteDoc(userRef);
-
-            // delete user from Authentication
-            user.delete().then(function () {
-                console.log("User account and data deleted successfully");
-            }).catch(function (error) {
-                // An error happened.
-                console.log("An error occurred while deleting user account", error);
-            });
+        } catch (error) {
+            console.error('error', error)
         }
-        deleteUser(user.uid)
 
-        async function LogoutUser() {
-            try {
-                await logOut()
-            } catch (error) {
-                console.log('ERROR: ', error)
-            }
-        }
-        LogoutUser()
+
+
     }
 
     const handleCloseDialogWindow = () => {
