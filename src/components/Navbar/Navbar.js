@@ -68,6 +68,11 @@ const Navbar = () => {
                     Account
                   </NavLink>
                 </li>
+                <li >
+                  <NavLink to="/app-guide">
+                    App Guide
+                  </NavLink>
+                </li>
                 <li onClick={handleSignOut}>Sign Out</li>
               </ul>
             </section>

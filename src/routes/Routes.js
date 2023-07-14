@@ -14,6 +14,8 @@ import RPS from '../components/Games/RPS/rps';
 import ShipsGame from '../components/Games/Ships/ships';
 import TttComponent from '../components/Games/TTT/Ttt';
 import NotFound from '../pages/NotFound';
+import AppGuide from '../pages/AppGuide/AppGuide';
+
 
 
 
@@ -30,6 +32,7 @@ const Routes = () => {
 
         <Route index element={<Home />} />
         <Route path="/account" element={<Account />}></Route>
+        <Route path="/app-guide" element={<AppGuide />}></Route>
         <Route path="/notes">
           <Route index element={<Notes />} />
           <Route path="edit/:noteId" element={<EditNote />} />
