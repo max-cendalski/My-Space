@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react"
-import { collection, deleteDoc, getDocs, getDoc, doc, writeBatch} from "firebase/firestore";
+import { collection, deleteDoc, getDocs, getDoc, doc, writeBatch } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { UserAuth } from "../../context/AuthContext";
 import Navbar from "../../components/Navbar/Navbar"
 
 export default function Account() {
-    const { user } = UserAuth()
+    const { user, logOut } = UserAuth()
     const [userStats, setUserStats] = useState({
         notes: 0,
         todos: 0,
@@ -55,7 +55,6 @@ export default function Account() {
     };
 
     const handleConfirmAccountDelete = () => {
-        console.log("Account deleted");
         setDialogStatus(false);
         const deleteUser = async (userId) => {
             const userRef = doc(db, 'users', userId)
@@ -87,7 +86,16 @@ export default function Account() {
             });
         }
         deleteUser(user.uid)
-    };
+
+        async function LogoutUser() {
+            try {
+                await logOut()
+            } catch (error) {
+                console.log('ERROR: ', error)
+            }
+        }
+        LogoutUser()
+    }
 
     const handleCloseDialogWindow = () => {
         setDialogStatus(false);
