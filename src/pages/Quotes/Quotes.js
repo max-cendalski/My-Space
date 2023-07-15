@@ -42,6 +42,9 @@ const Quotes = () => {
             setGenerateIdeasButton(true);
           }
         }
+        else if (ideasToRender.length === 0) {
+          setGenerateIdeasButton(true)
+        }
       } catch (err) {
         console.error("ERROR", err);
       }
@@ -49,7 +52,7 @@ const Quotes = () => {
     if (user.uid) {
       fetchIdeas()
     }
-
+     // eslint-disable-next-line
   }, [user.uid]);
 
   const handleGenerateIdeas = () => {

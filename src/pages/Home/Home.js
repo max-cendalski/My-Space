@@ -88,13 +88,18 @@ const Home = () => {
         if (docSnap.exists()) {
           setIdea(docSnap.data());
         } else {
-
-          setIdea({
-            text: "Habits will form whether you want them or not. Whatever you repeat, you reinforce.",
-            extended: false
-          })
+          try {
+            await setDoc(
+              doc(db, "users", user.uid, "ideaToHome", "ideaToHomePageID"),
+              {
+                text: "Habits will form whether you want them or not. Whatever you repeat, you reinforce.",
+                extend: false
+              }
+            );
+          } catch (err) {
+            console.error("Something went wrong:", err);
+          }
         }
-
       } catch (err) {
         console.error("Something went wrong:", err);
       }
@@ -185,9 +190,8 @@ const Home = () => {
 
 
 
-  const handleIdeaHomepageArrowButton = () => {
-    idea.extend = !idea.extend;
-    setIdea(idea);
+  const handleIdeaHomeExtendButton = () => {
+    setIdea({ ...idea, extend: !idea.extend })
     const updateIdea = async () => {
       try {
         const extendRef = doc(
@@ -197,14 +201,13 @@ const Home = () => {
           "ideaToHome",
           "ideaToHomePageID"
         );
-        await updateDoc(extendRef, {
-          extend: idea.extend,
-        });
+        await updateDoc(extendRef,
+          { idea, extend: !idea.extend }
+        );
       } catch (err) {
         console.error("SOMETHING WENT WRONG:", err);
       }
     };
-
     updateIdea();
   };
 
@@ -330,7 +333,7 @@ const Home = () => {
         >
           <button
             className="down-arrow-button"
-            onClick={handleIdeaHomepageArrowButton}
+            onClick={handleIdeaHomeExtendButton}
           >
             {idea.extend ? (
               <i className="fa-solid fa-angle-up fa-2xl"></i>
