@@ -78,12 +78,11 @@ code {
 #signing-page-container {
   text-align: center;
   display: flex;
-  width: 18rem;
-  height: 18rem;
+  width: 19rem;
+  height: 19rem;
   flex-direction: column;
   margin: 6rem auto;
   background-color: white;
-  ;
   font-size: 1.2rem;
   border-radius: 5px;
   box-shadow: 3px 4px 4px 4px rgb(0, 0, 0, 0.3);

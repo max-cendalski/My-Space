@@ -120,7 +120,7 @@ const Quotes = () => {
       <Navbar />
       <article id="ideas-page-container">
         <h1 id="ideas-header">Three Quotes for Inspiration</h1>
-        {(generateIdeaButtonStatus || ideasToRender.length === 0) && (
+        {(generateIdeaButtonStatus) && (
           <button
             onClick={handleGenerateIdeas}
             className="generate-ideas-button"
