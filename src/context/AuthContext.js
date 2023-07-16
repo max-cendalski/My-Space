@@ -1,14 +1,25 @@
 import { useContext, createContext, useEffect, useState } from 'react';
-import {GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged,unlink, linkWithPopup} from 'firebase/auth';
-import {auth} from '../firebase/Firebase';
-import { browserLocalPersistence } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, unlink, linkWithPopup, browserLocalPersistence } from 'firebase/auth';
+import { auth } from '../firebase/Firebase';
 
 
 const AuthContext = createContext()
 
-export const AuthContextProvider = ({children}) => {
+export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({})
- 
+
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+
 
   const googleSignIn = () => {
     const provider = new GoogleAuthProvider();
@@ -24,22 +35,22 @@ export const AuthContextProvider = ({children}) => {
   const googleReauthenticate = () => {
     const provider = new GoogleAuthProvider();
     if (user) { // check if user is not null
-        unlink(user, provider.providerId)
+      unlink(user, provider.providerId)
         .then(() => {
-            linkWithPopup(user, provider)
+          linkWithPopup(user, provider)
             .then((result) => {
-                var user = result.user;
-                setUser(user);
+              var user = result.user;
+              setUser(user);
             })
             .catch((error) => {
-                console.log(error);
+              console.log(error);
             });
         })
         .catch((error) => {
-            console.log(error);
+          console.log(error);
         });
     }
-};
+  };
 
   const logOut = () => {
     signOut(auth)
@@ -51,32 +62,32 @@ export const AuthContextProvider = ({children}) => {
       });
   };
 
-  const clearSession = async ()=> {
+  const clearSession = async () => {
     await auth.setPersistence(browserLocalPersistence);
   }
 
-   useEffect(()=> {
+  useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser)
     });
     return () => {
       unsubscribe()
     }
-   },[])
+  }, [])
 
-   return (
-     <AuthContext.Provider value={
-          {
-            googleSignIn,
-            user,
-            logOut,
-            googleReauthenticate,
-            clearSession
-          }
-        }>
-        {children}
-      </AuthContext.Provider>
-   )
+  return (
+    <AuthContext.Provider value={
+      {
+        googleSignIn,
+        user,
+        logOut,
+        googleReauthenticate,
+        clearSession
+      }
+    }>
+      {children}
+    </AuthContext.Provider>
+  )
 }
 
 export const UserAuth = () => {
