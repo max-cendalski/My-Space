@@ -79,8 +79,17 @@ export default function Account() {
                 await deleteDoc(userRef);
 
                 // delete user from Authentication
-                user.delete().then(function () {
+                user.delete()
+                .then(()=> {
                     console.log("User account and data deleted successfully");
+                    (async function LogoutUser() {
+                        try {
+                            await logOut()
+                            await clearSession()
+                        } catch (error) {
+                            console.log('ERROR: ', error)
+                        }
+                    })()
                 }).catch(function (error) {
                     // An error happened.
                     console.log("An error occurred while deleting user account", error);
@@ -88,15 +97,8 @@ export default function Account() {
             }
             deleteUser(user.uid)
 
-            async function LogoutUser() {
-                try {
-                    await logOut()
-                    await clearSession()
-                } catch (error) {
-                    console.log('ERROR: ', error)
-                }
-            }
-            LogoutUser()
+         
+            //LogoutUser()
 
         } catch (error) {
             console.error('error', error)

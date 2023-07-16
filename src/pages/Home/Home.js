@@ -40,7 +40,7 @@ const Home = () => {
     setCurrentDay(format(new Date(), "E, MMMM dd"));
     const interval = setInterval(() => setValue(new Date()), 1000);
 
-    const fetchWetherData = async () => {
+    const fetchWeatherData = async () => {
       try {
         const locationHomeRef = doc(
           db,
@@ -106,8 +106,8 @@ const Home = () => {
     };
 
     if (user.uid) {
-      fetchIdea();
-      fetchWetherData()
+      //fetchIdea();
+      fetchWeatherData()
     }
     return () => {
       clearInterval(interval);
