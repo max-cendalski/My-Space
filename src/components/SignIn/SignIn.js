@@ -25,6 +25,8 @@ const SignIn = () => {
   useEffect(() => {
     if (user != null) {
       navigate('/')
+    } else {
+      navigate('/login')
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user])

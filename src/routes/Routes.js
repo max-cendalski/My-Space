@@ -17,14 +17,13 @@ import NotFound from '../pages/NotFound';
 import AppGuide from '../pages/AppGuide/AppGuide';
 
 
-
-
 const Routes = () => {
   return (
     <Router>
       <Route path="/" element={<Layout />} />
 
       {/*public routes*/}
+      
       <Route path="/login" element={<Login />} />
 
       {/*protected routes*/}

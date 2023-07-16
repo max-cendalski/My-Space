@@ -88,7 +88,12 @@ const Home = () => {
         if (docSnap.exists()) {
           setIdea(docSnap.data());
         } else {
+          console.log('idea doesn\'t exists')
           try {
+            setIdea(  {
+              text: "Habits will form whether you want them or not. Whatever you repeat, you reinforce.",
+              extend: false
+            })
             await setDoc(
               doc(db, "users", user.uid, "ideaToHome", "ideaToHomePageID"),
               {
@@ -106,7 +111,7 @@ const Home = () => {
     };
 
     if (user.uid) {
-      //fetchIdea();
+      fetchIdea();
       fetchWeatherData()
     }
     return () => {

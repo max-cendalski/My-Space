@@ -52,7 +52,7 @@ const Quotes = () => {
     if (user.uid) {
       fetchIdeas()
     }
-     // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [user.uid]);
 
   const handleGenerateIdeas = () => {

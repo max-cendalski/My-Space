@@ -80,24 +80,24 @@ export default function Account() {
 
                 // delete user from Authentication
                 user.delete()
-                .then(()=> {
-                    console.log("User account and data deleted successfully");
-                    (async function LogoutUser() {
-                        try {
-                            await logOut()
-                            await clearSession()
-                        } catch (error) {
-                            console.log('ERROR: ', error)
-                        }
-                    })()
-                }).catch(function (error) {
-                    // An error happened.
-                    console.log("An error occurred while deleting user account", error);
-                });
+                    .then(() => {
+                        console.log("User account and data deleted successfully");
+                        (async function LogoutUser() {
+                            try {
+                                await logOut()
+                                await clearSession()
+                            } catch (error) {
+                                console.log('ERROR: ', error)
+                            }
+                        })()
+                    }).catch(function (error) {
+                        // An error happened.
+                        console.log("An error occurred while deleting user account", error);
+                    });
             }
             deleteUser(user.uid)
 
-         
+
             //LogoutUser()
 
         } catch (error) {
