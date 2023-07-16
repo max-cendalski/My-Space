@@ -279,7 +279,7 @@ const Home = () => {
           <p>{currentDay}</p>
           <Clock value={value}
             renderNumbers={true}
-            size={todoList.length > 0 ? 100 : 120}
+            size={todoList.length > 0 ? 100 : 130}
           />
           {todoList.length > 0 &&
             <ul onClick={(event) => {
