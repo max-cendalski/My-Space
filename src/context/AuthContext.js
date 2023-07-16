@@ -1,6 +1,8 @@
 import { useContext, createContext, useEffect, useState } from 'react';
 import {GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged,unlink, linkWithPopup} from 'firebase/auth';
 import {auth} from '../firebase/Firebase';
+import { browserLocalPersistence } from "firebase/auth";
+
 
 const AuthContext = createContext()
 
@@ -15,22 +17,18 @@ export const AuthContextProvider = ({children}) => {
         setUser(result.user);
       })
       .catch((error) => {
-        // Handle Errors here.
         console.log(error);
       });
   };
 
   const googleReauthenticate = () => {
     const provider = new GoogleAuthProvider();
-    // Prompt the user to re-provide their sign-in credentials
     if (user) { // check if user is not null
         unlink(user, provider.providerId)
         .then(() => {
             linkWithPopup(user, provider)
             .then((result) => {
-                // The firebase.User instance:
                 var user = result.user;
-                // Update user in your context state
                 setUser(user);
             })
             .catch((error) => {
@@ -53,6 +51,10 @@ export const AuthContextProvider = ({children}) => {
       });
   };
 
+  const clearSession = async ()=> {
+    await auth.setPersistence(browserLocalPersistence);
+  }
+
    useEffect(()=> {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser)
@@ -68,7 +70,8 @@ export const AuthContextProvider = ({children}) => {
             googleSignIn,
             user,
             logOut,
-            googleReauthenticate
+            googleReauthenticate,
+            clearSession
           }
         }>
         {children}

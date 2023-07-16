@@ -5,7 +5,7 @@ import { UserAuth } from "../../context/AuthContext";
 import Navbar from "../../components/Navbar/Navbar"
 
 export default function Account() {
-    const { user, logOut, googleReauthenticate } = UserAuth()
+    const { user, logOut, googleReauthenticate, clearSession } = UserAuth()
     const [userStats, setUserStats] = useState({
         notes: 0,
         todos: 0,
@@ -91,6 +91,7 @@ export default function Account() {
             async function LogoutUser() {
                 try {
                     await logOut()
+                    await clearSession()
                 } catch (error) {
                     console.log('ERROR: ', error)
                 }
