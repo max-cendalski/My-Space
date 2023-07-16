@@ -28,8 +28,7 @@ const SignIn = () => {
     } else {
       navigate('/login')
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user])
+  }, [user,navigate])
 
   return (
     <article id="signing-page-wrapper">

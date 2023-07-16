@@ -333,6 +333,7 @@ code {
 #time-location-homepage-container {
   display: flex;
   width: 90%;
+  min-height: 10rem;
   margin: auto;
 }
 
