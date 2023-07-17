@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import PinL from "../../icons/PinL.png";
-import TrashL from "../../icons/trashL.png";
+import TrashIcon from "../../icons/trash-icon.png";
 import Close from "../../icons/closeS.png";
 import Pencil from "../../icons/pencilS.png";
 
@@ -89,7 +89,7 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
                       </Link>
                       <img
                         className="note-trash"
-                        src={TrashL}
+                        src={TrashIcon}
                         alt="trash-icon"
                         onClick={() => deleteNote(note.id)}
                       />

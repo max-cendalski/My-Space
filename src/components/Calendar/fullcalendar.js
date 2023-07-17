@@ -73,8 +73,7 @@ function CalendarComponent() {
     setShowDialogAddEvent(true)
   }
 
-  const handleDialogSubmit = (e,title) => { //Add new event
-    e.stopPropagation()
+  const handleDialogSubmit = (title) => { //Add new event
     let newEvent = {
       title,
       start: selectedDateInfo.startStr,

@@ -69,7 +69,6 @@ export default function Account() {
                         await batch.commit();
                     }
                 }
-
                 await deleteDoc(userRef);
 
                 // delete user from Authentication
@@ -90,12 +89,10 @@ export default function Account() {
                     });
             }
             deleteUser(user.uid)
-
         } catch (error) {
             console.error('error', error)
         }
     }
-
 
 
     return (
