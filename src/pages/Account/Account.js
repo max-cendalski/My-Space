@@ -15,8 +15,6 @@ export default function Account() {
     })
     const [isLoading, setIsLoading] = useState(true)
 
-    const [dialogStatus, setDialogStatus] = useState(false);
-
     useEffect(() => {
         async function getCollections() {
             try {
@@ -49,10 +47,6 @@ export default function Account() {
         Promise.all([getGameData(), getCollections()]).then(() => setIsLoading(false));
     }, [user.uid])
 
-
-    const handleConfirmAccountDelete = () => {
-        setDialogStatus(true);
-    };
 
     const handleDeleteButtonClick = async () => {
         try {
@@ -97,20 +91,12 @@ export default function Account() {
             }
             deleteUser(user.uid)
 
-
-            //LogoutUser()
-
         } catch (error) {
             console.error('error', error)
         }
-
-
-
     }
 
-    const handleCloseDialogWindow = () => {
-        setDialogStatus(false);
-    };
+
 
     return (
         <>
@@ -143,19 +129,6 @@ export default function Account() {
                         <h3>Delete Your Account</h3>
                         <p>Once you delete your account, you will permanently lose all saved data and this cannot be undone.</p>
                         <button onClick={handleDeleteButtonClick} className="delete-account-button">Delete Account</button>
-                        {dialogStatus &&
-                            <section id="delete-account-dialog-wrapper">
-                                <dialog open>
-                                    <h3>Delete Your Account</h3>
-                                    <p>Are you sure you want to delete your account? This process cannot be undone.</p>
-                                    <footer className="dialog-delete-event-footer">
-                                        <button onClick={handleCloseDialogWindow} className="close-dialog-account">Cancel</button>
-                                        <button onClick={handleConfirmAccountDelete} className="confirm-delete-account-button">Confirm</button>
-                                    </footer>
-
-                                </dialog>
-                            </section>
-                        }
                     </section>
                 </article>
             )}
