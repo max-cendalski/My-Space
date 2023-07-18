@@ -1600,14 +1600,33 @@ dialog::backdrop {
   width:90%;
   margin: 0 auto;
 }
+
 .app-guide-section-container {
   border-bottom: 1px solid var(--darkGreen);
   padding-block-end: 2rem;
 }
 
+.icon-app-guide-quick-access {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 4rem;
+  height: 4rem;
+  float: left;
+  padding: 0.5rem;
+  margin-inline-end: 0.8rem;
+  border-radius: 50%;
+  border: 1px solid black;
+}
+
+.icon-app-guide-quick-access img {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
 .app-guide-section-container p {
-  white-space: pre-line;
   line-height: 1.5;
+  word-spacing: 3px;
 }
 
 .icon-app-guide {
