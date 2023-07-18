@@ -1605,6 +1605,11 @@ dialog::backdrop {
   padding-block-end: 2rem;
 }
 
+.app-guide-section-container p {
+  white-space: pre-line;
+  line-height: 1.5;
+}
+
 .icon-app-guide {
   width: 5rem;
   height: 5rem;
