@@ -265,7 +265,7 @@ code {
   font-size: 1rem;
   box-shadow: 10px 10px 10px 5px rgb(0, 0, 0, 0.5);
   border-radius: 2px;
-  z-index:6;
+  z-index: 6;
   border: 1px solid var(--red);
 }
 
@@ -568,10 +568,17 @@ code {
   border-radius: 2px;
 }
 
+.single-note-header-list,
+.single-note-text-small {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+
 .single-note-text-small {
   font-size: 0.8rem;
   font-family: 'kalam-regular';
-  white-space: pre-line;
   margin-block: 0;
 }
 
@@ -1597,7 +1604,7 @@ dialog::backdrop {
 
 /*AppGuide*/
 #app-guide-container {
-  width:90%;
+  width: 90%;
   margin: 0 auto;
 }
 
@@ -1662,10 +1669,10 @@ dialog::backdrop {
   right: 5%;
   width: 60px;
   height: 60px;
-  background-color: var(--darkGreen);
   border-radius: 50%;
   border: none;
   color: white;
+  cursor: pointer;
 }
 
 .label-standard {
@@ -1676,4 +1683,40 @@ dialog::backdrop {
   display: none;
 }
 
-@media screen {}
+@media screen and (min-width: 1024px) {
+
+  /*NOTES DESKTOP */
+
+  .notes-search-section {
+    width: 45%;
+  }
+
+  .notes-list-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
+    gap: 2rem;
+    margin: 0 auto;
+    max-width: 90%;
+  }
+
+  .single-note-container {
+    height: 18rem;
+  }
+
+  .single-note-header-list,
+  .single-note-text-small {
+    white-space: pre-wrap;
+  }
+
+  .notes-list-container dialog[open] { 
+    width: 60%;
+  }
+
+  .note-form,
+  .notes-form-footer{
+    width: 60%;
+    margin: 0 auto;
+  }
+
+}
+

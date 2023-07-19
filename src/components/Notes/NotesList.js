@@ -60,10 +60,10 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
             <section>
               <img className="notes-pin" alt="pin" src={PinL} height="20px" />
               <h4 className="single-note-header-list">
-                {note.title.substr(0, 10) + "..."}
+                {note.title}
               </h4>
               <p className="single-note-text-small">
-                {note.text.substr(0, 30) + "..."}
+                {note.text}
               </p>
             </section>
             <article>

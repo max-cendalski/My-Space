@@ -5,6 +5,7 @@ import { UserAuth } from "../../context/AuthContext";
 import Navbar from "../../components/Navbar/Navbar";
 import NotesList from "../../components/Notes/NotesList";
 import AddNote from "../../components/Notes/AddNote";
+import PlusButton from "../../icons/plus-icon.png";
 
 const Notes = () => {
   const { user } = UserAuth();
@@ -29,7 +30,7 @@ const Notes = () => {
     return () => {
       unsub();
     };
-   
+
   }, [user.uid]);
 
   const handleDeleteNote = (id) => {
@@ -64,10 +65,11 @@ const Notes = () => {
           setIsVisible={setIsVisible}
         />
         {isVisible ? (
-          <button onClick={handleFormState} className="notes-add-button">
-            <i className="fa-solid fa-plus fa-2xl"></i>
-          </button>
+
+          <img onClick={handleFormState} className="notes-add-button" src={PlusButton} alt="add-note"></img>
+
         ) : null}
+
       </article>
     </>
   );
