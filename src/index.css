@@ -1313,6 +1313,9 @@ dialog::backdrop {
   padding-inline-start: 0.4rem;
   color: black;
 }
+.weather-detail-location-header:nth-child(1) {
+  color: var(--darkGreen);
+}
 
 .detail-location-data {
   padding-inline-start: 0.4rem;
@@ -1719,8 +1722,9 @@ dialog::backdrop {
   }
 
   /*WEATHER DESKTOP */
-  #places-autocomplete-section {
+  #places-autocomplete-section input {
     width: 60%;
+    box-shadow: 2px 3px 3px 3px rgb(0, 0, 0, 0.2);
   }
 
   #locations-fromDB-container {
@@ -1731,6 +1735,9 @@ dialog::backdrop {
     max-width: 100%;
   }
 
+  .detail-location {
+    box-shadow: 2px 3px 3px 3px rgb(0, 0, 0, 0.3);
+  }
 
 
 
