@@ -77,6 +77,20 @@ const Weather = () => {
     })();
   }, [searchedLocations, user.uid]);
 
+
+  useEffect(() => { // close todo window
+    const handleClick = (e) => {
+      if (!e.target.closest('.location-searchinput')) {
+        setAddress("")
+      }
+    };
+    document.addEventListener('click', handleClick);
+
+    return () => {
+      document.removeEventListener('click', handleClick);
+    };
+  }, []);
+
   const handleChange = (address) => {
     setAddress(address);
   };
@@ -194,6 +208,7 @@ const Weather = () => {
       <article id="weather-page-container">
         <LocationSearch
           address={address}
+          setAddress={setAddress}
           handleChange={handleChange}
           handleSelect={handleSelect}
         />
@@ -258,7 +273,7 @@ const Weather = () => {
             ))}
           <article>
             {searchedLocations &&
-              searchedLocations.map((location, index) => (
+              searchedLocations.map((location) => (
                 <section
                   className="searched-locations"
 
