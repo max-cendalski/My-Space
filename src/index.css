@@ -1254,7 +1254,7 @@ dialog::backdrop {
 }
 
 #places-autocomplete-section input {
-  width: 60%;
+  width: 80%;
   height: 1.8rem;
   font-size: 1rem;
   padding-inline-start: 0.4rem;
@@ -1717,6 +1717,22 @@ dialog::backdrop {
     width: 60%;
     margin: 0 auto;
   }
+
+  /*WEATHER DESKTOP */
+  #places-autocomplete-section {
+    width: 60%;
+  }
+
+  #locations-fromDB-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
+    gap: 2rem;
+    margin: 0 auto;
+    max-width: 100%;
+  }
+
+
+
 
 }
 
