@@ -20,6 +20,7 @@ const Weather = () => {
   const [searchedLocations, setSearchedLocations] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [modal, setModal] = useState("hidden");
+  //const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024)
 
   useEffect(() => {
     const locationsFromDB = [];
@@ -76,6 +77,20 @@ const Weather = () => {
       }
     })();
   }, [searchedLocations, user.uid]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      var locationsToExtend = Array.from(locationsFromDB)
+      var shouldExtend = window.innerWidth >= 1024
+      locationsToExtend.forEach(location => location.extend = shouldExtend);
+      setLocationsFromDB(locationsToExtend);
+    }
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  })
 
 
   useEffect(() => { // close todo window
@@ -163,6 +178,7 @@ const Weather = () => {
     const locationsToChange = Array.from(locationsFromDB);
     locationsToChange.slice(locationIndex, location);
     setLocationsFromDB(locationsToChange);
+
   };
 
   const handleDeleteLocation = (location) => {
@@ -234,7 +250,7 @@ const Weather = () => {
                     {location.city} - {location.temp}&deg;F
                   </p>
                   <button
-                    className="down-arrow-button"
+                    className="weather-arrow-button"
                     onClick={() => handleDBLocationArrowClick(location)}
                   >
                     {location.extend === true ? (
