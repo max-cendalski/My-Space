@@ -1737,7 +1737,10 @@ dialog::backdrop {
 
   .detail-location {
     box-shadow: 2px 3px 3px 3px rgb(0, 0, 0, 0.3);
-    height: 28rem;
+  }
+
+  .down-arrow-button {
+    display: none;
   }
 
   .searched-locations {
