@@ -10,7 +10,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { UserAuth } from "../../context/AuthContext";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import { format } from "date-fns";
 
 const Weather = () => {
@@ -20,7 +20,9 @@ const Weather = () => {
   const [searchedLocations, setSearchedLocations] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [modal, setModal] = useState("hidden");
-  //const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024)
+
+  const [screenWidth, setWidth] = useState(window.innerWidth);
+
 
   useEffect(() => {
     const locationsFromDB = [];
@@ -78,19 +80,47 @@ const Weather = () => {
     })();
   }, [searchedLocations, user.uid]);
 
-  useEffect(() => {
-    const handleResize = () => {
-      var locationsToExtend = Array.from(locationsFromDB)
-      var shouldExtend = window.innerWidth >= 1024
+
+
+  // useEffect(() => {
+
+  //   if (window.innerWidth >= 1024 || address === "") {
+
+  //     const handleResize = () => {
+  //       var locationsToExtend = Array.from(locationsFromDB);
+  //       var shouldExtend = window.innerWidth >= 1024;
+  //       locationsToExtend.forEach(location => location.extend = shouldExtend);
+  //       setLocationsFromDB(locationsToExtend);
+  //     };
+  //     handleResize();
+
+  //     window.addEventListener('resize', handleResize);
+
+  //     return () => {
+  //       window.removeEventListener('resize', handleResize);
+  //     };
+  //   }
+
+  // }, [isLoading])
+
+  useLayoutEffect(() => {
+    function handleResize() {
+      setWidth(window.innerWidth);
+    }
+    window.addEventListener('resize', handleResize);
+
+    if (screenWidth >= 1024) {
+      var locationsToExtend = Array.from(locationsFromDB);
+      var shouldExtend = window.innerWidth >= 1024;
       locationsToExtend.forEach(location => location.extend = shouldExtend);
       setLocationsFromDB(locationsToExtend);
     }
-    window.addEventListener('resize', handleResize)
 
+   
     return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  })
+      window.removeEventListener('resize', handleResize);
+    };
+  },[isLoading]);
 
 
   useEffect(() => { // close todo window
@@ -232,7 +262,22 @@ const Weather = () => {
         {isLoading && (
           <p className="loading-notification">Loading data from database ...</p>
         )}
-
+        {searchedLocations &&
+          searchedLocations.map((location) => (
+            <section
+              className="searched-locations"
+              key={location.city}
+            >
+              <section className="temperature-section">
+                {location.city} : {location.temp}&deg;F
+              </section>
+              <button
+                className="add-location-button"
+                onClick={() => handleAddLocationToDB(location)}>
+                <i className="fa-solid fa-plus fa-2xl"></i>
+              </button>
+            </section>
+          ))}
         <article id="locations-fromDB-container">
           {!isLoading &&
             locationsFromDB.map(location => (
@@ -250,7 +295,7 @@ const Weather = () => {
                     {location.city} - {location.temp}&deg;F
                   </p>
                   <button
-                    className="weather-arrow-button"
+                    className="down-arrow-button"
                     onClick={() => handleDBLocationArrowClick(location)}
                   >
                     {location.extend === true ? (
@@ -287,26 +332,10 @@ const Weather = () => {
                 </button>
               </section>
             ))}
-          <article>
-            {searchedLocations &&
-              searchedLocations.map((location) => (
-                <section
-                  className="searched-locations"
-
-                  key={location.city}
-                >
-                  <section className="temperature-section">
-                    {location.city} : {location.temp}&deg;F
-                  </section>
-                  <button
-                    className="add-location-button"
-                    onClick={() => handleAddLocationToDB(location)}>
-                    <i className="fa-solid fa-plus fa-2xl"></i>
-                  </button>
-                </section>
-              ))}
-          </article>
+         
         </article>
+         
+     
 
         <article className={modal}>
           <h3 className="modal-info">
