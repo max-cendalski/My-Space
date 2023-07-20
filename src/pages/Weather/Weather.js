@@ -116,7 +116,6 @@ const Weather = () => {
       setLocationsFromDB(locationsToExtend);
     }
 
-   
     return () => {
       window.removeEventListener('resize', handleResize);
     };
@@ -208,7 +207,6 @@ const Weather = () => {
     const locationsToChange = Array.from(locationsFromDB);
     locationsToChange.slice(locationIndex, location);
     setLocationsFromDB(locationsToChange);
-
   };
 
   const handleDeleteLocation = (location) => {
