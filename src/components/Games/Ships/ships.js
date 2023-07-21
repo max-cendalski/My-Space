@@ -8,7 +8,7 @@ const ShipsGame = () => {
     <>
       <Navbar />
   
-        <article>
+        <article id="ships-game-container">
           <h1> WORK IN PROGRESS</h1>
         </article>
    
