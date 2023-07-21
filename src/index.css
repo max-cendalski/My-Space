@@ -1046,7 +1046,7 @@ dialog::backdrop {
   display: flex;
   justify-content: center;
   gap: 8rem;
-  padding-block-end: 1rem;
+  padding-block-end: 2rem;
   border-bottom: 1px solid var(--lightPink);
 }
 
@@ -1079,6 +1079,7 @@ dialog::backdrop {
   font-weight: 700;
   border-radius: 150px;
   line-height: 4.5rem;
+  box-shadow: 3px 4px 4px 4px rgb(0, 0, 0, 0.4);
 }
 
 .rps-choice-section-container {
@@ -1115,6 +1116,7 @@ dialog::backdrop {
 .result-article {
   margin-block: 3rem;
   display: flex;
+  gap:3rem;
   font-size: 3rem;
 }
 
@@ -1789,6 +1791,11 @@ dialog::backdrop {
   }
 
   /* RPS */
-
+  .rps-container {
+    width: 40%;
+  }
+  .start-game-button {
+    width: 40%;
+  }
 
 }
