@@ -1279,11 +1279,14 @@ dialog::backdrop {
 #places-autocomplete-section input:focus {
   border: 2px solid var(--lightPink) !important;
   outline: none;
+
 }
 
 .autocomplete-dropdown-container {
   position: absolute;
   background-color: white;
+  border: 1px solid var(--lightPink);
+  max-width: 60%; 
 }
 
 .suggestion-item--active {

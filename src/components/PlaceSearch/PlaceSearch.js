@@ -1,6 +1,5 @@
 import React from "react";
 import PlacesAutocomplete from "react-places-autocomplete";
-//import { useState } from "react";
 
 const LocationSearch = ({ handleChange, handleSelect, address }) => {
   return (
@@ -19,7 +18,7 @@ const LocationSearch = ({ handleChange, handleSelect, address }) => {
               })}
             />
           </p>
-          <div className="autocomplete-dropdown-container">
+          <div className={address ? "autocomplete-dropdown-container": ""}>
             {loading && <div>Loading...</div>}
             {suggestions.map((suggestion, index) => {
               const className = suggestion.active
