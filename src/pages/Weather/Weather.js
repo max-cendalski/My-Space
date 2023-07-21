@@ -121,7 +121,7 @@ const Weather = () => {
               temp: data.current.temp,
             };
             if (
-              locationsFromDB.some((item) => item.city === locationToSave.city)
+              locationsFromDB.some((item) => item.city.toLowerCase() === locationToSave.city.toLowerCase())
             ) {
               setModal("modal-visible");
               setTimeout(() => {
