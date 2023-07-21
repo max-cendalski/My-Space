@@ -10,7 +10,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../../firebase/Firebase";
 import { UserAuth } from "../../context/AuthContext";
-import { useState, useEffect, useLayoutEffect } from "react";
+import { useState, useEffect } from "react";
 import { format } from "date-fns";
 
 const Weather = () => {
@@ -84,56 +84,6 @@ const Weather = () => {
     })();
   }, [searchedLocations, user.uid]);
 
-
-  // useEffect(() => {
-  //   if (screenWidth <= 1024) {
-  //     setLocationsFromDB(locationsFromDB.map(loc => ({ ...loc, extend: false })))
-  //   }
-  // }, [isLoading])
-
-  // useEffect(() => {
-
-  //   if (window.innerWidth >= 1024) {
-  //     const handleResize = () => {
-  //       var locationsToExtend = Array.from(locationsFromDB);
-  //       var shouldExtend = window.innerWidth >= 1024;
-  //       locationsToExtend.forEach(location => location.extend = shouldExtend);
-  //       setLocationsFromDB(locationsToExtend);
-  //     };
-  //     handleResize();
-
-  //     window.addEventListener('resize', handleResize);
-
-  //     return () => {
-  //       window.removeEventListener('resize', handleResize);
-  //     };
-  //   }
-
-  // }, [isLoading])
-
-  // useLayoutEffect(() => {
-  //   function handleResize() {
-  //     setWidth(window.innerWidth);
-  //   }
-  //   window.addEventListener('resize', handleResize);
-
-  //   if (screenWidth <= 1024) {
-  //     var locationsToExtend = Array.from(locationsFromDB);
-  //     var shouldExtend = window.innerWidth >= 1024;
-  //     locationsToExtend.forEach(location => location.extend = shouldExtend);
-  //     setLocationsFromDB(locationsToExtend);
-
-  //   }
-
-  //   console.log('loc', locationsFromDB)
-  //   return () => {
-  //     window.removeEventListener('resize', handleResize);
-  //   };
-  // }, []);
-
-  useEffect(() => {
-    console.log('locafromdb', locationsFromDB)
-  }, [locationsFromDB])
 
   useEffect(() => { // reset address search input
     const handleClick = (e) => {
