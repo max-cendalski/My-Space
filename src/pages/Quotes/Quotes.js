@@ -121,24 +121,26 @@ const Quotes = () => {
   return (
     <>
       <Navbar />
-      <article id="ideas-page-container">
-        <h1 id="ideas-header">Three Quotes for Inspiration</h1>
-        {(generateIdeaButtonStatus) && (
-          <button
-            onClick={handleGenerateIdeas}
-            className="generate-ideas-button"
-          >
-            Generate Three New Quotes!
-          </button>
-        )}
+      <article id="quotes-container">
+        <article className="quotes-header">
+          <h1>Three Quotes for Inspiration</h1>
+          {(generateIdeaButtonStatus) && (
+            <button
+              onClick={handleGenerateIdeas}
+              className="generate-quotes-button"
+            >
+              Generate Three New Quotes!
+            </button>
+          )}
+        </article>
         {ideasToRender &&
           ideasToRender.map((idea) => (
-            <section className="single-idea" key={idea.id}>
+            <section className="single-quote" key={idea.id}>
               <p>
                 <q>{idea.text}</q>
               </p>
               <button
-                className="single-idea-button"
+                className="single-quote-button"
                 onClick={() => handleAddIdeaToHomepage(idea.id)}
               >
                 Add This Quote to Your Homepage

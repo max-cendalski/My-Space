@@ -333,7 +333,7 @@ const Home = () => {
       {idea && (
         <section
           className={
-            idea.extend ? "idea-homepage-visible" : "idea-homepage-hidden"
+            idea.extend ? "quote-homepage-visible" : "quote-homepage-hidden"
           }
         >
           <button
@@ -346,7 +346,7 @@ const Home = () => {
               <i className="fa-solid fa-angle-down fa-2xl"></i>
             )}
           </button>
-          <q className="idea-homepage-quote">{idea.text}</q>
+          <q className="quote-homepage-quote">{idea.text}</q>
         </section>
       )}
 

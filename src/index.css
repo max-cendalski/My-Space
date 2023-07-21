@@ -924,18 +924,29 @@ dialog::backdrop {
 
 /* IDEAS */
 
-#ideas-page-container {
+#quotes-container {
   margin: 1rem auto;
   width: 90%;
 }
 
-.single-idea {
+.quotes-header {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: var(--red)
+}
+
+.quotes-header:nth-child(1) {
+  color: var(--red);
+  font-size: 1.4rem;
+}
+
+.single-quote {
   margin-block-end: 1.375rem;
   padding-block-end: 1.375rem;
   border-block-end: 1px solid var(--lightPink);
 }
 
-.single-idea button {
+.single-quote button {
   width: 100%;
   font-size: 1rem;
   color: white;
@@ -947,7 +958,7 @@ dialog::backdrop {
   border: none;
 }
 
-.generate-ideas-button {
+.generate-quotes-button {
   width: 100%;
   height: 3rem;
   font-size: 1rem;
@@ -959,7 +970,7 @@ dialog::backdrop {
   font-size: 1.375rem;
 }
 
-.idea-homepage-visible {
+.quote-homepage-visible {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
@@ -972,7 +983,7 @@ dialog::backdrop {
 }
 
 
-.idea-homepage-hidden {
+.quote-homepage-hidden {
   display: flex;
   flex-direction: column;
   margin: 0.5rem auto;
@@ -985,11 +996,6 @@ dialog::backdrop {
 }
 
 
-#ideas-header {
-  text-align: center;
-  margin-bottom: 1rem;
-  color: var(--red)
-}
 
 /*GAMES */
 
@@ -1761,6 +1767,21 @@ dialog::backdrop {
   .searched-locations {
     width: 30%;
     border-radius: 3px;
+  }
+
+  /*QUOTES*/
+  #quotes-container {
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 2rem
+  }
+
+  .quotes-header {
+    grid-column: 1/4;
+  }
+
+  .single-quote {
+    border-bottom: none;
   }
 
 }
