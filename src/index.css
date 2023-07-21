@@ -995,6 +995,9 @@ dialog::backdrop {
   text-indent: 10px;
 }
 
+.quote-text {
+  line-height: 1.5rem;
+}
 
 
 /*GAMES */

@@ -137,7 +137,7 @@ const Quotes = () => {
           ideasToRender.map((idea) => (
             <section className="single-quote" key={idea.id}>
               <p>
-                <q>{idea.text}</q>
+                <q className="quote-text">{idea.text}</q>
               </p>
               <button
                 className="single-quote-button"
