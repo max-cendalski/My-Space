@@ -21,10 +21,10 @@ const Weather = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [modal, setModal] = useState("hidden");
 
-  const [screenWidth, setWidth] = useState(window.innerWidth);
 
 
   useEffect(() => {
+    var screenWidth = window.innerWidth
     const locationsFromDB = [];
     const urls = [];
     const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
@@ -66,26 +66,34 @@ const Weather = () => {
                 locationsFromDB[i].pressure = data[i].current.pressure;
                 locationsFromDB[i].windSpeed = data[i].current.wind_speed;
                 locationsFromDB[i].visibility = data[i].current.visibility;
-                locationsFromDB[i].extend = false;
               }
-              setIsLoading(false);
+              if (screenWidth >= 1024) {
+                setLocationsFromDB(locationsFromDB.map(loc => ({ ...loc, extend: false })))
+              } else {
+                setLocationsFromDB(locationsFromDB);
+
+              }
             })
             .catch((error) => console.log("ERROR:", error))
         );
       } catch (err) {
         console.log("Error:", err);
       } finally {
-        setLocationsFromDB(locationsFromDB);
+        setIsLoading(false);
       }
     })();
   }, [searchedLocations, user.uid]);
 
 
+  // useEffect(() => {
+  //   if (screenWidth <= 1024) {
+  //     setLocationsFromDB(locationsFromDB.map(loc => ({ ...loc, extend: false })))
+  //   }
+  // }, [isLoading])
 
   // useEffect(() => {
 
-  //   if (window.innerWidth >= 1024 || address === "") {
-
+  //   if (window.innerWidth >= 1024) {
   //     const handleResize = () => {
   //       var locationsToExtend = Array.from(locationsFromDB);
   //       var shouldExtend = window.innerWidth >= 1024;
@@ -103,26 +111,31 @@ const Weather = () => {
 
   // }, [isLoading])
 
-  useLayoutEffect(() => {
-    function handleResize() {
-      setWidth(window.innerWidth);
-    }
-    window.addEventListener('resize', handleResize);
+  // useLayoutEffect(() => {
+  //   function handleResize() {
+  //     setWidth(window.innerWidth);
+  //   }
+  //   window.addEventListener('resize', handleResize);
 
-    if (screenWidth >= 1024) {
-      var locationsToExtend = Array.from(locationsFromDB);
-      var shouldExtend = window.innerWidth >= 1024;
-      locationsToExtend.forEach(location => location.extend = shouldExtend);
-      setLocationsFromDB(locationsToExtend);
-    }
+  //   if (screenWidth <= 1024) {
+  //     var locationsToExtend = Array.from(locationsFromDB);
+  //     var shouldExtend = window.innerWidth >= 1024;
+  //     locationsToExtend.forEach(location => location.extend = shouldExtend);
+  //     setLocationsFromDB(locationsToExtend);
 
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  },[isLoading]);
+  //   }
 
+  //   console.log('loc', locationsFromDB)
+  //   return () => {
+  //     window.removeEventListener('resize', handleResize);
+  //   };
+  // }, []);
 
-  useEffect(() => { // close todo window
+  useEffect(() => {
+    console.log('locafromdb', locationsFromDB)
+  }, [locationsFromDB])
+
+  useEffect(() => { // reset address search input
     const handleClick = (e) => {
       if (!e.target.closest('.location-searchinput')) {
         setAddress("")
@@ -156,7 +169,6 @@ const Weather = () => {
               country: locationArray[locationArray.length - 1],
               coordinates: latLng,
               temp: data.current.temp,
-              extend: false,
             };
             if (
               locationsFromDB.some((item) => item.city === locationToSave.city)
@@ -231,7 +243,6 @@ const Weather = () => {
       temperature: location.temp,
       clouds: location.cloudsDescription,
       coordinates: location.coordinates,
-      extended: true,
     };
     const addLocationToHome = async () => {
       try {
@@ -281,7 +292,7 @@ const Weather = () => {
             locationsFromDB.map(location => (
               <section
                 className={
-                  location.extend === true
+                  location.extend === false
                     ? "detail-location"
                     : "single-location"
                 }
@@ -293,10 +304,10 @@ const Weather = () => {
                     {location.city} - {location.temp}&deg;F
                   </p>
                   <button
-                    className="down-arrow-button"
+                    className="down-arrow-button-weather"
                     onClick={() => handleDBLocationArrowClick(location)}
                   >
-                    {location.extend === true ? (
+                    {location.extend === false ? (
                       <i className="fa-solid fa-angle-up fa-xl"></i>
                     ) : (
                       <i className="fa-solid fa-angle-down fa-xl"></i>
@@ -330,10 +341,10 @@ const Weather = () => {
                 </button>
               </section>
             ))}
-         
+
         </article>
-         
-     
+
+
 
         <article className={modal}>
           <h3 className="modal-info">

@@ -21,9 +21,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
 }
-
 
 input,
 textarea,
@@ -37,6 +35,10 @@ section {
 
 button {
   cursor: pointer;
+}
+
+input {
+  border-radius: 3px;
 }
 
 
@@ -67,6 +69,15 @@ code {
   display: flex;
   flex-direction: column;
   gap: 1.3rem
+}
+
+.down-arrow-button {
+  margin-inline-start: auto;
+  margin-block-end: 0.5rem;
+  color: var(--darkGreen);
+  background-color: white;
+  border: none;
+  cursor: pointer;
 }
 
 #signing-page-wrapper {
@@ -1233,6 +1244,7 @@ dialog::backdrop {
   border-radius: 3px;
   border: 1px solid rgb(193, 190, 190);
 }
+
 .location-search-input::placeholder {
   color: rgb(165, 162, 162);
 }
@@ -1321,7 +1333,7 @@ dialog::backdrop {
   padding-inline-start: 0.4rem;
 }
 
-.down-arrow-button {
+.down-arrow-button-weather {
   margin-inline-start: auto;
   margin-block-end: 0.5rem;
   color: var(--darkGreen);
@@ -1335,9 +1347,9 @@ dialog::backdrop {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  padding: 0.4rem;
+  padding: 0.5rem;
   border: 1px solid rgb(222, 222, 222);
-  margin-block-start: 2rem;
+  margin-block: 1.5rem;
 }
 
 .temperature-section {
@@ -1711,19 +1723,19 @@ dialog::backdrop {
     white-space: pre-wrap;
   }
 
-  .notes-list-container dialog[open] { 
+  .notes-list-container dialog[open] {
     width: 60%;
   }
 
   .note-form,
-  .notes-form-footer{
+  .notes-form-footer {
     width: 60%;
     margin: 0 auto;
   }
 
   /*WEATHER DESKTOP */
   #places-autocomplete-section input {
-    width: 60%;
+    width: 40%;
     box-shadow: 2px 3px 3px 3px rgb(0, 0, 0, 0.2);
   }
 
@@ -1739,14 +1751,13 @@ dialog::backdrop {
     box-shadow: 2px 3px 3px 3px rgb(0, 0, 0, 0.3);
   }
 
-  .down-arrow-button {
+  .down-arrow-button-weather {
     display: none;
   }
 
   .searched-locations {
-    width: 25%;
-    padding: 0.4rem;
+    width: 30%;
+    border-radius: 3px;
   }
 
 }
-
