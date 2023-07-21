@@ -1444,7 +1444,19 @@ dialog::backdrop {
   background-color: #9e8d73;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   grid-gap: 2px;
+  cursor: pointer;
 }
+
+.ttt-select-container {
+  padding: 0.4rem 1rem;
+  font-size: 1rem;
+  background-color: var(--darkGreen);
+  color: white;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 3px 3px 3px rgba(0,0,0,0.4);
+}
+
 
 .sign-lvl-choose-section {
   display: flex;
@@ -1457,15 +1469,11 @@ dialog::backdrop {
 .line-horizontal-middle::after {
   content: "";
   position: absolute;
-  /* Adjust the below properties based on the position of the line. */
   top: 50%;
-  /* Adjust this for horizontal lines. */
   left: 0;
   width: 100%;
   border-top: 3px solid black;
-  /* Use border-left for vertical lines. */
 }
-
 
 .reset-ttt {
   width: 24rem;
@@ -1476,6 +1484,7 @@ dialog::backdrop {
   color: white;
   border: none;
   border-radius: 5px;
+  box-shadow: 3px 3px 3px rgba(0,0,0,0.4);
 }
 
 .reset-ttt:hover {
@@ -1826,7 +1835,7 @@ dialog::backdrop {
 
 .line-horizontal-middle::after {
   left: 36%;
-  top: 36%;
+  top: 37%;
 }
 
 .line-horizontal-bottom::after {
