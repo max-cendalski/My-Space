@@ -1046,6 +1046,8 @@ dialog::backdrop {
   display: flex;
   justify-content: center;
   gap: 8rem;
+  padding-block-end: 1rem;
+  border-bottom: 1px solid var(--lightPink);
 }
 
 .start-game-button {
@@ -1785,5 +1787,8 @@ dialog::backdrop {
   .single-quote {
     border-bottom: none;
   }
+
+  /* RPS */
+
 
 }

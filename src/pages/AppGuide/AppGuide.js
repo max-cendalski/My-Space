@@ -34,9 +34,9 @@ const AppGuide = () => {
                         Add events by tapping any day on the calendar and filling in the details. Edit events by selecting the day and tapping the event to modify its details.
                         <br />
                         To remove an event, tap the event and choose the Delete option. Enjoy managing your events with ease using the Calendar feature.
-                        <br/>
+                        <br />
                         Effortlessly manage your events using the Calendar feature and make the most of your scheduling.
-                        </p>
+                    </p>
                 </section>
                 <section className="app-guide-section-container">
                     <img src={WeatherIcon} className="icon-app-guide" alt="weather-icon"></img>

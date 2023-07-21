@@ -83,8 +83,8 @@ const RPS = () => {
     if (userChoice === computerChoice) {
       if (userChoice === 0) {
         setIcons({
-          userIcon: PaperIcon,
-          computerIcon: PaperIcon,
+          userIcon: RockIcon,
+          computerIcon: RockIcon,
         });
       } else if (userChoice === 1) {
         setIcons({
