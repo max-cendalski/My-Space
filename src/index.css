@@ -60,10 +60,7 @@ code {
   font-size: 1.825rem;
 }
 
-.rps-ratio {
-  margin-top: 1rem;
-  color: var(--darkGreen);
-}
+
 
 #home-container {
   display: flex;
@@ -1050,6 +1047,13 @@ dialog::backdrop {
   border-bottom: 1px solid var(--lightPink);
 }
 
+.rps-ratio {
+  margin-top: 1rem;
+  color: var(--darkGreen);
+  padding: 1rem 0.8rem;
+  border: 1px solid var(--lightPink);
+}
+
 .start-game-button {
   width: 80%;
   font-size: 1.2rem;
@@ -1059,6 +1063,7 @@ dialog::backdrop {
   color: white;
   border: none;
   border-radius: 5px;
+  box-shadow:  4px 4px 4px rgb(0, 0, 0, 0.4);
 }
 
 .start-game-button:hover {
