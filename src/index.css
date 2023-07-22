@@ -1421,8 +1421,6 @@ dialog::backdrop {
 
 
 
-
-
 /*TIC TAC TOE*/
 
 .ttt-container {
@@ -1445,7 +1443,6 @@ dialog::backdrop {
   background-color: #9e8d73;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   grid-gap: 2px;
-  cursor: pointer;
 }
 
 .ttt-select-container {
@@ -1501,6 +1498,7 @@ dialog::backdrop {
   justify-content: center;
   align-items: center;
   background-color: #f5deb3;
+  cursor: pointer;
 }
 
 .filled {
