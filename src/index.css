@@ -1436,6 +1436,7 @@ dialog::backdrop {
 }
 
 .ttt-game-area-container {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
@@ -1562,13 +1563,13 @@ dialog::backdrop {
 
 .line-diagonal-left::after {
   left: -15%;
-  top: 35%;
+  top: 50%;
   transform: rotate(45deg);
 }
 
 .line-diagonal-right::after {
   right: -15%;
-  top: 35%;
+  top: 50%;
   transform: rotate(-45deg);
 }
 
@@ -1819,7 +1820,7 @@ dialog::backdrop {
 
   /* TTT */
 
-  .line-horizontal-top::after,
+  /* .line-horizontal-top::after,
 .line-horizontal-middle::after,
 .line-horizontal-bottom::after {
   content: "";
@@ -1883,5 +1884,5 @@ dialog::backdrop {
   right: 31%;
   top: 37%;
   transform: rotate(-45deg);
-}
+} */
 }
