@@ -1490,7 +1490,7 @@ dialog::backdrop {
 }
 
 .reset-ttt:active {
-  transform: scale(1.06, 1.08)
+  transform: scale(1.03, 1.06)
 }
 
 .ttt-square {

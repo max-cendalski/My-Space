@@ -112,7 +112,7 @@ const Home = () => {
 
     if (user.uid) {
       fetchIdea();
-      //fetchWeatherData()
+      fetchWeatherData()
     }
     return () => {
       clearInterval(interval);
