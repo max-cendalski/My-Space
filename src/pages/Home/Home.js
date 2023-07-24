@@ -88,14 +88,14 @@ const Home = () => {
         if (docSnap.exists()) {
           setQuote(docSnap.data());
         } else {
-          console.log('idea doesn\'t exists')
+          console.log('quote doesn\'t exists')
           try {
             setQuote(  {
               text: "Habits will form whether you want them or not. Whatever you repeat, you reinforce.",
               extend: false
             })
             await setDoc(
-              doc(db, "users", user.uid, "ideaToHome", "ideaToHomePageID"),
+              doc(db, "users", user.uid, "quoteToHome", "quoteToHomePageID"),
               {
                 text: "Habits will form whether you want them or not. Whatever you repeat, you reinforce.",
                 extend: false
