@@ -13,61 +13,65 @@ import { UserAuth } from "../../context/AuthContext";
 
 const Quotes = () => {
   const { user } = UserAuth();
-  const [ideas, setIdeas] = useState([]);
-  const [ideasToRender, setIdeasToRender] = useState([]);
-  const [generateIdeaButtonStatus, setGenerateIdeasButton] = useState(false);
+  const [quotes, setQuotes] = useState([]);
+  const [quotesToRender, setQuotesToRender] = useState([]);
+  const [generateQuotesButtonStatus, setGenerateQuotesButton] = useState(false);
 
   useEffect(() => {
-    const fetchIdeas = async () => {
-      const dataRef = doc(db, "users", user.uid, "dateForIdeas", "dateID");
+    const fetchQuotes = async () => {
+      const dataRef = doc(db, "users", user.uid, "dateForQuotes", "dateID");
       try {
-        const dateForIdeas = await getDoc(dataRef);
-        const ideasData = await getDocs(collection(db, "ideas"));
-        const ideasToRenderData = await getDocs(
-          collection(db, "users", user.uid, "ideas")
+        const dateForQuotes = await getDoc(dataRef);
+        const quotesData = await getDocs(collection(db, "ideas"));
+        const quotesToRenderData = await getDocs(
+          collection(db, "users", user.uid, "quotes")
         );
-        setIdeas(ideasData.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-        setIdeasToRender(
-          ideasToRenderData.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+        setQuotes(quotesData.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+        setQuotesToRender(
+          quotesToRenderData.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
         );
-        if (dateForIdeas.data()) {
+        if (dateForQuotes.data()) {
           let timeNow = new Date().getTime();
           let timeTodayToCompare = new Date(timeNow).toDateString().split(" ");
           timeTodayToCompare[4] = "23:59:59";
           let timeTodayToSave = new Date(
             timeTodayToCompare.join(" ")
           ).getTime();
-          let timeBefore = new Date(dateForIdeas.data().timeToSave).getTime();
+          let timeBefore = new Date(dateForQuotes.data().timeToSave).getTime();
           if (timeTodayToSave - timeBefore >= 172800300) {
-            setGenerateIdeasButton(true);
+            setGenerateQuotesButton(true);
           }
         }
-        else if (ideasToRender.length === 0) {
-          setGenerateIdeasButton(true)
+        else if (quotesToRender.length === 0) {
+          setGenerateQuotesButton(true)
         }
       } catch (err) {
         console.error("ERROR", err);
       }
     };
     if (user.uid) {
-      fetchIdeas()
+      fetchQuotes()
     }
     // eslint-disable-next-line
   }, [user.uid]);
 
-  const handleGenerateIdeas = () => {
+  useEffect(()=> {
+    console.log('qut',quotesToRender)
+  },[quotesToRender])
+
+  const handleGenerateQuotes = () => {
     var numbers = [];
     var number = 0;
     for (var i = 0; i < 3; i++) {
-      number = Math.floor(Math.random() * ideas.length);
-      if (numbers.includes(ideas[number]) === false) {
-        numbers.push(ideas[number]);
-      } else if (numbers.includes(ideas[number]) === true) {
-        number = Math.floor(Math.random() * ideas.length);
-        numbers.push(ideas[number]);
+      number = Math.floor(Math.random() * quotes.length);
+      if (numbers.includes(quotes[number]) === false) {
+        numbers.push(quotes[number]);
+      } else if (numbers.includes(quotes[number]) === true) {
+        number = Math.floor(Math.random() * quotes.length);
+        numbers.push(quotes[number]);
       }
     }
-    setIdeasToRender(numbers.slice());
+    setQuotesToRender(numbers.slice());
 
     const addDate = async () => {
       try {
@@ -75,18 +79,18 @@ const Quotes = () => {
         let timeToChange = new Date(dateToMiliseconds).toString().split(" ");
         timeToChange[4] = "23:59:59";
         let timeToSave = new Date(timeToChange.join(" ")).getTime();
-        await setDoc(doc(db, "users", user.uid, "dateForIdeas", "dateID"), {
+        await setDoc(doc(db, "users", user.uid, "dateForQuotes", "dateID"), {
           timeToSave,
         });
-        if (ideasToRender.length === 0) {
+        if (quotesToRender.length === 0) {
           for (const item of numbers) {
-            await setDoc(doc(db, "users", user.uid, "ideas", item.id), item);
+            await setDoc(doc(db, "users", user.uid, "quotes", item.id), item);
           }
         } else {
           var counter = 0;
-          for (const item of ideasToRender) {
+          for (const item of quotesToRender) {
             await updateDoc(
-              doc(db, "users", user.uid, "ideas", item.id),
+              doc(db, "users", user.uid, "quotes", item.id),
               numbers[counter]
             );
             counter++;
@@ -98,24 +102,24 @@ const Quotes = () => {
       }
     };
 
-    setGenerateIdeasButton(false);
+    setGenerateQuotesButton(false);
     addDate();
   };
 
-  const handleAddIdeaToHomepage = (id) => {
-    const ideaToHomePage = ideasToRender.filter((item) => item.id === id);
-    ideaToHomePage[0].extend = true
-    const addIdea = async () => {
+  const handleAddQuoteToHomepage = (id) => {
+    const quoteToHomePage = quotesToRender.filter((item) => item.id === id);
+    quoteToHomePage[0].extend = true
+    const addQuote = async () => {
       try {
         await setDoc(
-          doc(db, "users", user.uid, "ideaToHome", "ideaToHomePageID"),
-          ideaToHomePage[0]
+          doc(db, "users", user.uid, "quoteToHome", "quoteToHomePageID"),
+          quoteToHomePage[0]
         );
       } catch (err) {
         console.error("Something went wrong:", err);
       }
     };
-    addIdea();
+    addQuote();
   };
 
   return (
@@ -124,24 +128,24 @@ const Quotes = () => {
       <article id="quotes-container">
         <article className="quotes-header">
           <h1>Three Quotes for Inspiration</h1>
-          {(generateIdeaButtonStatus) && (
+          {(generateQuotesButtonStatus) && (
             <button
-              onClick={handleGenerateIdeas}
+              onClick={handleGenerateQuotes}
               className="generate-quotes-button"
             >
               Generate Three New Quotes!
             </button>
           )}
         </article>
-        {ideasToRender &&
-          ideasToRender.map((idea) => (
-            <section className="single-quote" key={idea.id}>
+        {quotesToRender &&
+          quotesToRender.map((quote) => (
+            <section className="single-quote" key={quote.id}>
               <p>
-                <q className="quote-text">{idea.text}</q>
+                <q className="quote-text">{quote.text}</q>
               </p>
               <button
                 className="single-quote-button"
-                onClick={() => handleAddIdeaToHomepage(idea.id)}
+                onClick={() => handleAddQuoteToHomepage(quote.id)}
               >
                 Add This Quote to Your Homepage
               </button>

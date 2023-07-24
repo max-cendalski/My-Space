@@ -17,7 +17,7 @@ import GamesIcon from "../../icons/games-icon.png";
 
 const Home = () => {
   const firstInputRef = useRef(null);
-  const [idea, setIdea] = useState(null);
+  const [quote, setQuote] = useState(null);
   const { user } = UserAuth();
   const [currentDay, setCurrentDay] = useState("");
   const [homepageWeather, setHomepageWeather] = useState(null);
@@ -75,22 +75,22 @@ const Home = () => {
     };
 
 
-    const fetchIdea = async () => {
+    const fetchQuote = async () => {
       try {
         const ideaRef = doc(
           db,
           "users",
           user.uid,
-          "ideaToHome",
-          "ideaToHomePageID"
+          "quoteToHome",
+          "quoteToHomePageID"
         );
         const docSnap = await getDoc(ideaRef);
         if (docSnap.exists()) {
-          setIdea(docSnap.data());
+          setQuote(docSnap.data());
         } else {
           console.log('idea doesn\'t exists')
           try {
-            setIdea(  {
+            setQuote(  {
               text: "Habits will form whether you want them or not. Whatever you repeat, you reinforce.",
               extend: false
             })
@@ -111,7 +111,7 @@ const Home = () => {
     };
 
     if (user.uid) {
-      fetchIdea();
+      fetchQuote();
       fetchWeatherData()
     }
     return () => {
@@ -196,7 +196,7 @@ const Home = () => {
 
 
   const handleIdeaHomeExtendButton = () => {
-    setIdea({ ...idea, extend: !idea.extend })
+    setQuote({ ...quote, extend: !quote.extend })
     const updateIdea = async () => {
       try {
         const extendRef = doc(
@@ -207,7 +207,7 @@ const Home = () => {
           "ideaToHomePageID"
         );
         await updateDoc(extendRef,
-          { idea, extend: !idea.extend }
+          { idea: quote, extend: !quote.extend }
         );
       } catch (err) {
         console.error("SOMETHING WENT WRONG:", err);
@@ -330,23 +330,23 @@ const Home = () => {
         }
       </article>
 
-      {idea && (
+      {quote && (
         <section
           className={
-            idea.extend ? "quote-homepage-visible" : "quote-homepage-hidden"
+            quote.extend ? "quote-homepage-visible" : "quote-homepage-hidden"
           }
         >
           <button
             className="down-arrow-button"
             onClick={handleIdeaHomeExtendButton}
           >
-            {idea.extend ? (
+            {quote.extend ? (
               <i className="fa-solid fa-angle-up fa-2xl"></i>
             ) : (
               <i className="fa-solid fa-angle-down fa-2xl"></i>
             )}
           </button>
-          <q className="quote-homepage-quote">{idea.text}</q>
+          <q className="quote-homepage-quote">{quote.text}</q>
         </section>
       )}
 
