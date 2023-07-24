@@ -65,7 +65,9 @@ code {
 #home-container {
   display: flex;
   flex-direction: column;
-  gap: 1.3rem
+  gap: 1.3rem;
+  max-width: 1920px;
+  margin: 0 auto;
 }
 
 .down-arrow-button {
@@ -342,7 +344,7 @@ code {
   display: flex;
   width: 90%;
   min-height: 10rem;
-  margin: auto;
+  margin: 0 auto;
 }
 
 .weather-homepage {
@@ -1816,71 +1818,30 @@ dialog::backdrop {
     width: 40%;
   }
 
-  /* TTT */
+  /* TODOS */
 
-  /* .line-horizontal-top::after,
-.line-horizontal-middle::after,
-.line-horizontal-bottom::after {
-  content: "";
-  position: absolute;
-  width: 28%;
-  border-top: 4px solid var(--red);
-}
 
-.line-horizontal-top::after {
-  left: 36%;
-  top: 22%;
-}
+  .quick-access-element.active {
+    width: 21rem;
+  }
+  .todo-list-homepage-small.active {
+    width: 24rem;
+  }
 
-.line-horizontal-middle::after {
-  left: 36%;
-  top: 37%;
-}
+  /* HOME */ 
+    .navbar-container {
+      width: 90%;
+      padding-inline: 5%;
+    }
+  
+    #time-location-homepage-container{
+      width: 85%;
+      display:grid;
+      grid-template-columns: calc(4fr)
+    }
 
-.line-horizontal-bottom::after {
-  left: 36%;
-  top: 50%;
-}
+    .todo-list-homepage-small.active {
+      visibility: visible;
+    }
 
-.line-vertical-left::after,
-.line-vertical-middle::after,
-.line-vertical-right::after {
-  content: "";
-  position: absolute;
-  top: 16%;
-  height: 41%;
-  border-left: 4px solid var(--red);
-}
-
-.line-vertical-left::after {
-  left: 40%;
-}
-
-.line-vertical-middle::after {
-  left: 50%;
-}
-
-.line-vertical-right::after {
-  left: 60%;
-}
-
-.line-diagonal-left::after,
-.line-diagonal-right::after {
-  content: "";
-  position: absolute;
-  width: 39%;
-  border-top: 4px solid var(--red);
-}
-
-.line-diagonal-left::after {
-  left: 31%;
-  top: 37%;
-  transform: rotate(45deg);
-}
-
-.line-diagonal-right::after {
-  right: 31%;
-  top: 37%;
-  transform: rotate(-45deg);
-} */
 }
