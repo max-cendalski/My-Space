@@ -331,13 +331,9 @@ const Home = () => {
 
           }
         </section>
-        
+
         {quote && (
-          <section
-            className={
-              quote.extend ? "quote-homepage-visible" : "quote-homepage-hidden"
-            }
-          >
+          <section className="quote-homepage-container">
             <button
               className="down-arrow-button"
               onClick={handleIdeaHomeExtendButton}
@@ -348,8 +344,16 @@ const Home = () => {
                 <i className="fa-solid fa-angle-down fa-2xl"></i>
               )}
             </button>
-            <q className="quote-homepage-quote">{quote.text}</q>
+            <section
+              className={
+                quote.extend ? "quote-homepage-visible" : "quote-homepage-hidden"
+              }
+            >
+
+              <q className="quote-homepage-quote">{quote.text}</q>
+            </section>
           </section>
+
         )}
 
 
