@@ -64,9 +64,11 @@ code {
 
 #home-container {
   display: grid;
-  grid-template-columns: auto;
-  grid-template-rows:  repeat(auto-fit, minmax(20%, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(50%, 1fr));
+  grid-template-rows:  repeat(4,auto);
   gap: 1.5rem;
+  width:90%;
+  margin: 0 auto;
   max-width: 1920px;
   
 }
@@ -341,19 +343,12 @@ code {
 
 /*HOMEPAGE TIME-LOCATION CONTAINER*/
 
-#time-location-homepage-container {
-  display: flex;
-  width: 90%;
-  min-height: 10rem;
-  margin: 1.5rem auto;
-}
 
 .weather-homepage {
-  width: 50%;
-  gap: 0.4rem;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  /* width: 50%;
+  gap: 0.4rem; */
+  margin-block-start: 1.5rem;
+  grid-column: 2;
 }
 
 .weather-homepage-temp-image-section {
@@ -1834,24 +1829,32 @@ dialog::backdrop {
       width: 90%;
       padding-inline: 5%;
     }
-    /* }
+    
+    #home-container {
+      margin-inline: 10%;
+      grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
+      grid-template-rows:  repeat(3, auto);
+    }
   
-    #time-location-homepage-container {
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
-      padding-inline:5rem ;
-    } 
     .time-homepage {
       grid-column: 1;
     }
-    .quote-homepage-quote {
+    /* .quote-homepage-quote {
       grid-column: 3/2;
-    }
+    } */
     .weather-homepage {
-      grid-column: 2/3;
+      grid-column: 2/;
+    }
+
+    .quick-access-homepage {
+      grid-row: 2;
     }
     .todo-list-homepage-small.active {
       visibility: visible;
-    } */
+    }
+    #icons-homepage-container {
+      grid-column: 1/5;
+      grid-row: 3;
+    } 
 
 }

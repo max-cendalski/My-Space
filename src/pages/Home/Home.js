@@ -275,49 +275,49 @@ const Home = () => {
     <>
       <Navbar />
       <article id="home-container">
-        <article id="time-location-homepage-container">
-          <section className="time-homepage">
-            <p>{currentDay}</p>
-            <Clock value={value}
-              renderNumbers={true}
-              size={todoList.length > 0 ? 100 : 130}
-            />
-            {todoList.length > 0 &&
-              <ul onClick={(event) => {
-                if (!isTodoListLarge) {
-                  event.stopPropagation();
-                  handleExtendTodoList();
-                }
-              }}
-                className={`todo-list-homepage-small ${isTodoListLarge ? "active" : ""}`}
-              >
-                {todoList.map((todo, index) => (
-                  <li
-                    style={{ textDecoration: todo.status ? "line-through" : "none" }}
-                    key={index}
-                    onClick={(e) => {
-                      if (isTodoListLarge) {
-                        e.stopPropagation()
-                        setTodoList((prev) =>
-                          prev.map((item) =>
-                            item.id === todo.id
-                              ? { ...item, status: !item.status }
-                              : item
-                          )
-                        )
-                      }
-                    }
-                    }>
-                    {todo.text}
-                  </li>
-                ))}
-              </ul>
+        <section className="time-homepage">
+          <p>{currentDay}</p>
+          <Clock value={value}
+            renderNumbers={true}
+            size={todoList.length > 0 ? 100 : 130}
+          />
+        </section>
+
+        {todoList.length > 0 &&
+          <ul onClick={(event) => {
+            if (!isTodoListLarge) {
+              event.stopPropagation();
+              handleExtendTodoList();
             }
+          }}
+            className={`todo-list-homepage-small ${isTodoListLarge ? "active" : ""}`}
+          >
+            {todoList.map((todo, index) => (
+              <li
+                style={{ textDecoration: todo.status ? "line-through" : "none" }}
+                key={index}
+                onClick={(e) => {
+                  if (isTodoListLarge) {
+                    e.stopPropagation()
+                    setTodoList((prev) =>
+                      prev.map((item) =>
+                        item.id === todo.id
+                          ? { ...item, status: !item.status }
+                          : item
+                      )
+                    )
+                  }
+                }
+                }>
+                {todo.text}
+              </li>
+            ))}
+          </ul>
+        }
 
-          </section>
-
+        <section className="weather-homepage">
           {homepageWeather &&
-            <section className="weather-homepage">
+            <section>
               <p>{homepageWeather.city}</p>
               <section className="weather-homepage-temp-image-section">
                 <img className="weather-image"
@@ -328,9 +328,10 @@ const Home = () => {
               <p>{homepageWeather.description}</p>
               <p>Humidity: {homepageWeather.humidity} %</p>
             </section>
-          }
-        </article>
 
+          }
+        </section>
+        
         {quote && (
           <section
             className={
