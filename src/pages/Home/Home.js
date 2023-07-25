@@ -284,9 +284,9 @@ const Home = () => {
         </section>
 
         {todoList.length > 0 &&
-          <ul onClick={(event) => {
+          <ul onClick={(e) => {
             if (!isTodoListLarge) {
-              event.stopPropagation();
+              e.stopPropagation()
               handleExtendTodoList();
             }
           }}

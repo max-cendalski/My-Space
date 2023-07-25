@@ -29,6 +29,7 @@ button,
 select,
 a,
 i,
+ul,
 section {
   -webkit-tap-highlight-color: transparent;
 }
