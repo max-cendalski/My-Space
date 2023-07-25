@@ -1745,7 +1745,7 @@ dialog::backdrop {
   display: none;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1024px) and (max-width: 1920px) {
 
   /*NOTES DESKTOP */
 
@@ -1849,6 +1849,8 @@ dialog::backdrop {
   }
 
   #home-container {
+    width: 80%;
+    row-gap: 2rem;
     grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
     grid-template-rows: repeat(3, auto);
   }
@@ -1857,7 +1859,6 @@ dialog::backdrop {
     grid-column: 1/2;
     grid-row: 1;
   }
-
 
 
   .weather-homepage {
@@ -1872,18 +1873,30 @@ dialog::backdrop {
   .quote-homepage-container button {
     display: none;
   }
+
   .quick-access-homepage {
-    width: 100vw;
     grid-row: 3;
+    margin-inline: -20%;
   }
+
+  .quick-access-element {
+    margin-inline-start: 15%;
+  }
+
 
   .todo-list-homepage-small.active {
     visibility: visible;
   }
 
   #icons-homepage-container {
-    grid-column: 1/5;
+    width: 100%;
     grid-row: 4;
+    grid-column: 1/5;
+  }
+
+  .icon-homepage {
+    width: 8rem;
+    height: 8rem;
   }
 
 }
