@@ -90,7 +90,7 @@ const Home = () => {
         } else {
           console.log('quote doesn\'t exists')
           try {
-            setQuote(  {
+            setQuote({
               text: "Habits will form whether you want them or not. Whatever you repeat, you reinforce.",
               extend: false
             })
@@ -272,132 +272,133 @@ const Home = () => {
 
 
   return (
-    <article id="home-container">
+    <>
       <Navbar />
-      <article id="time-location-homepage-container">
-        <section className="time-homepage">
-          <p>{currentDay}</p>
-          <Clock value={value}
-            renderNumbers={true}
-            size={todoList.length > 0 ? 100 : 130}
-          />
-          {todoList.length > 0 &&
-            <ul onClick={(event) => {
-              if (!isTodoListLarge) {
-                event.stopPropagation();
-                handleExtendTodoList();
-              }
-            }}
-              className={`todo-list-homepage-small ${isTodoListLarge ? "active" : ""}`}
-            >
-              {todoList.map((todo, index) => (
-                <li
-                  style={{ textDecoration: todo.status ? "line-through" : "none" }}
-                  key={index}
-                  onClick={(e) => {
-                    if (isTodoListLarge) {
-                      e.stopPropagation()
-                      setTodoList((prev) =>
-                        prev.map((item) =>
-                          item.id === todo.id
-                            ? { ...item, status: !item.status }
-                            : item
+      <article id="home-container">
+        <article id="time-location-homepage-container">
+          <section className="time-homepage">
+            <p>{currentDay}</p>
+            <Clock value={value}
+              renderNumbers={true}
+              size={todoList.length > 0 ? 100 : 130}
+            />
+            {todoList.length > 0 &&
+              <ul onClick={(event) => {
+                if (!isTodoListLarge) {
+                  event.stopPropagation();
+                  handleExtendTodoList();
+                }
+              }}
+                className={`todo-list-homepage-small ${isTodoListLarge ? "active" : ""}`}
+              >
+                {todoList.map((todo, index) => (
+                  <li
+                    style={{ textDecoration: todo.status ? "line-through" : "none" }}
+                    key={index}
+                    onClick={(e) => {
+                      if (isTodoListLarge) {
+                        e.stopPropagation()
+                        setTodoList((prev) =>
+                          prev.map((item) =>
+                            item.id === todo.id
+                              ? { ...item, status: !item.status }
+                              : item
+                          )
                         )
-                      )
+                      }
                     }
-                  }
-                  }>
-                  {todo.text}
-                </li>
-              ))}
-            </ul>
-          }
+                    }>
+                    {todo.text}
+                  </li>
+                ))}
+              </ul>
+            }
 
-        </section>
-
-        {homepageWeather &&
-          <section className="weather-homepage">
-            <p>{homepageWeather.city}</p>
-            <section className="weather-homepage-temp-image-section">
-              <img className="weather-image"
-                src={`https://openweathermap.org/img/wn/${homepageWeather.img}@4x.png`} alt='weather icon'
-              ></img>
-              <p>{homepageWeather.temp}&deg;</p>
-            </section>
-            <p>{homepageWeather.description}</p>
-            <p>Humidity: {homepageWeather.humidity} %</p>
           </section>
-        }
-      </article>
 
-      {quote && (
-        <section
-          className={
-            quote.extend ? "quote-homepage-visible" : "quote-homepage-hidden"
+          {homepageWeather &&
+            <section className="weather-homepage">
+              <p>{homepageWeather.city}</p>
+              <section className="weather-homepage-temp-image-section">
+                <img className="weather-image"
+                  src={`https://openweathermap.org/img/wn/${homepageWeather.img}@4x.png`} alt='weather icon'
+                ></img>
+                <p>{homepageWeather.temp}&deg;</p>
+              </section>
+              <p>{homepageWeather.description}</p>
+              <p>Humidity: {homepageWeather.humidity} %</p>
+            </section>
           }
-        >
-          <button
-            className="down-arrow-button"
-            onClick={handleIdeaHomeExtendButton}
+        </article>
+
+        {quote && (
+          <section
+            className={
+              quote.extend ? "quote-homepage-visible" : "quote-homepage-hidden"
+            }
           >
-            {quote.extend ? (
-              <i className="fa-solid fa-angle-up fa-2xl"></i>
-            ) : (
-              <i className="fa-solid fa-angle-down fa-2xl"></i>
-            )}
-          </button>
-          <q className="quote-homepage-quote">{quote.text}</q>
-        </section>
-      )}
+            <button
+              className="down-arrow-button"
+              onClick={handleIdeaHomeExtendButton}
+            >
+              {quote.extend ? (
+                <i className="fa-solid fa-angle-up fa-2xl"></i>
+              ) : (
+                <i className="fa-solid fa-angle-down fa-2xl"></i>
+              )}
+            </button>
+            <q className="quote-homepage-quote">{quote.text}</q>
+          </section>
+        )}
 
 
-      <article className="quick-access-homepage">
-        <section onClick={handleExtendToDoForm} className={`quick-access-element  ${isNewTodoActive ? "active" : ""}`}>
-          <form className={`${newTodoFormClass} ${isNewTodoActive ? "active" : ""}`} onSubmit={handleAddTodos}>
-            {newTodos.map((todo, index) => (
-              <p key={index}>
-                <input
-                  type="text"
-                  value={todo.text}
-                  maxLength="30"
-                  className="new-todo-input-homepage"
-                  placeholder="add todo"
-                  onChange={(e) => handleTodoInputChange(e, index)}
-                  ref={index === 0 ? firstInputRef : null}
-                />
-              </p>
-            ))}
-            <button className="add-todo-button">Submit</button>
-          </form>
-          <img
-            className={`todo-pencil ${isNewTodoActive ? "hidden" : ""}`}
-            src={Pencil}
-            alt="pencil-icon"
-          />
+        <article className="quick-access-homepage">
+          <section onClick={handleExtendToDoForm} className={`quick-access-element  ${isNewTodoActive ? "active" : ""}`}>
+            <form className={`${newTodoFormClass} ${isNewTodoActive ? "active" : ""}`} onSubmit={handleAddTodos}>
+              {newTodos.map((todo, index) => (
+                <p key={index}>
+                  <input
+                    type="text"
+                    value={todo.text}
+                    maxLength="30"
+                    className="new-todo-input-homepage"
+                    placeholder="add todo"
+                    onChange={(e) => handleTodoInputChange(e, index)}
+                    ref={index === 0 ? firstInputRef : null}
+                  />
+                </p>
+              ))}
+              <button className="add-todo-button">Submit</button>
+            </form>
+            <img
+              className={`todo-pencil ${isNewTodoActive ? "hidden" : ""}`}
+              src={Pencil}
+              alt="pencil-icon"
+            />
+          </section>
+        </article>
+
+
+        <section id="icons-homepage-container">
+          <NavLink to="/notes">
+            <img src={NotesIcon} alt="notes-icon" className="icon-homepage"></img>
+          </NavLink>
+          <NavLink to="/Calendar">
+            <img src={CalendarIcon} alt="calendar-icon" className="icon-homepage"></img>
+          </NavLink>
+          <NavLink to="/weather">
+            <img src={WeatherIcon} alt="weather-icon" className="icon-homepage"></img>
+          </NavLink>
+          <NavLink to="/quotes">
+            <img src={QuoteIcon} alt="quote-icon" className="icon-homepage"></img>
+          </NavLink>
+          <NavLink to="/games">
+            <img src={GamesIcon} alt="games-icon" className="icon-homepage"></img>
+          </NavLink>
         </section>
+
       </article>
-
-
-      <section id="icons-homepage-container">
-        <NavLink to="/notes">
-          <img src={NotesIcon} alt="notes-icon" className="icon-homepage"></img>
-        </NavLink>
-        <NavLink to="/Calendar">
-          <img src={CalendarIcon} alt="calendar-icon" className="icon-homepage"></img>
-        </NavLink>
-        <NavLink to="/weather">
-          <img src={WeatherIcon} alt="weather-icon" className="icon-homepage"></img>
-        </NavLink>
-        <NavLink to="/quotes">
-          <img src={QuoteIcon} alt="quote-icon" className="icon-homepage"></img>
-        </NavLink>
-        <NavLink to="/games">
-          <img src={GamesIcon} alt="games-icon" className="icon-homepage"></img>
-        </NavLink>
-      </section>
-
-
-    </article>
+    </>
   );
 };
 

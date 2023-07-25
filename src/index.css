@@ -63,11 +63,12 @@ code {
 
 
 #home-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1.3rem;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows:  repeat(auto-fit, minmax(20%, 1fr));
+  gap: 1.5rem;
   max-width: 1920px;
-  margin: 0 auto;
+  
 }
 
 .down-arrow-button {
@@ -344,7 +345,7 @@ code {
   display: flex;
   width: 90%;
   min-height: 10rem;
-  margin: 0 auto;
+  margin: 1.5rem auto;
 }
 
 .weather-homepage {
@@ -478,7 +479,7 @@ code {
   height: 3rem;
   list-style: none;
   overflow: auto;
-  top: 13.5rem;
+  top: 14.5rem;
   border: 1px solid #d3d3d3;
   box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.2);
   background-color: #f5f5f5;
@@ -1833,15 +1834,24 @@ dialog::backdrop {
       width: 90%;
       padding-inline: 5%;
     }
+    /* }
   
-    #time-location-homepage-container{
-      width: 85%;
+    #time-location-homepage-container {
       display:grid;
-      grid-template-columns: calc(4fr)
+      grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
+      padding-inline:5rem ;
+    } 
+    .time-homepage {
+      grid-column: 1;
     }
-
+    .quote-homepage-quote {
+      grid-column: 3/2;
+    }
+    .weather-homepage {
+      grid-column: 2/3;
+    }
     .todo-list-homepage-small.active {
       visibility: visible;
-    }
+    } */
 
 }
