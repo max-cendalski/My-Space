@@ -203,11 +203,11 @@ const Home = () => {
           db,
           "users",
           user.uid,
-          "ideaToHome",
-          "ideaToHomePageID"
+          "quoteToHome",
+          "quoteToHomePageID"
         );
         await updateDoc(extendRef,
-          { idea: quote, extend: !quote.extend }
+          { quote: quote, extend: !quote.extend }
         );
       } catch (err) {
         console.error("SOMETHING WENT WRONG:", err);
