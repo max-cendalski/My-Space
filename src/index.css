@@ -479,8 +479,8 @@ code {
 
 .todo-list-homepage-small {
   position: absolute;
-  width: 6.5rem;
-  height: 3rem;
+  width: 6rem;
+  height: 3.5rem;
   list-style: none;
   overflow: auto;
   top: 14rem;
@@ -1849,8 +1849,8 @@ dialog::backdrop {
   }
 
   #home-container {
+    row-gap: 1rem;
     width: 80%;
-    row-gap: 2rem;
     grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
     grid-template-rows: repeat(3, auto);
   }
@@ -1859,7 +1859,16 @@ dialog::backdrop {
     grid-column: 1/2;
     grid-row: 1;
   }
+  
+  .todo-list-homepage-small {
+    top: 7rem;
+    left: 17rem;
+    height: auto;
+  }
 
+  .todo-list-homepage-small.active {
+    visibility: visible;
+  }
 
   .weather-homepage {
     grid-column: 4/5
@@ -1873,7 +1882,7 @@ dialog::backdrop {
   .quote-homepage-container button {
     display: none;
   }
-
+  
   .quick-access-homepage {
     grid-row: 3;
     margin-inline: -20%;
@@ -1881,11 +1890,6 @@ dialog::backdrop {
 
   .quick-access-element {
     margin-inline-start: 15%;
-  }
-
-
-  .todo-list-homepage-small.active {
-    visibility: visible;
   }
 
   #icons-homepage-container {

@@ -87,11 +87,10 @@ const Home = () => {
         );
         const docSnap = await getDoc(quoteRef);
         if (docSnap.exists()) {
-          let quoteToRender = {}
+          let quoteToRender
           quoteToRender = docSnap.data()
-          quoteToRender.extend = screenWidth >= 1024 ? true : false;
-          setQuote(quoteToRender);
-
+          screenWidth >= 1024 ? setQuote({ ...quoteToRender, extend: true }) : setQuote(quoteToRender)
+          console.log('qut', quoteToRender) 
         } else {
           console.log('quote doesn\'t exists')
           try {
@@ -132,8 +131,7 @@ const Home = () => {
   }, [isNewTodoActive]);
 
   useEffect(() => {
-    var screenWidth = window.innerWidth
-    if (!isTodoListLarge && todoList.length > 0 && screenWidth >=1024) {
+    if (!isTodoListLarge && todoList.length > 0) {
 
       const updatedTodoList = todoList.filter(todo => todo.status !== true);
       const todosToBeRemoved = todoList.filter(todo => todo.status === true);
