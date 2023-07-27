@@ -1862,8 +1862,9 @@ dialog::backdrop {
   
   .todo-list-homepage-small {
     top: 7rem;
-    left: 17rem;
+    left: 19rem;
     height: auto;
+    width: 8rem;
   }
 
   .todo-list-homepage-small.active {
