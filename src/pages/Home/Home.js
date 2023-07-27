@@ -89,8 +89,7 @@ const Home = () => {
         if (docSnap.exists()) {
           let quoteToRender
           quoteToRender = docSnap.data()
-          screenWidth >= 1024 ? setQuote({ ...quoteToRender, extend: true }) : setQuote(quoteToRender)
-          console.log('qut', quoteToRender) 
+          setQuote(screenWidth >= 1024 ? { ...quoteToRender, extend: true } : quoteToRender);
         } else {
           console.log('quote doesn\'t exists')
           try {
@@ -283,7 +282,7 @@ const Home = () => {
           <p>{currentDay}</p>
           <Clock value={value}
             renderNumbers={true}
-            size={todoList.length > 0 ? 100 : 130}
+            size={todoList.length > 0 ? 110 : 140}
           />
         </section>
 
