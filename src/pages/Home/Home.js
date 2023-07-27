@@ -36,6 +36,7 @@ const Home = () => {
   const [value, setValue] = useState(new Date());
 
   useEffect(() => {
+    var screenWidth = window.innerWidth
     const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
     setCurrentDay(format(new Date(), "E, MMMM dd"));
     const interval = setInterval(() => setValue(new Date()), 1000);
@@ -77,16 +78,20 @@ const Home = () => {
 
     const fetchQuote = async () => {
       try {
-        const ideaRef = doc(
+        const quoteRef = doc(
           db,
           "users",
           user.uid,
           "quoteToHome",
           "quoteToHomePageID"
         );
-        const docSnap = await getDoc(ideaRef);
+        const docSnap = await getDoc(quoteRef);
         if (docSnap.exists()) {
-          setQuote(docSnap.data());
+          let quoteToRender = {}
+          quoteToRender = docSnap.data()
+          quoteToRender.extend = screenWidth >= 1024 ? true : false;
+          setQuote(quoteToRender);
+
         } else {
           console.log('quote doesn\'t exists')
           try {
@@ -127,7 +132,8 @@ const Home = () => {
   }, [isNewTodoActive]);
 
   useEffect(() => {
-    if (!isTodoListLarge && todoList.length > 0) {
+    var screenWidth = window.innerWidth
+    if (!isTodoListLarge && todoList.length > 0 && screenWidth >=1024) {
 
       const updatedTodoList = todoList.filter(todo => todo.status !== true);
       const todosToBeRemoved = todoList.filter(todo => todo.status === true);
