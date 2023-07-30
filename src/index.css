@@ -131,14 +131,11 @@ code {
 
 
 #icons-homepage-container {
-  width: 90%;
-  margin: 0 auto;
   grid-row: 4;
   grid-column: 1/5;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-
 }
 
 .icon-homepage {
@@ -430,7 +427,6 @@ code {
   background-color: white;
   padding-inline: 5%;
   box-shadow: 3px 4px 4px 4px rgb(0, 0, 0, 0.4);
-  margin: 0 auto;
 }
 
 .new-todo-form-homepage {
@@ -457,6 +453,7 @@ code {
 
 .new-todo-input-homepage {
   font-size: 1rem;
+  width: 19rem;
   border: none;
   border-bottom: 1px solid var(--lightPink);
   outline: none;
@@ -479,11 +476,12 @@ code {
 
 .todo-list-homepage-small {
   position: absolute;
-  width: 6rem;
-  height: 3.5rem;
+  width: 7rem;
+  max-height: 3rem;
   list-style: none;
   overflow: auto;
   top: 14rem;
+  left: 1rem;
   border: 1px solid #d3d3d3;
   box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.2);
   background-color: #f5f5f5;
@@ -505,13 +503,17 @@ code {
 }
 
 .todo-list-homepage-small.active {
+  padding-block: 0.5rem;
   top: 8rem;
+  left:1rem;
+  right:1rem;
   width: 90%;
-  height: 14rem;
+  max-height: 30rem;
   box-shadow: 3px 4px 4px 4px rgb(0, 0, 0, 0.4);
   transform: translate(-0%, -25%);
   background-color: #f5f5f5;
   overflow: auto;
+  transition: all 0.2s ease-out;
   z-index: 3;
 }
 
@@ -520,6 +522,7 @@ code {
   padding-block: 0.3rem;
   padding-inline: 1rem;
   font-size: 1rem;
+  transition: all 0.2s ease-out;
 }
 
 .todo-pencil {
@@ -990,7 +993,7 @@ dialog::backdrop {
   transition: 0.1s linear;
   grid-column: 1/4;
   grid-row: 2;
-  margin: 1rem auto 0 auto;
+  margin: 1.5rem auto 0 auto;
 }
 
 
@@ -1860,14 +1863,15 @@ dialog::backdrop {
   }
   
   .todo-list-homepage-small {
-    top: 7rem;
+    top: 5rem;
     left: 19rem;
-    height: auto;
+    max-height: 12rem;
     width: 8rem;
   }
 
   .todo-list-homepage-small.active {
     visibility: visible;
+    left: 19rem;
   }
 
   .weather-homepage {
