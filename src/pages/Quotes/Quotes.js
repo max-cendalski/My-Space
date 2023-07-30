@@ -55,9 +55,6 @@ const Quotes = () => {
     // eslint-disable-next-line
   }, [user.uid]);
 
-  useEffect(()=> {
-    console.log('qut',quotesToRender)
-  },[quotesToRender])
 
   const handleGenerateQuotes = () => {
     var numbers = [];
