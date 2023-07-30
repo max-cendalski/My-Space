@@ -34,6 +34,10 @@ section {
   -webkit-tap-highlight-color: transparent;
 }
 
+select:focus {
+  outline: none;
+}
+
 button {
   cursor: pointer;
 }
