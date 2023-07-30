@@ -990,16 +990,15 @@ dialog::backdrop {
   transition: 0.1s linear;
   grid-column: 1/4;
   grid-row: 2;
-  margin: 2rem auto 0 auto;
+  margin: 1rem auto 0 auto;
 }
 
 
 .quote-homepage-hidden {
   display: flex;
   flex-direction: column;
-  margin: 0.5rem auto;
   width: 90%;
-  height: 0.5rem;
+  height: 0.1rem;
   color: white;
   font-style: italic;
   font-weight: 600;
