@@ -1864,14 +1864,14 @@ dialog::backdrop {
   
   .todo-list-homepage-small {
     top: 5rem;
-    left: 19rem;
+    left: 20%;
     max-height: 12rem;
-    width: 8rem;
+    width: 7rem;
   }
 
   .todo-list-homepage-small.active {
     visibility: visible;
-    left: 19rem;
+    left: 20%;
   }
 
   .weather-homepage {
@@ -1880,7 +1880,7 @@ dialog::backdrop {
 
   .quote-homepage-container {
     grid-row: 1;
-    grid-column: 2/3;
+    grid-column: 2/4;
   }
 
   .quote-homepage-container button {
