@@ -300,29 +300,6 @@ const Home = () => {
     //   ])
     // }
 
-    //let sym = todoList.filter(todo => newTodos.some(newTodo => newTodo.text === todo.text));
-    // if (sym.length > 0) {
-    //   setIsNewTodoActive(false);
-    //   setNewTodos([
-    //     { text: '', status: false },
-    //     { text: '', status: false },
-    //     { text: '', status: false },
-    //     { text: '', status: false },
-    //   ])
-    // } else {
-    //   let newTodoList = [...todoList, ...newTodos]
-    //   console.log('newTodoList', newTodoList)
-    //   setTodoList(newTodoList)
-    //   setIsNewTodoActive(false);
-    //   addTodos(newTodos.filter(item => item.text))
-    //   setNewTodoFormClass("new-todo-form-homepage")
-    //   setNewTodos([
-    //     { text: '', status: false },
-    //     { text: '', status: false },
-    //     { text: '', status: false },
-    //     { text: '', status: false },
-    //   ])
-    // }
   }
 
   const handleExtendTodoList = () => {
