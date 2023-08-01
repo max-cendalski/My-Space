@@ -244,6 +244,62 @@ const Home = () => {
 
   const handleAddTodos = (e) => {
     e.preventDefault()
+    let newTodosToUpdate = newTodos.filter( // checking if there are duplicate inputs and removing empty ones
+      (todo, i, a) => a.map((val) => val.text).indexOf(todo.text) === i && todo.text !== "");
+    setNewTodos([
+      { text: '', status: false },
+      { text: '', status: false },
+      { text: '', status: false },
+      { text: '', status: false },
+    ])
+    if (newTodosToUpdate.length > 0) {
+      let filteredTodosToUpdate = newTodosToUpdate.filter( // checking for duplicate in "new" and old todos
+        (newTodo) => !todoList.some((todo) => todo.text === newTodo.text)
+      );
+      if (filteredTodosToUpdate.length > 0) {
+        addTodos(newTodosToUpdate)
+        setTodoList([...newTodosToUpdate, ...todoList].sort((a, b) => a.text.localeCompare(b)))
+        setIsNewTodoActive(false);
+      } else {
+        setNewTodoFormClass("new-todo-form-homepage")
+        setIsNewTodoActive(false)
+      }
+    } else {
+      setIsNewTodoActive(false)
+    }
+
+    // if (filteredTodos.length > 0) {
+    //   addTodos(filteredTodos.filter(item => item.text))
+    //   const comparedTodoLists = filteredTodos.filter(
+    //     (obj1) => !todoList.some((obj2) => obj2.text === obj1.text)
+    //   );
+    //   var sortedTodos = [...comparedTodoLists, ...todoList].sort((a, b) =>
+    //     a.text.localeCompare(b.text)
+    //   );
+    //   console.log('sorted', sortedTodos)
+    //   setNewTodos([
+    //     { text: '', status: false },
+    //     { text: '', status: false },
+    //     { text: '', status: false },
+    //     { text: '', status: false },
+    //   ])
+    //   setTodoList(sortedTodos)
+    //   setIsNewTodoActive(false);
+    // } else {
+    //   let newTodoList = [...todoList, ...newTodos]
+    //   console.log('newTodoList', newTodoList)
+    //   setTodoList(newTodoList)
+    //   setIsNewTodoActive(false);
+    //   addTodos(newTodos.filter(item => item.text))
+    //   setNewTodoFormClass("new-todo-form-homepage")
+    //   setNewTodos([
+    //     { text: '', status: false },
+    //     { text: '', status: false },
+    //     { text: '', status: false },
+    //     { text: '', status: false },
+    //   ])
+    // }
+
     //let sym = todoList.filter(todo => newTodos.some(newTodo => newTodo.text === todo.text));
     // if (sym.length > 0) {
     //   setIsNewTodoActive(false);
