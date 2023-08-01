@@ -239,8 +239,7 @@ const Home = () => {
       return updatedTodos
     });
   };
-
-
+ 
 
   const handleAddTodos = (e) => {
     e.preventDefault()
@@ -267,45 +266,13 @@ const Home = () => {
     } else {
       setIsNewTodoActive(false)
     }
-
-    // if (filteredTodos.length > 0) {
-    //   addTodos(filteredTodos.filter(item => item.text))
-    //   const comparedTodoLists = filteredTodos.filter(
-    //     (obj1) => !todoList.some((obj2) => obj2.text === obj1.text)
-    //   );
-    //   var sortedTodos = [...comparedTodoLists, ...todoList].sort((a, b) =>
-    //     a.text.localeCompare(b.text)
-    //   );
-    //   console.log('sorted', sortedTodos)
-    //   setNewTodos([
-    //     { text: '', status: false },
-    //     { text: '', status: false },
-    //     { text: '', status: false },
-    //     { text: '', status: false },
-    //   ])
-    //   setTodoList(sortedTodos)
-    //   setIsNewTodoActive(false);
-    // } else {
-    //   let newTodoList = [...todoList, ...newTodos]
-    //   console.log('newTodoList', newTodoList)
-    //   setTodoList(newTodoList)
-    //   setIsNewTodoActive(false);
-    //   addTodos(newTodos.filter(item => item.text))
-    //   setNewTodoFormClass("new-todo-form-homepage")
-    //   setNewTodos([
-    //     { text: '', status: false },
-    //     { text: '', status: false },
-    //     { text: '', status: false },
-    //     { text: '', status: false },
-    //   ])
-    // }
-
   }
+
 
   const handleExtendTodoList = () => {
     setIsTodoListLarge(true)
   }
-
+  
 
   async function addTodos(todos) {
     const todosCollection = collection(db, "users", user.uid, "todos");
