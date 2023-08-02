@@ -500,7 +500,7 @@ code {
 
 .todo-list-homepage-small li {
   border-bottom: 1px solid #d3d3d3;
-  padding-block: 0.2rem;
+  padding-block-end: 0.3rem;
   padding-inline-start: 0.3rem;
   font-size: 0.6rem;
   transition: all 200ms ease-in;
