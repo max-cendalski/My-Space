@@ -1913,24 +1913,65 @@ dialog::backdrop {
     width: 8rem;
     height: 8rem;
   }
+
   .single-note-container {
-    padding-inline-start:0.5rem;
-    padding-inline-end: 0.5rem;   
-  }  
+    padding-inline-start: 0.5rem;
+    padding-inline-end: 0.5rem;
+  }
 }
 
 @media screen and (min-width: 1920px) {
-  .todo-list-homepage-small {
+
+  .navbar-container {
+    width: 70%;
+    margin-inline: 15%;
+  }
+
+  #home-container {
+    width: 60%;
+    margin-inline: 20%;
+  }
+
+ .todo-list-homepage-small {
     top: 6.5rem;
-    left: 20%;
+    left: 27%;
     width: 10rem;
     max-height: 18rem;
   }
+ 
   .quote-homepage-container {
     grid-row: 1;
     grid-column: 2/4;
   }
+
   .quote-homepage-container button {
     display: none;
+  }
+
+  #quotes-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 2rem
+  }
+  .quotes-header {
+    grid-column: 1/4;
+  }
+
+  .notes-list-container {
+    width: 70%;
+    margin-inline: 15%;
+  }
+  .notes-search-input {
+    width: 30%;
+  } 
+  .notes-add-button {
+    right: 18%;
+  }
+  #weather-page-container{
+    width: 60%;
+    margin-inline: 20%;
+  }
+  #places-autocomplete-section input {
+    width:40%;
   }
 }
