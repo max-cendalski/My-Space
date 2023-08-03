@@ -1867,15 +1867,14 @@ dialog::backdrop {
   }
 
   .todo-list-homepage-small {
-    top: 5rem;
+    top: 6.5rem;
     left: 20%;
-    max-height: 9rem;
+    max-height: 8rem;
     width: 7rem;
   }
 
   .todo-list-homepage-small.active {
     visibility: visible;
-    left: 20%;
   }
 
   .todo-list-homepage-small li {
@@ -1917,6 +1916,21 @@ dialog::backdrop {
   .single-note-container {
     padding-inline-start:0.5rem;
     padding-inline-end: 0.5rem;   
-  }
+  }  
+}
 
+@media screen and (min-width: 1920px) {
+  .todo-list-homepage-small {
+    top: 6.5rem;
+    left: 20%;
+    width: 10rem;
+    max-height: 18rem;
+  }
+  .quote-homepage-container {
+    grid-row: 1;
+    grid-column: 2/4;
+  }
+  .quote-homepage-container button {
+    display: none;
+  }
 }
