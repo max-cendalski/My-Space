@@ -485,7 +485,7 @@ code {
   list-style: none;
   overflow: auto;
   top: 14rem;
-  left: 1rem;
+  left: 4%;
   border: 1px solid #d3d3d3;
   box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.2);
   background-color: #f5f5f5;
@@ -1982,4 +1982,33 @@ dialog::backdrop {
   .start-game-button {
     width: 20%;
   }
+
+  /*WEATHER SECTION */
+
+  #places-autocomplete-section input {
+    width: 40%;
+    box-shadow: 2px 3px 3px 3px rgb(0, 0, 0, 0.2);
+  }
+
+  #locations-fromDB-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
+    gap: 2rem;
+    margin: 0 auto;
+    max-width: 100%;
+  }
+
+  .detail-location {
+    box-shadow: 2px 3px 3px 3px rgb(0, 0, 0, 0.3);
+  }
+
+  .down-arrow-button-weather {
+    display: none;
+  }
+
+  .searched-locations {
+    width: 30%;
+    border-radius: 3px;
+  }
+
 }
