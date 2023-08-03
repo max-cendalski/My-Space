@@ -1058,7 +1058,6 @@ dialog::backdrop {
 
 /*RPS GAME*/
 .rps-container {
-  width: 100%;
   margin-block-start: 3rem;
   display: flex;
   justify-content: center;
@@ -1950,6 +1949,7 @@ dialog::backdrop {
 
   #quotes-container {
     display: grid;
+    width: 70%;
     grid-template-columns: 1fr 1fr 1fr;
     grid-column-gap: 2rem
   }
@@ -1973,5 +1973,13 @@ dialog::backdrop {
   }
   #places-autocomplete-section input {
     width:40%;
+  }
+
+  .rps-container {
+    width: 20%
+  }
+
+  .start-game-button {
+    width: 20%;
   }
 }
