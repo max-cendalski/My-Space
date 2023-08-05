@@ -15,9 +15,8 @@
 }
 
 body {
-  margin: 0;
-  max-width: 1024px;
-  overflow: hidden;
+  margin-inline: auto;
+  max-width: 1920px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -73,9 +72,7 @@ code {
   grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
   grid-template-rows: repeat(4, auto);
   padding-block-start: 1.5rem;
-  width: 90%;
-  max-width: 1920px;
-  margin: 0 auto;
+  padding-inline: 5%;
   row-gap: 1.5rem;
 }
 
@@ -397,11 +394,11 @@ code {
 .quick-access-homepage {
   grid-column: 1/6;
   grid-row: 3;
+  width: 110vw;
   background-color: var(--lightPink);
   height: 6rem;
   display: flex;
   align-items: center;
-  margin-inline: -5%;
 }
 
 .quick-access-element {
@@ -481,8 +478,8 @@ code {
 }
 
 .todo-list-homepage-small {
-  grid-column: 1;
-  grid-row: 2;
+  grid-column: 1/2;
+  grid-row: 2/2;
   width: 7rem;
   max-height: 3rem;
   list-style: none;
@@ -492,7 +489,6 @@ code {
   background-color: #f5f5f5;
   font-size: 1rem;
   margin-block-start: -1.5rem;
-
   transition: all 200ms ease-in;
   padding: 0;
   border-radius: 5px;
@@ -930,11 +926,6 @@ dialog::backdrop {
 }
 
 
-
-
-
-
-
 /* IDEAS */
 
 #quotes-container {
@@ -990,14 +981,11 @@ dialog::backdrop {
 }
 
 .quote-homepage-visible {
-  width: 90%;
   color: var(--red);
   font-style: italic;
   font-weight: 600;
   text-indent: 10px;
   transition: 0.1s linear;
-  grid-column: 1/4;
-  grid-row: 2;
   margin: 1.5rem auto 0 auto;
 }
 
@@ -1751,25 +1739,8 @@ dialog::backdrop {
   display: none;
 }
 
-@media screen and (min-width: 768px) and (max-width:1024px) {
-  
-  .quote-homepage-container {
-    grid-row: 1;
-    grid-column: 2/4;
-  }
 
-  .quote-homepage-container button {
-    display: none;
-  }
-
-  .todo-list-homepage-small {
-    grid-row: 2;
-    max-height: 3rem;
-    margin-block-end: 0;
-  }
-}
-
-@media screen and (min-width: 1024px) and (max-width: 1920px) {
+@media screen and (min-width: 768px) and (max-width: 3440px) {
 
   /*NOTES DESKTOP */
 
@@ -1869,14 +1840,14 @@ dialog::backdrop {
   /* HOME */
   .navbar-container {
     width: 90%;
-    padding-inline: 5%;
+    margin-inline: auto;
   }
 
   #home-container { 
     row-gap: 1rem;
-    width: 80%;
-    grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
     grid-template-rows: repeat(3, auto);
+    margin: 0 auto;
   }
 
   .time-homepage {
@@ -1886,11 +1857,10 @@ dialog::backdrop {
 
   .todo-list-homepage-small {
     grid-row: 1;
-    grid-column: 1/3;
+    grid-column: 2/3;
     margin-block-start: 2rem;
-    margin-inline-start: 30%;
     max-height: 8rem;
-    width: 7rem;
+    width: 80%;
   }
 
   .todo-list-homepage-small.active {
@@ -1902,12 +1872,16 @@ dialog::backdrop {
   }
 
   .weather-homepage {
-    grid-column: 4/5
+    grid-column: 5/6
   }
 
   .quote-homepage-container {
     grid-row: 1;
-    grid-column: 2/4;
+    grid-column: 3/5;
+  }
+
+  .quote-homepage-quote {
+    margin-inline: 1rem;
   }
 
   .quote-homepage-container button {
@@ -1916,7 +1890,6 @@ dialog::backdrop {
 
   .quick-access-homepage {
     grid-row: 3;
-    margin-inline: -20%;
   }
 
   .quick-access-element {
@@ -1926,7 +1899,7 @@ dialog::backdrop {
   #icons-homepage-container {
     width: 100%;
     grid-row: 4;
-    grid-column: 1/5;
+    grid-column: 1/6;
   }
 
   .icon-homepage {
