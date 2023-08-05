@@ -1859,12 +1859,16 @@ dialog::backdrop {
     grid-row: 1;
     grid-column: 2/3;
     margin-block-start: 2rem;
+    height: auto;
     max-height: 8rem;
     width: 80%;
   }
 
   .todo-list-homepage-small.active {
     visibility: visible;
+    grid-row: 1;
+    grid-column: 2/5;
+    width: 80%;
   }
 
   .todo-list-homepage-small li {
