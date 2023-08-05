@@ -217,7 +217,7 @@ code {
 
 .navbar-dropdown-menu {
   position: absolute;
-  top: 3rem;
+  top: 3.5rem;
   right: 5%;
   display: flex;
   flex-direction: column;
@@ -504,11 +504,12 @@ code {
 }
 
 .todo-list-homepage-small.active {
-  padding-block: 0.5rem;
+  position: fixed;
   top: 8rem;
   left: 1rem;
   right: 1rem;
   width: 90%;
+  padding-block: 0.5rem;
   max-height: 30rem;
   box-shadow: 3px 4px 4px 4px rgb(0, 0, 0, 0.4);
   transform: translate(-0%, -25%);
@@ -551,7 +552,7 @@ code {
 
 .notes-list-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
   gap: 1.5rem;
   margin: 0 auto;
   max-width: 90%;

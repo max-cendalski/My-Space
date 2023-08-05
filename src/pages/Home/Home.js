@@ -294,7 +294,7 @@ const Home = () => {
           <p>{currentDay}</p>
           <Clock value={value}
             renderNumbers={true}
-            size={todoList.length > 0 ? 100 : 130}
+            size={todoList.length > 0 ? 100 : 140}
           />
         </section>
 
@@ -312,7 +312,7 @@ const Home = () => {
                 style={{ textDecoration: todo.status ? "line-through" : "none" }}
                 key={index}
                 onClick={(e) => {
-                  if (isTodoListLarge) {
+                  if (isTodoListLarge) { 
                     e.stopPropagation()
                     setTodoList((prev) =>
                       prev.map((item) =>
