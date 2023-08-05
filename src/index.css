@@ -537,6 +537,7 @@ code {
 
 /*NOTES */
 #notes-page-container {
+  position: relative;
   background-image: url('../public/corkboard.jpg');
   min-height: 100vh;
   max-height: 300vh;
@@ -550,7 +551,7 @@ code {
 
 .notes-list-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
   gap: 1.5rem;
   margin: 0 auto;
   max-width: 90%;
@@ -1749,6 +1750,7 @@ dialog::backdrop {
   }
 
   .notes-list-container {
+    position: relative;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
     gap: 2rem;
@@ -1823,7 +1825,7 @@ dialog::backdrop {
   }
 
   .start-game-button {
-    width: 40%;
+    width: 19rem;
   }
 
   /* TODOS */
@@ -1839,7 +1841,7 @@ dialog::backdrop {
 
   /* HOME */
   .navbar-container {
-    width: 90%;
+    width: 100%;
     margin-inline: auto;
   }
 
