@@ -72,7 +72,7 @@ code {
   grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
   grid-template-rows: repeat(4, auto);
   padding-block-start: 1.5rem;
-  padding-inline:5%;
+  padding-inline: 5%;
   row-gap: 1.5rem;
 }
 
@@ -481,7 +481,7 @@ code {
   grid-column: 1/2;
   grid-row: 2/2;
   width: 7rem;
-  max-height: 3rem;
+  height: 3rem;
   list-style: none;
   overflow: auto;
   border: 1px solid #d3d3d3;
@@ -504,12 +504,10 @@ code {
 }
 
 .todo-list-homepage-small.active {
-  position: fixed;
-  top: 8rem;
-  left: 1rem;
-  right: 1rem;
-  width: 90%;
-  padding-block: 0.5rem;
+  grid-column: 1/6;
+  width: auto;
+  height: auto;
+  grid-row: 2;
   max-height: 30rem;
   box-shadow: 3px 4px 4px 4px rgb(0, 0, 0, 0.4);
   transform: translate(-0%, -25%);
@@ -1846,7 +1844,7 @@ dialog::backdrop {
     margin-inline: auto;
   }
 
-  #home-container { 
+  #home-container {
     row-gap: 1rem;
     grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
     grid-template-rows: repeat(3, auto);
@@ -1915,5 +1913,3 @@ dialog::backdrop {
     padding-inline-end: 0.5rem;
   }
 }
-
-
