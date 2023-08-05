@@ -72,7 +72,7 @@ code {
   grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
   grid-template-rows: repeat(4, auto);
   padding-block-start: 1.5rem;
-  padding-inline: 5%;
+  padding-inline:5%;
   row-gap: 1.5rem;
 }
 
@@ -394,7 +394,7 @@ code {
 .quick-access-homepage {
   grid-column: 1/6;
   grid-row: 3;
-  width: 110vw;
+  margin-inline: -5%;
   background-color: var(--lightPink);
   height: 6rem;
   display: flex;
@@ -1847,7 +1847,6 @@ dialog::backdrop {
     row-gap: 1rem;
     grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
     grid-template-rows: repeat(3, auto);
-    margin: 0 auto;
   }
 
   .time-homepage {
@@ -1890,6 +1889,7 @@ dialog::backdrop {
 
   .quick-access-homepage {
     grid-row: 3;
+    grid-column: 1/6;
   }
 
   .quick-access-element {
