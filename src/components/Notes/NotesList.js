@@ -18,7 +18,7 @@ const NotesList = ({ isVisible, notes, deleteNote }) => {
     setSelectedNote(null);
   };
   if (!isVisible) {
-    return null;
+  return null;
   }
 
   const handleSelected = (e) => {
