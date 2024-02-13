@@ -1,8 +1,12 @@
-import Navbar from "../../components/Navbar/Navbar";
+import Navbar from "../../Navbar/Navbar";
 import { useState, useEffect } from "react";
-import { db } from "../../firebase/Firebase";
+import { db } from "../../../firebase/Firebase";
 import { doc, setDoc, getDoc } from "firebase/firestore";
-import { UserAuth } from "../../context/AuthContext";
+import { UserAuth } from "../../../context/AuthContext";
+import RobotIcon from "../../../icons/robot-icon.png";
+import RockIcon from "../../../icons/rock-icon.png";
+import ScissorsIcon from "../../../icons/scissors-icon.png";
+import PaperIcon from "../../../icons/paper-icon.png";
 
 const RPS = () => {
   const { user } = UserAuth();
@@ -14,8 +18,8 @@ const RPS = () => {
     resultContainer: "hidden",
   });
   const [icons, setIcons] = useState({
-    userIcon: "",
-    computerIcon: "",
+    userIcon: null,
+    computerIcon: null,
   });
   const [scores, setScores] = useState({
     userScore: 0,
@@ -36,9 +40,11 @@ const RPS = () => {
         console.error("ERROR: ", err);
       }
     };
-    getData();
+    if (user.uid) {
+      getData()
+    }
     // eslint-disable-next-line
-  }, []);
+  }, [user.uid]);
 
   const handleStartNewGame = () => {
     setStartGameButton("hidden");
@@ -66,29 +72,29 @@ const RPS = () => {
     var computerChoice = Math.floor(Math.random() * 3);
     var userChoice = 0;
     setStartGameButton("start-game-button");
-    if (e.target.className === "fa-solid fa-gem fa-2xl") {
+    if (e.target.alt === "rock") {
       userChoice = 0;
-    } else if (e.target.className === "fa-regular fa-map fa-2xl") {
+    } else if (e.target.alt === "paper") {
       userChoice = 1;
-    } else if (e.target.className === "fa-solid fa-scissors fa-2xl") {
+    } else if (e.target.alt === "scissors") {
       userChoice = 2;
     }
 
     if (userChoice === computerChoice) {
       if (userChoice === 0) {
         setIcons({
-          userIcon: "fa-solid fa-gem",
-          computerIcon: "fa-solid fa-gem",
+          userIcon: RockIcon,
+          computerIcon: RockIcon,
         });
       } else if (userChoice === 1) {
         setIcons({
-          userIcon: "fa-solid fa-map",
-          computerIcon: "fa-solid fa-map",
+          userIcon: PaperIcon,
+          computerIcon: PaperIcon,
         });
       } else {
         setIcons({
-          userIcon: "fa-solid fa-scissors",
-          computerIcon: "fa-solid fa-scissors",
+          userIcon: ScissorsIcon,
+          computerIcon: ScissorsIcon,
         });
       }
       setGameState({
@@ -104,8 +110,8 @@ const RPS = () => {
           rpsChoiceSectionContainer: "hidden",
         });
         setIcons({
-          userIcon: "fa-solid fa-gem",
-          computerIcon: "fa-solid fa-map",
+          userIcon: RockIcon,
+          computerIcon: PaperIcon,
         });
         setScores({
           userScore: scores.userScore,
@@ -122,8 +128,8 @@ const RPS = () => {
           computerScore: scores.computerScore + 1,
         });
         setIcons({
-          userIcon: "fa-solid fa-map",
-          computerIcon: "fa-solid fa-scissors",
+          userIcon: PaperIcon,
+          computerIcon: ScissorsIcon,
         });
       } else if (userChoice === 2 && computerChoice === 0) {
         setGameState({
@@ -136,8 +142,8 @@ const RPS = () => {
           computerScore: scores.computerScore + 1,
         });
         setIcons({
-          userIcon: "fa-solid fa-scissors",
-          computerIcon: "fa-solid fa-gem",
+          userIcon: ScissorsIcon,
+          computerIcon:RockIcon
         });
       } else if (userChoice === 0 && computerChoice === 2) {
         setGameState({
@@ -150,8 +156,8 @@ const RPS = () => {
           computerScore: scores.computerScore,
         });
         setIcons({
-          userIcon: "fa-solid fa-gem",
-          computerIcon: "fa-solid fa-scissors",
+          userIcon: RockIcon,
+          computerIcon: ScissorsIcon,
         });
       } else if (userChoice === 1 && computerChoice === 0) {
         setGameState({
@@ -164,8 +170,8 @@ const RPS = () => {
           computerScore: scores.computerScore,
         });
         setIcons({
-          userIcon: "fa-solid fa-map",
-          computerIcon: "fa-solid fa-gem",
+          userIcon: PaperIcon,
+          computerIcon: RockIcon,
         });
       } else if (userChoice === 2 && computerChoice === 1) {
         setGameState({
@@ -178,8 +184,8 @@ const RPS = () => {
           computerScore: scores.computerScore,
         });
         setIcons({
-          userIcon: "fa-solid fa-scissors",
-          computerIcon: "fa-solid fa-map",
+          userIcon: ScissorsIcon,
+          computerIcon: PaperIcon,
         });
       }
     }
@@ -197,28 +203,29 @@ const RPS = () => {
           Win/loose ratio: {scores.userScore} / {scores.computerScore}
         </h2>
         <article className="rps-container">
-          <section className="players">USER</section>
-          <section className="players">
-            <i className="fa-solid fa-robot fa-2xl"></i>
+          {user.uid && <section className="players">{user.displayName.charAt(0)}</section>}
+          <section>
+            <img className="players" src={RobotIcon} alt="robot-icon" />
           </section>
         </article>
         <article className={gameState.rpsChoiceSectionContainer}>
-          <section onClick={handleChoiceClick} className="choice-section">
-            <i className="fa-solid fa-gem fa-2xl"></i>
+          <section onClick={handleChoiceClick} >
+            <img src={RockIcon} alt="rock" className="rps-element" />
           </section>
-          <section onClick={handleChoiceClick} className="choice-section">
-            <i className="fa-regular fa-map fa-2xl"></i>
+          <section onClick={handleChoiceClick} >
+            <img src={PaperIcon} alt="paper" className="rps-element"/>
           </section>
-          <section onClick={handleChoiceClick} className="choice-section">
-            <i className="fa-solid fa-scissors fa-2xl"></i>
+          <section onClick={handleChoiceClick} >
+            <img src={ScissorsIcon} alt="scissors" className="rps-element" />
           </section>
         </article>
+
         <article className={gameState.resultContainer}>
           <section>
-            <i className={icons.userIcon}></i>
+            <img className="choosen-element" src={icons.userIcon} alt="user-choosen-icon" />
           </section>
           <section>
-            <i className={icons.computerIcon}></i>
+            <img className="choosen-element" src={icons.computerIcon} alt="computer-choosen-icon" />
           </section>
         </article>
         <h1 className="game-result-header">{gameState.result}</h1>

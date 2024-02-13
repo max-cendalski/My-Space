@@ -53,8 +53,7 @@ function CalendarComponent() {
     return () => {
       unsub();
     };
-    // eslint-disable-next-line
-  }, []);
+  }, [user.uid]);
 
   useEffect(() => {
     if (showDialogAddEvent) {
@@ -155,7 +154,7 @@ function CalendarComponent() {
       <article className='demo-app-main'>
         <FullCalendar
           ref={calendarRef}
-          longPressDelay={400} // sets the delay for press and hold
+          longPressDelay={200} // sets the delay for press and hold
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           headerToolbar={{
             left: 'prev,next today',

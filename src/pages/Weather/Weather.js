@@ -21,7 +21,10 @@ const Weather = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [modal, setModal] = useState("hidden");
 
+
+
   useEffect(() => {
+    var screenWidth = window.innerWidth
     const locationsFromDB = [];
     const urls = [];
     const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
@@ -63,19 +66,37 @@ const Weather = () => {
                 locationsFromDB[i].pressure = data[i].current.pressure;
                 locationsFromDB[i].windSpeed = data[i].current.wind_speed;
                 locationsFromDB[i].visibility = data[i].current.visibility;
-                locationsFromDB[i].extend = false;
               }
-              setIsLoading(false);
+              if (screenWidth >= 1024) {
+                setLocationsFromDB(locationsFromDB.map(loc => ({ ...loc, extend: false })))
+              } else {
+                setLocationsFromDB(locationsFromDB);
+
+              }
             })
             .catch((error) => console.log("ERROR:", error))
         );
       } catch (err) {
         console.log("Error:", err);
       } finally {
-        setLocationsFromDB(locationsFromDB);
+        setIsLoading(false);
       }
     })();
   }, [searchedLocations, user.uid]);
+
+
+  useEffect(() => { // reset address search input
+    const handleClick = (e) => {
+      if (!e.target.closest('.location-searchinput')) {
+        setAddress("")
+      }
+    };
+    document.addEventListener('click', handleClick);
+
+    return () => {
+      document.removeEventListener('click', handleClick);
+    };
+  }, []);
 
   const handleChange = (address) => {
     setAddress(address);
@@ -98,10 +119,9 @@ const Weather = () => {
               country: locationArray[locationArray.length - 1],
               coordinates: latLng,
               temp: data.current.temp,
-              extend: false,
             };
             if (
-              locationsFromDB.some((item) => item.city === locationToSave.city)
+              locationsFromDB.some((item) => item.city.toLowerCase() === locationToSave.city.toLowerCase())
             ) {
               setModal("modal-visible");
               setTimeout(() => {
@@ -173,7 +193,6 @@ const Weather = () => {
       temperature: location.temp,
       clouds: location.cloudsDescription,
       coordinates: location.coordinates,
-      extended: true,
     };
     const addLocationToHome = async () => {
       try {
@@ -194,6 +213,7 @@ const Weather = () => {
       <article id="weather-page-container">
         <LocationSearch
           address={address}
+          setAddress={setAddress}
           handleChange={handleChange}
           handleSelect={handleSelect}
         />
@@ -201,13 +221,28 @@ const Weather = () => {
         {isLoading && (
           <p className="loading-notification">Loading data from database ...</p>
         )}
-
+        {searchedLocations &&
+          searchedLocations.map((location) => (
+            <section
+              className="searched-locations"
+              key={location.city}
+            >
+              <section className="temperature-section">
+                {location.city} : {location.temp}&deg;F
+              </section>
+              <button
+                className="add-location-button"
+                onClick={() => handleAddLocationToDB(location)}>
+                <i className="fa-solid fa-plus fa-2xl"></i>
+              </button>
+            </section>
+          ))}
         <article id="locations-fromDB-container">
           {!isLoading &&
             locationsFromDB.map(location => (
               <section
                 className={
-                  location.extend === true
+                  location.extend === false
                     ? "detail-location"
                     : "single-location"
                 }
@@ -219,10 +254,10 @@ const Weather = () => {
                     {location.city} - {location.temp}&deg;F
                   </p>
                   <button
-                    className="down-arrow-button"
+                    className="down-arrow-button-weather"
                     onClick={() => handleDBLocationArrowClick(location)}
                   >
-                    {location.extend === true ? (
+                    {location.extend === false ? (
                       <i className="fa-solid fa-angle-up fa-xl"></i>
                     ) : (
                       <i className="fa-solid fa-angle-down fa-xl"></i>
@@ -256,26 +291,10 @@ const Weather = () => {
                 </button>
               </section>
             ))}
-          <article>
-            {searchedLocations &&
-              searchedLocations.map((location, index) => (
-                <section
-                  className="searched-locations"
 
-                  key={location.city}
-                >
-                  <section className="temperature-section">
-                    {location.city} : {location.temp}&deg;F
-                  </section>
-                  <button
-                    className="add-location-button"
-                    onClick={() => handleAddLocationToDB(location)}>
-                    <i className="fa-solid fa-plus fa-2xl"></i>
-                  </button>
-                </section>
-              ))}
-          </article>
         </article>
+
+
 
         <article className={modal}>
           <h3 className="modal-info">
