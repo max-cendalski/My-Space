@@ -614,7 +614,7 @@ code {
 
 .dialog-note-header-list {
   font-size: 1.7rem;
-  margin-block: 0.5rem 0.3rem;
+  margin-block: 2.3rem 0.3rem;
   font-family: 'kalam-regular';
 }
 
@@ -635,7 +635,7 @@ code {
 .notes-list-container dialog[open] {
   position: fixed;
   border: none;
-  top: 7rem;
+  top: 3.5rem;
   opacity: 1;
   scale: 1;
   width: 80%;
@@ -644,13 +644,13 @@ code {
   padding: 1rem;
   font-size: 2rem;
   box-shadow: 10px 10px 10px 5px rgb(0, 0, 0, 0.7);
-  max-height: 80%;
+  max-height: 85%;
   border-radius: 2px;
 }
 
 .note-close-button {
   position: fixed;
-  top: 0;
+  top: 0.5rem;
   z-index: 9;
   right: 0.6rem;
   padding: 0.2rem;
