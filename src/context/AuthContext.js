@@ -116,9 +116,11 @@ export const AuthContextProvider = ({ children }) => {
   return (
     <AuthContext.Provider value={
       {
+        facebookSignIn,
         googleSignIn,
         user,
         logOut,
+        facebookReauthenticate,
         googleReauthenticate,
         clearSession
       }

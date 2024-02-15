@@ -7,19 +7,23 @@ import FacebookIcon from '../../icons/facebook.png'
 
 
 const SignIn = () => {
-  const { googleSignIn, user } = UserAuth()
+  const { googleSignIn, user, facebookSignIn } = UserAuth()
   const navigate = useNavigate()
 
   const handleGoogleSignIn = async () => {
     try {
       await googleSignIn()
     } catch (error) {
-      console.log('ERROR:', error)
+      console.error('ERROR:', error)
     }
   };
 
-  const handleFBSign = () => {
-    alert("Doesn't work")
+  const handleFBSignIn = async () => {
+    try {
+      await facebookSignIn()
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   useEffect(() => {
@@ -28,7 +32,7 @@ const SignIn = () => {
     } else {
       navigate('/login')
     }
-  }, [user,navigate])
+  }, [user, navigate])
 
   return (
     <article id="signing-page-wrapper">
@@ -40,7 +44,7 @@ const SignIn = () => {
         </section>
         <section className="signing-section">
           <img className="login-icon" src={FacebookIcon} alt="facebook"></img>
-          <button onClick={handleFBSign}>Facebook</button>
+          <button onClick={handleFBSignIn}>Facebook</button>
         </section>
 
       </article>
