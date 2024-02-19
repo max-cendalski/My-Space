@@ -53,7 +53,7 @@ export default function Account() {
             await googleReauthenticate()
             const deleteUser = async (userId) => {
                 const userRef = doc(db, 'users', userId)
-                const collectionsToDelete = ['calendarEvents', 'dateForIdeas', 'games', 'ideaToHome', 'ideas', 'locationHome', 'notes', 'todos', 'weatherLocations'];
+                const collectionsToDelete = ['calendarEvents', 'dateForIdeas', 'games', 'ideaToHome', 'quoteToHome', 'quotes', 'ideas', 'locationHome', 'notes', 'todos', 'weatherLocations', 'dateForQuotes'];
 
                 for (const collectionName of collectionsToDelete) {
                     const collectionRef = collection(userRef, collectionName);

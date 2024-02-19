@@ -1413,6 +1413,10 @@ dialog::backdrop {
   border-radius: 0 0 3px 3px;
   border: none;
 }
+.add-location-to-homepage:active {
+  background-color: white;
+  color: var(--darkGreen)
+}
 
 .modal-visible {
   position: absolute;
