@@ -1,5 +1,5 @@
 import { useContext, createContext, useEffect, useState } from 'react';
-import { FacebookAuthProvider, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, unlink, linkWithPopup, browserLocalPersistence } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, unlink, linkWithPopup, browserLocalPersistence } from 'firebase/auth';
 import { auth } from '../firebase/Firebase';
 
 
@@ -18,46 +18,6 @@ export const AuthContextProvider = ({ children }) => {
       unsubscribe();
     };
   }, []);
-
-  const facebookSignIn = () => {
-    const provider = new FacebookAuthProvider();
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-        const token = result.credential.accessToken;
-        // The signed-in user info.
-        const user = result.user;
-        setUser(user);
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        console.log(error);
-      });
-  };
-
-  const facebookReauthenticate = () => {
-    const provider = new FacebookAuthProvider();
-    if (user) {
-      unlink(user, provider.providerId)
-        .then(() => {
-          linkWithPopup(user, provider)
-            .then((result) => {
-              // The user is re-authenticated with Facebook and linked.
-              var user = result.user;
-              setUser(user);
-            })
-            .catch((error) => {
-              // Handle Errors here.
-              console.log(error);
-            });
-        })
-        .catch((error) => {
-          // Handle Errors here.
-          console.log(error);
-        });
-    }
-  };
-  
 
   const googleSignIn = () => {
     const provider = new GoogleAuthProvider();
@@ -116,11 +76,9 @@ export const AuthContextProvider = ({ children }) => {
   return (
     <AuthContext.Provider value={
       {
-        facebookSignIn,
         googleSignIn,
         user,
         logOut,
-        facebookReauthenticate,
         googleReauthenticate,
         clearSession
       }

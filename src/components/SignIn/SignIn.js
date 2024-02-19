@@ -3,11 +3,10 @@ import { useEffect } from 'react';
 import { UserAuth } from '../../context/AuthContext'
 import { useNavigate } from 'react-router-dom';
 import GoogleIcon from '../../icons/google-icon.png'
-import FacebookIcon from '../../icons/facebook.png'
 
 
 const SignIn = () => {
-  const { googleSignIn, user, facebookSignIn } = UserAuth()
+  const { googleSignIn, user,} = UserAuth()
   const navigate = useNavigate()
 
   const handleGoogleSignIn = async () => {
@@ -18,13 +17,6 @@ const SignIn = () => {
     }
   };
 
-  const handleFBSignIn = async () => {
-    try {
-      await facebookSignIn()
-    } catch (error) {
-      console.error(error)
-    }
-  }
 
   useEffect(() => {
     if (user != null) {
@@ -42,11 +34,6 @@ const SignIn = () => {
           <img className="login-icon" src={GoogleIcon} alt="google"></img>
           <button onClick={handleGoogleSignIn}>Google</button>
         </section>
-        <section className="signing-section">
-          <img className="login-icon" src={FacebookIcon} alt="facebook"></img>
-          <button onClick={handleFBSignIn}>Facebook</button>
-        </section>
-
       </article>
     </article>
   )
