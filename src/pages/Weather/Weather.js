@@ -23,6 +23,7 @@ const Weather = () => {
 
 
 
+
   useEffect(() => {
     var screenWidth = window.innerWidth
     const locationsFromDB = [];
@@ -206,6 +207,8 @@ const Weather = () => {
     };
     addLocationToHome();
   };
+
+
 
   return (
     <>
