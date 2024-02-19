@@ -1738,6 +1738,16 @@ dialog::backdrop {
   font-weight: bold;
 }
 
+#privacy-policy-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding-inline: 1rem;
+}
+
+#privacy-policy-container li {
+  margin-block-end: 1rem;
+}
+
 .hidden {
   display: none;
 }

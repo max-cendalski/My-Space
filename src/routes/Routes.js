@@ -15,6 +15,7 @@ import ShipsGame from '../components/Games/Ships/ships';
 import TttComponent from '../components/Games/TTT/Ttt';
 import NotFound from '../pages/NotFound';
 import AppGuide from '../pages/AppGuide/AppGuide';
+import PrivacyPolicy from '../components/Privacy/Privacy-Policy';
 
 
 const Routes = () => {
@@ -24,6 +25,7 @@ const Routes = () => {
 
       {/*public routes*/}
       <Route path="/login" element={<Login />} />
+      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 
       {/*protected routes*/}
       <Route element={<RequireAuth />}>
