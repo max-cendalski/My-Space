@@ -98,10 +98,12 @@ code {
 #signing-page-container {
   text-align: center;
   display: flex;
-  width: 19rem;
+  justify-content: space-between;
+  width: 17rem;
   height: 19rem;
   flex-direction: column;
   margin: 6rem auto;
+  padding-inline: 1rem;
   background-color: white;
   font-size: 1.2rem;
   border-radius: 5px;
@@ -113,7 +115,6 @@ code {
   justify-content: flex-start;
   align-items: center;
   border: 1px solid black;
-  margin-inline: 1rem;
   margin-block-end: 1rem;
   padding: 0.5rem 1rem;
   cursor: pointer;
@@ -1746,6 +1747,11 @@ dialog::backdrop {
 
 #privacy-policy-container li {
   margin-block-end: 1rem;
+}
+
+.privacy-policy-link {
+  font-size: 0.8rem;
+  font-weight: 600;
 }
 
 .hidden {

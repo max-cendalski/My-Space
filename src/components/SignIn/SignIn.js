@@ -34,6 +34,7 @@ const SignIn = () => {
           <img className="login-icon" src={GoogleIcon} alt="google"></img>
           <button onClick={handleGoogleSignIn}>Google</button>
         </section>
+        <p className='privacy-policy-link'>For information on how we handle your data, please read our <a href='/privacy-policy'>Privacy Policy</a>.</p>
       </article>
     </article>
   )
