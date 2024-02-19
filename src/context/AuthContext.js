@@ -1,13 +1,11 @@
 import { useContext, createContext, useEffect, useState } from 'react';
-import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, unlink, linkWithPopup, browserLocalPersistence } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, unlink, linkWithPopup, browserLocalPersistence, GithubAuthProvider } from 'firebase/auth';
 import { auth } from '../firebase/Firebase';
-
 
 const AuthContext = createContext()
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({})
-
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -30,9 +28,21 @@ export const AuthContextProvider = ({ children }) => {
       });
   };
 
+  const signInWithGitHub = () => {
+    const provider = new GithubAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        //const token = result.credential.accessToken; //not needed for now
+        setUser(result.user);
+
+      }).catch((error) => {
+        console.error(error);
+      });
+  };
+
   const googleReauthenticate = () => {
     const provider = new GoogleAuthProvider();
-    if (user) { 
+    if (user) {
       unlink(user, provider.providerId)
         .then(() => {
           linkWithPopup(user, provider)
@@ -77,6 +87,7 @@ export const AuthContextProvider = ({ children }) => {
     <AuthContext.Provider value={
       {
         googleSignIn,
+        signInWithGitHub,
         user,
         logOut,
         googleReauthenticate,
