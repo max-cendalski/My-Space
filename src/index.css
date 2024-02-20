@@ -595,15 +595,18 @@ code {
   border-radius: 2px;
 }
 
-.single-note-header-list,
-.single-note-text-small {
+.single-note-header-list {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
 }
 
-
 .single-note-text-small {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
   font-size: 0.8rem;
   font-family: 'kalam-regular';
   margin-block: 0;
@@ -837,6 +840,7 @@ textarea {
   font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
   font-size: 14px;
 }
+
 .fc .fc-toolbar-title {
   margin: 0;
   padding-inline: 0;
@@ -1811,9 +1815,16 @@ dialog::backdrop {
     height: 18rem;
   }
 
-  .single-note-header-list,
+  .single-note-header-list {
+    white-space: wrap;
+    overflow: hidden;
+  }
+
   .single-note-text-small {
-    white-space: pre-wrap;
+    font-family: 'kalam-regular';
+    display: -webkit-box;
+    -webkit-line-clamp: 8;
+    -webkit-box-orient: vertical;
   }
 
   .notes-list-container dialog[open] {
