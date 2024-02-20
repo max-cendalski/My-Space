@@ -154,7 +154,7 @@ function CalendarComponent() {
       <article className='demo-app-main'>
         <FullCalendar
           ref={calendarRef}
-          longPressDelay={100} // sets the delay for press and hold
+          longPressDelay={100} 
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           headerToolbar={{
             left: 'prev,next',

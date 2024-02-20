@@ -837,12 +837,11 @@ textarea {
   font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
   font-size: 14px;
 }
-
 .fc .fc-toolbar-title {
   margin: 0;
-  font-size: 1rem;
+  padding-inline: 0;
+  font-size: 1.2rem;
 }
-
 
 .fc-direction-ltr .fc-toolbar>*> :not(:first-child) {
   margin-left: 0.65em;
