@@ -777,6 +777,13 @@ textarea {
   font-size: 1rem;
 }
 
+.delete-button:active {
+  transform: scale(110%);
+  border: 2px solid var(--red);
+  color: var(--red);
+  background-color: white;
+}
+
 #edit-note-container {
   background-image: url('../public/corkboard.jpg');
   min-height: 100vh;
@@ -962,7 +969,7 @@ dialog::backdrop {
   border-block-end: 1px solid var(--lightPink);
 }
 
-.single-quote button {
+.single-quote-button {
   width: 100%;
   font-size: 1rem;
   color: white;
@@ -972,6 +979,13 @@ dialog::backdrop {
   padding-inline: 0.;
   border-radius: 5px;
   border: none;
+}
+
+.single-quote-button:active {
+  transform: scale(110%);
+  color: var(--darkGreen);
+  background-color: white;
+  border: 2px solid var(--darkGreen);
 }
 
 .generate-quotes-button {
@@ -1747,6 +1761,10 @@ dialog::backdrop {
   border: none;
   color: white;
   cursor: pointer;
+}
+
+.notes-add-button:active {
+  transform: scale(110%);
 }
 
 .label-standard {
