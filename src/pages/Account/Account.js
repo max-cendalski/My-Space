@@ -123,7 +123,7 @@ export default function Account() {
                         {userStats.games ? <p>You've played <span className="user-stats-number">{userStats.games}</span> times in the RPS game.</p> : <p>You haven't played the RPS game yet.</p>}
                     </section>
                     <section id="delete-account-section">
-                        <h3>Delete Your Account</h3>
+                        <h3>Delete Account</h3>
                         <p>Once you delete your account, you will permanently lose all saved data and this cannot be undone.</p>
                         <button onClick={handleDeleteButtonClick} className="delete-account-button">Delete Account</button>
                     </section>
