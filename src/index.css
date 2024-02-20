@@ -437,7 +437,7 @@ code {
 }
 
 .new-todo-form-homepage {
-  opacity: 0
+  opacity: 0;
 }
 
 @keyframes fadeIn {
@@ -497,7 +497,6 @@ code {
   padding: 0;
   border-radius: 5px;
   cursor: pointer;
-  z-index: 99;
 }
 
 .todo-list-homepage-small li {
@@ -519,7 +518,6 @@ code {
   background-color: #f5f5f5;
   overflow: auto;
   transition: all 0.2s ease-out;
-  z-index: 3;
 }
 
 .todo-list-homepage-small.active li {
@@ -1889,7 +1887,6 @@ dialog::backdrop {
   }
 
   /* TODOS */
-
 
   .quick-access-element.active {
     width: 21rem;
