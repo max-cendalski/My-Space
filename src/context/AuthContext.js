@@ -1,5 +1,5 @@
 import { useContext, createContext, useEffect, useState } from 'react';
-import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, unlink, linkWithPopup, browserLocalPersistence, GithubAuthProvider, fetchSignInMethodsForEmail, linkWithCredential } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, unlink, linkWithPopup, browserLocalPersistence, GithubAuthProvider } from 'firebase/auth';
 import { auth } from '../firebase/Firebase';
 
 const AuthContext = createContext()
@@ -27,7 +27,6 @@ export const AuthContextProvider = ({ children }) => {
         console.log(error);
       });
   };
-
 
   const signInWithGitHub = () => {
     const provider = new GithubAuthProvider();
@@ -74,14 +73,6 @@ export const AuthContextProvider = ({ children }) => {
     await auth.setPersistence(browserLocalPersistence);
   }
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser)
-    });
-    return () => {
-      unsubscribe()
-    }
-  }, [])
 
   return (
     <AuthContext.Provider value={
