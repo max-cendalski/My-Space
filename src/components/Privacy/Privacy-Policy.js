@@ -4,7 +4,7 @@ export default function PrivacyPolicy() {
             <h1>Privacy Policy for Myspacemaxcen</h1>
             <h2>Last Updated: 2/17/2024</h2>
             <p>
-                Welcome to Myspacemaxcen. This application has been developed by Max as a part of my professional portfolio to showcase my technical skills in web and app development. Please note the following key points regarding the use of this application:
+                Welcome to Myspacemaxcen. This application has been developed by me as a part of my professional portfolio to showcase my technical skills in web and app development. Please note the following key points regarding the use of this application:
             </p>
             <ol>
                 <li>**Purpose:** Myspacemaxcen is solely a demonstration project. It is designed to exhibit my abilities in integrating and implementing various functionalities, including Google and GitHub login authentication, within a web application. This app is not intended for commercial use or for general public usage.
