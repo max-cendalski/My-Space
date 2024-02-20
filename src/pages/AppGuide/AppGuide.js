@@ -53,7 +53,7 @@ const AppGuide = () => {
                 <section className="app-guide-section-container">
                     <img src={QuoteIcon} className="icon-app-guide" alt="quote-icon"></img>
                     <p>To access the Quotes section in your app, click on the large icon with a face and bulb on the Homepage.
-                        Inside the Quotes section, you can generate three new quotes once every three days. These quotes are designed to provide you with inspiration and motivation.
+                        Inside the Quotes section, <strong>you can generate three new quotes once every three days.</strong> These quotes are designed to provide you with inspiration and motivation.
                         <br />
                         If you come across a quote that resonates with you, you have the option to add it to the Homepage. Simply select the desired quote from the generated list and click the "Add this Quote to Homepage" button.
                         This will pin the selected quote to the Homepage, allowing you to easily view and draw inspiration from it every day.
