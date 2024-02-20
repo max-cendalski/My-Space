@@ -239,7 +239,7 @@ const Home = () => {
       return updatedTodos
     });
   };
- 
+
 
   const handleAddTodos = (e) => {
     e.preventDefault()
@@ -272,7 +272,7 @@ const Home = () => {
   const handleExtendTodoList = () => {
     setIsTodoListLarge(true)
   }
-  
+
 
   async function addTodos(todos) {
     const todosCollection = collection(db, "users", user.uid, "todos");
@@ -298,7 +298,7 @@ const Home = () => {
           />
         </section>
 
-        {todoList.length > 0 &&
+        {todoList.length &&
           <ul onClick={(e) => {
             if (!isTodoListLarge) {
               e.stopPropagation()
@@ -312,7 +312,7 @@ const Home = () => {
                 style={{ textDecoration: todo.status ? "line-through" : "none" }}
                 key={index}
                 onClick={(e) => {
-                  if (isTodoListLarge) { 
+                  if (isTodoListLarge) {
                     e.stopPropagation()
                     setTodoList((prev) =>
                       prev.map((item) =>

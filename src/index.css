@@ -497,6 +497,7 @@ code {
   padding: 0;
   border-radius: 5px;
   cursor: pointer;
+  z-index: 99;
 }
 
 .todo-list-homepage-small li {
@@ -1004,8 +1005,7 @@ dialog::backdrop {
 }
 
 .quote-homepage-container {
-  margin: 0 auto;
-  padding-block-start: 0.6rem;
+  margin: 0.6rem auto;
   grid-row: 2;
   grid-column: 1/6;
 }
