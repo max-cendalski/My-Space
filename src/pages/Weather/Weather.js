@@ -21,9 +21,7 @@ const Weather = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [modal, setModal] = useState("hidden");
 
-
-
-
+  
   useEffect(() => {
     var screenWidth = window.innerWidth
     const locationsFromDB = [];
