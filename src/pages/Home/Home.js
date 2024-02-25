@@ -284,8 +284,6 @@ const Home = () => {
     }
   }
 
-
-
   return (
     <>
       <Navbar />
@@ -298,7 +296,7 @@ const Home = () => {
           />
         </section>
 
-        {todoList.length &&
+        {!!todoList.length &&
           <ul onClick={(e) => {
             if (!isTodoListLarge) {
               e.stopPropagation()
