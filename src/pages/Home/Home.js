@@ -284,8 +284,6 @@ const Home = () => {
     }
   }
 
-
-
   return (
     <>
       <Navbar />
@@ -298,7 +296,7 @@ const Home = () => {
           />
         </section>
 
-        {todoList.length &&
+        {!!todoList.length &&
           <ul onClick={(e) => {
             if (!isTodoListLarge) {
               e.stopPropagation()
@@ -368,9 +366,7 @@ const Home = () => {
               <q className="quote-homepage-quote">{quote.text}</q>
             </section>
           </section>
-
         )}
-
 
         <article className="quick-access-homepage">
           <section onClick={handleExtendToDoForm} className={`quick-access-element  ${isNewTodoActive ? "active" : ""}`}>
